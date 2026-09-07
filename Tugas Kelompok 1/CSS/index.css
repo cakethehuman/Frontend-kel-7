@@ -58,4 +58,23 @@ button {
 .content-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.form-box{
+    width: 100%;
+}
+
+.result-box {
+    width: 100%;
+    background: #ffffff;
+    padding: 30px;
+    padding-top: 40px;
+    border-radius: 8px;
+    border: 2px dashed #808080; 
+    box-sizing: border-box;
 }
