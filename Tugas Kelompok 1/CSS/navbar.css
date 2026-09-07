@@ -1,14 +1,9 @@
-* {
-    background-color: rgba(128, 128, 128, 0.621);
-}
-
 .navbar {
     border: 5px solid red;
     background-color: gray;
     padding: 5px 0;
     display: flex;
     justify-content: center;
-
     animation: colorChange 10s ease-in-out infinite;
 }
 
@@ -23,6 +18,7 @@
     color: white;
     font-size: 24px;
     transition: color 0.2s ease, background-color 0.2s ease;
+
 }
 
 .navbar a:hover {
@@ -36,7 +32,6 @@
     50% {
         border-color: rgb(30, 255, 0);
     }
-
     100% {
         border-color: rgb(0, 89, 255);
     }
