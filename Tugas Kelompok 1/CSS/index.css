@@ -1,70 +1,58 @@
-.form-box{
-    width: 570px;
-    padding: 15px;
-    margin: 0 auto;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Arial, sans-serif;
-    box-sizing: border-box;
-    text-align: center;
-    align-items: center;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
-.form-box textarea{
-    width: 100%;
-    height: 90px;
-    padding: 10px;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
-    border: 1px solid #b0b0b0;
-    border-radius: 2px;
-    box-sizing: border-box;
-    display: flex;
-    resize: vertical;
+header {
+    margin-top: 40px;
 }
 
-.button-group{
-    margin-top: 10px;
-    display: flex;
-    gap: 5px;
-    justify-content: center;
+h1 {
+    color: #2c3e50;
+    margin-bottom: 0;
 }
 
-.button-calculate{
-    background-color: #438a2e;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 2px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+h2 {
+  margin: 0;
+  color: rgb(9, 16, 16);
 }
 
-.button-calculate:hover {
-    background-color: #357024;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #c7cdec;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 4px 4px;
 }
 
-.button-clear{
-    background-color: #9e9e9e;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 2px;
-    cursor: pointer;
+textarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fcfdff;
+  padding: 30px;
+  border-radius: 10px;
+  resize: vertical;
 }
 
-.button-clear:hover {
-    background-color: #8c8c8c;
+.button-group {
+  display: flex;
+  gap: 15px;
 }
 
-.content-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+button {
+  margin-top: 10px;
+  font-size: medium;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
 }
