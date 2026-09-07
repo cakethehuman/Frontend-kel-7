@@ -19,19 +19,27 @@
         <h1 align="center"><strong>Statistic Calculator</strong></h1>
     </header>
 
-    <br><br><br><br>
-    <h2 align="center">Form</h2>
-    <form action="" method="POST" align="center">
-        <textarea name="angka_input" cols="70" rows="4" placeholder="Masukkan angka, harap dipisahkan dengan koma.."></textarea>
+    <div class="content-container">
+        <div class="form-box">
+            <form action="" method="POST" align="center">
+                <textarea name="angka_input" cols="70" rows="4" placeholder="Masukkan angka, harap dipisahkan dengan koma.."></textarea>
 
-        <div class="button-group">
-                <button type="submit" class="button-calculate">
-                    Calculate 
-                </button>
-                <button type="reset" class="button-clear">
-                    Clear
-                </button>
+                <div class="button-group">
+                    <button type="submit" class="button-calculate">
+                        Calculate 
+                        <span style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">▶</span>
+                    </button>
+                    <button type="reset" class="button-clear">
+                        Clear
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+
+        <div class="result-box">
+            <h3>Hasil Perhitungan</h3>
+            <p>Data hasil statistik akan muncul di sini setelah tombol Calculate ditekan.</p>
+        </div>
+    </div>
 </body>
 </html>
