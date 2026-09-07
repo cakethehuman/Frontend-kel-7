@@ -8,6 +8,7 @@
     font-family: Arial, sans-serif;
     box-sizing: border-box;
     text-align: center;
+    align-items: center;
 }
 
 .form-box textarea{
@@ -61,4 +62,9 @@
 
 .button-clear:hover {
     background-color: #8c8c8c;
+}
+
+.content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
