@@ -27,7 +27,7 @@
     margin-top: 10px;
     display: flex;
     gap: 5px;
-    text-align: center;
+    justify-content: center;
 }
 
 .button-calculate{
