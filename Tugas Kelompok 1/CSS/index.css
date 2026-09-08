@@ -64,14 +64,20 @@ button {
 
 @keyframes shadowcolorChange {
     0% {
-        box-shadow: 0 0 0 3px rgb(255, 0, 0);
+        box-shadow: 0 0 15px red;
     }
-    50% {
-        box-shadow: 0 0 0 3px rgb(30, 255, 0);
+
+    33% {
+        box-shadow: 0 0 15px lime;
     }
+
+    66% {
+        box-shadow: 0 0 15px blue;
+    }
+
     100% {
-        box-shadow: 0 0 0 3px rgb(0, 89, 255);
-    }
+        box-shadow: 0 0 15px red;
+    }   
 }
 
 .content-container{
