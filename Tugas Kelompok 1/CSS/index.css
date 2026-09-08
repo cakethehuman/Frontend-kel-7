@@ -78,3 +78,13 @@ button {
     border: 2px dashed #808080; 
     box-sizing: border-box;
 }
+
+/**
+    Hide table
+**/
+.hidden-table{
+    display: none;
+}
+
+
+
