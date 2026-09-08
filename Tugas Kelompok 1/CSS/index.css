@@ -2,6 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    line-height: 1.6 ;
 }
 
 header {
@@ -53,6 +54,30 @@ button {
     font-weight: bold;
     border: none;
     border-radius: 5px;
+}
+
+.button-calculate:hover{
+    background-image: none !important;
+    border: none;
+    animation: shadowcolorChange 2s linear infinite;
+}
+
+@keyframes shadowcolorChange {
+    0% {
+        box-shadow: 0 0 15px red;
+    }
+
+    33% {
+        box-shadow: 0 0 15px lime;
+    }
+
+    66% {
+        box-shadow: 0 0 15px blue;
+    }
+
+    100% {
+        box-shadow: 0 0 15px red;
+    }   
 }
 
 .content-container{
