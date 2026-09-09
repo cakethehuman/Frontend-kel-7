@@ -47,6 +47,7 @@ textarea {
     padding: 30px;
     border-radius: 10px;
     resize: vertical;
+    margin-bottom: 20px;
 }
 
 .button-group {
