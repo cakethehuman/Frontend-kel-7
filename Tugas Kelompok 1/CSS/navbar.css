@@ -1,7 +1,6 @@
 .navbar {
     border: 3px solid red;
     background-color: #808080;
-    padding: 5px 0;
     display: flex;
     justify-content: center;
     animation: colorChange 10s ease-in-out infinite;

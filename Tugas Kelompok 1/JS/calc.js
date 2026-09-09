@@ -13,6 +13,9 @@ class Calc{
     #geometricMean;
     #standardDeviation;
     #sampleStandardDeviation;
+    #Q1;
+    #Q3;
+    #IQR;
 
     constructor(data) {
         this.#data = [...data];
@@ -41,6 +44,10 @@ class Calc{
 
         this.#CalcultaeStandardDeviation();
         this.#CalcultaeSampleStandardDeviation();
+
+        this.#Q1();
+        this.#Q3();
+        this.#IQR();
     }
 
     // retrieving the copy data
@@ -95,6 +102,18 @@ class Calc{
 
     get sampleStandardDeviation() {
         return this.#sampleStandardDeviation;
+    }
+
+    get Q1(){
+        return this.#Q1;
+    }
+
+    get Q2(){
+        return this.#Q3;
+    }
+
+    get Q3(){
+        return this.#IQR;
     }
 
  
