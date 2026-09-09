@@ -93,7 +93,7 @@ class Calc{
         return this.#standardDeviation;
     }
 
-    get sampleVariance() {
+    get sampleStandardDeviation() {
         return this.#sampleStandardDeviation;
     }
 

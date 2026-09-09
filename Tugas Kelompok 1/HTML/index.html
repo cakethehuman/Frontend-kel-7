@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/index.css">
     <script src="../JS/navbar.js" defer></script>
-    <script type="module" src="../JS/middleware.js"></script>
+    <script type="module" src="../JS/stat-controller.js"></script>
     <title>Statistic Calculator</title>
 </head>
 <body>
@@ -41,17 +41,15 @@
                         <th>Result</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            mean
-                        </td>
-                        <td id="mean-result">
-                            p
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
+
+            <template id="result-template">
+                <tr>
+                    <td class="table-id"></td>
+                    <td class="table-content"></td>
+                </tr>
+            </template>
             
             <p>Data hasil statistik akan muncul di sini setelah tombol Calculate ditekan.</p>
         </div>
