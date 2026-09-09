@@ -1,19 +1,20 @@
 body {
-    font-family : 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin : 0;
     line-height: 1.6 ;
+    background-color:rgba(0, 0, 0,0.916);
 }
 
 header {
     margin : 0;
     text-align : center;
-    background-color :rgb(104, 149, 216);
+    background-color : #c7cdec;
     padding : 30px;
 }
 
 header h1 {
     font-size: 40px;
-    color : black;
+    color :  #2c3e50;
     margin : 0 ;
 }
 
@@ -34,8 +35,10 @@ article {
 article h2 {
     width : 100%;
     text-align : center;
-    color :rgb(50, 90, 150);
+    color : #e8f1fa;
     margin-bottom : 30px;
+    font-size: 30px;
+    animation: neonPulse 2s infinite alternate;
 }
 
 article > img {
@@ -45,35 +48,43 @@ article > img {
     margin-bottom : 30px; 
     width : 50%;
     height : 800px;
-    border :rgb(104, 149, 216) 2px solid;
+    border : 2px solid #c7cdec;
+    border-radius: 60px;
+    box-shadow : 5px 5px 10px rgba(234, 111, 197, 0.916);
 }
 
 .member {
-    display : block;
+    display : inline-block;
     width : 300px;
     min-height : 200px; 
     margin : 20px;
     padding : 20px;
-    border : 2px solid black; 
+    border : 2px; 
     border-style : dashed;
+    border-width: 4px;
+    border-radius: 35px;
+    max-width: 300px;
+    background-color:#868585;
+    animation: colorChange 10s ease-in-out infinite;
 }
 
 .member h3 {
     text-align : center;
-    color :rgb(50, 90, 150);
-    font-size : 22px;
+    color :white;
+    font-size : 23px;
     margin-bottom : 10px;
 }
 
 .member p:first-of-type {
     font-weight : bold;
-    font-size : 20px;
+    font-size : 25px;
+    color : #c4c9e8;
 }
 
 .member p {
     text-align : center;
     font-size : 16px;
-    color : black;
+    color : #fcfdff;
     margin : 8px auto;
 }
 
@@ -89,15 +100,28 @@ article > img {
     margin :10px;
 }
 
-.member a {
-    text-decoration: none;
-    color : black;
-    font-size : 16px;
+.member a{
+    text-decoration:none;
+    color: white;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+
+.member a:hover {
+    background-color: #c7cdec;
+    color :#2c3e50;
 }
 
 footer {
     text-align : center;
     padding : 30px;
-    background-color : rgb(104, 149, 216);
-    color : white;
+    background-color : #c7cdec;
+    color : black;
+    font-size: large;
 }
+
+@keyFrames neonPulse {
+    from { text-shadow: 0 0 3px red, 0 0 6px lime; }
+    to {text-shadow: 0 0 9px blue, 0 0 12px red }
+}
+
