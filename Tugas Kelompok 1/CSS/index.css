@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
+    background-color: rgba(0, 0, 0, 0.916);
 }
 
 header {
@@ -10,8 +11,9 @@ header {
 }
 
 h1 {
-    color: #2c3e50;
+    color: #e8f1fa;
     margin-bottom: 0;
+    animation: neonPulse 2s infinite alternate
 }
 
 h2 {
@@ -62,24 +64,6 @@ button {
     animation: shadowcolorChange 3s linear infinite;
 }
 
-@keyframes shadowcolorChange {
-    0% {
-        box-shadow: 0 0 15px red;
-    }
-
-    33% {
-        box-shadow: 0 0 15px lime;
-    }
-
-    66% {
-        box-shadow: 0 0 15px blue;
-    }
-
-    100% {
-        box-shadow: 0 0 15px red;
-    }   
-}
-
 .content-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -98,11 +82,18 @@ button {
     width: 100%;
     background: #ffffff;
     padding: 30px;
-    padding-top: 40px;
+    padding-top: 30px;
     border-radius: 8px;
-    border: 2px dashed #808080; 
+    border: 4px solid #808080; 
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation: colorChange 10s ease-in-out infinite;
 }
+
 
 /**
     Hide table
@@ -111,5 +102,37 @@ button {
     display: none;
 }
 
+@keyframes shadowcolorChange {
+    0% {
+        box-shadow: 0 0 15px red;
+    }
 
+    33% {
+        box-shadow: 0 0 15px lime;
+    }
 
+    66% {
+        box-shadow: 0 0 15px blue;
+    }
+
+    100% {
+        box-shadow: 0 0 15px red;
+    }   
+}
+
+@keyframes colorChange {
+    0% {
+        border-color: rgb(255, 0, 0);
+    }
+    50% {
+        border-color: rgb(30, 255, 0);
+    }
+    100% {
+        border-color: rgb(0, 89, 255);
+    }
+}
+
+@keyFrames neonPulse {
+    from { text-shadow: 0 0 3px red, 0 0 6px lime; }
+    to {text-shadow: 0 0 9px blue, 0 0 12px red }
+}
