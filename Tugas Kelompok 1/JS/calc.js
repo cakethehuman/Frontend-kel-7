@@ -11,6 +11,8 @@ class Calc{
     #variance;
     #sampleVariance;
     #geometricMean;
+    #standardDeviation;
+    #sampleStandardDeviation;
 
     constructor(data) {
         this.#data = [...data];
@@ -36,6 +38,9 @@ class Calc{
         this.#calculateVariance();
         this.#calculateSampleVariance();
         this.#calculateGeometricMean();
+
+        this.#CalcultaeStandardDeviation();
+        this.#CalcultaeSampleStandardDeviation();
     }
 
     // retrieving the copy data
@@ -82,6 +87,14 @@ class Calc{
 
     get range() {
         return this.#range;
+    }
+
+    get standardDeviation() {
+        return this.#standardDeviation;
+    }
+
+    get sampleVariance() {
+        return this.#sampleStandardDeviation;
     }
 
  
@@ -235,6 +248,14 @@ class Calc{
 
         result = Math.pow(productOfDataset, 1/this.numberCount);
         this.#geometricMean = result;
+    }
+
+    #CalcultaeStandardDeviation(){
+        this.#standardDeviation =  Math.sqrt(this.variance);
+    }
+
+    #CalcultaeSampleStandardDeviation(){
+        this.#sampleStandardDeviation =  Math.sqrt(this.sampleVariance);
     }
 }
 
