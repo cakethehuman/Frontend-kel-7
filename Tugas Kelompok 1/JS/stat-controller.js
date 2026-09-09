@@ -33,7 +33,7 @@ form.addEventListener("submit", (event) => {
         {'id': 'Count', "content" : result.numberCount},
         {'id': 'Sum', "content" : result.total},
         {'id': 'Mean', "content" : result.mean},
-        // {'id': 'Mode', "content" : result.mode},
+        {'id': 'Mode', "content" : result.mode()},
         {'id': 'Max', "content" : result.largest},
         {'id': 'Min', "content" : result.smallest},
         {'id': 'Range', "content" : result.range},
