@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/index.css">
     <script src="../JS/navbar.js" defer></script>
+    <script type="module" src="../JS/stat-controller.js"></script>
     <title>Statistic Calculator</title>
 </head>
 <body>
@@ -16,12 +17,13 @@
 
     <div class="content-container">
         <div class="form-box">
-            <form action="" method="POST" align="center">
+            <form id="stat-form" align="center">
                 <textarea name="angka_input" cols="70" rows="4" placeholder="Masukkan angka, harap dipisahkan dengan koma.."></textarea>
 
                 <div class="button-group">
                     <button type="submit" class="button-calculate">
-                        Calculate ▶
+                        Calculate 
+                        
                     </button>
                     <button type="reset" class="button-clear">
                         Clear
@@ -32,6 +34,23 @@
 
         <div class="result-box">
             <h3>Hasil Perhitungan</h3>
+            <table class="hidden-table" id="hidden-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <template id="result-template">
+                <tr>
+                    <td class="table-id"></td>
+                    <td class="table-content"></td>
+                </tr>
+            </template>
+            
             <p>Data hasil statistik akan muncul di sini setelah tombol Calculate ditekan.</p>
         </div>
     </div>
