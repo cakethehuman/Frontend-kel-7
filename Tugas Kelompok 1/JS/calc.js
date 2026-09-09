@@ -11,6 +11,8 @@ class Calc{
     #variance;
     #sampleVariance;
     #geometricMean;
+    #standardDeviation;
+    #sampleStandardDeviation;
 
     constructor(data) {
         this.#data = [...data];
@@ -36,6 +38,9 @@ class Calc{
         this.#calculateVariance();
         this.#calculateSampleVariance();
         this.#calculateGeometricMean();
+
+        this.#CalcultaeStandardDeviation();
+        this.#CalcultaeSampleStandardDeviation();
     }
 
     // retrieving the copy data
@@ -82,6 +87,14 @@ class Calc{
 
     get range() {
         return this.#range;
+    }
+
+    get standardDeviation() {
+        return this.#standardDeviation;
+    }
+
+    get sampleStandardDeviation() {
+        return this.#sampleStandardDeviation;
     }
 
  
@@ -134,7 +147,7 @@ class Calc{
             }
         }
         this.numberFrequency = numberFrequency;
-        console.log(this.numberFrequency);
+        // console.log(this.numberFrequency);
     }
 
     #calculateAllPossibleModes(){
@@ -144,7 +157,7 @@ class Calc{
         for (const [key, value] of this.numberFrequency) {
             // console.log(`Key: ${key}, value: ${value}`)
             if (allPossibleModes.size === 0) {
-                    console.log(`key yang akan ditambahkan: ${key}, valuenya : ${value}`);
+                    // console.log(`key yang akan ditambahkan: ${key}, valuenya : ${value}`);
                     frequentData = key;
                     frequentDataCount = value;
                     allPossibleModes.set(frequentData, value);
@@ -236,54 +249,63 @@ class Calc{
         result = Math.pow(productOfDataset, 1/this.numberCount);
         this.#geometricMean = result;
     }
-}
 
-
-// let TEST = new Calc(Array.from({length: 100}, () => Math.floor(Math.random() * 100) + 1));
-let TEST = new Calc([5, 77, 11, 61, 68, 24, 53, 64, 23, 50, 52, 72, 4, 44, 76, 85, 33, 2, 98, 31, 51, 38, 82, 88, 26, 17, 77, 63, 88, 41]);
-
-console.log(`The data is:\n${TEST.data}`);
-if (TEST.isMultipleMode()) {
-    for (const [key, value] of TEST.mode()) {
-        // console.log(`value ${key} has ${value} occurence`)
+    #CalcultaeStandardDeviation(){
+        this.#standardDeviation =  Math.sqrt(this.variance);
     }
-}   else {
-        const [modeValue, modeFrequency] = TEST.mode();
 
-
-        // console.log(TEST.smallest());
-        // console.log(TEST.range());
-        console.log(`The mode is: ${modeValue}`);
-        console.log(`The frequency is: ${modeFrequency}`);
-}
-
-
-console.log("Before appending: ");
-
-console.log(`Varians: ${TEST.variance}`);
-console.log(`Sample Varians: ${TEST.sampleVariance}`);
-console.log(`Geometric mean: ${TEST.geometricMean}`);
-
-
-console.log("After the new data, 5");
-
-TEST.addData(5);
-console.log(`Varians: ${TEST.variance}`);
-console.log(`Sample Varians: ${TEST.sampleVariance}`);
-console.log(`Geometric mean: ${TEST.geometricMean}`);
-
-
-console.log(`The data is:\n${TEST.data}`);
-if (TEST.isMultipleMode()) {
-    for (const [key, value] of TEST.mode()) {
-        console.log(`value ${key} has ${value} occurence`)
+    #CalcultaeSampleStandardDeviation(){
+        this.#sampleStandardDeviation =  Math.sqrt(this.sampleVariance);
     }
-}   else {
-        const [modeValue, modeFrequency] = TEST.mode();
-
-
-        // console.log(TEST.smallest());
-        // console.log(TEST.range());
-        console.log(`The mode is: ${modeValue}`);
-        console.log(`The frequency is: ${modeFrequency}`);
 }
+
+export default Calc;
+// // let TEST = new Calc(Array.from({length: 100}, () => Math.floor(Math.random() * 100) + 1));
+// let TEST = new Calc([5, 77, 11, 61, 68, 24, 53, 64, 23, 50, 52, 72, 4, 44, 76, 85, 33, 2, 98, 31, 51, 38, 82, 88, 26, 17, 77, 63, 88, 41]);
+
+// console.log(`The data is:\n${TEST.data}`);
+// if (TEST.isMultipleMode()) {
+//     for (const [key, value] of TEST.mode()) {
+//         // console.log(`value ${key} has ${value} occurence`)
+//     }
+// }   else {
+//         const [modeValue, modeFrequency] = TEST.mode();
+
+
+//         // console.log(TEST.smallest());
+//         // console.log(TEST.range());
+//         console.log(`The mode is: ${modeValue}`);
+//         console.log(`The frequency is: ${modeFrequency}`);
+// }
+
+
+// console.log("Before appending: ");
+
+// console.log(`Varians: ${TEST.variance}`);
+// console.log(`Sample Varians: ${TEST.sampleVariance}`);
+// console.log(`Geometric mean: ${TEST.geometricMean}`);
+
+
+// console.log("After the new data, 5");
+
+// TEST.addData(5);
+// console.log(`Varians: ${TEST.variance}`);
+// console.log(`Sample Varians: ${TEST.sampleVariance}`);
+// console.log(`Geometric mean: ${TEST.geometricMean}`);
+
+
+// console.log(`The data is:\n${TEST.data}`);
+// if (TEST.isMultipleMode()) {
+//     for (const [key, value] of TEST.mode()) {
+//         console.log(`value ${key} has ${value} occurence`)
+//     }
+// }   else {
+//         const [modeValue, modeFrequency] = TEST.mode();
+
+
+//         // console.log(TEST.smallest());
+//         // console.log(TEST.range());
+//         console.log(`The mode is: ${modeValue}`);
+//         console.log(`The frequency is: ${modeFrequency}`);
+// }
+
