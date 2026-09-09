@@ -34,8 +34,13 @@ form.addEventListener("submit", (event) => {
     if(Array.isArray(mode)){
         hasilMode = `${mode[0]} with a frequency of ${mode[1]}`;
     } else{
-        console.log(mode.typ);
-        hasilMode = "Have no mode"; 
+        let hasilMultipleMode = [];
+        let frequency;
+        mode.forEach((freq, num) =>{
+            frequency = freq;
+            hasilMultipleMode.push(num);
+        });
+        hasilMode = `${hasilMultipleMode} have all have a frequncy of ${frequency}`; 
     }
     let statisticResult = [
         {'id': 'Count', "content" : result.numberCount},
