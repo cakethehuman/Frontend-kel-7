@@ -59,7 +59,7 @@ button {
 .button-calculate:hover{
     background-image: none !important;
     border: none;
-    animation: shadowcolorChange 2s linear infinite;
+    animation: shadowcolorChange 3s linear infinite;
 }
 
 @keyframes shadowcolorChange {
