@@ -13,6 +13,9 @@ header {
 h1 {
     color: #e8f1fa;
     margin-bottom: 0;
+    animation: 
+    neonPulse 2s infinite alternate,
+    wave 2s infinite;
 }
 
 h2 {
