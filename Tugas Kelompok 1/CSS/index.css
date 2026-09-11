@@ -3,7 +3,11 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
-    background-color: rgba(0, 0, 0, 0.916);
+    
+    background-image: url('../IMG/Dark Theme.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
 }
 
 header {
@@ -31,7 +35,6 @@ form {
     background: #808080;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 4px 4px;
     border: 4px solid red; 
     animation: colorChange 4s linear infinite;
 }
