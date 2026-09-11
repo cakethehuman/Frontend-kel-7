@@ -1,0 +1,19 @@
+.title{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.graph-location{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.graph-visual{
+    width: 1000;
+    height: 500;
+    border:1px solid #000000;
+
+}
+
