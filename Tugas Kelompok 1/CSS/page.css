@@ -13,6 +13,10 @@ header {
     padding : 30px;
 }
 
+h2{
+    font-size: 30px;
+}
+
 header h1 {
     font-size: 40px;
     color :  #2c3e50;
@@ -33,25 +37,22 @@ article {
     justify-content : center; 
 }
 
-article h2 {
-    width : 100%;
-    text-align : center;
-    color : #e8f1fa;
-    margin-bottom : 20px;
-    margin-top: 20px;
+h2 {
+    text-align: center;
+    color : #ffff;
     font-size: 38px;
+    margin-top: 100px;
     animation: neonPulse 2s infinite alternate,
     wave 3.5s infinite;
 }
 
-article > img {
-    display : block; 
-    margin-left : 250px;
-    margin-right : 250px;
-    margin-bottom : 30px; 
-    max-width: 700px;
-    width : 50%;
-    height : 800px;
+.kelompok-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kelompok-image {
     border : 3px solid #c7cdec;
     border-radius: 60px;
     box-shadow : 8px 8px 20px indigo;
@@ -105,6 +106,10 @@ article > img {
     text-decoration:none;
     color: white;
     transition: background-color 0.4s, color 0.4s;
+}
+
+.member:hover{
+    background-color: #000000;
 }
 
 
