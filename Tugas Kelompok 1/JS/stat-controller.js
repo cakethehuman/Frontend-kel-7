@@ -9,7 +9,7 @@ function createTable(data){
     const template = document.getElementById('result-template');
 
     const fragment = document.createDocumentFragment();
-
+    
     data.forEach(element => {
         const clone =  template.content.cloneNode(true);
 

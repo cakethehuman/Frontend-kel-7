@@ -18,13 +18,13 @@
     <div class="content-container">
         <div class="form-box">
             <form id="stat-form" align="center">
-                <textarea name="angka_input" cols="70" rows="4" placeholder="Masukkan angka, harap dipisahkan dengan koma.."></textarea>
+                <textarea name="angka_input" id="angkaInput" cols="70" rows="4" placeholder="Masukkan angka, harap dipisahkan dengan koma.."></textarea>
 
                 <div class="button-group">
                     <button type="submit" class="button-calculate">
                         Calculate 
                     </button>
-                    <button type="reset" class="button-clear">
+                    <button type="button" class="button-clear" onclick="document.getElementById('angkaInput').value = ''">
                         Clear
                     </button>
                 </div>
