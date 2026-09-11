@@ -35,7 +35,7 @@ export class GraphBuilder {
   axes() {
     const { ctx, width, height, originX, originY, scale } = this;
 
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = "white";
     ctx.lineWidth = 2;
 
     ctx.beginPath();
@@ -48,7 +48,7 @@ export class GraphBuilder {
     ctx.lineTo(originX, height);
     ctx.stroke();
 
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "white";
     ctx.font = "14px Arial";
 
     for (let x = -10; x <= 10; x++) {

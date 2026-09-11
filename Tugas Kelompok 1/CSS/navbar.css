@@ -5,21 +5,27 @@
     background-color: var(--base-navbar);
     display: flex;
     justify-content: center;
-    animation: colorChange 10s ease-in-out infinite;
+    align-items: center;
+    margin-left: 50px;
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
+    margin-right : 50px;
     gap: 30px;
 }
 
 .navbar a {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     text-decoration: none;
     color: var(--base-navbar-a);
     font-size: 24px;
     transition: color 0.2s ease, background-color 0.2s ease;
-
 }
 
 .navbar a:hover {
