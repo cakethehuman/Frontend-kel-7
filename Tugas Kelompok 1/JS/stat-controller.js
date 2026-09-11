@@ -46,6 +46,7 @@ form.addEventListener("submit", (event) => {
         {'id': 'Count', "content" : result.numberCount},
         {'id': 'Sum', "content" : result.total},
         {'id': 'Mean', "content" : result.mean},
+        {'id': 'Median', "content" : result.median},
         {'id': 'Mode', "content" : hasilMode},
         {'id': 'Max', "content" : result.largest},
         {'id': 'Min', "content" : result.smallest},
@@ -55,7 +56,7 @@ form.addEventListener("submit", (event) => {
         {'id': 'STD', "content" : result.standardDeviation},
         {'id': 'Sample STD', "content" : result.sampleStandardDeviation},
         {'id': 'Geometric Mean', "content" : result.geometricMean},
-        {'id': 'sorted data', "content": result.sorted}
+        {'id': 'Sorted Data', "content": result.sorted}
     ];
 
     createTable(statisticResult);
