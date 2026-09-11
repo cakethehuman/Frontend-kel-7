@@ -1,13 +1,21 @@
 .navbar {
     background-color: rgb(32, 32, 83);
     display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    display: flex;
     justify-content: center;
+    align-items: center;
+    margin-left: 50px;
 }
 
 .navbar ul {
     list-style: none;
     display: flex;
-    gap: 5px;
+    margin-right : 50px;
+    gap: 30px;
 }
 
 .navbar a {
