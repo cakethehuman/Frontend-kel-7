@@ -1,14 +1,47 @@
+:root {
+    --primary-color: black;
+    --base-body: white;
+    --base-h1: black;
+    --base-h2: rgb(9, 16, 16);
+    --base-form: #808080;
+    --base-form-border: red;
+    --base-textarea: #fcfdff;
+    --base-result-box: #ffffff;
+    --base-result-box-border: #808080;
+    --base-table: white;
+    --base-th-td-border: #808080;
+    --base-th-td: #000;
+    --base-th: #c7cdec;
+    --base-navbar: #808080;
+    --base-navbar-a: white;
+}
+
+.darkmode {
+    --primary-color: gray;
+    --base-body: rgba(0, 0, 0, 0.916);
+    --base-h1: #e8f1fa;
+    --base-h2: rgb(9, 16, 16);
+    --base-form: #808080;
+    --base-form-border: red;
+    --base-textarea: #fcfdff;
+    --base-result-box: #ffffff;
+    --base-result-box-border: #808080;
+    --base-table: white;
+    --base-th-td-border: #808080;
+    --base-th-td: #000;
+    --base-th: #c7cdec;
+    --base-navbar: #808080;
+    --base-navbar-a: white;
+}
+
+
+
 body {
     font-family:'Franklin Gothic Medium', Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
-
-    background-image: url('../IMG/Dark Theme.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;  
-    background-size: cover;
-
+    background-color: var(--base-body);
 }
 
 header {
@@ -19,7 +52,7 @@ header {
 
 
 h1 {
-    color: #e8f1fa;
+    color: var(--base-h1);
     margin-bottom: 0;
     animation: neonPulse 2s infinite alternate,
     wave 3.5s infinite;
@@ -27,7 +60,7 @@ h1 {
 
 h2 {
     margin: 0;
-    color: rgb(9, 16, 16);
+    color: var(--base-h2);
 }
 
 h3 {
@@ -40,10 +73,11 @@ form {
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
-    background: rgb(32, 32, 83);
+    background: var(--base-form);
     padding: 30px;
     border-radius: 8px;
-    border: 1px solid red; 
+    box-shadow: 4px 4px;
+    border: 4px solid var(--base-form-border); 
     animation: colorChange 4s linear infinite;
 }
 
@@ -53,7 +87,7 @@ textarea {
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
-    background: #fcfdff;
+    background: var(--base-textarea);
     padding: 30px;
     border-radius: 10px;
     resize: vertical;
@@ -99,11 +133,11 @@ button {
 
 .result-box {
     width: 100%;
-    background: rgb(32, 32, 83);
+    background: var(--base-result-box);
     padding: 30px;
     padding-top: 30px;
     border-radius: 8px;
-    border: 1px solid #808080; 
+    border: 4px solid var(--base-result-box-border); 
     box-sizing: border-box;
 
     display: flex;
@@ -179,23 +213,23 @@ button {
 }
 
 table {
-    width: 85%;
-    margin: 20px auto;
-    border-collapse: collapse; 
-    background-color: transparent;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--base-table);
 }
 
 th, td {
-    border: 2px solid #808080;
-    padding: 4px 16px;
+    border: 2px solid var(--base-th-td-border);
+    margin: auto;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     color: #fff;
 }
 
 th {
-    background-color: rgba(65, 65, 130, 0.8);
-    font-size: 16px;
+    background-color: var(--base-th);
+    font-size: 1.1rem;
+    text-align: center;
 }
 
 td {
