@@ -7,7 +7,7 @@ body {
 
 header {
     margin : 0;
-    text-align : center;
+    text-align : center;    
     background-color : #c7cdec;
     padding : 30px;
 }
@@ -120,7 +120,7 @@ footer {
     font-size: large;
 }
 
-@keyFrames neonPulse {
+@keyframes neonPulse {
     from { text-shadow: 0 0 3px red, 0 0 6px lime; }
     to {text-shadow: 0 0 9px blue, 0 0 12px red }
 }
