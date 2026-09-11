@@ -28,7 +28,7 @@ form.addEventListener("submit", (event) => {
     const formData = new FormData(event.target);
     let data = Object.fromEntries(formData.entries()); 
     let data_clean = data['angka_input'].split(',').map(Number)
-    let result = new Calc(data_clean);
+    let result = new Calc(data=data_clean);
     let mode  = result.mode()
     let hasilMode;
     if(Array.isArray(mode)){

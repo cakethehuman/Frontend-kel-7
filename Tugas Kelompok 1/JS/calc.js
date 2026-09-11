@@ -13,6 +13,9 @@ class Calc{
     #geometricMean;
     #standardDeviation;
     #sampleStandardDeviation;
+    // #Q1;
+    // #Q3;
+    // #IQR;
 
     constructor(data) {
         this.#data = [...data];
@@ -41,6 +44,10 @@ class Calc{
 
         this.#CalcultaeStandardDeviation();
         this.#CalcultaeSampleStandardDeviation();
+
+        // this.#Q1();
+        // this.#Q3();
+        // this.#IQR();
     }
 
     // retrieving the copy data
@@ -96,6 +103,18 @@ class Calc{
     get sampleStandardDeviation() {
         return this.#sampleStandardDeviation;
     }
+
+    // get Q1(){
+    //     return this.#Q1;
+    // }
+
+    // get Q2(){
+    //     return this.#Q3;
+    // }
+
+    // get Q3(){
+    //     return this.#IQR;
+    // }
 
  
     addData(value) {
@@ -218,10 +237,10 @@ class Calc{
     }
 
     #calculateVariance() {
-        let differenceOfMeanAndDataset = 0
+        let differenceOfMeanAndDataset = 0;
         let result;
         for (let i = 0; i < this.numberCount; i++) {
-            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2
+            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2;
         }
         result = differenceOfMeanAndDataset / this.numberCount;
 
@@ -229,10 +248,10 @@ class Calc{
     }
 
     #calculateSampleVariance() {
-        let differenceOfMeanAndDataset = 0
+        let differenceOfMeanAndDataset = 0;
         let result;
         for (let i = 0; i < this.numberCount; i++) {
-            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2
+            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2;
         }
         result = differenceOfMeanAndDataset / (this.numberCount - 1);
 

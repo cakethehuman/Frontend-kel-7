@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/graph.css">
+    <script src="../JS/navbar.js" defer></script>
+    <script type="module" src="../JS/graph-controller.js"></script>
+    <title>Document</title>
+</head>
+    <body>
+        <div id="navbar-placeholder"></div>
+
+        <h1 class="title">Regression Calculator</h1>
+        <div class="graph-location">
+            <canvas class="graph-visual" id="cartesian-graph" width=650 height=650></canvas>
+        </div>
+
+        <form id='data-input'>
+            <textarea name="x-data" cols="30" rows="5" placeholder="Masukan data x"></textarea>
+            <textarea name="y-data" cols="30" rows="5" placeholder="Masukan data y"></textarea>
+            <button type="submit" class="button-plot">
+                plot & predict
+            </button>
+        </form>
+        
+    </body>
+</html>
