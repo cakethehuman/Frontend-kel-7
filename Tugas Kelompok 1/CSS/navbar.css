@@ -1,6 +1,8 @@
+@import url('./index.css');
+
 .navbar {
     border: 5px solid red;
-    background-color: #808080;
+    background-color: var(--base-navbar);
     display: flex;
     justify-content: center;
     animation: colorChange 10s ease-in-out infinite;
@@ -14,7 +16,7 @@
 
 .navbar a {
     text-decoration: none;
-    color: white;
+    color: var(--base-navbar-a);
     font-size: 24px;
     transition: color 0.2s ease, background-color 0.2s ease;
 
@@ -24,6 +26,35 @@
     background-color: black;
 }
 
+#theme-switcher {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--base-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 5px; /* left out 5px from the top */
+    right: 10px; /* left out 10px from the right */
+}
+
+#theme-switcher svg {
+    fill: var(--primary-color);
+}
+
+#theme-switcher svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:last-child {
+    display: block;
+}
 
 
 @keyframes colorChange {
