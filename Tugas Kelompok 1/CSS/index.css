@@ -3,14 +3,11 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
-<<<<<<< HEAD
-=======
     
     background-image: url('../IMG/Dark Theme.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;  
     background-size: cover;
->>>>>>> 58df9536fa29029413fddc6854f79c62ca7ea62d
 }
 
 header {
@@ -68,38 +65,6 @@ button {
     border-radius: 5px;
 }
 
-<<<<<<< HEAD
-/* @keyframes bounce{
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-.button-calculate:hover{
-    animation:bounce 0.4s ease infinite;
-} */
-
-.button-calculate:hover{
-    background-image: none !important;
-    border: 3px solid rgb(255, 0, 0);
-    animation: colorChange 2s linear infinite;
-}
-
-@keyframes colorChange {
-    0% {
-        background-color: rgb(255, 0, 0);
-    }
-    50% {
-        background-color: rgb(30, 255, 0);
-    }
-    100% {
-        background-color: rgb(0, 89, 255);
-    }
-=======
 .button-calculate:hover{
     border: none;
     animation: shadowcolorChange 3s linear infinite;
@@ -108,7 +73,6 @@ button {
 .button-clear:hover { 
     border: none;
     animation: shadowcolorChange 3s linear infinite;
->>>>>>> 58df9536fa29029413fddc6854f79c62ca7ea62d
 }
 
 .content-container{
