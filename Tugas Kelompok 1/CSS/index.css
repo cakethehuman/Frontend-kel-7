@@ -1,8 +1,16 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Franklin Gothic Medium', Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
+<<<<<<< HEAD
+=======
+    
+    background-image: url('../IMG/Dark Theme.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+>>>>>>> 58df9536fa29029413fddc6854f79c62ca7ea62d
 }
 
 header {
@@ -10,8 +18,10 @@ header {
 }
 
 h1 {
-    color: #2c3e50;
+    color: #e8f1fa;
     margin-bottom: 0;
+    animation: neonPulse 2s infinite alternate,
+    wave 3.5s infinite;
 }
 
 h2 {
@@ -25,10 +35,11 @@ form {
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
-    background: #c7cdec;
+    background: #808080;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 4px 4px;
+    border: 4px solid red; 
+    animation: colorChange 4s linear infinite;
 }
 
 textarea {
@@ -41,6 +52,7 @@ textarea {
     padding: 30px;
     border-radius: 10px;
     resize: vertical;
+    margin-bottom: 20px;
 }
 
 .button-group {
@@ -56,6 +68,7 @@ button {
     border-radius: 5px;
 }
 
+<<<<<<< HEAD
 /* @keyframes bounce{
     0%, 100% {
         transform: translateY(0);
@@ -86,6 +99,16 @@ button {
     100% {
         background-color: rgb(0, 89, 255);
     }
+=======
+.button-calculate:hover{
+    border: none;
+    animation: shadowcolorChange 3s linear infinite;
+}
+
+.button-clear:hover { 
+    border: none;
+    animation: shadowcolorChange 3s linear infinite;
+>>>>>>> 58df9536fa29029413fddc6854f79c62ca7ea62d
 }
 
 .content-container{
@@ -106,8 +129,104 @@ button {
     width: 100%;
     background: #ffffff;
     padding: 30px;
-    padding-top: 40px;
+    padding-top: 30px;
     border-radius: 8px;
-    border: 2px dashed #808080; 
+    border: 4px solid #808080; 
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation: colorChange 5s ease-in-out infinite;
+}
+
+
+/**
+    Hide table
+**/
+.hidden-table{
+    display: none;
+}
+
+@keyframes shadowcolorChange {
+    0% {
+        box-shadow: 0 0 15px red;
+    }
+
+    33% {
+        box-shadow: 0 0 15px lime;
+    }
+
+    66% {
+        box-shadow: 0 0 15px blue;
+    }
+
+    100% {
+        box-shadow: 0 0 15px red;
+    }   
+}
+
+@keyframes colorChange {
+    0%   { border-color: red; }
+    14%  { border-color: orange; }
+    29%  { border-color: yellow; }
+    42%  { border-color: green; }
+    57%  { border-color: blue; }
+    71%  { border-color: indigo; }
+    85% { border-color: violet; }
+    100%   { border-color: red; }   
+}
+
+@keyframes rgbBackground {
+    0%   { background-color: red; }
+    14%  { background-color: orange; }
+    29%  { background-color: yellow; }
+    42%  { background-color: green; }
+    57%  { background-color: blue; }
+    71%  { background-color: indigo; }
+    85% { background-color: violet; }
+    100%   { background-color: red; }    
+}
+
+@keyframes neonPulse {
+    from { text-shadow: 0 0 3px red, 0 0 6px lime; }
+    to {text-shadow: 0 0 9px blue, 0 0 12px red }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+table {
+    width: 85%;
+    margin: 20px auto;
+    border-collapse: collapse; 
+    background-color: white;
+}
+
+th, td {
+    border: 2px solid #808080;
+    padding: 4px 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+}
+
+th {
+    background-color: #c7cdec;
+    font-size: 16px;
+}
+
+td {
+    font-size: 15px;
+    font-weight: bold;
 }
