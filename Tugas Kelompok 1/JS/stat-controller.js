@@ -29,11 +29,24 @@ form.addEventListener("submit", (event) => {
     let data = Object.fromEntries(formData.entries()); 
     let data_clean = data['angka_input'].split(',').map(Number)
     let result = new Calc(data_clean);
+    let mode  = result.mode()
+    let hasilMode;
+    if(Array.isArray(mode)){
+        hasilMode = `${mode[0]} with a frequency of ${mode[1]}`;
+    } else{
+        let hasilMultipleMode = [];
+        let frequency;
+        mode.forEach((freq, num) =>{
+            frequency = freq;
+            hasilMultipleMode.push(num);
+        });
+        hasilMode = `${hasilMultipleMode} have all have a frequncy of ${frequency}`; 
+    }
     let statisticResult = [
         {'id': 'Count', "content" : result.numberCount},
         {'id': 'Sum', "content" : result.total},
         {'id': 'Mean', "content" : result.mean},
-        // {'id': 'Mode', "content" : result.mode},
+        {'id': 'Mode', "content" : hasilMode},
         {'id': 'Max', "content" : result.largest},
         {'id': 'Min', "content" : result.smallest},
         {'id': 'Range', "content" : result.range},
@@ -42,6 +55,7 @@ form.addEventListener("submit", (event) => {
         {'id': 'STD', "content" : result.standardDeviation},
         {'id': 'Sample STD', "content" : result.sampleStandardDeviation},
         {'id': 'Geometric Mean', "content" : result.geometricMean},
+        {'id': 'sorted data', "content": result.sorted}
     ];
 
     createTable(statisticResult);
