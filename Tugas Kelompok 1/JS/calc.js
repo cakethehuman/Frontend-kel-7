@@ -237,10 +237,10 @@ class Calc{
     }
 
     #calculateVariance() {
-        let differenceOfMeanAndDataset = 0
+        let differenceOfMeanAndDataset = 0;
         let result;
         for (let i = 0; i < this.numberCount; i++) {
-            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2
+            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2;
         }
         result = differenceOfMeanAndDataset / this.numberCount;
 
@@ -248,10 +248,10 @@ class Calc{
     }
 
     #calculateSampleVariance() {
-        let differenceOfMeanAndDataset = 0
+        let differenceOfMeanAndDataset = 0;
         let result;
         for (let i = 0; i < this.numberCount; i++) {
-            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2
+            differenceOfMeanAndDataset += (this.#data[i] - this.mean) ** 2;
         }
         result = differenceOfMeanAndDataset / (this.numberCount - 1);
 

@@ -1,7 +1,5 @@
 import { GraphBuilder } from './graph-builder.js';
 import Regression from './regression.js'
-import Calc from './calc.js';
-
 
 const form = document.getElementById('data-input');
 const canvas = document.getElementById("cartesian-graph");
@@ -20,15 +18,16 @@ form.addEventListener('submit', function(event){
     const y = form.elements["y-data"].value.split(",").map(Number);
 
     graph.clear().grid().axes();
-    let xData = new Calc(x);
     let regression = new Regression(x,y);
     let regressionResult = regression.fit()
 
     for (let i = 0; i < x.length; i++) {
         graph.point(x[i], y[i]);
     }
+
     let xMin = -10;
     let xMax = 10;
+    
     let regressionLineStart = regressionResult[0] * xMin;
     let regressionInterceptStart = regressionResult[1];
     let regressionLineEnd = regressionResult[0] * xMax;
