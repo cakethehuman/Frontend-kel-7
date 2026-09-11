@@ -63,14 +63,13 @@ button {
 }
 
 .button-calculate:hover{
-    background-image: none !important;
     border: none;
     animation: shadowcolorChange 3s linear infinite;
 }
 
 .button-clear:hover { 
-    animation: rgbBackground 2s linear infinite; 
-    color: #ffffff;
+    border: none;
+    animation: shadowcolorChange 3s linear infinite;
 }
 
 .content-container{
