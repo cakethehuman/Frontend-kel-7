@@ -1,48 +1,42 @@
 :root {
-    --primary-color: black;
-    --base-body: white;
-    --base-h1: black;
-    --base-h2: rgb(9, 16, 16);
-    --base-form: #808080;
-    --base-form-border: red;
-    --base-textarea: #fcfdff;
-    --base-result-box: #ffffff;
-    --base-result-box-border: #808080;
-    --base-table: white;
-    --base-th-td-border: #808080;
-    --base-th-td: #000;
-    --base-th: #c7cdec;
-    --base-navbar: #808080;
-    --base-navbar-a: white;
+    --primary-color: rgb(255, 255, 255);
+    --base-body: black;
+    --base-h1: #0f172a;
+    --base-h2: #1e293b;
+    --base-form: #4980da;
+    --base-form-border: #e2e8f0;
+    --base-textarea: #f8fafc;
+    --base-result-box: #4980da;
+    --base-result-box-border: #4980da;
+    --base-table: #ffffff;
+    --base-th-td-border: black;
+    --base-th-td: black;
+    --base-th: #fd02a5;
+    --base-navbar: #4980da;
+    --base-navbar-a: #ffffff;
+    --theme-background : url('../IMG/Light Theme.jpg');
 }
 
 .darkmode {
-    --primary-color: gray;
-    --base-body: rgba(0, 0, 0, 0.916);
+    --primary-color: black;
+    --base-body: rgb(255, 255, 255);
     --base-h1: #e8f1fa;
-    --base-h2: rgb(9, 16, 16);
-    --base-form: #808080;
+    --base-h2: rgb(32, 32, 83);
+    --base-form: rgb(32, 32, 83);
     --base-form-border: red;
     --base-textarea: #fcfdff;
-    --base-result-box: #ffffff;
-    --base-result-box-border: #808080;
+    --base-result-box: rgb(32, 32, 83);
+    --base-result-box-border: rgb(32, 32, 83);
     --base-table: white;
-    --base-th-td-border: #808080;
-    --base-th-td: #000;
-    --base-th: #c7cdec;
-    --base-navbar: #808080;
+    --base-th-td-border: rgb(32, 32, 83);
+    --base-th-td: rgb(32, 32, 83);
+    --base-th: rgb(200, 200, 213);
+    --base-navbar: rgb(32, 32, 83);
     --base-navbar-a: white;
+    --theme-background : url('../IMG/Dark Theme.jpg');
 }
 
 
-
-body {
-    font-family:'Franklin Gothic Medium', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6 ;
-    background-color: var(--base-body);
-}
 
 header {
     display: flex;
@@ -51,8 +45,22 @@ header {
 }
 
 
+body {
+    font-family:'Franklin Gothic Medium', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6 ;
+    background-image: var(--theme-background);
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+    min-height: calc(100vh - 70px);
+
+}
+
+
 h1 {
-    color: var(--base-h1);
+    color: white;
     margin-bottom: 0;
     animation: neonPulse 2s infinite alternate,
     wave 3.5s infinite;
@@ -64,7 +72,7 @@ h2 {
 }
 
 h3 {
-    color:#fff
+    color:#ffffff
 }
 
 form {
@@ -76,8 +84,8 @@ form {
     background: var(--base-form);
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 4px 4px;
-    border: 4px solid var(--base-form-border); 
+
+    border: 1px solid var(--base-form-border); 
     animation: colorChange 4s linear infinite;
 }
 
@@ -137,7 +145,7 @@ button {
     padding: 30px;
     padding-top: 30px;
     border-radius: 8px;
-    border: 4px solid var(--base-result-box-border); 
+    border: 1px solid var(--base-result-box-border); 
     box-sizing: border-box;
 
     display: flex;
@@ -147,10 +155,6 @@ button {
     animation: colorChange 5s ease-in-out infinite;
 }
 
-
-/**
-    Hide table
-**/
 .hidden-table{
     display: none;
 }
