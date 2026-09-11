@@ -4,9 +4,6 @@ import Regression from './regression.js'
 const form = document.getElementById('data-input');
 const canvas = document.getElementById("cartesian-graph");
 
-const x = [1, 2, 3];
-const y = [1, 2, 3];
-
 const graph = new GraphBuilder(canvas, { scale: 30 });
 
 graph.grid().axes();
@@ -25,9 +22,9 @@ form.addEventListener('submit', function(event){
         graph.point(x[i], y[i]);
     }
 
-    let xMin = -10;
-    let xMax = 10;
-    
+    let xMin = -15;
+    let xMax = 15;
+
     let regressionLineStart = regressionResult[0] * xMin;
     let regressionInterceptStart = regressionResult[1];
     let regressionLineEnd = regressionResult[0] * xMax;
