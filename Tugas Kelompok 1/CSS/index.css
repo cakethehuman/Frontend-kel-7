@@ -8,17 +8,18 @@
     --base-textarea: #f8fafc;
     --base-result-box: #4980da;
     --base-result-box-border: #4980da;
-    --base-table: #ffffff;
-    --base-th-td-border: black;
-    --base-th-td: black;
-    --base-th: #fd02a5;
+    --base-table: transparent;
+    --base-th-td-border: #808080;
+    --base-th-td: #ffffff;
+    --base-th: #c7cdec;
+    --base-table-text: #000000;
     --base-navbar: #4980da;
-    --base-graph-container:rgb(32, 32, 83);
+    --base-graph-container: rgb(32, 32, 83);
     --base-navbar-a: #ffffff;
     --base-profile-title: #ffff;
     --base-member: rgb(32, 32, 83);
     --base-member-hover: #000000;
-    --theme-background : url('../IMG/Light Theme.jpg');
+    --theme-background: url('../IMG/Light Theme.jpg');
 }
 
 .darkmode {
@@ -31,20 +32,19 @@
     --base-textarea: #fcfdff;
     --base-result-box: rgb(32, 32, 83);
     --base-result-box-border: rgb(32, 32, 83);
-    --base-table: white;
-    --base-th-td-border: rgb(32, 32, 83);
-    --base-th-td: rgb(32, 32, 83);
-    --base-th: rgb(200, 200, 213);
+    --base-table: transparent;
+    --base-th-td-border: #808080;
+    --base-th-td: rgba(20, 20, 50, 0.5);
+    --base-th: rgba(65, 65, 130, 0.8);
+    --base-table-text: #ffffff;
     --base-navbar: rgb(32, 32, 83);
     --base-navbar-a: white;
     --base-profile-title: #4980da;
     --base-member: #4980da;
     --base-member-hover: #073c93;
     --base-graph-container: #4980da;
-    --theme-background : url('../IMG/Dark Theme.jpg');
+    --theme-background: url('../IMG/Dark Theme.jpg');
 }
-
-
 
 header {
     display: flex;
@@ -225,27 +225,28 @@ button {
 }
 
 table {
+    width: 100%;
+    margin: 15px auto;
     border-collapse: collapse;
-    margin-top: 20px;
     background-color: var(--base-table);
 }
 
 th, td {
     border: 2px solid var(--base-th-td-border);
-    margin: auto;
+    padding: 4px 40px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
+    color: var(--base-table-text);
 }
 
 th {
     background-color: var(--base-th);
-    font-size: 1.1rem;
-    text-align: center;
+    font-size: 16px;
 }
 
 td {
     font-size: 15px;
     font-weight: bold;
-    background-color: rgba(20, 20, 50, 0.5);
+    background-color: var(--base-th-td);
+    white-space: nowrap;
 }
