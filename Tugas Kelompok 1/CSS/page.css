@@ -42,7 +42,7 @@ h2.profile-title {
     text-align: center;
     color : var(--base-profile-title);
     font-size: 38px;
-    margin-top: 100px;
+    margin-top: 60px;
     animation: neonPulse 2s infinite alternate,
     wave 3.5s infinite;
 }
@@ -115,8 +115,8 @@ h2.profile-title {
 
 
 .member a:hover {
-    background-color: #c7cdec;
-    color :#2c3e50;
+    color : var(--base-member-hover);
+    animation: backgroundColorChange 4s ease-in-out infinite;
 }
 
 footer {
@@ -143,6 +143,11 @@ footer {
     100%   { border-color: red; }   
 }
 
+@keyframes backgroundColorChange {
+    0%   { background-color: red; }
+    50%  { background-color: rgb(21, 255, 0); }
+    100%   { background-color: rgb(255, 255, 0); }   
+}
 
 @keyframes wave {
     0% {
