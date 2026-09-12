@@ -40,7 +40,7 @@ form.addEventListener("submit", (event) => {
             frequency = freq;
             hasilMultipleMode.push(num);
         });
-        hasilMode = `${hasilMultipleMode} have all have a frequncy of ${frequency}`; 
+        hasilMode = `${hasilMultipleMode} have all have a frequency of ${frequency}`; 
     }
     let statisticResult = [
         {'id': 'Count', "content" : result.numberCount},
