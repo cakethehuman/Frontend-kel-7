@@ -1,6 +1,5 @@
 let darkmode = localStorage.getItem('darkmode');
 
-
 let body = document.body;
 let h1 = document.querySelector('h1');
 let h2 = document.querySelector('h2');
@@ -12,7 +11,9 @@ let th = document.querySelector('th');
 let td = document.querySelector('td');
 let nav = document.querySelector('nav')
 let nav_a = document.querySelectorAll('nav a');
-
+let graph_container = document.querySelector('.graph-container');
+let member = document.querySelector('.member');
+let member_hovered = document.querySelector('.member:hover');
 const enableDarkmode = () => {
     body.classList.add('darkmode');
     
@@ -49,6 +50,19 @@ const enableDarkmode = () => {
             a.classList.add('darkmode');
         });
     }
+    if (graph_container) {
+        graph_container.classList.add('darkmode');
+    }
+    if (member) {
+        member.classList.add('darkmode');
+    }
+    if (member_hovered) {
+        member.classList.add('darkmode');
+    }
+
+    // if (graph && graph.ctx) {
+    //     graph.changeLineStroke("green");
+    // }
     localStorage.setItem('darkmode', 'active');
 }
 
@@ -87,6 +101,18 @@ const disableDarkmode = () => {
             a.classList.remove('darkmode');
         });
     }
+    if (graph_container) {
+        graph_container.classList.remove('darkmode');
+    }
+    if (member) {
+        member.classList.remove('darkmode');    
+    }
+    if (member_hovered) {
+        member_hovered.classList.remove('darkmode');
+    }
+    // if (graph && graph.ctx) {
+    //     graph.changeLineStroke("blue");
+    // }
     localStorage.setItem('darkmode', null);
 }
 

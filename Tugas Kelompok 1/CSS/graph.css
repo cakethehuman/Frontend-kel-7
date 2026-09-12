@@ -1,10 +1,15 @@
+@import url('index.css');
+
 body {
     font-family:'Franklin Gothic Medium', Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
     background-color: rgba(0, 0, 0, 0.916);
+
 }
+
+
 
 .title{
     display: flex;
@@ -14,7 +19,7 @@ body {
     justify-content: center;
 }
 
- h1 {
+h1 {
     color: #e8f1fa;
     margin-bottom: 0;
     animation: neonPulse 2s infinite alternate,
@@ -36,7 +41,7 @@ body {
 }
 
 .graph-container {
-    background: rgb(32, 32, 83);
+    background: var(--base-graph-container);
     padding: 20px;
     border-radius: 12px;
     border: 1px solid red;

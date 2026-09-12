@@ -1,4 +1,5 @@
 // graph-builder.js
+
 export class GraphBuilder {
   constructor(canvas, { scale = 30 } = {}) {
     this.canvas = canvas;
@@ -12,7 +13,7 @@ export class GraphBuilder {
 
   grid() {
     const { ctx, width, height, scale } = this;
-    ctx.strokeStyle = "#ddd";
+    this.changeLineStroke("#ddd");
     ctx.lineWidth = 1;
 
     for (let x = 0; x <= width; x += scale) {
@@ -82,7 +83,7 @@ export class GraphBuilder {
     const p1 = this._toPixel(x1, y1);
     const p2 = this._toPixel(x2, y2);
 
-    this.ctx.strokeStyle = "blue";
+    this.changeLineStroke("yellow");
     this.ctx.lineWidth = 2;
     this.ctx.beginPath();
     this.ctx.moveTo(p1.pixelX, p1.pixelY);
@@ -90,6 +91,10 @@ export class GraphBuilder {
     this.ctx.stroke();
 
     return this;
+  }
+
+  changeLineStroke(color){
+    this.ctx.strokeStyle = color;
   }
 
   clear() {

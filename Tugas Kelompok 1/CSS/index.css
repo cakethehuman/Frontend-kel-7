@@ -13,7 +13,11 @@
     --base-th-td: black;
     --base-th: #fd02a5;
     --base-navbar: #4980da;
+    --base-graph-container:rgb(32, 32, 83);
     --base-navbar-a: #ffffff;
+    --base-profile-title: #ffff;
+    --base-member: rgb(32, 32, 83);
+    --base-member-hover: #000000;
     --theme-background : url('../IMG/Light Theme.jpg');
 }
 
@@ -33,6 +37,10 @@
     --base-th: rgb(200, 200, 213);
     --base-navbar: rgb(32, 32, 83);
     --base-navbar-a: white;
+    --base-profile-title: #4980da;
+    --base-member: #4980da;
+    --base-member-hover: #073c93;
+    --base-graph-container: #4980da;
     --theme-background : url('../IMG/Dark Theme.jpg');
 }
 
