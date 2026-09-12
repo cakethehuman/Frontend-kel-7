@@ -8,6 +8,8 @@ const graph = new GraphBuilder(canvas, { scale: 30 });
 
 graph.grid().axes();
 
+
+
 form.addEventListener('submit', function(event){
     event.preventDefault();
 

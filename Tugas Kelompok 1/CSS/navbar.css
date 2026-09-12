@@ -1,7 +1,11 @@
+@import url('./index.css');
+
+
 .navbar {
-    background-color: rgb(32, 32, 83);
+    background-color: var(--base-navbar);
     display: flex;
     justify-content: space-between;
+    height: 70px;
 }
 
 .logo{
@@ -25,7 +29,7 @@
     align-items: center;
 
     text-decoration: none;
-    color: white;
+    color: var(--base-navbar-a);
 
     width: 80px;
     height: 35px;
@@ -38,4 +42,35 @@
 .navbar a:hover {
     background-color: black;
 }
+
+#theme-switcher {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--base-body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    right: 10px; 
+}
+
+#theme-switcher svg {
+    fill: var(--primary-color);
+}
+
+#theme-switcher svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:last-child {
+    display: block;
+}
+
 
