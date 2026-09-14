@@ -240,11 +240,7 @@ th, td {
 }
 
 th {
-<<<<<<< HEAD
-    background-color: rgba(65, 65, 130, 0.8);
-=======
     background-color: var(--base-th);
->>>>>>> 0df9870b7ef2864cebe366e30d2ed10e2e31ad1f
     font-size: 16px;
 }
 
@@ -252,5 +248,5 @@ td {
     font-size: 15px;
     font-weight: bold;
     background-color: var(--base-th-td);
-    white-space: nowrap;
+    word-break: break-word;
 }
