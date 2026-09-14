@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
     <link rel="stylesheet" href="../CSS/graph.css">
     <script src="../JS/navbar.js" defer></script>
     <script type="module" src="../JS/graph-controller.js"></script>
+    <script type="text/javascript" src="../JS/darkmode.js" defer></script>
 </head>
     <body>
         <div id="navbar-placeholder"></div>
-
-        <h1 class="title">Regression Calculator</h1>
-
+        
         <div class="graph-location">
-            <canvas class="graph-visual" id="cartesian-graph" width=650 height=650></canvas>
+            <div class="graph-container">
+                <h1 class="title">Graph.js</h1>
+                <canvas class="graph-visual" id="cartesian-graph" width=650 height=650></canvas>
+            </div>
         </div>
 
         <div class="form-id">

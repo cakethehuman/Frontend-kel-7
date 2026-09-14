@@ -1,0 +1,14 @@
+﻿# Frontend-kel-7
+This is the first project on our team! Contributors:
+
+**535250003 Louise William**
+
+**535250008 Michael Respati Sanjaya Ho**
+
+**535250013 Willson Putra Hadinata**
+
+**535250016 Angga Johanes Thesman**
+
+**535250019 Chandra**
+
+This is Statistic Calculator project, you can enter some array of numbers by seperating them with only commas to get some statistics properties, and there's also a graph for Linear Regression too!

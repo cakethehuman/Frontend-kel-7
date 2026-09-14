@@ -1,14 +1,19 @@
+@import url('index.css');
+
 body {
     font-family:'Franklin Gothic Medium', Arial, sans-serif;
     margin: 0;
     padding: 0;
     line-height: 1.6 ;
     background-color: rgba(0, 0, 0, 0.916);
+
 }
+
+
 
 .title{
     display: flex;
-    margin-top: 50px;
+    margin-top: 0px;
     color: #e8f1fa;
     margin-bottom: 0;
     justify-content: center;
@@ -28,9 +33,22 @@ h1 {
 }
 
 .graph-visual{
+    display: block;
     width: 1000;
     height: 500;
     border:1px solid #ffffff;
+    border-radius: 6px;
+}
+
+.graph-container {
+    background: var(--base-graph-container);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid red;
+    animation: colorChange 4s linear infinite;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-id {
