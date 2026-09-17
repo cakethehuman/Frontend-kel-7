@@ -1,0 +1,74 @@
+@import url('./index.css');
+
+
+.navbar {
+    background-color: #A85D30;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    margin-right : 50px;
+    gap: 30px;
+}
+
+.navbar a {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-decoration: none;
+    color: #000000;
+
+    width: 80px;
+    height: 35px;
+
+    border-radius: 8px;
+    font-size: 24px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.navbar a:hover {
+    background-color: #CE8B5C
+}
+
+#theme-switcher {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: #A85D30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    right: 10px; 
+}
+
+#theme-switcher svg {
+    fill: #A85D30;
+}
+
+#theme-switcher svg:last-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:first-child {
+    display: none;
+}
+
+.darkmode #theme-switcher svg:last-child {
+    display: block;
+}
