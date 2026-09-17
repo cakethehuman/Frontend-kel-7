@@ -248,5 +248,5 @@ td {
     font-size: 15px;
     font-weight: bold;
     background-color: var(--base-th-td);
-    white-space: nowrap;
+    word-break: break-word;
 }

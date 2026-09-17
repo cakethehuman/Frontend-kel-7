@@ -1,5 +1,4 @@
 let darkmode = localStorage.getItem('darkmode');
-
 let body = document.body;
 
 const enableDarkmode = () => {
@@ -9,25 +8,23 @@ const enableDarkmode = () => {
 
 const disableDarkmode = () => {
     body.classList.remove('darkmode');
-    
-    localStorage.setItem('darkmode', null);
+    localStorage.setItem('darkmode', 'inactive'); 
 }
-
 if (darkmode === "active") enableDarkmode();
 
-document.addEventListener('navbarLoaded', () => {
-    const themeSwitcher = document.getElementById('theme-switcher');
-    themeSwitcher.addEventListener("click", () => {
-
+document.addEventListener('click', (e) => {
+    const themeSwitcher = e.target.closest('#theme-switcher');
+    
+    if (themeSwitcher) {
         console.log(darkmode);
-        darkmode  = localStorage.getItem('darkmode');
+        darkmode = localStorage.getItem('darkmode');
+        
         if (darkmode !== "active") {
-            console.log("Dark mode tidak aktif");
+            console.log("Dark mode diaktifkan");
             enableDarkmode();
-        }
-        else {
-            console.log("Dark mode matiin");
+        } else {
+            console.log("Dark mode dimatikan");
             disableDarkmode();
         }
-    });
+    }
 });
