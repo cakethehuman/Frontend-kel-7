@@ -8,11 +8,15 @@
     height: 70px;
 }
 
-.logo{
+.logo {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 50px;
+}
+
+.navbar img {
+    border-radius: 75%;
 }
 
 .navbar ul {
@@ -43,32 +47,3 @@
     background-color: #CE8B5C
 }
 
-#theme-switcher {
-    height: 50px;
-    width: 50px;
-    padding: 0;
-    border-radius: 50%;
-    background-color: #A85D30;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: 10px;
-    right: 10px; 
-}
-
-#theme-switcher svg {
-    fill: #A85D30;
-}
-
-#theme-switcher svg:last-child {
-    display: none;
-}
-
-.darkmode #theme-switcher svg:first-child {
-    display: none;
-}
-
-.darkmode #theme-switcher svg:last-child {
-    display: block;
-}
