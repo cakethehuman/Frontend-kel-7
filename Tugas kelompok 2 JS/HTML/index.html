@@ -1,24 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Kopi Nusantara</title>
+    <title>Tentang Kami - Kopi Nusantara</title>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
-    
-    <div class="our-story"></div>
-    
-    <div class="more-info"></div>
 
-        <div class="brand-meaning"></div>
-    
-        <div class="about-products"></div>
-    
+    <div class="our-story"></div>
+
+    <section class="jargon container section-padding">
+        <div class="section-header">
+            <h3>Dari Biji ke Cangkir</h3>
+            <p>Komitmen kami menjaga kualitas di setiap tahapan, dari biji kopi pilihan hingga secangkir kopi yang sampai ke tangan Anda.</p>
+            <p class="section-philosophy">Bagi kami, nama ini bukan sekadar judul. Ia menggambarkan filosofi bahwa secangkir kopi yang nikmat lahir dari perjalanan panjang yang tak boleh dilewati begitu saja—pemilihan biji terbaik, ketelitian dalam menyeduh, hingga sentuhan tangan barista yang berdedikasi. Setiap tahap sama pentingnya, sekecil apa pun itu.</p>
+        </div>
+        <div class="grid-layout">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Biji Kopi Pilihan">
+                <h4>Biji Kopi Pilihan</h4>
+                <p>Kami hanya menggunakan biji kopi arabika berstandar tinggi yang disangrai dengan presisi untuk rasa terbaik.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mesin Espresso Presisi">
+                <h4>Diseduh dengan Cermat</h4>
+                <p>Setiap takaran dan waktu seduh diperhatikan dengan teliti agar konsistensi rasa kopi tetap terjaga di setiap cangkir.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Barista Profesional">
+                <h4>Barista Profesional</h4>
+                <p>Kopi Nusantara diracik oleh para ahli yang memiliki dedikasi tinggi terhadap seni menyeduh kopi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="halal-certified section-padding">
+        <!-- Layout menggunakan CSS Flexbox -->
+        <div class="container halal-container flex-layout">
+            <div class="halal-text">
+                <h3>Halal Certified</h3>
+                <p>Kenyamanan dan ketenangan pikiran Anda adalah prioritas kami. Seluruh produk, bahan baku, hingga proses operasional Kopi Nusantara telah disertifikasi Halal secara resmi.</p>
+                <p>Sertifikat ini membuktikan komitmen kami dalam menyajikan produk dari bahan terbaik, yang diproses dengan standar kebersihan, keamanan pangan, dan syariat yang ketat.</p>
+            </div>
+            <div class="halal-image">
+                <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Proses Kopi Halal">
+            </div>
+        </div>
+    </section>
+
     <div class="our-experts-say"></div>
-    
-    <div class="milestone"></div>
-    
+
+    <section class="milestone container section-padding">
+        <div class="section-header">
+            <h3>Milestone Kami</h3>
+            <p>Perjalanan Kopi Nusantara dari waktu ke waktu.</p>
+        </div>
+
+        <input type="checkbox" id="toggle-milestone" class="toggle-checkbox">
+
+        <div class="milestone-timeline">
+            <!-- Item 1 -->
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2021</div>
+                    <h4>Mulai Berdiri</h4>
+                    <p>Berawal dari kedai rumahan sederhana, kami mulai melayani komunitas pecinta kopi Nusantara di skala lokal.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="https://placehold.co/500x300/e3d9c6/1c3f3a?text=Gambar+Milestone+2021" alt="Placeholder 2021">
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023</div>
+                    <h4>Sertifikasi Halal</h4>
+                    <p>Berhasil mengantongi sertifikasi Halal untuk semua produk untuk menjamin kualitas dan keamanan konsumen.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="https://placehold.co/500x300/e3d9c6/1c3f3a?text=Gambar+Milestone+2023" alt="Placeholder 2023">
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h4>Cabang Kedua</h4>
+                    <p>Membuka cabang kedua dengan konsep kedai ramah lingkungan dan area terbuka hijau.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="https://placehold.co/500x300/e3d9c6/1c3f3a?text=Gambar+Milestone+2024" alt="Placeholder 2024">
+                </div>
+            </div>
+
+            <div class="timeline-item hidden-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <h4>Roastery Mandiri</h4>
+                    <p>Membangun fasilitas pemanggangan biji kopi (roastery) mandiri untuk mengontrol kualitas secara penuh.</p>
+                </div>
+                <div class="timeline-image">
+                    <img src="https://placehold.co/500x300/e3d9c6/1c3f3a?text=Gambar+Milestone+2025" alt="Placeholder 2025">
+                </div>
+            </div>
+        </div>
+
+        <div class="milestone-action">
+            <label for="toggle-milestone" class="btn-primary" id="label-more">Tampilkan Lebih Banyak</label>
+            <label for="toggle-milestone" class="btn-primary" id="label-less">Tampilkan Lebih Sedikit</label>
+        </div>
+    </section>
+
     <div class="advantage"></div>
 
 </body>
