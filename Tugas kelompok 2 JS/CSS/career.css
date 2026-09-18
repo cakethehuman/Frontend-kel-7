@@ -33,11 +33,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 1000px;
     height: 500px;
     background-color: #421908;
-    border-radius: 10%;
+    border-radius: 16px;
 }
+
+.lowongan{}
 
 .team-story h1{
     color: #ECCCB4;
