@@ -1,7 +1,7 @@
-@import url('./index.css');
+@import url('./style.css');
 
 .navbar {
-    background-color: #A85D30;
+    background-color: var(--secondary-color);
     display: flex;
     justify-content: space-between;
     width: 100%;
