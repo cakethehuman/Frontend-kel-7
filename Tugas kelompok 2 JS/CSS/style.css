@@ -517,6 +517,38 @@ img {
 }
 
 @media screen and (min-width: 576px) {
+
+    .story-text h3 {
+        font-size: 34px;
+    }
+
+    .expert-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+     .advantage-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .compare-table {
+        font-size: 15px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+        padding: 14px 16px;
+    }
+
+    .testimoni-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimoni-card:last-child {
+        grid-column: span 2;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+
     .hero {
         padding: 80px 20px;
     }
