@@ -258,6 +258,64 @@ a {
     color: var(--primary-color);
 }
 
+.testimoni {
+    background-color: var(--bg-light);
+}
+
+.testimoni-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+.testimoni-card {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 25px 20px;
+    background-color: var(--text-light);
+    border-top: 4px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.testimoni-rating {
+    color: var(--secondary-color);
+    letter-spacing: 3px;
+}
+
+.testimoni-text {
+    flex-grow: 1;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.testimoni-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.testimoni-user img {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.testimoni-user h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+.testimoni-user p {
+    font-size: 13px;
+    color: #777;
+}
+
 .section-padding {
     padding: 60px 0;
 }
