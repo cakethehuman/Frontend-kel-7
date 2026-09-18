@@ -12,7 +12,51 @@
 
     <div id="navbar-placeholder"></div>
 
-    <div class="our-story"></div>
+    <div class="our-story">
+        <!-- Layout menggunakan CSS Flexbox-->
+        <div class="container story-container flex-layout">
+            <div class="story-text">
+                <h3>Dari Satu Teras Kecil, Untuk Seluruh Nusantara</h3>
+                <p>Semuanya berawal pada tahun 2021, ketika Willson pulang dari perantauan membawa satu koper 
+                    kecil berisi biji kopi dari Gayo, Toraja, dan Flores. Di teras rumahnya, ia menyeduh kopi 
+                    untuk para tetangga. Rasa kopi itu melekat di hati tetangganya yang menginspirasi Willson untuk
+                    menciptakan suatu inovasi. </p>
+                <p>Dari sinilah Willson yakin bahwa kopi Nusantara pantas dinikmati tanpa harus mahal atau rumit.
+                    Bersama Michael dan Angga, ia mengubah teras itu menjadi kedai, lalu menjadi rumah bagi para petani, 
+                    roaster, dan barista yang mencintai kopi Indonesia.</p>
+                <p>Kopi Nusantara juga dibangun dari kecintaan terhadap kopi Indonesia. Kami percaya bahwa setiap daerah 
+                    memiliki karakter kopi yang berbeda dan menarik untuk dinikmati.</p>
+                <p>Dari teras rumah hingga menjadi tempat berkumpul bagi para pecinta kopi, Kopi Nusantara terus berkembang dengan 
+                    tetap mempertahankan prinsip sederhana: menggunakan biji kopi pilihan, menjaga kualitas rasa, dan menyajikan kopi 
+                    dengan sepenuh hati.</p>
+                <p>Bagi kami, kopi bukan hanya sebuah minuman. Kopi adalah bagian dari cerita, percakapan, dan momen yang 
+                    dibagikan bersama.</p>
+                <p><i>Kini setiap cangkir Kopi Nusantara membawa satu cerita: tentang tanah yang subur, tangan petani yang sabar, 
+                    dan keramahan khas kita.</i></p>
+
+                <!-- Statistik Singkat (Flexbox)-->
+                <div class="story-stats">
+                    <div class="stat-item">
+                        <h4>2021</h4>
+                        <p>Tahun Berdiri</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>12+</h4>
+                        <p>Petani Mitra</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>10rb+</h4>
+                        <p>Cangkir per Bulan</p>
+                    </div>
+                </div>
+            </div>
+
+            <figure class="story-figure">
+                <img src="../Images/Willson Ngopi.jpg" alt = "Willson menyeduh kopi di teras kedai pertama">
+                <figcaption>Teras kedai pertama Kopi Nusantara, 2021.</figcaption>
+            </figure>
+        </div>
+    </div>
 
     <section class="jargon container section-padding">
         <div class="section-header">
@@ -39,6 +83,63 @@
         </div>
     </section>
 
+    <div class="our-experts-says">
+        <div class="container">
+            <div class="section-header">
+                <h3>Kata Para Ahli</h3>
+                <p class="our-experts-says-text">Orang-orang di balik Kopi Nusantara yang selalu menjaga kualitas rasa dan pengalaman 
+                    di setiap cangkir.</p>
+            </div>
+
+            <!-- Flexbox kolom di mobile, baris di desktop -->
+            <div class= "expert-featured flex-layout">
+                <figure class="expert-ceo-figure">
+                    <img src="../Images/CEO Kopi Nusantara.jpg"alt="Willson, Founder dan CEO Kopi Nusantara">
+                    <figcaption><b>Willson Putra Hadinata</b><br>Founder &amp; CEO</figcaption>
+                </figure>
+                <div class = "expert-ceo-text">
+                    <p class = "expert-quote-big">"Kopi yang baik tidak pernah terburu-buru. 
+                        Kami menunggu petani memanen di waktu terbaiknya, menunggu biji disangrai 
+                        sampai matang sempurna, dan menunggu Anda menyeruputnya dengan tenang. 
+                        Dari kedai teras sampai roastery sendiri, saya hanya punya satu janji, yakni 
+                        setiap cangkir harus layak mewakili nama Nusantara."</p>
+                </div>
+            </div>
+
+            <!-- CSS Grid 1 kolom, 2 kolom, 4 kolom -->
+            <div class="expert-grid">
+                <div class="expert-card">
+                    <img class="expert-photo" src="../Images/Head Barista.jpg" alt="Louise, Head Barista">
+                    <h4>Louise William</h4>
+                    <p class="expert-role">Head Barista &amp; Q Grader</p>
+                    <p class="expert-quote">"Sekali mencicipi, Anda akan tahu ini bukan kopi biasa. 
+                        Ada karamel, ada rempah, ada rasa pulang di dalamnya."</p>
+                </div>
+                <div class="expert-card">
+                    <img class="expert-photo" src="../Images/Koordinator Petani.jpg" alt="Angga, Koordinator Petani Mitra">
+                    <h4>Angga Johanes Thesman</h4>
+                    <p class="expert-role">Koordinator Petani Mitra</p>
+                    <p class="expert-quote">"Petani kami dibayar adil, dan itu terasa sampai ke biji. 
+                        Kopi terbaik lahir dari hati yang tenang."</p>
+                </div>
+                <div class="expert-card">
+                    <img class="expert-photo" src="../Images/Head Roaster.jpg" alt="Michael, Head Roaster">
+                    <h4>Michael Respati Sanjaya Ho</h4>
+                    <p class="expert-role">Head Roaster</p>
+                    <p class="expert-quote">"Api sangrai kami atur detik demi detik, karena selisih satu menit 
+                        bisa berarti beda satu dunia rasa."</p>
+                </div>
+                 <div class="expert-card">
+                    <img class="expert-photo" src="../Images/Expresso Maker.jpg" alt="Chandra, Ahli Racikan Espresso">
+                    <h4>Chandra</h4>
+                    <p class="expert-role">Ahli Racikan Espresso</p>
+                    <p class="expert-quote">"Tidak ada resep rahasia. Yang ada hanya takaran tepat, 
+                        air bersih, dan kesabaran."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="halal-certified section-padding">
         <!-- Layout menggunakan CSS Flexbox -->
         <div class="container halal-container flex-layout">
@@ -52,8 +153,6 @@
             </div>
         </div>
     </section>
-
-    <div class="our-experts-say"></div>
 
     <section class="milestone container section-padding">
         <div class="section-header">
@@ -116,7 +215,130 @@
         </div>
     </section>
 
-    <div class="advantage"></div>
+    <div class="advantage">
+        <div class="container">
+            <div class="section-header">
+                <h3>Kenapa Kopi Nusantara?</h3>
+                <p>Bukan cuma soal rasa. Ini enam alasan pelanggan kami betah dan tidak pindah ke lain hati.</p>
+            </div>
+
+            <!-- CSS Grid -->
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <h4>Langsung Dari Petani</h4>
+                    <p>Biji dibeli langsung dari 12 petani mitra dengan harga adil, tanpa perantara.</p>
+                </div>
+                <div class="advantage-item">
+                    <h4>Sangrai Segar Tiap Pekan</h4>
+                    <p>Roastery mandiri kami menyangrai dalam jumlah kecil supaya aroma selalu segar.</p>
+                </div>
+                <div class="advantage-item">
+                    <h4>Bersertifikat Halal</h4>
+                    <p>Bahan baku hingga proses operasional sudah tersertifikasi Halal secara resmi.</p>
+                </div>
+                <div class="advantage-item">
+                    <h4>Harga Bersahabat</h4>
+                    <p>Kopi berkualitas mulai dari Rp18.000 per cangkir, cocok untuk ngopi setiap hari.</p>
+                </div>
+                <div class="advantage-item">
+                    <h4>Kedai Ramah Lingkungan</h4>
+                    <p>Area terbuka hijau, sedotan kertas, dan ampas kopi yang kami olah jadi pupuk.</p>
+                </div>
+                 <div class="advantage-item">
+                    <h4>Barista Bersertifikat</h4>
+                    <p>Setiap barista dilatih dan diuji agar rasa konsisten di semua cabang.</p>
+                </div>
+            </div>
+
+            <!-- Tabel Perbandingan -->
+            <h4 class="compare-title">Kopi Nusantara vs Kedai Lain</h4>
+            <div class="compare-wrap">
+                <table class="compare-table">
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Kopi Nusantara</th>
+                        <th>Kedai Lain</th>
+                    </tr>
+                    <tr>
+                        <td>Asal Biji</td>
+                        <td class="ya">Langsung dari petani mitra</td>
+                        <td>Lewat perantara</td>
+                    </tr>
+                    <tr>
+                        <td>Sangrai</td>
+                        <td class="ya">Segar tiap pekan</td>
+                        <td>Stok lama</td>
+                    </tr>
+                    <tr>
+                        <td>Halal</td>
+                        <td class="ya">Bersertifikat Resmi</td>
+                        <td>Tidak selalu</td>
+                    </tr>
+                    <tr>
+                        <td>Harga</td>
+                        <td class="ya">Mulai dari Rp18.000</td>
+                        <td>Cenderung lebih mahal</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class ="testimoni section-padding">
+        <div class ="container">
+            <div class="section-header">
+                <h3>Apa Kata Mereka ?</h3>
+                <p>Cerita dari mereka yang sudah jatuh cinta pada seduhan kami.</p>
+            </div>
+
+            <div class="testimoni-grid">
+                <div class="testimoni-card">
+                    <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                    <p class="testimoni-text">"Es kopi susu gula aren-nya juara. Saya kerja seharian di sini dan tidak pernah kepikiran pindah kedai lain."</p>
+                    <div class="testimoni-user">
+                        <img src="../Images/Testimoni 1.jpg" alt="Testimoni pelanggan 1">
+                        <div>
+                            <h4>Nicholas Tanaydi</h4>
+                            <p>Programmer Gemini</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimoni-card">
+                    <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                    <p class="testimoni-text">"Suka sekali karena sudah halal dan tempatnya adem. Anak-anak juga senang main di area hijaunya."</p>
+                    <div class="testimoni-user">
+                        <img src="../Images/Testimoni 2.jpg" alt="Testimoni pelanggan 2">
+                        <div>
+                            <h4>Malvin Grico</h4>
+                            <p>Pengusaha Besi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimoni-card">
+                    <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                    <p class="testimoni-text">"Biji kopinya wangi banget. Beli sebungkus buat di rumah, sampai tetangga nanya belinya di mana."</p>
+                    <div class="testimoni-user">
+                        <img src="../Images/Testimoni 3.jpg" alt="Testimoni pelanggan 3">
+                        <div>
+                            <h4>Leonardo Firnandius</h4>
+                            <p>Manajer BYD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimoni-card">
+                    <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                    <p class="testimoni-text">"Kopinya punya rasa yang enak dan tidak terlalu pahit. Tempatnya juga nyaman untuk ngobrol santai."</p>
+                    <div class="testimoni-user">
+                        <img src="../Images/Testimoni 4.jpg" alt="Testimoni pelanggan 4">
+                        <div>
+                            <h4>Christon Julian Wijaya</h4>
+                            <p>Sepuh Transjakarta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div id="footer-placeholder"></div>
