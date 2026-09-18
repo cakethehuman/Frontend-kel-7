@@ -39,7 +39,9 @@ body{
     border-radius: 16px;
 }
 
-.lowongan{}
+.lowongan{
+    background-color: red;
+}
 
 .team-story h1{
     color: #ECCCB4;
