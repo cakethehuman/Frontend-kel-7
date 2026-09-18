@@ -86,6 +86,95 @@ a {
     color: var(--bg-beige)
 }
 
+.stat-item p {
+    margin-bottom: 0;
+    font-size: 13px;
+}
+
+.our-experts-says{
+    padding-top: 50px;
+    background-color: var(--text-light);
+}
+
+.our-experts-says-text{
+    font-family: var(--font-body);
+    color: var(--primary-color);
+}
+
+.expert-featured {
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 25px 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.expert-ceo-figure img {
+    width: 100%;
+    max-width: 1000px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin : 0 auto;
+    border-radius: 12px;
+}
+
+.expert-ceo-figure figcaption {
+    margin-top: 10px;
+    color: var(--primary-color)
+}
+
+.expert-quote-big {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.expert-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+}
+
+.expert-card {
+    background-color: var(--bg-light);
+    border-radius: 8px;
+    padding : 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.expert-photo {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin : 0 auto 15px;
+    border-radius: 50%;
+    border: 3px solid var(--secondary-color);
+}
+
+.expert-card h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.expert-role {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--secondary-color);
+}
+
+.expert-quote {
+    font-style: italic;
+    font-size: 15px;
+    color: #555;
+}
+
 .section-padding {
     padding: 60px 0;
 }
