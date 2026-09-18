@@ -36,6 +36,56 @@ a {
     padding: 0 20px;
 }
 
+.our-story {
+    background-color: var(--primary-color);
+    color : var(--text-light);
+    padding: 60px 0;
+}
+
+.story-text h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.story-text p {
+    margin-bottom : 15px;
+}
+
+.story-figure img {
+    border-radius: 12px;
+    width: 100%;
+}
+
+.story-figure figcaption {
+    margin-top: 10px;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--bg-beige)
+}
+
+.story-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+    border : 2px solid var(--secondary-color);
+    padding-top: 10px;
+}
+
+.stat-item h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--bg-beige)
+}
+
 .section-padding {
     padding: 60px 0;
 }
