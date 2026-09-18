@@ -585,6 +585,57 @@ img {
 
 @media screen and (min-width: 993px) {
 
+    .story-text,
+    .story-figure {
+        flex: 1;
+    }
+
+    .story-text {
+        padding-right: 40px;
+    }
+
+    .story-text h3 {
+        font-size: 38px;
+    }
+
+    .expert-featured {
+        padding: 40px;
+        text-align: left;
+    }
+
+    .expert-ceo-figure {
+        flex: 0 0 260px;
+    }
+
+    .expert-ceo-text {
+        flex: 1;
+    }
+
+    .expert-quote-big {
+        font-size: 24px;
+    }
+
+    .expert-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .advantage-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+      .compare-table {
+        font-size: 16px;
+    }
+
+    .testimoni-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .testimoni-card:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+    
     .grid-layout {
         grid-template-columns: repeat(3, 1fr);
     }
