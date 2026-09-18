@@ -92,7 +92,7 @@ a {
 }
 
 .our-experts-says{
-    padding-top: 50px;
+    padding: 60px 0;
     background-color: var(--text-light);
 }
 
@@ -111,7 +111,7 @@ a {
 
 .expert-ceo-figure img {
     width: 100%;
-    max-width: 1000px;
+    max-width: 320px;
     aspect-ratio: 1/1;
     object-fit: cover;
     margin : 0 auto;
@@ -635,7 +635,7 @@ img {
         grid-column: span 1;
         max-width: 100%;
     }
-    
+
     .grid-layout {
         grid-template-columns: repeat(3, 1fr);
     }
