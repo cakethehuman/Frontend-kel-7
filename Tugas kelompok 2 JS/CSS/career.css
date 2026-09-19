@@ -1,5 +1,11 @@
 @import url('./style.css');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bg-beige);
     color: var(--secondary-color);
@@ -84,34 +90,31 @@ body {
 }
 
 .lowongan-container {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
     width: 100%;
-    max-width: 750px;
-    min-height: 500px;
+    max-width: 1000px;
 
     padding: 24px;
     box-sizing: border-box;
 
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 16px;
 }
 
-.lowongan-fixed,
-.lowongan-fine-detail {
-    display: flex;
-    align-items: center;
+.lowongan-table {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.lowongan-fixed {
-    justify-content: space-between;
+.lowongan-table th,
+.lowongan-table td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--bg-beige);
+    color: var(--bg-beige);
 }
 
-.lowongan-fine-detail {
-    justify-content: space-between;
+.lowongan-table th {
+    font-family: var(--font-heading);
 }
 
 @media (max-width: 576px) {
@@ -150,14 +153,13 @@ body {
     }
 
     .lowongan-container {
-        min-height: auto;
-        padding: 20px;
+        padding: 16px;
     }
 
-    .lowongan-detail {
-        flex-direction: column;
-        gap: 16px;
-        margin: 8px;
+    .lowongan-table th,
+    .lowongan-table td {
+        padding: 8px;
+        font-size: 16px;
     }
 }
 
@@ -182,10 +184,6 @@ body {
 
     .lowongan-container {
         max-width: 750px;
-    }
-
-    .lowongan-detail {
-        gap: 32px;
     }
 }
 
