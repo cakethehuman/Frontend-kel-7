@@ -534,12 +534,6 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .testimoni-card:last-child {
-        grid-column: span 2;
-        max-width: 50%;
-        margin: 0 auto;
-    }
-
     .hero {
         padding: 80px 20px;
     }
