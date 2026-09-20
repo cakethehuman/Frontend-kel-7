@@ -616,11 +616,6 @@ img {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .testimoni-card:last-child {
-        grid-column: span 1;
-        max-width: 100%;
-    }
-
     .grid-layout {
         grid-template-columns: repeat(3, 1fr);
     }
