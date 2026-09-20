@@ -1,61 +1,44 @@
+$(function() {
+    const $containers = $(".coffee-selection-container");
+    const animation_delay = 800;
+    // for delay
+    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+    $containers.each(function() {
+        // getting the buttons
+        const $size = $(this).find(".display-content").first();
+        const $cups = $(this).find(".coffee-selection-button");
+        const $currentContainer = $(this);
 
-const containers = document.querySelectorAll(".coffee-selection-container");
+        // getting the priceholder via container
+        const $priceDisplay = $(this).closest('.item-description').find('.price-placeholder').first();
 
-
-const animation_delay = 800;
-
-// for delay
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-containers.forEach((container) =>{
-    // getting the buttons
-    const size = container.querySelector(".display-content");
-    const cups = container.querySelectorAll(".coffee-selection-button");
-    // getting the priceholder via container
-    const priceDisplay = container.closest('.item-description').querySelector('.price-placeholder');
-
-
-    // for size button
-    size.addEventListener("pointerdown", (event) => {
-        // ensures that once a button clicked, you have to click something to disable the popup
-        event.stopPropagation();
-
-        containers.forEach((otherContainer) => {
-            if (otherContainer !== container) {
-                otherContainer.classList.remove("active");
-            }
-        });
-
-        container.classList.toggle("active");
-    });
-
-    // for cups button displaying price
-    cups.forEach((cup) => {
-        cup.addEventListener('pointerdown', async (event) => {
+        $size.on('pointerdown', function(event) {
             event.stopPropagation();
 
-            const price = cup.dataset.price;
+            $containers.not($currentContainer).removeClass("active");
 
-            // trigger the delay
-
-            await sleep(animation_delay);
-            if (priceDisplay && price) {
-                priceDisplay.textContent = price;
-            }
-            
-
-            container.classList.remove("active");
+            $currentContainer.toggleClass("active");
         });
+
+        $cups.each(function() {
+            const $cup = $(this);
+            $cup.on('pointerdown', async function(event) {
+                event.stopPropagation();
+                const price = $cup.data('price');
+                await sleep(animation_delay);
+
+                if ($priceDisplay && price) {
+                    $priceDisplay.text(`${price}`);
+                }
+            });
+        });
+
     });
-
-
 
 });
 
 
-document.addEventListener("pointerdown", () => {
-    containers.forEach((container) => {
-        container.classList.remove("active");
-    });
-});
+
+
+
