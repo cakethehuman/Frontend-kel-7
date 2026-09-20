@@ -481,6 +481,29 @@ img {
     transition: background-color 0.3s ease;
 }
 
+.btn-elevator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #B58A60;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-elevator:hover {
+    background-color: #8B5A2B;
+    transform: scale(1.1);
+}
+
 .btn-primary:hover {
     background-color: var(--primary-color);
 }
@@ -506,6 +529,54 @@ img {
     color: var(--text-light);
     padding: 50px 0 20px;
 }
+
+.faq-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-title h1{
+    color: var(--text-dark);
+    font-size: 64px;
+}
+
+
+.faq-section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accordion-wrapper{
+    width: 1000px;
+}
+
+.accordion {
+    display: flex;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    transition: 0.4s;
+}
+
+.accordion p{
+    font-size: 16px;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: var(--secondary-color);
+  opacity: 75%;
+  color: var(--text-light);
+  display: none;
+  overflow: hidden;
+}
+
 
 @media screen and (min-width: 576px) {
 
