@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
     <script src="../JS/navbar.js" defer></script>
     <script src="../JS/footer.js" defer></script>
     <script src="../JS/scrollHorizontal.js" defer></script>
     <script src="../JS/priceDisplayAndTouchHandler.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../JS/smoothScroll.js" defer></script>
     <link rel="stylesheet" href="../CSS/menu.css">
-
     <title>Menu - Kopi Nusantara</title>
 </head>
 <body>
@@ -615,6 +615,11 @@
             </div>
         </div>
     </main>
+    <button class="btn-elevator" data-target="#navbar-placeholder">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+    </button>
     <footer>
         <div id="footer-placeholder"></div>
     </footer>
