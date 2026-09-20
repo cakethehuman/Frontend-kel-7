@@ -1,0 +1,348 @@
+@import url("constants.css");
+body {
+    background-color: var(--gray-color);
+}
+
+
+.our-menu-image-wrapper {
+    margin: 10px auto;
+}
+
+
+
+.centering {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    background: url("../Images/menu_banner_panjang.webp");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    width: 290px;
+    height: 90px;
+    margin: 0 auto;
+}
+
+.our-menu-text {
+    font-size: 40px;
+    user-select: none;
+    
+    color: var(--gray-color);
+    font-family: fantasy;
+}
+
+#nusantara, #foreign, #dessert {
+    font-family: cursive;
+    white-space: nowrap;
+    font-size: 15px;
+}
+.menu-navigation {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 20px; 
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+p {
+    font-family: fantasy;
+    text-align: left;
+
+}
+
+.description-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+}
+
+
+.menu-navigation > a {
+    text-decoration: none;
+    font-family: cursive;
+    color: black;
+}
+
+.menu-container {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.item-description {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.item-description > h3 {
+    margin-top: 0;
+    margin-bottom: 4px;
+    font-family: fantasy;
+}
+
+.item-description > p {
+    margin-top: 0;
+}
+
+.coffee-selection-small {
+    margin-top: auto;
+    width: 16px;
+    height: 22px;
+    transition: all 0.5s ease-in-out;
+}
+
+.coffee-selection-medium {
+    width: 21px;
+    height: 29px;
+    transition: all 0.5s ease-in-out;
+}
+
+.coffee-selection-large {
+    width: 25px;
+    height: 35px;
+    transition: all 0.5s ease-in-out;
+}
+
+.coffee-selection-small:active {
+
+    transform: scale(1.5);
+}
+.coffee-selection-medium:active {
+    transform: scale(1.3);
+}
+
+.coffee-selection-large:active {
+    transform: scale(1.2);
+}
+
+
+.coffee-selection-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+
+.coffee-selection-button {
+    background: none;
+    border: none;
+    padding: 0;
+    outline: inherit;
+    width: 25px;
+    height: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.menu-item .image-wrapper {
+    width: 110px;
+    display: flex;
+    justify-content: flex-start; /* antara center atau flex-start */
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.menu-img {
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
+    object-position: top center;
+}
+
+#kintamani {
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.display-content {
+    background-color: var(--rich-brown);
+    color: var(--gray-color);
+    font-family: 'Fantasy', sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    width: 65px;
+    height: 35px;
+    border: 2px solid var(--darker-brown);
+    border-radius: 10px 0 0 10px;
+
+    cursor: pointer;
+    box-sizing: border-box;
+
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (hover: hover) {
+    .display-content:hover {
+        background-color: var(--lighter-brown);
+        border-color: var(--rich-brown);
+    }
+}
+
+
+.dropright-content {
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 85px;
+    height: 35px;
+    box-sizing: border-box;
+    border-radius: 0 10px 10px 0;
+}
+
+.coffee-selection-container.active .dropright-content {
+    display: flex;
+}
+
+.price-placeholder {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--rich-brown);
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+    user-select: none;
+    transition: color 0.2s ease-in-out; 
+}
+
+
+.display-content:active,
+.coffee-selection-container.active .display-content {
+    background-color: var(--roast-brown);    
+    border-color: var(--darker-roast-brown);
+    transform: scale(0.97);      
+}
+
+@media screen and (min-width: 576px) {
+    .centering  {
+        background-image: url("../Images/coffee beans-landscape-final.webp");
+        width: 80%;
+        height: auto;
+    }
+
+    .our-menu-text {
+        font-size: 50px;
+        user-select: none;
+        color: var(--gray-color);
+        font-family: fantasy;
+    }
+
+    h3 {
+        white-space: nowrap;
+    }
+
+    .menu-navigation {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 20px; 
+        white-space: nowrap;
+    }
+
+    .menu-navigation > a {
+        font-family: cursive;
+        font-size: 25px;
+        color: black;
+    }
+}
+
+
+@media screen and (min-width: 993px) {
+
+    .our-menu-image-wrapper {
+        margin: 30px auto;
+    }
+    .centering {
+        border: 2px solid black;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("../Images/coffee beans-landscape-final.webp");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 70%;
+        height: auto;
+        background-position: center;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        gap: 5%;
+    }
+
+    .menu-card {
+        width: 50%;
+    }
+
+    .our-menu-text {
+        font-size: 130px;
+        user-select: none;
+        color: var(--gray-color);
+        font-family: fantasy;
+    }
+    .menu-navigation {
+        display: flex;
+        flex-direction: column;
+        justify-content: normal;
+        margin-top: 50px;
+        gap: 1%; 
+        white-space: nowrap;
+    }
+
+    .menu-navigation > a {
+        text-decoration: none;
+        font-family: cursive;
+        font-size: 30px;
+        color: black;
+        margin-left: 30px;
+    }
+
+    .menu-container {
+        display: grid;
+        grid-template-columns: 300px 300px;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    .item-description {
+        display: flex;
+        flex-direction: column;
+        font-size: 12px;
+    }
+
+}
+/* .banner {
+    max-width: 100%;
+    padding: 10px;
+    height: auto;
+} */
