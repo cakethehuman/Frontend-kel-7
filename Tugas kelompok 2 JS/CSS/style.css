@@ -481,6 +481,29 @@ img {
     transition: background-color 0.3s ease;
 }
 
+.btn-elevator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #B58A60;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-elevator:hover {
+    background-color: #8B5A2B;
+    transform: scale(1.1);
+}
+
 .btn-primary:hover {
     background-color: var(--primary-color);
 }
