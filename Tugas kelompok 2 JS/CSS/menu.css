@@ -49,7 +49,7 @@ body {
     white-space: nowrap;
 }
 
-p {
+.description-wrapper > p {
     font-family: fantasy;
     text-align: left;
 
