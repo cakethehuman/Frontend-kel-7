@@ -1,20 +1,11 @@
+@import url("constants.css");
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --primary-color: #1C3F3A;   
-    --secondary-color: #A0855B; 
-    --bg-light: #F8F5F0;        
-    --bg-beige: #E3D9C6;     
-    --text-dark: #2B2B2B;      
-    --text-light: #FFFFFF;       
 
-    --font-heading: 'Fraunces', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-}
 
 body {
     font-family: var(--font-body);

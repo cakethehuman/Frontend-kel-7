@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #1C3F3A;   
+    --secondary-color: #A0855B; 
+    --bg-light: #F8F5F0;        
+    --bg-beige: #E3D9C6;     
+    --text-dark: #2B2B2B;      
+    --text-light: #FFFFFF;
+    --gray-color: #DCE1E7;       
+    --rich-brown: #4a2c11;
+    --darker-brown: #361f0b;
+    --lighter-brown: #5c3716;
+    --roast-brown: #2b190a;
+    --darker-roast-brown: #1f1207;
+    --font-heading: 'Fraunces', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+}
