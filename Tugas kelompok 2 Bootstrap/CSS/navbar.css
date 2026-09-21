@@ -1,85 +1,81 @@
 @import url('./style.css');
 
-.custom-navbar {
+.navbar {
     background-color: var(--secondary-color);
     height: 70px;
 }
 
-.custom-logo {
-    border-radius: 75%;
-}
-
-.custom-link {
+.link {
     width: 80px;
     height: 35px;
     font-size: 24px;
     transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.custom-link:hover {
+.link:hover {
     background-color: var(--primary-color);
     color: var(--text-light) !important;
 }
 
-.custom-navbar ul {
+.navbar ul {
     margin-right: 50px;
     gap: 30px;
 }
 
-.custom-gap {
+.gap {
     gap: 30px;
 }
 
 /* Responsive Media Queries */
 @media (max-width: 576px) {
 
-    .custom-navbar { 
+    .navbar { 
         height: 60px; 
     }
-    .custom-link { 
+    .link { 
         width: 60px; height: 30px; font-size: 15px; 
     }
 
-    .custom-navbar ul {
+    .navbar ul {
         margin-right: 10px;
     }
 
-    .custom-gap {
+    .gap {
         gap: 5px;
     }
 }
 
 @media (min-width: 577px) and (max-width: 992px) {
 
-    .custom-navbar { 
+    .navbar { 
         height: 65px; 
     }
-    .custom-link { 
+    .link { 
         width: 70px; height: 32px; font-size: 18px; 
     }
-    .custom-navbar ul {
+    .navbar ul {
         margin-right: 20px;
     }
 
-    .custom-gap {
+    .gap {
         gap: 15px;
     }
 }
 
 @media (min-width: 993px) {
     
-    .custom-navbar { 
+    .navbar { 
         height: 70px; 
     }
-    .custom-link { 
+    .link { 
         width: 80px; height: 35px; font-size: 24px; 
     }
 
-    .custom-navbar ul {
+    .navbar ul {
         margin-right: 50px;
     }
 
-    .custom-gap {
+    .gap {
         gap: 30px;
     }
 }
