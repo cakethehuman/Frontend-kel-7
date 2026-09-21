@@ -1,37 +1,7 @@
-.footer {
-    width: 100%;
-    margin-top: 60px;
+.footer-bg {
     background-color: #A85D30;
-    text-align: center;
 }
 
-.footer-content h3 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.footer-content p {
-    margin: 8px 0;
-}
-
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-}
-
-.footer-links a {
-    text-decoration: none;
-    color: #ECCCB4;
-    transition: 0.3s;
-}
-
-.footer-links a:hover {
-    opacity: 0.7;
-}
-
-.copyright {
-    font-size: 14px;
-    opacity: 0.6;
+.footer-font-color{
+    color: #fff;
 }
