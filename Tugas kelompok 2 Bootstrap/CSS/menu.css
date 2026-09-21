@@ -70,9 +70,10 @@ body {
 }
 
 .menu-container {
-    display: flex;
-    gap: 5px;
-    flex-direction: column;
+    /* display: flex !important;
+    gap: 16px;
+    align-items: flex-start; */
+
 }
 
 .item-description {
@@ -95,19 +96,19 @@ body {
     margin-top: auto;
     width: 16px;
     height: 22px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .coffee-selection-medium {
     width: 21px;
     height: 29px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .coffee-selection-large {
     width: 25px;
     height: 35px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .coffee-selection-small:active {
@@ -328,10 +329,10 @@ body {
     }
 
     .menu-container {
-        display: grid;
+        /* display: grid;
         grid-template-columns: 300px 300px;
         gap: 5px;
-        flex-direction: column;
+        flex-direction: column; */
     }
 
     .item-description {

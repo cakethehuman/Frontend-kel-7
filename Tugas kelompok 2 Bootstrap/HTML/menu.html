@@ -10,6 +10,7 @@
     <script src="../JS/priceDisplayAndTouchHandler.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../JS/smoothScroll.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../CSS/menu.css">
     <title>Menu - Kopi Nusantara</title>
 </head>
@@ -30,585 +31,636 @@
         </div>
         <div class="menu-card">
             <h1 id="nusantara">NUSANTARA SERIES</h1>
-            <div class="menu-container">
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/Hot Flores Bajawa.webp" alt="Hot flores bajawa" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Kopi Flores Bajawa</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 20.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 28.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 33.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button> 
-                            </div>
+            <div class="menu-container row row-cols-1 row-cols-md-2 g-4">
+                
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/Hot Flores Bajawa.webp" alt="Hot flores bajawa" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Cita rasa eksotis dari Nusa Tenggara Timur dengan paduan aroma nutty dan karamel yang lembut. Seduhan hangat yang pas untuk memberikan ketenangan di sela aktivitasmu!</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Kopi Flores Bajawa</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 20.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 28.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 33.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button> 
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Cita rasa eksotis dari Nusa Tenggara Timur dengan paduan aroma nutty dan karamel yang lembut. Seduhan hangat yang pas untuk memberikan ketenangan di sela aktivitasmu!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/HOT GAYO.webp" alt="Hot Gayo" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Gayo</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 18.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 25.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 30.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/HOT GAYO.webp" alt="Hot Gayo" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Gayo</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 18.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 25.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 30.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Karakter rempah dan cokelat pekat dari dataran tinggi Aceh Gayo yang bold. Disajikan hangat, kopi ini siap memberikan kehangatan dan inspirasi di setiap tegukannya.</p>
                             </div>
                         </div>
-                        <div class="description-wrapper">
-                            <p>Karakter rempah dan cokelat pekat dari dataran tinggi Aceh Gayo yang bold. Disajikan hangat, kopi ini siap memberikan kehangatan dan inspirasi di setiap tegukannya.</p>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/HOT KINTAMANI BALI.webp" alt="Hot kintamani" id="kintamani" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Kintamani</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 22.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 29.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 34.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Seduhan hangat dengan profil rasa fruity dan citrus yang cerah khas Bali. Nikmati sensasi rasa kopi otentik yang ringan dan membangkitkan mood positif.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/HOT Mandailing.webp" alt="Hot kintamani" id="kintamani" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Mandailing</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 20.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 28.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 33.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Kepekatan kopi Sumatera dengan tingkat keasaman rendah dan sentuhan rasa herbal yang khas. Pilihan klasik yang menghangatkan jiwa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/HOT TORAJA.webp" alt="Hot TORAJA" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Toraja</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 22.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 29.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 34.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Kopi hitam hangat dengan sentuhan earthy dan aroma khas Sulawesi yang kuat. Cita rasa klasik sempurna untuk kamu penikmat kopi sejati.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/ICED GAYO.webp" alt="Iced Gayo" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Gayo</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 23.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 30.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 35.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Karakter rempah dataran tinggi Aceh Gayo yang berani, disajikan dingin menyegarkan. Solusi tepat untuk bangkitkan kembali fokus dan semangat harimu!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/ICED KINTAMANI BALI.webp" alt="Iced kintamani" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Kintamani</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 25.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 32.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 37.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Kesegaran es dipadu dengan profil rasa fruity yang cerah khas Kintamani, Bali. Sangat ringan, segar, dan cocok untuk melegakan dahaga di siang hari yang panas!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/ICED Mandailing.webp" alt="Iced mandailing" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Mandailing</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 28.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 35.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 40.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Kepekatan kopi Sumatera Mandailing dengan sentuhan rasa herbal dan dark chocolate, disajikan dingin menyegarkan. Sensasi rasa bold yang sempurna untuk kembali menyegarkan pikiranmu di tengah hari!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI NUSANTARA/webp/ICED TORAJA.webp" alt="Iced toraja" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Toraja</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 25.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 32.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 37.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper"> 
+                                <p>Kombinasi sempurna kopi Toraja yang earthy dengan es yang menyegarkan. Rasakan kedalaman rasa kopi khas Toraja untuk menemani waktu santaimu.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/HOT KINTAMANI BALI.webp" alt="Hot kintamani" id="kintamani" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Kintamani</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 22.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 29.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 34.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Seduhan hangat dengan profil rasa fruity dan citrus yang cerah khas Bali. Nikmati sensasi rasa kopi otentik yang ringan dan membangkitkan mood positif.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/HOT Mandailing.webp" alt="Hot kintamani" id="kintamani" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Mandailing</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 20.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 28.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 33.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Kepekatan kopi Sumatera dengan tingkat keasaman rendah dan sentuhan rasa herbal yang khas. Pilihan klasik yang menghangatkan jiwa.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/HOT TORAJA.webp" alt="Hot TORAJA" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Toraja</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 22.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 29.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 34.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Kopi hitam hangat dengan sentuhan earthy dan aroma khas Sulawesi yang kuat. Cita rasa klasik sempurna untuk kamu penikmat kopi sejati.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/ICED GAYO.webp" alt="Iced Gayo" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Gayo</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 23.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 30.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 35.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Karakter rempah dataran tinggi Aceh Gayo yang berani, disajikan dingin menyegarkan. Solusi tepat untuk bangkitkan kembali fokus dan semangat harimu!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/ICED KINTAMANI BALI.webp" alt="Iced kintamani" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Kintamani</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 25.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 32.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 37.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Kesegaran es dipadu dengan profil rasa fruity yang cerah khas Kintamani, Bali. Sangat ringan, segar, dan cocok untuk melegakan dahaga di siang hari yang panas!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/ICED Mandailing.webp" alt="Iced mandailing" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Mandailing</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 28.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 35.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 40.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper">
-                            <p>Kepekatan kopi Sumatera Mandailing dengan sentuhan rasa herbal dan dark chocolate, disajikan dingin menyegarkan. Sensasi rasa bold yang sempurna untuk kembali menyegarkan pikiranmu di tengah hari!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI NUSANTARA/webp/ICED TORAJA.webp" alt="Iced toraja" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Toraja</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 25.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 32.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 37.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
-                        </div>
-                        <div class="description-wrapper"> 
-                            <p>Kombinasi sempurna kopi Toraja yang earthy dengan es yang menyegarkan. Rasakan kedalaman rasa kopi khas Toraja untuk menemani waktu santaimu.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <h1 id="foreign">FOREIGN SERIES</h1 >
-            <div class="menu-container">
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/ICED DIRTY MATCHAEXPRESSO.webp" alt="Iced Dirty Matchapresso" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Dirty Matchapresso</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 24.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 31.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 36.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button> 
-                            </div>
+            <h1 id="foreign" class="position">FOREIGN SERIES</h1>
+            <div class="menu-container row row-cols-1 row-cols-md-2 g-4">
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/ICED DIRTY MATCHAEXPRESSO.webp" alt="Iced Dirty Matchapresso" class="menu-img">
                         </div>
-                        <div class="description-wrapper">           
-                            <p>Kombinasi matcha dan espresso yang bold, satukan dua dunia untuk bangkitkan semangatmu!</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Dirty Matchapresso</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 24.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 31.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 36.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button> 
+                                </div>
+                            </div>
+                            <div class="description-wrapper">           
+                                <p>Kombinasi matcha dan espresso yang bold, satukan dua dunia untuk bangkitkan semangatmu!</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Iced Malty Latte.webp" alt="Iced Malty Latte" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Malty Latte</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 20.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 27.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 32.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Iced Malty Latte.webp" alt="Iced Malty Latte" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Sang legenda Traditional Latte berpadu dengan manisnya karamel, menambah pengalaman rasa creamy dan nutty, yang berkesan di hati.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Malty Latte</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 20.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 27.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 32.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Sang legenda Traditional Latte berpadu dengan manisnya karamel, menambah pengalaman rasa creamy dan nutty, yang berkesan di hati.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Iced Bumi Latte.webp" alt="Iced Bumi Latte" id="kintamani" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Bumi Latte</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 19.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 25.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 30.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Iced Bumi Latte.webp" alt="Iced Bumi Latte" id="kintamani" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Sensasi lembut dan legit dari saus karamel dan butterscotch yang khas berpadu dengan kopi autentik Indonesia</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Bumi Latte</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 19.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 25.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 30.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Sensasi lembut dan legit dari saus karamel dan butterscotch yang khas berpadu dengan kopi autentik Indonesia</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Iced Cappuccino.webp" alt="Iced Cappuccino" id="kintamani" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Cappuccino</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 22.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 29.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 34.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Iced Cappuccino.webp" alt="Iced Cappuccino" id="kintamani" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Paduan Espresso, susu hangat, dan lapisan foam tebal di atasnya tanpa gula tambahan.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Cappuccino</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 22.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 29.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 34.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Paduan Espresso, susu hangat, dan lapisan foam tebal di atasnya tanpa gula tambahan.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/ICED AMERICANO.webp" alt="Iced Americano" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Americano</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 18.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 23.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 28.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/ICED AMERICANO.webp" alt="Iced Americano" class="menu-img">
                         </div>
-                        <div class="description-wrapper">     
-                            <p>Espresso shot yang dicampur dengan segelas air menghadirkan karakter, aroma, dan rasa yang ideal.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Americano</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 18.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 23.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 28.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">     
+                                <p>Espresso shot yang dicampur dengan segelas air menghadirkan karakter, aroma, dan rasa yang ideal.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Iced Caramel Praline Macchiato.webp" alt="Iced Caramel Praline Macchiato" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Iced Caramel Praline Macchiato</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 26.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 34.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 39.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Iced Caramel Praline Macchiato.webp" alt="Iced Caramel Praline Macchiato" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Latte dengan saus Praline dan karamel dengan rasa dan aroma manis.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Iced Caramel Praline Macchiato</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 26.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 34.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 39.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Latte dengan saus Praline dan karamel dengan rasa dan aroma manis.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/HOT AMERICANO.webp" alt="Hot Americano" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Americano</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 18.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 23.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 28.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/HOT AMERICANO.webp" alt="Hot Americano" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Espresso shot yang dicampur dengan segelas air menghadirkan karakter, aroma, dan rasa yang ideal.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Americano</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 18.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 23.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 28.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Espresso shot yang dicampur dengan segelas air menghadirkan karakter, aroma, dan rasa yang ideal.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">    
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Hot Cappuccino.webp" alt="Hot Cappuccino" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Cappuccino</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 22.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 29.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 34.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">    
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Hot Cappuccino.webp" alt="Hot Cappuccino" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Paduan Espresso, susu hangat, dan lapisan foam tebal di atasnya tanpa gula tambahan.</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Cappuccino</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 22.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 29.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 34.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Paduan Espresso, susu hangat, dan lapisan foam tebal di atasnya tanpa gula tambahan.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/KOPI LUAR/webp/Hot Espresso.webp" alt="Hot Espresso" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Hot Espresso</h3>
-                        <div class="price-placeholder"></div>
-                        <div class="coffee-selection-container">
-                            <button class="display-content">SIZE</button>
-                            <div class="dropright-content">
-                                <button class="coffee-selection-button" data-price="Rp 18.000">
-                                    <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 21.000">
-                                    <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
-                                </button>
-                                <button class="coffee-selection-button" data-price="Rp 25.000">
-                                    <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
-                                </button>  
-                            </div>
+                <div class="col d-flex">
+                    <div class="menu-item d-flex align-items-start gap-3">
+                        <div class="image-wrapper">
+                            <img src="../Images/KOPI LUAR/webp/Hot Espresso.webp" alt="Hot Espresso" class="menu-img">
                         </div>
-                        <div class="description-wrapper">
-                            <p>Ekstrak biji kopi Arabika murni tanpa campuran</p>
+                        <div class="item-description">
+                            <h3 class="fs-5">Hot Espresso</h3>
+                            <div class="price-placeholder"></div>
+                            <div class="coffee-selection-container">
+                                <button class="display-content">SIZE</button>
+                                <div class="dropright-content">
+                                    <button class="coffee-selection-button" data-price="Rp 18.000">
+                                        <img src="../Images/Coffee Selection/small cup_refined.webp" alt="kopi kecil" class="coffee-selection-small">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 21.000">
+                                        <img src="../Images/Coffee Selection/cup M.webp" alt="kopi sedang" class="coffee-selection-medium">
+                                    </button>
+                                    <button class="coffee-selection-button" data-price="Rp 25.000">
+                                        <img src="../Images/Coffee Selection/cup L.webp" alt="kopi besar" class="coffee-selection-large">
+                                    </button>  
+                                </div>
+                            </div>
+                            <div class="description-wrapper">
+                                <p>Ekstrak biji kopi Arabika murni tanpa campuran</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <h1 id="dessert">DESSERT</h1>
-            <div class="menu-container">
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/Pandan-Roll-Cake-ID.webp" alt="Roll Cake Cheese Pandan" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Roll Cake Cheese Pandan</h3>
-                        <div class="price-placeholder">Rp 27.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Bolu gulung pandan yang lembut dengan krim vanilla dan taburan keju parut.</p>
+            <div class="menu-container row row-cols-1 row-cols-md-2 g-4">
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/Pandan-Roll-Cake-ID.webp" alt="Roll Cake Cheese Pandan" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Roll Cake Cheese Pandan</h3>
+                            <div class="price-placeholder">Rp 27.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Bolu gulung pandan yang lembut dengan krim vanilla dan taburan keju parut.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/PBnJ-Roll-Cake-ID.webp" alt="Roll Cake Peanut Butter & Jam" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Roll Cake Peanut Butter & Jam</h3>
-                        <div class="price-placeholder">Rp 27.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Bolu gulung vanila yang lembut dengan selai kacang dan selai stroberi.</p>
-                        </div>  
-                    </div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/Moccha-Roll-Cake-ID.webp" alt="Roll Cake Mocha" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Roll Cake Mocha</h3>
-                        <div class="price-placeholder">Rp 27.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Bolu gulung coklat yang lembut dengan krim mocha dan taburan meses.</p>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/PBnJ-Roll-Cake-ID.webp" alt="Roll Cake Peanut Butter & Jam" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Roll Cake Peanut Butter & Jam</h3>
+                            <div class="price-placeholder">Rp 27.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Bolu gulung vanila yang lembut dengan selai kacang dan selai stroberi.</p>
+                            </div>  
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/Pain au Tiramisu.webp" alt="Pain au Tiramisu" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Pain au Tiramisu</h3>
-                        <div class="price-placeholder">Rp 36.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Pastry dengan isian almond paste rasa tiramisu dan topping cocoa crumble</p>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/Moccha-Roll-Cake-ID.webp" alt="Roll Cake Mocha" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Roll Cake Mocha</h3>
+                            <div class="price-placeholder">Rp 27.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Bolu gulung coklat yang lembut dengan krim mocha dan taburan meses.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/cempedak-80.webp" alt="Cempedak Cake" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Cempedak Cake</h3>
-                        <div class="price-placeholder">Rp 27.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Bolu gulung coklat yang lembut dengan krim mocha dan taburan meses.</p>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/Pain au Tiramisu.webp" alt="Pain au Tiramisu" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Pain au Tiramisu</h3>
+                            <div class="price-placeholder">Rp 36.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Pastry dengan isian almond paste rasa tiramisu dan topping cocoa crumble</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/Butter Croissant _-80.webp" alt="Butter Croissant" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Butter Croissant</h3>
-                        <div class="price-placeholder">Rp 24.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Pastry dengan rasa dan aroma butter</p>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/cempedak-80.webp" alt="Cempedak Cake" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Cempedak Cake</h3>
+                            <div class="price-placeholder">Rp 27.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Bolu gulung coklat yang lembut dengan krim mocha dan taburan meses.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/painauchocolat2403.webp" alt="PPain au Chocolat" class="menu-img">
-                    </div>
-                    <div class="item-description">
-                        <h3>Pain au Chocolat</h3>
-                        <div class="price-placeholder">Rp 29.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Pastry dengan isi coklat di dalamnya</p>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/Butter Croissant _-80.webp" alt="Butter Croissant" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Butter Croissant</h3>
+                            <div class="price-placeholder">Rp 24.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Pastry dengan rasa dan aroma butter</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="image-wrapper">
-                        <img src="../Images/DESSERT/webp/Kouign amann-.webp" alt="Kouign-Amann" class="menu-img">
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/painauchocolat2403.webp" alt="PPain au Chocolat" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Pain au Chocolat</h3>
+                            <div class="price-placeholder">Rp 29.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Pastry dengan isi coklat di dalamnya</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="item-description">
-                        <h3>Kouign-Amann</h3>
-                        <div class="price-placeholder">Rp 29.000</div>
-                        
-                        <div class="description-wrapper"> 
-                            <p>Pastry dengan lapisan karamel manis dan juga taburan kayu manis</p>
+                </div>
+                <div class="col d-flex">
+                    <div class="menu-item">
+                        <div class="image-wrapper">
+                            <img src="../Images/DESSERT/webp/Kouign amann-.webp" alt="Kouign-Amann" class="menu-img">
+                        </div>
+                        <div class="item-description">
+                            <h3 class="fs-5">Kouign-Amann</h3>
+                            <div class="price-placeholder">Rp 29.000</div>
+                            
+                            <div class="description-wrapper"> 
+                                <p>Pastry dengan lapisan karamel manis dan juga taburan kayu manis</p>
+                            </div>
                         </div>
                     </div>
                 </div>
