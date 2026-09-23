@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tentang Kami - Kopi Nusantara</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/style.css">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/navbar.js" defer></script>
     <script src="../JS/footer.js" defer></script>
     <script src="../JS/faq.js" defer></script>
@@ -19,9 +20,9 @@
 
     <div class="our-story py-5">
         <!-- Layout menggunakan CSS Flexbox-->
-        <div class="container">
-            <div class="row-align-items-center g-5">
-                <div class="col-12 col-lgh-7 story-text">
+        <div class="container story-container">
+            <div class="row align-items-center g-4">
+                <div class="col-12 col-lg-7 story-text">
                     <h3>Dari Satu Teras Kecil, Untuk Seluruh Nusantara</h3>
                     <p>Semuanya berawal pada tahun 2021, ketika Willson pulang dari perantauan membawa satu koper 
                         kecil berisi biji kopi dari Gayo, Toraja, dan Flores. Di teras rumahnya, ia menyeduh kopi 
@@ -40,30 +41,31 @@
                     <p><i>Kini setiap cangkir Kopi Nusantara membawa satu cerita: tentang tanah yang subur, tangan petani yang sabar, 
                         dan keramahan khas kita.</i></p>
                     <!-- Statistik Singkat (Flexbox)-->
-                    <div class="row row-cols-3 g-3 mt-4 text-center">
-                        <div class="col">
-                            <div class="stat-item">
+                    <div class="row g-3 mt-4">
+                        <div class="col-4">
+                            <div class="stat-item p-2 rounded">
                                 <h4>2021</h4>
-                                <p class="mb-0">Tahun Berdiri</p>
+                                <p>Tahun Berdiri</p>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="stat-item">
+                        <div class="col-4">
+                            <div class="stat-item p-2 rounded">
                                 <h4>12+</h4>
-                                <p class="mb-0">Petani Mitra</p>
+                                <p>Petani Mitra</p>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="stat-item">
+                        <div class="col-4">
+                            <div class="stat-item p-2 rounded">
                                 <h4>10rb+</h4>
-                                <p class="mb-0">Cangkir per Bulan</p>
+                                <p>Cangkir per Bulan</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12 col-lg-5">
                     <figure class="story-figure mb-0">
-                        <img src="../Images/Willson Ngopi.jpg" alt = "Willson menyeduh kopi di teras kedai pertama">
+                        <img src="../Images/Willson Ngopi.jpg" class="rounded shadow" alt = "Willson menyeduh kopi di teras kedai pertama">
                         <figcaption>Teras kedai pertama Kopi Nusantara, 2021.</figcaption>
                     </figure>
                 </div>
@@ -117,9 +119,9 @@
                     di setiap cangkir.</p>
             </div>
             <!-- Flexbox kolom di mobile, baris di desktop -->
-            <div class= "expert-featured row-align-items-center g-4 rounded-3 p-4 mb-5">
-                <div class="col-12 col-lg-4 text-center text-lg-start">
-                    <figure class="expert-ceo-figure mb-0 mx-auto">
+            <div class= "expert-featured row align-items-center g-4 mb-5 text-center text-lg-start">
+                <div class="col-12 col-lg-4">
+                    <figure class="expert-ceo-figure mb-0">
                         <img src="../Images/CEO Kopi Nusantara.jpg"alt="Willson, Founder dan CEO Kopi Nusantara">
                         <figcaption><b>Willson Putra Hadinata</b><br>Founder &amp; CEO</figcaption>
                     </figure>
@@ -136,50 +138,43 @@
                     </button>
                 </div>
             </div>
+
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             <!-- CSS Grid 1 kolom, 2 kolom, 4 kolom -->
                 <div class="col">
-                    <div class="card expert-card h-100 text-center border-0 shadow-sm">
-                        <img src="../Images/Head Barista.jpg" class="expert-photo rounded-circle mx-auto mt-4" alt="Louise, Head Barista">
-                        <div class="card-body">
-                            <h4 class="card-title">Louise William</h4>
-                            <p class="expert-role mb-2">Head Barista &amp; Q Grader</p>
-                            <p class="expert-quote card-text">"Sekali mencicipi, Anda akan tahu ini bukan kopi biasa. 
+                    <div class="expert-card">
+                        <img class="expert-photo" src="../Images/Head Barista.jpg" alt="Louise, Head Barista">
+                        <h4 class="card-title">Louise William</h4>
+                        <p class="expert-role">Head Barista &amp; Q Grader</p>
+                        <p class="expert-quote">"Sekali mencicipi, Anda akan tahu ini bukan kopi biasa. 
                                 Ada karamel, ada rempah, ada rasa pulang di dalamnya."</p>
-                        </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card expert-card h-100 text-center border-0 shadow-sm">
-                        <img src="../Images/Koordinator Petani.jpg" class="expert-photo rounded-circle mx-auto mt-4" alt="Angga, Koordinator Petani Mitra">
-                        <div class="card-body">
-                            <h4 class="card-title">Angga Johanes Thesman</h4>
-                            <p class="expert-role mb-2">Koordinator Petani Mitra</p>
-                            <p class="expert-quote card-text">"Petani kami dibayar adil, dan itu terasa sampai ke biji. 
-                                Kopi terbaik lahir dari hati yang tenang."</p>
-                        </div>
+                    <div class="expert-card">
+                        <img class="expert-photo" src="../Images/Koordinator Petani.jpg" alt="Angga, Koordinator Petani Mitra">
+                        <h4 class="card-title">Angga Johanes Thesman</h4>
+                        <p class="expert-role">Koordinator Petani Mitra</p>
+                        <p class="expert-quote">"Petani kami dibayar adil, dan itu terasa sampai ke biji. 
+                            Kopi terbaik lahir dari hati yang tenang."</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card expert-card h-100 text-center border-0 shadow-sm">
-                        <img src="../Images/Head Roaster.jpg" class="expert-photo rounded-circle mx-auto mt-4" alt="Michael, Head Roaster">
-                        <div class="card-body">
-                            <h4 class="card-title">Michael Respati Sanjaya Ho</h4>
-                            <p class="expert-role mb-2">Head Roaster</p>
-                            <p class="expert-quote card-text">"Api sangrai kami atur detik demi detik, karena selisih satu menit 
-                                bisa berarti beda satu dunia rasa."</p>
-                        </div>
+                    <div class="expert-card">
+                        <img class="expert-photo" src="../Images/Head Roaster.jpg" alt="Michael, Head Roaster">
+                        <h4 class="card-title">Michael Respati Sanjaya Ho</h4>
+                        <p class="expert-role">Head Roaster</p>
+                        <p class="expert-quote">"Api sangrai kami atur detik demi detik, karena selisih satu menit 
+                            bisa berarti beda satu dunia rasa."</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card expert-card h-100 text-center border-0 shadow-sm">
-                        <img src="../Images/Expresso Maker.jpg" class="expert-photo rounded-circle mx-auto mt-4" alt="Chandra, Ahli Racikan Espresso">
-                        <div class="card-body">
-                            <h4 class="card-title">Chandra</h4>
-                            <p class="expert-role mb-2">Ahli Racikan Espresso</p>
-                            <p class="expert-quote card-text">"Tidak ada resep rahasia. Yang ada hanya takaran tepat, 
-                                air bersih, dan kesabaran."</p>
-                        </div>
+                    <div class="expert-card">
+                        <img class="expert-photo" src="../Images/Expresso Maker.jpg" alt="Chandra, Ahli Racikan Espresso">
+                        <h4 class="card-title">Chandra</h4>
+                        <p class="expert-role">Ahli Racikan Espresso</p>
+                        <p class="expert-quote">"Tidak ada resep rahasia. Yang ada hanya takaran tepat, 
+                            air bersih, dan kesabaran."</p>
                     </div>
                 </div>
             </div>
@@ -302,85 +297,75 @@
             <!-- CSS Grid -->
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Langsung Dari Petani</h4>
-                            <p class="card-text">Biji dibeli langsung dari 12 petani mitra dengan harga adil, tanpa perantara.</p>
-                        </div>
+                    <div class="advantage-item">
+                        <h4>Langsung Dari Petani</h4>
+                        <p>Biji dibeli langsung dari 12 petani mitra dengan harga adil, tanpa perantara.</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Sangrai Segar Tiap Pekan</h4>
-                            <p class="card-text">Roastery mandiri kami menyangrai dalam jumlah kecil supaya aroma selalu segar.</p>
-                        </div>
+                    <div class="advantage-item">
+                        <h4>Sangrai Segar Tiap Pekan</h4>
+                        <p>Roastery mandiri kami menyangrai dalam jumlah kecil supaya aroma selalu segar.</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Bersertifikat Halal</h4>
-                            <p class="card-text">Bahan baku hingga proses operasional sudah tersertifikasi Halal secara resmi.</p>
-                        </div>
+                    <div class="advantage-item">
+                            <h4>Bersertifikat Halal</h4>
+                            <p>Bahan baku hingga proses operasional sudah tersertifikasi Halal secara resmi.</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Harga Bersahabat</h4>
-                            <p class="card-text">Kopi berkualitas mulai dari Rp18.000 per cangkir, cocok untuk ngopi setiap hari.</p>
-                        </div>
+                    <div class="advantage-item">
+                        <h4>Harga Bersahabat</h4>
+                        <p>Kopi berkualitas mulai dari Rp18.000 per cangkir, cocok untuk ngopi setiap hari.</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Kedai Ramah Lingkungan</h4>
-                            <p class="card-text">Area terbuka hijau, sedotan kertas, dan ampas kopi yang kami olah jadi pupuk.</p>
-                        </div>
+                    <div class="advantage-item">
+                            <h4>Kedai Ramah Lingkungan</h4>
+                            <p>Area terbuka hijau, sedotan kertas, dan ampas kopi yang kami olah jadi pupuk.</p>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card advantage-item h-100 border-0">
-                        <div class="card-body">
-                            <h4 class="card-title">Barista Bersertifikat</h4>
-                            <p class="card-text">Setiap barista dilatih dan diuji agar rasa konsisten di semua cabang.</p>
-                        </div>
+                    <div class="advantage-item">
+                        <h4 class="card-title">Barista Bersertifikat</h4>
+                        <p class="card-text">Setiap barista dilatih dan diuji agar rasa konsisten di semua cabang.</p>
                     </div>
                 </div>
             </div>
 
             <!-- Tabel Perbandingan -->
-            <h4 class="compare-title text-center mb-4">Kopi Nusantara vs Kedai Lain</h4>
-            <div class="compare-wrap mx-auto">
-                <table class="table compare-table mb-0">
-                    <tr>
-                        <th>Aspek</th>
-                        <th>Kopi Nusantara</th>
-                        <th>Kedai Lain</th>
-                    </tr>
-                    <tr>
-                        <td>Asal Biji</td>
-                        <td class="ya">Langsung dari petani mitra</td>
-                        <td>Lewat perantara</td>
-                    </tr>
-                    <tr>
-                        <td>Sangrai</td>
-                        <td class="ya">Segar tiap pekan</td>
-                        <td>Stok lama</td>
-                    </tr>
-                    <tr>
-                        <td>Halal</td>
-                        <td class="ya">Bersertifikat Resmi</td>
-                        <td>Tidak selalu</td>
-                    </tr>
-                    <tr>
-                        <td>Harga</td>
-                        <td class="ya">Mulai dari Rp18.000</td>
-                        <td>Cenderung lebih mahal</td>
-                    </tr>
-                </table>
+            <h4 class="compare-title">Kopi Nusantara vs Kedai Lain</h4>
+            <div class="compare-wrap mx-auto rounded shadow-sm" style="max-width: 800px; overflow:hidden;">
+                <div class="table-responsive">
+                    <table class="table compare-table mb-0">
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Kopi Nusantara</th>
+                            <th>Kedai Lain</th>
+                        </tr>
+                        <tr>
+                            <td>Asal Biji</td>
+                            <td class="ya">Langsung dari petani mitra</td>
+                            <td>Lewat perantara</td>
+                        </tr>
+                        <tr>
+                            <td>Sangrai</td>
+                            <td class="ya">Segar tiap pekan</td>
+                            <td>Stok lama</td>
+                        </tr>
+                        <tr>
+                            <td>Halal</td>
+                            <td class="ya">Bersertifikat Resmi</td>
+                            <td>Tidak selalu</td>
+                        </tr>
+                        <tr>
+                            <td>Harga</td>
+                            <td class="ya">Mulai dari Rp18.000</td>
+                            <td>Cenderung lebih mahal</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -392,63 +377,55 @@
                 <p>Cerita dari mereka yang sudah jatuh cinta pada seduhan kami.</p>
             </div>
 
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <div class="col">
-                    <div class="card testimoni-card h-100 border-0 shadow-sm">
-                        <div class="card-body d-flex flex-column">
-                            <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
-                            <p class="testimoni-text flex-grow-1">"Es kopi susu gula aren-nya juara. Saya kerja seharian di sini dan tidak pernah kepikiran pindah kedai lain."</p>
-                            <div class="testimoni-user d-flex align-items-center mt-3">
-                                <img src="../Images/Testimoni 1.jpg" class="rounded-circle me-3" alt="Testimoni pelanggan 1">
-                                <div>
-                                    <h4 class="mb-0">Nicholas Tanaydi</h4>
-                                    <p class="mb-0 small">Programmer Gemini</p>
-                                </div>
+                    <div class="card testimoni-card d-flex flex-column">
+                        <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                        <p class="testimoni-text flex-grow-1">"Es kopi susu gula aren-nya juara. Saya kerja seharian di sini dan tidak pernah kepikiran pindah kedai lain."</p>
+                        <div class="testimoni-user d-flex align-items-center gap-3">
+                            <img src="../Images/Testimoni 1.jpg" alt="Testimoni pelanggan 1">
+                            <div>
+                                <h4>Nicholas Tanaydi</h4>
+                                <p>Programmer Gemini</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card testimoni-card h-100 border-0 shadow-sm">
-                        <div class="card-body d-flex flex-column">
-                            <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
-                            <p class="testimoni-text flex-grow-1">"Suka sekali karena sudah halal dan tempatnya adem. Anak-anak juga senang main di area hijaunya."</p>
-                            <div class="testimoni-user d-flex align-items-center mt-3">
-                                <img src="../Images/Testimoni 2.jpg" class="rounded-circle me-3" alt="Testimoni pelanggan 2">
-                                <div>
-                                    <h4 class="mb-0">Malvin Grico</h4>
-                                    <p class="mb-0 small">Pengusaha Besi</p>
-                                </div>
+                    <div class="card testimoni-card d-flex flex-column">
+                        <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                        <p class="testimoni-text flex-grow-1">"Suka sekali karena sudah halal dan tempatnya adem. Anak-anak juga senang main di area hijaunya."</p>
+                        <div class="testimoni-user d-flex align-items-center gap-3">
+                            <img src="../Images/Testimoni 2.jpg" alt="Testimoni pelanggan 2">
+                            <div>
+                                <h4>Malvin Grico</h4>
+                                <p>Pengusaha Besi</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card testimoni-card h-100 border-0 shadow-sm">
-                        <div class="card-body d-flex flex-column">
-                            <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
-                            <p class="testimoni-text flex-grow-1">"Biji kopinya wangi banget. Beli sebungkus buat di rumah, sampai tetangga nanya belinya di mana."</p>
-                            <div class="testimoni-user d-flex align-items-center mt-3">
-                                <img src="../Images/Testimoni 3.jpg" class="rounded-circle me-3" alt="Testimoni pelanggan 3">
-                                <div>
-                                    <h4 class="mb-0">Leonardo Firnandius</h4>
-                                    <p class="mb-0 small">Manajer BYD</p>
-                                </div>
+                    <div class="card testimoni-card d-flex flex-column">
+                        <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                        <p class="testimoni-text flex-grow-1">"Biji kopinya wangi banget. Beli sebungkus buat di rumah, sampai tetangga nanya belinya di mana."</p>
+                        <div class="testimoni-user d-flex align-items-center gap-3">
+                            <img src="../Images/Testimoni 3.jpg" alt="Testimoni pelanggan 3">
+                            <div>
+                                <h4>Leonardo Firnandius</h4>
+                                <p>Manajer BYD</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card testimoni-card h-100 border-0 shadow-sm">
-                        <div class="card-body d-flex flex-column">
-                            <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
-                            <p class="testimoni-text flex-grow-1">"Kopinya punya rasa yang enak dan tidak terlalu pahit. Tempatnya juga nyaman untuk ngobrol santai."</p>
-                            <div class="testimoni-user d-flex align-items-center mt-3">
-                                <img src="../Images/Testimoni 4.jpg" class="rounded-circle me-3" alt="Testimoni pelanggan 4">
-                                <div>
-                                    <h4 class="mb-0">Christon Julian Wijaya</h4>
-                                    <p class="mb-0 small">Sepuh Transjakarta</p>
-                                </div>
+                    <div class="card testimoni-card d-flex flex-column">
+                        <p class="testimoni-rating">&starf;&starf;&starf;&starf;&starf;</p>
+                        <p class="testimoni-text flex-grow-1">"Kopinya punya rasa yang enak dan tidak terlalu pahit. Tempatnya juga nyaman untuk ngobrol santai."</p>
+                        <div class="testimoni-user d-flex align-items-center gap-3">
+                            <img src="../Images/Testimoni 4.jpg" alt="Testimoni pelanggan 4">
+                            <div>
+                                <h4>Christon Julian Wijaya</h4>
+                                <p>Sepuh Transjakarta</p>
                             </div>
                         </div>
                     </div>
@@ -541,8 +518,6 @@
         </div>
     </div>
 
-
-
     <button class="btn-elevator" data-target="#navbar-placeholder">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="18 15 12 9 6 15"></polyline>
@@ -554,6 +529,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
 </body>
 </html>
