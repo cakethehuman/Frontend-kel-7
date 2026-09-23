@@ -76,27 +76,21 @@ a {
 .our-experts-says-text{
     font-family: var(--font-body);
     color: var(--primary-color);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .expert-featured {
     background-color: var(--bg-light);
-    border-radius: 12px;
-    padding: 25px 20px;
-    margin-bottom: 40px;
-    text-align: center;
 }
 
 .expert-ceo-figure img {
-    width: 100%;
     max-width: 320px;
     aspect-ratio: 1/1;
     object-fit: cover;
-    margin : 0 auto;
-    border-radius: 12px;
 }
 
 .expert-ceo-figure figcaption {
-    margin-top: 10px;
     color: var(--primary-color)
 }
 
@@ -106,30 +100,23 @@ a {
     font-size: 19px;
     line-height: 1.6;
     color: var(--primary-color);
-    margin-bottom: 15px;
 }
 
-.expert-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
+.expert-featured .btn-outline-light {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
 }
 
 .expert-card {
     background-color: var(--bg-light);
-    border-radius: 8px;
-    padding : 25px 20px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .expert-photo {
     width: 100%;
-    max-width: 280px;
-    aspect-ratio: 1/1;
+    height:100px;
     object-fit: cover;
-    margin : 0 auto 15px;
-    border-radius: 50%;
     border: 3px solid var(--secondary-color);
 }
 
@@ -141,7 +128,6 @@ a {
 }
 
 .expert-role {
-    margin-bottom: 10px;
     font-size: 14px;
     color: var(--secondary-color);
 }
