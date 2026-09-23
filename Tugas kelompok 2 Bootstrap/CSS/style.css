@@ -19,16 +19,10 @@ a {
     color: inherit;
 }
 
-.container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 .our-story {
     background-color: var(--primary-color);
     color : var(--text-light);
+    padding: 60px 0;
 }
 
 .story-text h3 {
@@ -44,19 +38,22 @@ a {
 }
 
 .story-figure img {
-    aspect-ratio: 4/3;
-    object-fit: cover;
+    border-radius: 12px;
+    width: 100%;
 }
 
 .story-figure figcaption {
+    margin-top: 10px;
     font-size: 13px;
     font-style: italic;
     color: var(--bg-beige)
 }
 
 .stat-item {
+    text-align: center;
     border : 2px solid var(--secondary-color);
     padding-top: 10px;
+    height: 100%;
 }
 
 .stat-item h4 {
@@ -67,22 +64,24 @@ a {
 }
 
 .stat-item p {
+    margin-bottom: 0;
     font-size: 13px;
 }
 
 .our-experts-says{
+    padding: 60px 0;
     background-color: var(--text-light);
 }
 
 .our-experts-says-text{
     font-family: var(--font-body);
     color: var(--primary-color);
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .expert-featured {
     background-color: var(--bg-light);
+    border-radius: 12px;
+    padding: 25px 20px;
 }
 
 .expert-ceo-figure img {
@@ -90,9 +89,13 @@ a {
     max-width: 320px;
     aspect-ratio: 1/1;
     object-fit: cover;
+    margin: 0 auto;
+    border-radius: 12px;
 }
 
 .expert-ceo-figure figcaption {
+    margin-top: 10px;
+    padding-left: 35px;
     color: var(--primary-color)
 }
 
@@ -102,9 +105,11 @@ a {
     font-size: 19px;
     line-height: 1.6;
     color: var(--primary-color);
+    margin-bottom: 0;
 }
 
 .expert-featured .btn-outline-light {
+    font-weight: 500;
     --bs-btn-color: var(--primary-color);
     --bs-btn-border-color: var(--primary-color);
     --bs-btn-hover-bg: var(--primary-color);
@@ -113,19 +118,21 @@ a {
 
 .expert-card {
     background-color:var(--bg-light);
+    border-radius: 8px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px  rgba(0,0,0,0.05);
+    height: 100%;
 }
 
 .expert-photo {
     width: 100%;
-    max-width: 220px;
+    max-width: 280px;
     border-radius: 50%;
     aspect-ratio: 1/1;
     object-fit: cover;
+    margin: 0 auto 15px;
     border: 3px solid var(--secondary-color);
-}
-
-.expert-card .card-body {
-    background-color: var(--bg-light);
 }
 
 .expert-card h4 {
@@ -136,6 +143,7 @@ a {
 }
 
 .expert-role {
+    margin-bottom: 10px;
     font-size: 14px;
     color: var(--secondary-color);
 }
@@ -160,6 +168,7 @@ a {
 .advantage {
     background-color: var(--primary-color);
     color: var(--text-light);
+    padding: 60px 0;
 }
 
 .advantage .section-header h3{
@@ -171,46 +180,48 @@ a {
 }
 
 .advantage-item {
+    padding: 25px 20px;
     border: 1px solid var(--secondary-color);
     border-top: 4px solid var(--secondary-color);
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.06);
+    height: 100%;
 }
 
-.advantage-item .card-title {
+.advantage-item h4 {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 20px;
+    margin-bottom: 8px;
 }
 
-.advantage-item .card-text {
+.advantage-item p {
     font-size: 15px;
     color: var(--bg-beige);
+    margin-bottom: 0;
 }
 
 .compare-title {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 22px;
-}
-
-.compare-wrap {
-    max-width: 800px;
-    border-radius: 8px;
-    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .compare-table {
     background-color: var(--bg-light);
     color: var(--text-dark);
+    font-size: 13px;
+    margin-bottom: 0;
 }
 
-.compare-table th {
+table.compare-table th {
     background-color: var(--secondary-color);
     color: var(--text-light);
 }
 
-.compare-table td.ya {
+.compare-table td.ya{
     font-weight: 600;
     color: var(--primary-color);
 }
@@ -219,24 +230,36 @@ a {
     background-color: var(--bg-light);
 }
 
-.testimoni-card {
+.card.testimoni-card {
+    padding: 25px 20px;
+    background-color: var(--text-light);
+    border-radius: 8px;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     border-top: 4px solid var(--secondary-color);
+    text-align: left;
 }
 
 .testimoni-rating {
     color: var(--secondary-color);
     letter-spacing: 3px;
+    margin-bottom: 0;
 }
 
 .testimoni-text {
     font-style: italic;
     font-size: 15px;
+    margin-bottom: 0;
 }
 
-.testimoni-user img {
+.testimoni-card .testimoni-user img {
     width: 48px;
-    height: 48px;
+    height: 78px;
+    min-width: 88px;
+    flex-shrink: 0;
     object-fit: cover;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
 }
 
 .testimoni-user h4 {
@@ -244,11 +267,14 @@ a {
     font-weight: 600;
     font-size: 16px;
     color: var(--primary-color);
+    margin-bottom: 0;
+    padding-left: 20px;
 }
 
 .testimoni-user p {
     font-size: 13px;
     color: #777;
+    margin-bottom: 0;
 }
 
 .section-padding {
@@ -565,12 +591,6 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .card:last-child {
-        grid-column: span 2; 
-        max-width: 50%;
-        margin: 0 auto;
-    }
-
     .timeline-item {
         flex-direction: row; 
         align-items: center; 
@@ -605,10 +625,6 @@ img {
     .expert-featured {
         padding: 40px;
         text-align: left;
-    }
-
-    .expert-ceo-figure {
-        flex: 0 0 260px;
     }
 
     .expert-ceo-text {
@@ -647,11 +663,6 @@ img {
     .flex-layout {
         flex-direction: row;
         align-items: center;
-    }
-
-    .halal-text {
-        flex: 1;
-        padding-right: 50px;
     }
 
     .halal-image {
