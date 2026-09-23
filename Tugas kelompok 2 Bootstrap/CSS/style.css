@@ -138,10 +138,20 @@ a {
     color: #555;
 }
 
+#ceoModal .modal-content {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    border-radius: 12px;
+}
+
+#ceoModal .modal-title {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+}
+
 .advantage {
     background-color: var(--primary-color);
     color: var(--text-light);
-    padding: 60px 0;
 }
 
 .advantage .section-header h3{
@@ -167,48 +177,32 @@ a {
     background-color: rgba(255, 255, 255, 0.06);
 }
 
-.advantage-item h4 {
+.advantage-item .card-title {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 20px;
-    margin-bottom: 8px;
 }
 
-.advantage-item p {
+.advantage-item .card-text {
     font-size: 15px;
-    color: var(--bg-beige);
+    color: var(--text-dark);
 }
 
 .compare-title {
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 22px;
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .compare-wrap {
     max-width: 800px;
-    margin: 0 auto;
     border-radius: 8px;
     overflow: hidden;
 }
 
 .compare-table {
-    width: 100%;
-    table-layout: fixed;
-    border-collapse: collapse;
     background-color: var(--bg-light);
     color: var(--text-dark);
-    font-size: 13px;
-}
-
-.compare-table th,
-.compare-table td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid var(--bg-beige);
-    word-wrap: break-word;
 }
 
 .compare-table th {
@@ -225,21 +219,8 @@ a {
     background-color: var(--bg-light);
 }
 
-.testimoni-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-}
-
 .testimoni-card {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 25px 20px;
-    background-color: var(--text-light);
     border-top: 4px solid var(--secondary-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .testimoni-rating {
@@ -248,23 +229,14 @@ a {
 }
 
 .testimoni-text {
-    flex-grow: 1;
     font-style: italic;
     font-size: 15px;
-}
-
-.testimoni-user {
-    display: flex;
-    align-items: center;
-    gap: 12px;
 }
 
 .testimoni-user img {
     width: 48px;
     height: 48px;
-    flex-shrink: 0;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .testimoni-user h4 {
