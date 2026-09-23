@@ -1,25 +1,8 @@
-:root {
-    --primary-color: #1C3F3A;   
-    --secondary-color: #A0855B; 
-    --bg-light: #F8F5F0;        
-    --bg-beige: #E3D9C6;     
-    --text-dark: #2B2B2B;      
-    --text-light: #FFFFFF;
-    --gray-color: #DCE1E7;       
-    --rich-brown: #4a2c11;
-    --darker-brown: #361f0b;
-    --lighter-brown: #5c3716;
-    --roast-brown: #2b190a;
-    --darker-roast-brown: #1f1207;
-    --font-heading: 'Fraunces', serif;
-    --font-body: 'Plus Jakarta Sans', sans-serif;
-}
-
 @import url("constants.css");
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -484,7 +467,7 @@ img {
     margin-top: 30px;
 }
 
-.btn-primary {
+.btn-custom-primary {
     display: inline-block;
     background-color: var(--secondary-color);
     color: var(--text-light);
@@ -519,7 +502,7 @@ img {
     transform: scale(1.1);
 }
 
-.btn-primary:hover {
+.btn-custom-primary:hover {
     background-color: var(--primary-color);
 }
 
@@ -583,6 +566,11 @@ img {
     font-size: 16px;
 }
 
+.accordion.active,
+.accordion:hover {
+    background-color: var(--secondary-color);
+}
+
 .panel {
   padding: 0 18px;
   background-color: var(--secondary-color);
@@ -591,7 +579,6 @@ img {
   display: none;
   overflow: hidden;
 }
-
 
 @media screen and (min-width: 576px) {
 
@@ -728,48 +715,4 @@ img {
     .timeline-item {
         gap: 60px; 
     }
-}
-
-.custom-card-shadow {
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-radius: 8px;
-}
-
-.custom-card-img {
-    aspect-ratio: 4/3;
-    object-fit: cover;
-}
-
-.custom-card-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: 20px;
-}
-
-.halal-title {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 30px;
-    color: var(--primary-color);
-}
-
-.custom-rounded {
-    border-radius: 12px;
-}
-
-.btn-custom-primary {
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: var(--text-light);
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-custom-primary:hover {
-    background-color: var(--primary-color);
 }
