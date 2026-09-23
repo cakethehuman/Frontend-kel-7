@@ -28,7 +28,6 @@ a {
 .our-story {
     background-color: var(--primary-color);
     color : var(--text-light);
-    padding: 60px 0;
 }
 
 .story-text h3 {
@@ -44,26 +43,17 @@ a {
 }
 
 .story-figure img {
-    border-radius: 12px;
-    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
 }
 
 .story-figure figcaption {
-    margin-top: 10px;
     font-size: 13px;
     font-style: italic;
     color: var(--bg-beige)
 }
 
-.story-stats {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
 .stat-item {
-    flex: 1;
-    text-align: center;
     border : 2px solid var(--secondary-color);
     padding-top: 10px;
 }
@@ -76,12 +66,10 @@ a {
 }
 
 .stat-item p {
-    margin-bottom: 0;
     font-size: 13px;
 }
 
 .our-experts-says{
-    padding: 60px 0;
     background-color: var(--text-light);
 }
 
