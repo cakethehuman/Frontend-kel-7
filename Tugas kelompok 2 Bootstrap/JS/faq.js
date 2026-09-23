@@ -1,11 +1,11 @@
 const $acc = $(".accordion");
 
-$acc.each(function(){
-    $(this).toggleClass("active");
-    
-    $(this).on('click', function(){
+$acc.each(function () {
+    $(this).on('click', function () {
         let $panel = $(this).next();
         let $pTag = $(this).find('p');
+
+        $(this).toggleClass("active");
 
         if ($pTag.text() === '+') {
             $pTag.text('-');
@@ -13,6 +13,6 @@ $acc.each(function(){
             $pTag.text('+');
         }
 
-        $panel.slideToggle(); 
+        $panel.slideToggle();
     });
 });
