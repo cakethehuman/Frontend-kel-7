@@ -1,0 +1,16 @@
+:root{
+    --primary-color: #FF3131 ;   
+    --secondary-color:#A49F4D; 
+    --bg-light: #FFF8EA;        
+    --bg-beige: #FCE5C6;     
+    --text-dark: #393A3C ;      
+    --text-light: #FFFFFF;
+    --gray-color: #757070;       
+    --rich-brown: #B06A3B;
+    --darker-brown: #4A2814;
+    --lighter-brown: #B08968;
+    --roast-brown: #8C4B26 ;
+    --darker-roast-brown: #5C2E15;
+    --font-heading: 'Libre Baskerville', Georgia, serif ;
+    --font-body: 'Nunito', 'Segoe UI', sans-serif;
+}
