@@ -538,7 +538,6 @@ img {
     font-size: 16px;
 }
 
-.accordion.active,
 .accordion:hover {
     background-color: var(--secondary-color);
 }
