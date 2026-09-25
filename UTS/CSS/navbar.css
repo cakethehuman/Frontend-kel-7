@@ -1,0 +1,68 @@
+.custom-navbar {
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--bg-beige);
+    padding: 16px 0;
+}
+
+.custom-brand-container {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.brand-title {
+    font-family: var(--font-heading, Georgia, serif);
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 35px;
+}
+
+.brand-subtitle {
+    font-family: var(--font-body, sans-serif);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--rich-brown);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+.nav-links {
+    gap: 24px;
+}
+
+.nav-links .nav-link {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--darker-brown);
+    transition: color 0.2s ease;
+    padding: 8px 0;
+}
+
+.nav-links .nav-link:hover,
+.nav-links .nav-link:focus {
+    color: var(--primary-color);
+}
+
+.custom-toggler {
+    border: none;
+    padding: 4px;
+}
+
+.custom-toggler:focus,
+.custom-toggler:focus-visible {
+    outline: 3px solid var(--primary-color);
+    box-shadow: none;
+}
+
+@media (max-width: 991px) {
+    .nav-links {
+        margin-top: 16px;
+        text-align: center;
+        background-color: var(--bg-light);
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid var(--bg-beige);
+    }
+}
