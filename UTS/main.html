@@ -1,13 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
+    <title>Kedai Mie Belitung</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="../CSS/constants.css">
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/constants.css">
+    <link rel="stylesheet" href="../CSS/navbar.css">
+    <link rel="stylesheet" href="../CSS/main.css">
 </head>
 <body>
-    <h1>Test db</h1>
-    <script src="./JS/db.js"></script>
+    <div id="nav-placeholder"></div>
+    <main>
+        <section class="container py-5 mt-4">
+            <div class="row align-items-center">
+                <div class="col-lg-6 pe-lg-5">
+                    <h1 class="custom-heading mb-4">Kaya Rempah, Asli Belitung.</h1>
+                    <p class="custom-text mb-4">Mie kuning kenyal yang disiram kaldu udang kental manis dan gurih, disajikan dengan kentang rebus, emping, dan udang utuh. Resep asli keluarga yang dipertahankan konsistensinya.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#lokasi" class="btn custom-btn-primary">Lihat Lokasi</a>
+                        <a href="#tentang" class="btn custom-btn-secondary">Cara Pembuatan</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <div class="image-placeholder">
+                        [FOTO: Sahang dan happy]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tentang" class="container py-5 mt-5">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h2 class="custom-heading h1">Kunci Rasa Kaldu</h2>
+                    <p class="custom-text mt-3">Bukan sekadar kuah manis, melainkan hasil rebusan kepala udang segar selama berjam-jam.</p>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="custom-card h-100">
+                                <h3 class="custom-heading h4">Kaldu Udang Kental</h3>
+                                <p class="custom-text mt-2 mb-0">Kuah kecokelatan didapat dari rebusan udang murni tanpa pengental buatan, menghasilkan perpaduan gurih dan manis alami.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="custom-card h-100">
+                                <h3 class="custom-heading h4">Topping Klasik</h3>
+                                <p class="custom-text mt-2 mb-0">Dilengkapi potongan kentang rebus, irisan timun segar, tauge, udang kupas, dan taburan emping melinjo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lokasi" class="location-box mt-5">
+            <div class="container text-center py-5">
+                <h2 class="custom-heading text-light mb-4">Kunjungi Kami</h2>
+                <p class="custom-text text-light-beige mb-2">[ALAMAT ASLI: Jl. Nama Jalan No. XX, Kota, Kodepos]</p>
+                <p class="custom-text text-light-beige mb-0">Buka setiap hari: 08.00 - 20.00 WIB</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            $("#nav-placeholder").load("navbar.html .custom-navbar", function(response, status, xhr) {
+                if (status == "error") {
+                    var errorMsg = "Navigasi gagal dimuat: " + xhr.status + " " + xhr.statusText;
+                    $("#nav-placeholder").html("<div class='p-3 text-center text-danger fw-bold'>" + errorMsg + "</div>");
+                }
+            });
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

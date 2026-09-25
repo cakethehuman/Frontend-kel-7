@@ -2,7 +2,8 @@
     --primary-color: #FF3131 ;   
     --secondary-color:#A49F4D; 
     --bg-light: #FFF8EA;        
-    --bg-beige: #FCE5C6;     
+    --bg-beige: #FCE5C6;
+    --bg--darker-beige: #ede3d3;    
     --text-dark: #393A3C ;      
     --text-light: #FFFFFF;
     --gray-color: #757070;       
@@ -13,4 +14,40 @@
     --darker-roast-brown: #5C2E15;
     --font-heading: 'Libre Baskerville', Georgia, serif ;
     --font-body: 'Nunito', 'Segoe UI', sans-serif;
+}
+
+.bg-primary-color{
+    background-color: var(--primary-color) !important;
+}
+
+.bg-secondary-color{
+    background-color: var(--secondary-color) !important;
+}
+
+.bg-beige{
+    background-color: var(--bg-beige) !important;
+}
+
+.bg-darker-beige{
+    background-color: var(--bg--darker-beige) !important;
+}
+
+.bg-light{
+    background-color: var(--bg-light) !important;
+}
+
+.bg-lighter-brown{
+    background-color: var(--lighter-brown);
+}
+
+.bg-darker-brown{
+    background-color: var(--darker-brown);
+}
+
+.menu-card {
+    transition: transform 0.20s ease-in-out, box-shadow 0.20s ease-in-out;
+}
+
+.menu-card:hover {
+    transform: translateY(-1px);
 }
