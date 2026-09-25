@@ -22,6 +22,7 @@ async function initDb() {
 
         CREATE TABLE items (
             item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            image BLOB NOT NULL,
             name TEXT NOT NULL,
             description TEXT,
             price REAL NOT NULL DEFAULT 0,
