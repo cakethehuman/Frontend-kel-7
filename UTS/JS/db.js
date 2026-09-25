@@ -78,8 +78,6 @@ async function initDb() {
                 REFERENCES items(item_id)
         );
     `);
-
-    console.log("Database ready!");
 }
 
 initDb();
