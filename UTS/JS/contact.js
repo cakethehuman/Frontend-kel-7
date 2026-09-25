@@ -1,82 +1,72 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
 
   function updateStatus() {
     const now = new Date();
     const jamSekarang = now.getHours() + now.getMinutes() / 60;
-    const pill = document.getElementById('statusPill');
+    const $pill = $('#statusPill');
 
     if (jamSekarang >= 10 && jamSekarang < 21.5) {
-      pill.className = 'status-pill open';
-      pill.textContent = 'Buka Sekarang';
+      $pill.attr('class', 'status-pill open').text('Buka Sekarang');
     } else {
-      pill.className = 'status-pill closed';
-      pill.textContent = 'Tutup · Buka lagi jam 10.00';
+      $pill.attr('class', 'status-pill closed').text('Tutup · Buka lagi jam 10.00');
     }
   }
   updateStatus();
   setInterval(updateStatus, 60000); 
 
-  const btnCopy = document.getElementById('btnCopy');
-  btnCopy.addEventListener('click', function () {
+  $('#btnCopy').on('click', function () {
     const alamat = 'Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Belitung 33411';
+    const $btn = $(this);
 
     navigator.clipboard.writeText(alamat).then(function () {
-      btnCopy.innerHTML = '<i class="bi bi-check-lg"></i> Tersalin!';
+      $btn.html('<i class="bi bi-check-lg"></i> Tersalin!');
       setTimeout(function () {
-        btnCopy.innerHTML = '<i class="bi bi-clipboard"></i> Salin Alamat';
+        $btn.html('<i class="bi bi-clipboard"></i> Salin Alamat');
       }, 2000);
     });
   });
 
-  const stars = document.querySelectorAll('#stars .star');
-  const starLabel = document.getElementById('starLabel');
+  /* ============ 3. RATING BINTANG ============ */
   const labelTeks = ['Belum dinilai', 'Kurang, nih', 'Cukup enak', 'Enak!', 'Bikin nagih', 'Luar biasa!'];
   let ratingTerpilih = 0;
 
-  stars.forEach(function (star) {
-    star.addEventListener('click', function () {
-      ratingTerpilih = Number(star.dataset.val);
+  $('#stars .star').on('click', function () {
+    ratingTerpilih = Number($(this).data('val'));
 
-      stars.forEach(function (s) {
-        s.classList.toggle('active', Number(s.dataset.val) <= ratingTerpilih);
-      });
-      starLabel.textContent = labelTeks[ratingTerpilih];
-      document.getElementById('fieldRating').classList.remove('has-error');
+    $('#stars .star').each(function () {
+      $(this).toggleClass('active', Number($(this).data('val')) <= ratingTerpilih);
     });
+    $('#starLabel').text(labelTeks[ratingTerpilih]);
+    $('#fieldRating').removeClass('has-error');
   });
 
-  const pesanInput = document.getElementById('pesan');
-  const charCount = document.getElementById('charCount');
-
-  pesanInput.addEventListener('input', function () {
-    charCount.textContent = pesanInput.value.length + '/500';
+  $('#pesan').on('input', function () {
+    $('#charCount').text($(this).val().length + '/500');
   });
 
-  const form = document.getElementById('feedbackForm');
-  const formAlert = document.getElementById('formAlert');
-  const formSuccess = document.getElementById('formSuccess');
-  const btnSubmit = document.getElementById('btnSubmit');
+  const $form = $('#feedbackForm');
+  const $formAlert = $('#formAlert');
+  const $formSuccess = $('#formSuccess');
+  const $btnSubmit = $('#btnSubmit');
 
   function tampilkanError(idField, pesanError) {
-    const field = document.getElementById(idField);
-    field.classList.add('has-error');
-    field.querySelector('.error-msg').textContent = pesanError;
+    const $field = $('#' + idField);
+    $field.addClass('has-error');
+    $field.find('.error-msg').text(pesanError);
   }
 
   function hapusSemuaError() {
-    document.querySelectorAll('.field').forEach(function (f) {
-      f.classList.remove('has-error');
-    });
+    $('.field').removeClass('has-error');
   }
 
-  form.addEventListener('submit', function (e) {
+  $form.on('submit', function (e) {
     e.preventDefault();
-    formAlert.classList.remove('show');
+    $formAlert.removeClass('show');
     hapusSemuaError();
 
-    const nama = document.getElementById('nama').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const pesan = pesanInput.value.trim();
+    const nama = $.trim($('#nama').val());
+    const email = $.trim($('#email').val());
+    const pesan = $.trim($('#pesan').val());
     let valid = true;
 
     if (nama.length < 3) {
@@ -97,17 +87,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (!valid) {
-      formAlert.classList.add('show');
+      $formAlert.addClass('show');
       return;
     }
 
-    // Simulasi pengiriman ke server (belum ada backend)
-    btnSubmit.disabled = true;
-    btnSubmit.querySelector('.btn-label').textContent = 'Mengirim...';
+    $btnSubmit.prop('disabled', true);
+    $btnSubmit.find('.btn-label').text('Mengirim...');
 
     setTimeout(function () {
-      form.style.display = 'none';
-      formSuccess.classList.add('show');
+      $form.hide();
+      $formSuccess.addClass('show');
     }, 900);
   });
 
