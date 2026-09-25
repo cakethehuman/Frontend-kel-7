@@ -1,34 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - Sahang Kitchen Belitung</title>
+  <title>Kontak — Sahang Kitchen Belitung</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="CSS/contact.css">
+  <script src="../JS/navbar.js" defer></script>
+
 </head>
 <body>
 
-  <section class="hero">
-    <div class="container-narrow"></div>
-      <h1>Mampir, atau kabari kami dulu</h1>
-      <p>Temukan kedai kami di Tanjung Pandan, bisa hubungi lewat telepon atau WhatsApp, lalu tinggalkan masukkan atau kesan Anda setelah mencicipi semangkuk Mie Belitung.</p>
-  </section>
+  <div id="navbar-placeholder"></div>
 
-  <section class="contact-section">
-    <div class="container-narrow">
-      <div class="row g-4">
-        
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Kontak &amp; Lokasi — Tanjung Pandan</span>
+        <h1 class="hero-title">Mari Ngobrol, Sambil Sepiring <em>Mie Belitung</em></h1>
+        <p class="hero-lead">Punya saran resep, mau reservasi meja, atau cuma penasaran kami ada di mana? Semuanya ada di halaman ini.</p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="#lokasi"><i class="bi bi-geo-alt"></i> Lihat Lokasi</a>
+          <a class="btn btn-ghost" href="#ulasan"><i class="bi bi-pencil-square"></i> Tulis Masukan</a>
+        </div>
+        <p class="hero-status"><span class="status-pill" id="statusPill"></span></p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="">
       </div>
     </div>
   </section>
-  
-  <section class="feedback-section"></section>
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <section id="lokasi" class="section">
+    <div class="container grid-2">
+      <div>
+        <span class="eyebrow">Lokasi</span>
+        <h2 class="section-title">Dapur Kami di Tanjung Pandan</h2>
+        <p class="section-copy">Kedai kami gampang ditandai: cari genteng merah dan bangku kayu panjang di depan.</p>
+
+        <div class="info-item">
+          <i class="bi bi-geo-alt info-icon"></i>
+          <div>
+            <h5>Alamat</h5>
+            <p>Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten Belitung 33411</p>
+            <button type="button" class="copy-btn" id="btnCopy"><i class="bi bi-clipboard"></i> Salin Alamat</button>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <i class="bi bi-clock-history info-icon"></i>
+          <div>
+            <h5>Jam Buka</h5>
+            <p>Setiap hari, 10.00 – 21.30 WIB</p>
+          </div>
+        </div>
+
+        <a class="btn btn-solid" href="https://www.google.com/maps/dir/?api=1&destination=-2.7416,107.6358" target="_blank" rel="noopener">
+          <i class="bi bi-signpost-split"></i> Petunjuk Arah
+        </a>
+      </div>
+
+      <div class="map-frame">
+        <iframe
+          title="Peta lokasi Sahang Kitchen Belitung"
+          src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section id="hubungi" class="section band">
+    <div class="container">
+      <span class="eyebrow">Hubungi Kami</span>
+      <h2 class="section-title">Telepon Lebih Cepat Daripada Nasi Dingin</h2>
+
+      <div class="contact-list">
+        <a class="contact-row" href="tel:+6271922145">
+          <i class="bi bi-telephone contact-ico"></i>
+          <span><span class="contact-label">Telepon Reservasi</span><span class="contact-value">0719-22145</span></span>
+        </a>
+        <a class="contact-row" href="https://wa.me/6281273112045?text=Halo%20Sahang%20Kitchen!" target="_blank" rel="noopener">
+          <i class="bi bi-whatsapp contact-ico"></i>
+          <span><span class="contact-label">WhatsApp &amp; Pesan Antar</span><span class="contact-value">0812-7311-2045</span></span>
+        </a>
+        <a class="contact-row" href="mailto:halo@sahangkitchen.id">
+          <i class="bi bi-envelope contact-ico"></i>
+          <span><span class="contact-label">Email &amp; Kerja Sama</span><span class="contact-value">halo@sahangkitchen.id</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="ulasan" class="section">
+    <div class="container grid-2">
+      <div>
+        <span class="eyebrow">Saran &amp; Masukan</span>
+        <h2 class="section-title">Katakan Apa Saja, Dapur Kami Mendengar</h2>
+        <p class="section-copy">Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.</p>
+      </div>
+
+      <div class="form-panel">
+        <div id="formAlert" class="form-alert"><i class="bi bi-wifi-off"></i> Ups, ada isian yang belum lengkap.</div>
+        <div id="formSuccess" class="form-success">
+          <i class="bi bi-check-circle"></i>
+          <p>Terima kasih, masukanmu sudah terkirim!</p>
+        </div>
+
+        <form id="feedbackForm" novalidate>
+          <div class="field" id="fieldName">
+            <label class="f-label" for="nama">Nama Kamu <span class="req">*</span></label>
+            <input type="text" class="f-control" id="nama" name="nama" placeholder="Misal: Andi Belitung">
+            <span class="error-msg"></span>
+          </div>
+
+          <div class="field" id="fieldEmail">
+            <label class="f-label" for="email">Email (opsional)</label>
+            <input type="email" class="f-control" id="email" name="email" placeholder="biar kami bisa membalas">
+            <span class="error-msg"></span>
+          </div>
+
+          <div class="field" id="fieldRating">
+            <span class="f-label">Berapa Bintang untuk Kami? <span class="req">*</span></span>
+            <div class="stars-row" id="stars">
+              <button type="button" class="star" data-val="1"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star" data-val="2"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star" data-val="3"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star" data-val="4"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star" data-val="5"><i class="bi bi-star-fill"></i></button>
+              <span class="star-label" id="starLabel">Belum dinilai</span>
+            </div>
+            <span class="error-msg"></span>
+          </div>
+
+          <div class="field">
+            <label class="f-label" for="kategori">Mau Bicara Soal Apa?</label>
+            <select class="f-control" id="kategori" name="kategori">
+              <option value="Makanan">Makanan</option>
+              <option value="Pelayanan">Pelayanan</option>
+              <option value="Tempat">Tempat &amp; Suasana</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+
+          <div class="field" id="fieldPesan">
+            <label class="f-label" for="pesan">Pesan Kamu <span class="req">*</span></label>
+            <textarea class="f-control" id="pesan" name="pesan" rows="4" maxlength="500" placeholder="Ceritakan pengalamanmu..."></textarea>
+            <span class="char-count" id="charCount">0/500</span>
+            <span class="error-msg"></span>
+          </div>
+
+          <button type="submit" class="btn btn-solid" id="btnSubmit">
+            <i class="bi bi-send"></i> <span class="btn-label">Kirim Masukan</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <script src="JS/contact.js"></script>
-
 </body>
 </html>
