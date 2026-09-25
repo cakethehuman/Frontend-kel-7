@@ -14,3 +14,19 @@
     --font-heading: 'Libre Baskerville', Georgia, serif ;
     --font-body: 'Nunito', 'Segoe UI', sans-serif;
 }
+
+.bg-primary-color{
+    background-color: var(--primary-color) !important;
+}
+
+.bg-secondary-color{
+    background-color: var(--secondary-color) !important;
+}
+
+.bg-beige{
+    background-color: var(--bg-beige) !important;
+}
+
+.bg-light{
+    background-color: var(--bg-light) !important;
+}
