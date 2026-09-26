@@ -409,4 +409,33 @@ body{
     line-height: 1.6;
 }
 
+.about-closing {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.about-closing-img {
+    flex: 1;
+}
+
+.about-closing-img img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.about-closing-text {
+    flex: 1;
+}
+
+.about-closing-text p {
+    font-size: 15px;
+    color: var(--gray-color);
+    line-height: 1.7;
+    margin: 15px 0 20px;
+}
+
 
