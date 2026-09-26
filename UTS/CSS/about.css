@@ -127,5 +127,30 @@ body{
     font-size: 16px;
     line-height: 1.7;
     color: var(--text-dark);
+}
 
+.about-desc-more.show{
+    max-height: 400px;
+    opacity: 1;
+    margin-bottom: 15px;
+}
+
+.btn-toggle {
+    background: none;
+    color: var(--roast-brown);
+    font-weight: 650;
+    font-size: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.btn-toggle i {
+    transition: transform 0.3s;
+}
+
+.btn-toggle.open i {
+    transform: rotate(180deg);
 }
