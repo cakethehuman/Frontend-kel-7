@@ -19,14 +19,14 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-text">
-        <span class="eyebrow">Kontak &amp; Lokasi — Tanjung Pandan</span>
+        <div class="eyebrow">Kontak &amp; Lokasi — Tanjung Pandan</div>
         <h1 class="hero-title">Mari Ngobrol, Sambil Sepiring <em>Mie Belitung</em></h1>
         <p class="hero-lead">Punya saran resep, mau reservasi meja, atau cuma penasaran kami ada di mana? Semuanya ada di halaman ini.</p>
         <div class="hero-cta">
           <a class="btn-app btn-solid" href="#lokasi"><i class="bi bi-geo-alt"></i> Lihat Lokasi</a>
           <a class="btn-app btn-ghost" href="#ulasan"><i class="bi bi-pencil-square"></i> Tulis Masukan</a>
         </div>
-        <p class="hero-status"><span class="status-pill" id="statusPill"></span></p>
+        <p class="hero-status"><div class="status-pill" id="statusPill"></div></p>
       </div>
       <div class="hero-art" aria-hidden="true">
         <img src="IMG/gambar1_contact.webp" class="hero-img" alt="Mie Belitung">
@@ -37,7 +37,7 @@
   <section id="lokasi" class="section">
     <div class="wrap grid-2">
       <div>
-        <span class="eyebrow">Lokasi</span>
+        <div class="eyebrow">Lokasi</div>
         <h2 class="section-title">Dapur Kami di Tanjung Pandan</h2>
         <p class="section-copy">Kedai kami gampang ditandai: cari genteng merah dan bangku kayu panjang di depan.</p>
 
@@ -75,21 +75,21 @@
 
   <section id="hubungi" class="section band">
     <div class="wrap">
-      <span class="eyebrow">Hubungi Kami</span>
+      <div class="eyebrow">Hubungi Kami</div>
       <h2 class="section-title">Telepon Lebih Cepat Daripada Nasi Dingin</h2>
 
       <div class="contact-list">
         <a class="contact-row" href="tel:+6271922145">
           <i class="bi bi-telephone contact-ico"></i>
-          <span><span class="contact-label">Telepon Reservasi</span><span class="contact-value">0719-22145</span></span>
+          <div><div class="contact-label">Telepon Reservasi</div><div class="contact-value">0719-22145</div></div>
         </a>
         <a class="contact-row" href="https://wa.me/6281273112045?text=Halo%20Sahang%20Kitchen!" target="_blank" rel="noopener">
           <i class="bi bi-whatsapp contact-ico"></i>
-          <span><span class="contact-label">WhatsApp &amp; Pesan Antar</span><span class="contact-value">0812-7311-2045</span></span>
+          <div><div class="contact-label">WhatsApp &amp; Pesan Antar</div><div class="contact-value">0812-7311-2045</div></div>
         </a>
         <a class="contact-row" href="mailto:halo@sahangkitchen.id">
           <i class="bi bi-envelope contact-ico"></i>
-          <span><span class="contact-label">Email &amp; Kerja Sama</span><span class="contact-value">halo@sahangkitchen.id</span></span>
+          <div><div class="contact-label">Email &amp; Kerja Sama</div><div class="contact-value">halo@sahangkitchen.id</div></div>
         </a>
       </div>
     </div>
@@ -98,7 +98,7 @@
   <section id="ulasan" class="section">
     <div class="wrap grid-2">
       <div>
-        <span class="eyebrow">Saran &amp; Masukan</span>
+        <div class="eyebrow">Saran &amp; Masukan</div>
         <h2 class="section-title">Katakan Apa Saja, Dapur Kami Mendengar</h2>
         <p class="section-copy">Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.</p>
       </div>
@@ -112,28 +112,28 @@
 
         <form id="feedbackForm" novalidate>
           <div class="field" id="fieldName">
-            <label class="f-label" for="nama">Nama Kamu <span class="req">*</span></label>
+            <label class="f-label" for="nama">Nama Kamu <em class="req">*</em></label>
             <input type="text" class="f-control" id="nama" name="nama" placeholder="Misal: Andi Belitung">
-            <span class="error-msg"></span>
+            <div class="error-msg"></div>
           </div>
 
           <div class="field" id="fieldEmail">
             <label class="f-label" for="email">Email (opsional)</label>
             <input type="email" class="f-control" id="email" name="email" placeholder="biar kami bisa membalas">
-            <span class="error-msg"></span>
+            <div class="error-msg"></div>
           </div>
 
           <div class="field" id="fieldRating">
-            <span class="f-label">Berapa Bintang untuk Kami? <span class="req">*</span></span>
+            <div class="f-label">Berapa Bintang untuk Kami? <em class="req">*</em></div>
             <div class="stars-row" id="stars">
               <button type="button" class="star" data-val="1"><i class="bi bi-star-fill"></i></button>
               <button type="button" class="star" data-val="2"><i class="bi bi-star-fill"></i></button>
               <button type="button" class="star" data-val="3"><i class="bi bi-star-fill"></i></button>
               <button type="button" class="star" data-val="4"><i class="bi bi-star-fill"></i></button>
               <button type="button" class="star" data-val="5"><i class="bi bi-star-fill"></i></button>
-              <span class="star-label" id="starLabel">Belum dinilai</span>
+              <div class="star-label" id="starLabel">Belum dinilai</div>
             </div>
-            <span class="error-msg"></span>
+            <div class="error-msg"></div>
           </div>
 
           <div class="field">
@@ -147,14 +147,14 @@
           </div>
 
           <div class="field" id="fieldPesan">
-            <label class="f-label" for="pesan">Pesan Kamu <span class="req">*</span></label>
+            <label class="f-label" for="pesan">Pesan Kamu <em class="req">*</em></label>
             <textarea class="f-control" id="pesan" name="pesan" rows="4" maxlength="500" placeholder="Ceritakan pengalamanmu..."></textarea>
-            <span class="char-count" id="charCount">0/500</span>
-            <span class="error-msg"></span>
+            <div class="char-count" id="charCount">0/500</div>
+            <div class="error-msg"></div>
           </div>
 
           <button type="submit" class="btn-app btn-solid" id="btnSubmit">
-            <i class="bi bi-send"></i> <span class="btn-label">Kirim Masukan</span>
+            <i class="bi bi-send"></i> <div class="btn-label">Kirim Masukan</div>
           </button>
         </form>
       </div>
