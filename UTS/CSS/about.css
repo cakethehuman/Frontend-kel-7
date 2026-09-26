@@ -227,7 +227,7 @@ body{
     justify-content: space-between;
     position: relative;
     margin-bottom: 30px;
-}
+}  
 
 .timeline-item:nth-child(odd) {
     flex-direction: row-reverse;
@@ -256,6 +256,11 @@ body{
     background: var(--bg-light);
     padding: 16px 20px;
     border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+.timeline-content:hover{
+    transform: translateX(-0.6rem);
 }
 
 .timeline-content p {
@@ -272,10 +277,39 @@ body{
     margin-bottom: 80px;
 }
 
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap : 20px
+}
+
 .feature-box {
     background: var(--bg-light);
     border-radius: 15px;
     padding: 30px 20px;
     text-align: center;
     transition: transform 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(6px);
+}
+
+.feature-box i {
+    font-size: 36px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.feature-box h4 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.feature-box p {
+    font-size: 14px;
+    color: var(--gray-color);
+    line-height: 1.5;
 }
