@@ -11,3 +11,17 @@ if (btnBaca && teksTambahan) {
         }
     });
 }
+
+let accordionItems = document.querySelectorAll('.accordion-item');
+accordionItems.forEach(function (item) {
+    let header = item.querySelector('.accordion-header');
+    header.addEventListener('click', function() {
+        let isActive = item.classList.contains('active');
+        accordionItems.forEach(function (other) {
+            other.classList.remove('active');
+        });
+        if (!isActive) {
+            item.classList.add('active');
+        }
+    });
+});

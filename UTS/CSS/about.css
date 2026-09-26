@@ -356,5 +356,30 @@ body{
     color: var(--gray-color)
 }
 
+.about-legend {
+    max-width: 800px;
+    margin: 0 auto 80px;
+}
+
+.accordion-item {
+    background: var(--bg-light);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    background: none;
+    color: var(--text-dark);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    text-align: left;
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
 
 
