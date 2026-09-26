@@ -1,6 +1,4 @@
 export function login(db, email, password){
-
-            // Seeder
     db.run(`INSERT INTO users (name, email, password) VALUES ('Test User', 'john@gmail.com', 'Password')`);
     console.log("Done")
     const stmt = db.prepare(`

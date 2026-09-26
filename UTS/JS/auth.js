@@ -5,6 +5,7 @@ $('#loginForm').on('submit', async function(e){
     e.preventDefault();
     const email = $('#Email').val();
     const password = $('#Password').val();
+    $("#result").remove();
 
     const db = await initDb();
     const user = login(db, email, password);
@@ -13,6 +14,11 @@ $('#loginForm').on('submit', async function(e){
         sessionStorage.setItem('currentUser', JSON.stringify(user));
         window.location.href = '/UTS/main.html';
     } else {
-        alert('Invalid email or password');
+        $(".result").append("<p class=text-danger id=result>Email atau password kamu salah!</p>");
+        
+        setTimeout(function() {
+            $("#result").remove();
+        }, 3000);
+
     }
 });
