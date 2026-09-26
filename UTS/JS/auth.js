@@ -8,10 +8,20 @@ $('#registerForm').on('submit', async function(e){
     const name = $('#Name').val();
     const email = $('#Email').val();
     const password = $('#Password').val();
+    const confirmPassword = $('#confirmPassword').val();
+    $("#result").remove();
+
+    if(password !== confirmPassword){
+        $(".result").html("<p class=text-danger id=result>Password tidak sama dengan confirm password</p>");
+
+        setTimeout(function() {
+            $("#result").remove();
+        }, 3000);
+        return;
+    }
 
     const db = await initDb();
     const user = register(db, name, email, password);
-    console.log('ea')
 
     if (user){
         console.log("bisa");
@@ -27,13 +37,12 @@ $('#loginForm').on('submit', async function(e){
 
     const db = await initDb();
     const user = login(db, email, password);
-    const test = db.exec(`select * from users`);
-    console.log(test[0].values)
+
     if (user) {
         sessionStorage.setItem('currentUser', JSON.stringify(user));
         window.location.href = '/UTS/main.html';
     } else {
-        $(".result").append("<p class=text-danger id=result>Email atau password kamu salah!</p>");
+        $(".result").html("<p class=text-danger id=result>Email atau password kamu salah!</p>");
         
         setTimeout(function() {
             $("#result").remove();

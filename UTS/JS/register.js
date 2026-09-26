@@ -1,4 +1,5 @@
 import { saveDb } from './db.js'
+import { hashPassword } from "./password.js";
 
 export async function register(db, name, email, password) {
     const stmt = db.prepare(`
@@ -6,7 +7,7 @@ export async function register(db, name, email, password) {
         VALUES (:name, :email, :password);
     `);
 
-    stmt.bind({':name': name, ':email': email, ':password': password});
+    stmt.bind({':name': name, ':email': email, ':password': hashPassword(password)});
 
     stmt.step();
     await saveDb(db);
