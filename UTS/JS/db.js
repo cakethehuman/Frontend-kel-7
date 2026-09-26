@@ -99,9 +99,10 @@ function createSchema(db) {
             FOREIGN KEY (item_id) REFERENCES items(item_id)
         );
     `);
+
 }
 
-async function initDb() {
+export async function initDb() {
     const SQL = await initSqlJs({
         locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/${file}`
     });
@@ -114,6 +115,8 @@ async function initDb() {
     } else {
         db = new SQL.Database();
         createSchema(db);
+
+        
         await saveDb(db);
     }
 
