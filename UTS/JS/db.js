@@ -33,7 +33,7 @@ async function saveDbBytes(bytes) {
     });
 }
 
-async function saveDb(db) {
+export async function saveDb(db) {
     const bytes = db.export();
     await saveDbBytes(bytes);
 }
