@@ -1,3 +1,15 @@
+  $('body').addClass('lock');
+  let loaderDone = false;
+  const hideLoader = () => {
+    if (loaderDone) return;
+    loaderDone = true;
+    $('#loader').addClass('exit');
+    $('body').removeClass('lock').addClass('is-loaded'); // memicu animasi hero
+    setTimeout(() => $('#loader').remove(), 1100);
+  };
+  $(window).on('load', () => setTimeout(hideLoader, 600));
+  setTimeout(hideLoader, 2400); // pengaman bila 'load' lambat
+
 $(document).ready(function () {
 
   function updateStatus() {
