@@ -26,7 +26,6 @@ $(document).ready(function () {
     });
   });
 
-  /* ============ 3. RATING BINTANG ============ */
   const labelTeks = ['Belum dinilai', 'Kurang, nih', 'Cukup enak', 'Enak!', 'Bikin nagih', 'Luar biasa!'];
   let ratingTerpilih = 0;
 
