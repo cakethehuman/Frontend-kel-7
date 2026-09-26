@@ -1,0 +1,323 @@
+@import url('constants.css');
+
+@keyframes entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.text-and-button-wrapper a {
+    text-decoration: none;
+}
+
+main {
+    animation: entrance 1s ease-in forwards;
+    animation-delay: -0.7s;
+}
+
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+}
+
+.icon-and-text-wrapper {
+    display: flex;
+}
+
+.shield {
+    color: var(--roast-brown);
+}
+
+#footer-pertama-image-and-description-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    gap: 10%;
+}
+
+.footer-pertama-description-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 75%;
+    gap: 0;
+}
+
+.paragraph-footer-description {
+    margin: 1px;
+}
+
+.lower-paragraph-description {
+    font-size: 90%;
+}
+
+#footer-container-pertama {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+}
+#container-pertama {
+    display: flex;
+    gap: 40%;
+    margin-bottom: 1%;
+}
+
+
+.round-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    
+    object-fit: cover;
+
+    transition: transform 0.4s ease-in-out;
+}
+
+.text-and-button-wrapper {
+    width: 90%;
+}
+
+.image-wrapper {
+    width: 80%;
+    height: 100%;
+    overflow: hidden;
+    border: 7px solid var(--secondary-color);
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.image-wrapper:hover .round-img {
+    transform: scale(1.2);
+}
+
+
+.image-and-content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.plus-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    background-color: var(--text-light);
+    border: 2px solid var(--primary-color);
+    
+    color: var(--primary-color);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.info-num-1 {
+    position: absolute;
+    width: 50%;
+    top: 25%;
+    right: 75%;
+    border-radius: 10%;
+    background-color: var(--darker-roast-brown);
+    
+    visibility: hidden;
+    transform: translate(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.info-num-1::after {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    right: -10px;
+    
+    
+    border-width: 15px 0 0 25px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--darker-roast-brown);
+}
+
+.info-num-2 {
+    position: absolute;
+    width: 50%;
+    top: 5%;
+    right: -18%;
+    border-radius: 10%;
+    background-color: var(--darker-roast-brown);
+    
+    visibility: hidden;
+    transform: translate(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.info-num-2::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    
+    
+    border-width: 15px 20px 0 0;
+    border-style: solid;    
+    border-color: var(--darker-roast-brown) transparent transparent transparent;
+}
+
+
+.info-num-3 {
+    position: absolute;
+    width: 60%;
+    bottom: 5%;
+    right: 10%;
+    border-radius: 10%;
+    background-color: var(--darker-roast-brown);
+    
+    visibility: hidden;
+    transform: translate(10px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+
+
+.info-num-3::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 50%;
+
+
+    border-width: 15px 0 0 25px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--darker-roast-brown);
+}
+
+.info-num-1 h6,
+.info-num-1 p {
+    font-size: small;
+}
+
+.info-num-2 h6,
+.info-num-2 p {
+    font-size: small;
+}
+
+.info-num-3 h6,
+.info-num-3 p {
+    font-size: small;
+}
+
+
+.info-description {
+    margin: 0;
+}
+
+
+.plus-button:hover {
+    color: var(--text-light);
+    background-color: var(--primary-color);
+}
+
+.button-first {
+    top: 48%;
+    left: 27%;
+}
+
+.button-second {
+    top: 35%;
+    right: 30%;
+}
+
+
+.button-first:hover + .info-num-1,
+.info-num-1:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
+
+.button-second:hover + .info-num-2,
+.info-num-2:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
+
+
+.button-third:hover + .info-num-3,
+.info-num-3:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
+
+
+.desc2 {
+    max-width: 30ch;
+    overflow-wrap: break-word;
+}
+
+.description {
+    max-width: 100ch;
+    text-align: justify;
+    overflow-wrap: break-word;
+}
+
+.button-container-pertama {
+    border-radius: 30px;
+    width: 45%;
+    padding: 10px;
+    margin-right: 1%;
+    
+    border: none;
+}
+
+.pesan-sekarang {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    box-shadow: 0 2px 10px -3px var(--roast-brown);
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.baca-selengkapnya {
+    color: var(--darker-brown);
+    background-color: var(--bg-light);
+    font-weight: bold;
+    border: 1.5px solid color-mix(in srgb, var(--rich-brown) 60%, transparent);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.baca-selengkapnya:hover {
+    border: 2px solid var(--rich-brown);
+    background-color: color-mix(in srgb, var(--bg-light) 80%, var(--rich-brown));
+}
+
+.pesan-sekarang::after {
+    content: "\2192";
+    font-size: 18px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.pesan-sekarang:hover {
+    background-color: color-mix(in srgb, var(--primary-color) 80%, black);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 25px -10px var(--darker-roast-brown);
+}
+
