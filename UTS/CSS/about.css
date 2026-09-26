@@ -22,9 +22,110 @@ body{
     color: var(--text-dark);
 }
 
+.heading {
+    font-family: var(--font-heading);
+    font-size: 34px;
+    text-align:center;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.heading-left{
+    text-align: left;
+}
+
+.heading-small {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    margin: 2px 0 10px;
+    color: var(--rich-brown);
+}
+
+.heading-desc {
+    text-align: center;
+    color: var(--gray-color);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.section-label {
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.about {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 6% 40px;
+}
+
+.about::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 260px;
+    height: 260px;
+    background: var(--blob-peach);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.about::after {
+    content: "";
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: var(--blob-peach);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.about > div {
+    position: relative;
+    z-index: 1;
+}
+
 .about-intro{
     display: flex;
     align-items: center;
     gap: 50px;
     margin-bottom: 80px;
+}
+
+.about-intro-text {
+    flex: 1;
+}
+
+.about-title {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.about-title span{
+    color: var(--primary-color);
+}
+
+.about-desc{
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.about-desc-more {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-dark);
+
 }
