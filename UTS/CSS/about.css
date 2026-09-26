@@ -24,6 +24,7 @@ body{
 
 .heading {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 34px;
     text-align:center;
     color: var(--text-dark);
@@ -36,6 +37,7 @@ body{
 
 .heading-small {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 20px;
     margin: 2px 0 10px;
     color: var(--rich-brown);
@@ -106,6 +108,7 @@ body{
 
 .about-title {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 40px;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -213,11 +216,17 @@ body{
     margin-bottom: 80px;
 }
 
+.timeline-items {
+    position: relative;
+    max-width: 900px;
+    margin : 0 auto;
+}
+
 .timeline-items::before {
     content:"";
     position:absolute;
     width: 3px;
-    height: 85%;
+    height: 100%;
     background: var(--secondary-color);
     left: calc(50% - 1px);
 }
@@ -263,14 +272,18 @@ body{
     transform: translateX(-0.6rem);
 }
 
+.timeline-content h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--rich-brown);
+    margin-bottom: 5px;
+}
+
 .timeline-content p {
     font-size: 14px;
     color: var(--gray-color);
     line-height: 1.5;
-}
-
-.about-features {
-    margin-bottom: 80px;
 }
 
 .about-features {
@@ -303,6 +316,7 @@ body{
 
 .feature-box h4 {
     font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 18px;
     margin-bottom: 8px;
     color: var(--text-dark);
@@ -318,7 +332,7 @@ body{
     display: flex;
     align-items: center;
     gap : 50px;
-    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 .about-recipe-img {
@@ -338,14 +352,14 @@ body{
 .recipe-list {
     padding-left: 20px;
     font-size: 15px;
-    line-height: 19px;
+    line-height: 1.8;
     color: var(--text-dark)
 }
 
 .recipe-steps {
     padding-left: 20px;
     font-size: 15px;
-    line-height: 19px;
+    line-height: 1.8;
     color: var(--text-dark)
 }
 
@@ -361,14 +375,14 @@ body{
     margin: 0 auto 80px;
 }
 
-.accordion-item {
+.faq-item {
     background: var(--bg-light);
     border-radius: 10px;
     margin-bottom: 12px;
     overflow: hidden;
 }
 
-.accordion-header {
+.faq-header {
     width: 100%;
     background: none;
     color: var(--text-dark);
@@ -382,28 +396,28 @@ body{
     cursor: pointer;
 }
 
-.accordion-header i {
+.faq-header i {
     transition: transform 0.3s;
     color: var(--primary-color);
 }
 
-.accordion-item-active .accordion-header i {
+.faq-item.active .faq-header i {
     transform: rotate(180deg);
 }
 
-.accordion-body {
+.faq-body {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, opacity 0.4s;
-    padding: 0 22px;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 22px 0;
 }
 
-.accordion-item.active .accordion-body{
+.faq-item.active .faq-body{
     max-height: 200px;
     padding: 0 22px 18px;
 }
 
-.accordion-body p {
+.faq-body p {
     font-size: 14px;
     color: var(--gray-color);
     line-height: 1.6;
@@ -425,6 +439,8 @@ body{
 .about-closing-img img {
     width: 100%;
     border-radius: 20px;
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 .about-closing-text {
@@ -438,8 +454,8 @@ body{
     margin: 15px 0 20px;
 }
 
-@media screen and (min-width: 576px) {
-    /* .features-container {
+@media screen and (max-width: 991px) {
+    .features-container {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -447,12 +463,10 @@ body{
         flex-direction: column;
         text-align: center;
     }
-
     .about-recipe {
         flex-direction: column;
         text-align: center;
     }
-
     .about-closing {
         flex-direction: column;
         text-align: center;
@@ -480,7 +494,7 @@ body{
 
     .timeline-dot {
         left: 0;
-        top: 3px
+        top: 3px;
     }
 
     .timeline-date {
@@ -491,10 +505,51 @@ body{
     .timeline-content {
         width: 100%;
         text-align: left;
-    } */
+    }
 }
 
-@media screen and (min-width: 993px) {
-    
+@media screen and (max-width: 768px) {
+    .about-title {
+        font-size: 30px;
+    }
+
+    .heading {
+        font-size: 26px;
+    }
+
+    .about-intro-img img {
+        width: 260px;
+        height: 260px;
+    }
+
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+
+    .about-closing-img img {
+        height: 220px;
+    }
 }
- 
+
+@media screen and (max-width: 480px) {
+    .about {
+        padding: 60px 5% 30px;
+    }
+
+    .about-intro-img img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-title {
+        font-size: 24px;
+    }
+
+    .about-desc {
+        font-size: 14px;
+    }
+
+    .about-desc-more {
+        font-size: 14px;
+    }
+}

@@ -12,16 +12,18 @@ if (btnBaca && teksTambahan) {
     });
 }
 
-let accordionItems = document.querySelectorAll('.accordion-item');
-accordionItems.forEach(function (item) {
-    let header = item.querySelector('.accordion-header');
-    header.addEventListener('click', function() {
+let faqItems = document.querySelectorAll('.faq-item');
+faqItems.forEach(function (item) {
+    let header = item.querySelector('.faq-header');
+    let body = item.querySelector('.faq-body');
+    header.addEventListener('click', function () {
         let isActive = item.classList.contains('active');
-        accordionItems.forEach(function (other) {
-            other.classList.remove('active');
-        });
-        if (!isActive) {
+        if (isActive) {
+            item.classList.remove('active');
+            body.style.maxHeight = null;
+        } else {
             item.classList.add('active');
+            body.style.maxHeight = body.scrollHeight + 'px';
         }
     });
 });
