@@ -382,4 +382,31 @@ body{
     cursor: pointer;
 }
 
+.accordion-header i {
+    transition: transform 0.3s;
+    color: var(--primary-color);
+}
+
+.accordion-item-active .accordion-header i {
+    transform: rotate(180deg);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s;
+    padding: 0 22px;
+}
+
+.accordion-item.active .accordion-body{
+    max-height: 200px;
+    padding: 0 22px 18px;
+}
+
+.accordion-body p {
+    font-size: 14px;
+    color: var(--gray-color);
+    line-height: 1.6;
+}
+
 
