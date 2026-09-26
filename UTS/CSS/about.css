@@ -154,3 +154,54 @@ body{
 .btn-toggle.open i {
     transform: rotate(180deg);
 }
+
+.btn-cta {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-cta:hover {
+    background-color: var(--darker-roast-brown);
+}
+
+.about-intro-img {
+    flex: 1;
+    position:relative;
+    display: flex;
+    justify-content: center;
+}
+
+.about-intro-img img {
+    width: 380px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid var(--secondary-color);
+}
+
+.doodle {
+    position: absolute;
+    font-size: 30px;
+    color: var(--secondary-color);
+    opacity: 0.6 ;
+}
+
+.doodle-leaf-1 {
+    top: -10px;
+    right: 20px;
+}
+
+.doodle-leaf-2 {
+    bottom: 0;
+    left: 0;
+    transform: rotate(180deg);
+}
+
