@@ -1,6 +1,8 @@
+import { initDb } from "./db.js";
+
 (async function () {
     const db = await initDb();
-
+    
     db.exec(`
         INSERT INTO items (image, name, description, price, stock)
         VALUES
@@ -18,7 +20,7 @@
     const $menu = $('.container .row');
     const columns = results[0].columns;
     const rows = results[0].values;
-
+    
     rows.forEach(row => {
         const item = Object.fromEntries(columns.map((col, i) => [col, row[i]]));
 
