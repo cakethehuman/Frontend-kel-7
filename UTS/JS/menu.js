@@ -44,3 +44,8 @@ import { initDb } from "./db.js";
         $menu.append(card);
     });
 })();
+
+$(document).on('click', '.add-to-cart', function(){
+    const $itemId = $(this).data('item-id');
+    console.log($itemId)
+})
