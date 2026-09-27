@@ -1,68 +1,47 @@
-.custom-navbar {
+.navbar {
     background-color: var(--bg-light);
-    border-bottom: 1px solid var(--bg-beige);
-    padding: 16px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.custom-brand-container {
-    display: flex;
-    flex-direction: column;
+.navbar-brand {
     text-decoration: none;
 }
 
-.brand-title {
-    font-family: var(--font-heading, Georgia, serif);
-    font-size: 35px;
-    font-weight: 700;
-    color: var(--text-dark);
-    line-height: 35px;
+.navbar-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-.brand-subtitle {
-    font-family: var(--font-body, sans-serif);
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: var(--rich-brown);
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-top: 6px;
+.logo-main {
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    color: #2c3e50;
 }
 
-.nav-links {
-    gap: 24px;
-}
-
-.nav-links .nav-link {
+.logo-sub {
     font-family: var(--font-body);
+    font-size: 17.6px;
     font-weight: 600;
-    color: var(--darker-brown);
-    transition: color 0.2s ease;
-    padding: 8px 0;
+    color: #7f8c8d;
+    margin-top: 2px;
 }
 
-.nav-links .nav-link:hover,
-.nav-links .nav-link:focus {
-    color: var(--primary-color);
+.navbar .nav-link {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: color 0.3s ease;
 }
 
-.custom-toggler {
-    border: none;
-    padding: 4px;
-}
-
-.custom-toggler:focus,
-.custom-toggler:focus-visible {
-    outline: 3px solid var(--primary-color);
-    box-shadow: none;
-}
-
-@media (max-width: 991px) {
-    .nav-links {
-        margin-top: 16px;
-        text-align: center;
-        background-color: var(--bg-light);
-        padding: 16px;
-        border-radius: 8px;
-        border: 1px solid var(--bg-beige);
-    }
+.navbar .nav-link:hover {
+    color: #e67e22;
 }
