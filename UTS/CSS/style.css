@@ -20,6 +20,7 @@ main {
     animation: entrance 1s ease-in forwards;
     animation-delay: -0.7s;
     padding: 50px;
+    flex: 1;
 }
 
 .icon-wrapper {
