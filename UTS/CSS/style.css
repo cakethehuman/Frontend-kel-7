@@ -19,6 +19,7 @@
 main {
     animation: entrance 1s ease-in forwards;
     animation-delay: -0.7s;
+    padding: 50px;
 }
 
 .icon-wrapper {
@@ -27,6 +28,11 @@ main {
     align-items: center;
     height: 35px;
     width: 35px;
+    transition: transform 0.3s ease;
+}
+
+.icon-wrapper:hover {
+    transform: scale(1.2);
 }
 
 .icon-and-text-wrapper {
@@ -322,3 +328,99 @@ main {
     box-shadow: 0 7px 25px -10px var(--darker-roast-brown);
 }
 
+.why-us-section {
+    padding: 60px 0 20px;
+}
+
+.why-us-card {
+    transition: transform 0.3s ease;
+}
+
+.why-us-card:hover {
+    transform: scale(1.05);
+}
+
+.brand-heading {
+    font-family: var(--font-heading);
+}
+
+.why-us-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+}
+
+@media screen and (max-width: 1200px) {
+    #container-pertama {
+        gap: 8%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    main {
+        padding: 30px 25px;
+    }
+
+    #container-pertama {
+        flex-direction: column;
+        gap: 50px;
+        text-align: center;
+    }
+
+    .text-and-button-wrapper {
+        width: 100%;
+    }
+
+    .image-and-content-wrapper {
+        width: 100%;
+    }
+
+    .image-wrapper {
+        width: 55%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    #footer-pertama-image-and-description-wrapper {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .icon-and-text-wrapper {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    main {
+        padding: 20px 15px;
+    }
+
+    .text-and-button-wrapper h1 {
+        font-size: 28px;
+    }
+
+    .button-container-pertama {
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .text-and-button-wrapper a {
+        display: block;
+    }
+
+    .image-wrapper {
+        width: 70%;
+    }
+
+    .info-num-1,
+    .info-num-2,
+    .info-num-3 {
+        width: 65%;
+    }
+
+    .why-us-heading {
+        font-size: 26px;
+    }
+}
