@@ -12,6 +12,10 @@
     }
 }
 
+body {
+    background: var(--bg-beige);
+}
+
 .text-and-button-wrapper a {
     text-decoration: none;
 }
@@ -339,6 +343,21 @@ main {
 
 .why-us-card:hover {
     transform: scale(1.05);
+}
+
+.faq-section {
+    padding: 20px 0 60px;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--primary-color);
+    background-color: var(--bg-beige);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--secondary-color);
 }
 
 .brand-heading {
