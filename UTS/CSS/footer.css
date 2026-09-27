@@ -25,7 +25,7 @@
   }
  
   .footer-logo-placeholder{
-    width: 150px;
+    width: 90px;
     height: 90px;
     border-radius: 6px;
     display:flex;
@@ -42,6 +42,7 @@
     max-width:100%;
     max-height:100%;
     object-fit:contain;
+    border-radius: 10px;
   }
 
   .footer-center{
