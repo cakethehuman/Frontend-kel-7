@@ -1,4 +1,5 @@
-@import url("constants.css");
+@import url('constants.css');
+@import url('navbar.css');
 
 * {
     margin: 0;
