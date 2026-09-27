@@ -59,8 +59,7 @@ function createSchema(db) {
             name TEXT NOT NULL,
             description TEXT,
             price REAL NOT NULL DEFAULT 0,
-            stock INTEGER NOT NULL DEFAULT 0,
-            image BLOB NOT NULL
+            image VARCHAR NOT NULL
         );
 
         CREATE TABLE cart (

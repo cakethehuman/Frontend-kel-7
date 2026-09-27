@@ -4,20 +4,16 @@ import { initDb } from "./db.js";
     const db = await initDb();
     
     db.exec(`
-        INSERT INTO items (image, name, description, price, stock)
+        INSERT INTO items (name, description, price, image)
         VALUES
-            ('Mie India', 'Mie dengan cita rasa khas India', 15000, 20,2),
-            ('Nasi Goreng', 'Nasi goreng spesial dengan telur', 18000, 15,2),
-            ('Kopi Susu', 'Kopi susu gula aren', 12000, 30,2),
-            ('Es Teh', 'Teh manis dingin', 5000, 50,2),
-            ('Roti Bakar', 'Roti bakar dengan pilihan topping', 10000, 12,2);
+            ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp');
     `);
 
     const results = db.exec(`
         SELECT * FROM items;
     `);
     
-    const $menu = $('.container .row');
+    const $menu = $('.main-menu .container .row');
     const columns = results[0].columns;
     const rows = results[0].values;
     
@@ -27,7 +23,7 @@ import { initDb } from "./db.js";
         const card = `
             <div class="col-md-4">
                 <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                    <img src="Images/placeholder.jpg" class="w-100">
+                    <img src=${item.image} class="w-100">
                     <div class="p-4 d-flex flex-column">
                         <h5 class="fw-bold mb-2">${item.name}</h5>
                         <p class="text-muted small flex-grow-1">${item.description}</p>
@@ -38,7 +34,7 @@ import { initDb } from "./db.js";
                             </div>
                             <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2..."/>
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                 </svg>
                             </button>
                         </div>
@@ -48,3 +44,8 @@ import { initDb } from "./db.js";
         $menu.append(card);
     });
 })();
+
+$(document).on('click', '.add-to-cart', function(){
+    const $itemId = $(this).data('item-id');
+    console.log($itemId)
+})
