@@ -54,8 +54,10 @@ a {
 }
 
 .btn-app {
+  padding: 13px 24px;
   font-weight: 800;
   font-size: 15.2px;
+  cursor: pointer;
   transition:
     transform 0.2s,
     background 0.2s;
@@ -112,6 +114,7 @@ a {
 
 .hero-grid {
   grid-template-columns: 1fr;
+  gap: 24px;
 }
 
 .hero-title {
@@ -181,6 +184,7 @@ a {
 }
 
 .copy-btn {
+  color: var(--primary-deep);
   font-weight: 800;
   cursor: pointer;
   font-family: var(--font-body);
@@ -205,7 +209,6 @@ a {
 }
 
 .contact-row {
-  gap: 16px;
   border-radius: 14px;
   padding-left: 20px;
   padding-right: 20px;
@@ -278,6 +281,11 @@ a {
   display: block;
 }
 
+.char-count {
+  font-size: 12.48px;
+  color: var(--gray-color);
+}
+
 .stars-row {
   gap: 6px;
 }
@@ -285,6 +293,8 @@ a {
 .star {
   font-size: 25.6px;
   color: #ddd;
+  cursor: pointer;
+  padding: 2px;
 }
 
 .star.active {
