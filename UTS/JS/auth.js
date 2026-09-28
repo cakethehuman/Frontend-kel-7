@@ -25,7 +25,7 @@ $('#registerForm').on('submit', async function(e){
 
     if (user){
         console.log("bisa");
-        window.location.href = '/UTS/login.html';
+        window.location.href = 'login.html';
     }
 });
 
@@ -40,7 +40,7 @@ $('#loginForm').on('submit', async function(e){
 
     if (user) {
         sessionStorage.setItem('currentUser', JSON.stringify(user));
-        window.location.href = '/UTS/main.html';
+        window.location.href = 'index.html';
     } else {
         $(".result").html("<p class=text-danger id=result>Email atau password kamu salah!</p>");
         
