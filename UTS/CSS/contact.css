@@ -24,7 +24,6 @@ a {
 
 .wrap {
   max-width: 1100px;
-  margin: 0 auto;
   padding: 0 20px;
 }
 
@@ -33,7 +32,7 @@ a {
 }
 
 .section-title {
-  font-size: 2rem;
+  font-size: 32px;
   line-height: 1.2;
 }
 
@@ -43,32 +42,20 @@ a {
 }
 
 .eyebrow {
-  display: inline-block;
   font-weight: 800;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  font-size: 12.8px;
+  letter-spacing: 1.02px;
   color: var(--primary-color);
-  margin-bottom: 8px;
 }
 
 .grid-2 {
-  display: grid;
   grid-template-columns: 1fr;
   gap: 30px;
-  align-items: center;
 }
 
 .btn-app {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  padding: 13px 24px;
   font-weight: 800;
-  font-size: 0.95rem;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
+  font-size: 15.2px;
   transition:
     transform 0.2s,
     background 0.2s;
@@ -90,7 +77,6 @@ a {
 }
 
 .btn-ghost {
-  background: transparent;
   border: 2px solid var(--text-dark);
   color: var(--text-dark);
 }
@@ -106,7 +92,7 @@ a {
   gap: 8px;
   padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 13.6px;
   font-weight: 800;
 }
 
@@ -125,14 +111,11 @@ a {
 }
 
 .hero-grid {
-  display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: center;
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  font-size: clamp(32px, 4.5vw, 46.4px);
   line-height: 1.15;
   margin: 14px 0;
 }
@@ -148,7 +131,6 @@ a {
 }
 
 .hero-cta {
-  display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin: 22px 0;
@@ -162,7 +144,7 @@ a {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 5rem;
+  font-size: 80px;
   color: var(--roast-brown);
   overflow: hidden;
 }
@@ -176,59 +158,40 @@ a {
 }
 
 .info-item {
-  display: flex;
-  gap: 16px;
   padding: 18px 0;
   border-bottom: 1px dashed rgba(74, 40, 20, 0.15);
 }
 
 .info-icon {
-  flex: 0 0 auto;
-  font-size: 1.4rem;
+  flex-basis: auto;
+  font-size: 22.4px;
   color: var(--primary-color);
   width: 44px;
   height: 44px;
   border-radius: 12px;
   background: var(--bg-beige);
-  display: grid;
   place-items: center;
 }
 
 .info-item h5 {
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 12.8px;
+  letter-spacing: 0.64px;
   color: var(--gray-color);
   margin: 0 0 6px;
 }
 
-.info-item p {
-  margin: 0;
-  font-weight: 700;
-}
-
 .copy-btn {
-  margin-top: 8px;
-  background: none;
-  border: none;
-  color: var(--primary-deep);
   font-weight: 800;
-  padding: 0;
   cursor: pointer;
   font-family: var(--font-body);
 }
 
 .map-frame {
-  border-radius: 16px;
-  overflow: hidden;
   border: 1px solid rgba(74, 40, 20, 0.12);
 }
 
 .map-frame iframe {
-  width: 100%;
   height: 340px;
-  border: 0;
-  display: block;
 }
 
 .band {
@@ -236,20 +199,16 @@ a {
 }
 
 .contact-list {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
 .contact-row {
-  display: flex;
-  align-items: center;
   gap: 16px;
-  background: #fff;
   border-radius: 14px;
-  padding: 16px 20px;
-  text-decoration: none;
+  padding-left: 20px;
+  padding-right: 20px;
   transition: transform 0.2s;
 }
 
@@ -258,25 +217,21 @@ a {
 }
 
 .contact-ico {
-  font-size: 1.3rem;
+  font-size: 20.8px;
   color: var(--primary-color);
 }
 
 .contact-label {
-  display: block;
-  font-size: 0.78rem;
+  font-size: 12.48px;
   color: var(--gray-color);
-  font-weight: 700;
 }
 
 .contact-value {
-  display: block;
   font-weight: 800;
-  font-size: 1.05rem;
+  font-size: 16.8px;
 }
 
 .form-panel {
-  background: #fff;
   border-radius: 18px;
   padding: 28px;
   border: 1px solid rgba(74, 40, 20, 0.1);
@@ -287,9 +242,8 @@ a {
 }
 
 .f-label {
-  display: block;
   font-weight: 800;
-  font-size: 0.85rem;
+  font-size: 13.6px;
   margin-bottom: 6px;
 }
 
@@ -298,12 +252,11 @@ a {
 }
 
 .f-control {
-  width: 100%;
   padding: 11px 14px;
   border-radius: 10px;
   border: 1.5px solid rgba(74, 40, 20, 0.18);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  font-size: 15.2px;
 }
 
 .f-control:focus {
@@ -318,36 +271,20 @@ a {
 .error-msg {
   display: none;
   color: var(--primary-deep);
-  font-size: 0.8rem;
-  margin-top: 4px;
+  font-size: 12.8px;
 }
 
 .field.has-error .error-msg {
   display: block;
 }
 
-.char-count {
-  display: block;
-  text-align: right;
-  font-size: 0.78rem;
-  color: var(--gray-color);
-  margin-top: 4px;
-}
-
 .stars-row {
-  display: flex;
-  align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
 }
 
 .star {
-  background: none;
-  border: none;
-  font-size: 1.6rem;
+  font-size: 25.6px;
   color: #ddd;
-  cursor: pointer;
-  padding: 2px;
 }
 
 .star.active {
@@ -355,21 +292,18 @@ a {
 }
 
 .star-label {
-  margin-left: 8px;
   font-weight: 700;
   color: var(--gray-color);
-  font-size: 0.9rem;
+  font-size: 14.4px;
 }
 
 .form-alert, .form-success {
   display: none;
-  align-items: center;
   gap: 10px;
   padding: 12px 16px;
   border-radius: 12px;
   margin-bottom: 18px;
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 14.4px;
 }
 
 .form-alert.show {
@@ -380,17 +314,13 @@ a {
 
 .form-success.show {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
   background: rgba(164, 159, 77, 0.15);
   color: #5c5828;
   padding: 26px;
 }
 
 .form-success i {
-  font-size: 2rem;
+  font-size: 32px;
 }
 
 @media screen and (min-width: 576px) {
