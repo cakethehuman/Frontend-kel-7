@@ -1,0 +1,1 @@
+$('#admin-navbar').load('admin-navbar.html');
