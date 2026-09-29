@@ -6,7 +6,8 @@ import { initDb } from "./db.js";
     db.exec(`
         INSERT INTO items (name, description, price, image)
         VALUES
-            ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp');
+            ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp'), 
+            ('Es Jeruk Kunci', 'Es Jeruk', 7000, 'IMG/menu/EsJerukKunci.webp');
     `);
 
     const results = db.exec(`
