@@ -1,10 +1,5 @@
-/* ============================================================
-   PESANAN — Mie Belitung · Tema "Struk & Tiket Kedai"
-   ============================================================ */
-
 body { overflow-x: hidden; }
 
-/* ---------- Background dekoratif ---------- */
 .bg-dots {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
     background-image: radial-gradient(rgba(140, 75, 38, .10) 1.4px, transparent 1.6px);
@@ -22,14 +17,11 @@ body { overflow-x: hidden; }
     to   { transform: translate(40px, -30px) rotate(40deg) scale(1.12); }
 }
 
-/* Semua section di atas dekorasi */
 .hero, .stepper-wrap, .marquee-wrap, #empty-state, #order-content { position: relative; z-index: 1; }
 
-/* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s cubic-bezier(.22, .8, .3, 1); }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* ---------- Hero ---------- */
 .hero { padding: 3.2rem 1rem 1.6rem; }
 .hero-eyebrow {
     display: inline-flex; align-items: center; gap: .45rem;
@@ -55,7 +47,6 @@ body { overflow-x: hidden; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .hero-sub { color: var(--gray-color); font-weight: 600; margin: 0; }
 
-/* ---------- Stepper ---------- */
 .stepper-wrap { margin-bottom: 1.8rem; }
 .stepper {
     display: flex; align-items: center; justify-content: center; gap: .65rem;
@@ -87,7 +78,6 @@ body { overflow-x: hidden; }
     100% { box-shadow: 0 0 0 0 rgba(255, 49, 49, 0); }
 }
 
-/* ---------- Marquee kedai ---------- */
 .marquee-wrap {
     overflow: hidden; background: var(--primary-color);
     transform: rotate(-1.2deg) scale(1.03);
@@ -103,7 +93,6 @@ body { overflow-x: hidden; }
 }
 @keyframes scrollX { to { transform: translateX(-50%); } }
 
-/* ---------- Mangkuk mie (SVG) ---------- */
 .bowl-svg .steam {
     fill: none; stroke: var(--lighter-brown); stroke-width: 6; stroke-linecap: round;
     opacity: 0; animation: steamUp 2.6s ease-in-out infinite;
@@ -116,7 +105,6 @@ body { overflow-x: hidden; }
     100% { transform: translateY(-16px); opacity: 0; }
 }
 
-/* ---------- Empty state ---------- */
 .empty-card {
     background: #fff; border-radius: 28px; padding: 3rem 2rem 2.6rem;
     max-width: 520px; margin: 0 auto; text-align: center;
@@ -129,7 +117,6 @@ body { overflow-x: hidden; }
 .empty-title { font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; color: var(--darker-brown); }
 .empty-sub { color: var(--gray-color); font-weight: 600; margin: .4rem 0 1.4rem; }
 
-/* ---------- Blok konten ---------- */
 .order-block {
     background: rgba(255, 255, 255, .94);
     border: 1.5px solid rgba(237, 227, 211, .9);
@@ -154,7 +141,6 @@ body { overflow-x: hidden; }
 }
 .btn-ghost-danger:hover { color: var(--primary-color); background: #FFECEC; }
 
-/* ---------- Kartu tiket item ---------- */
 .ticket {
     background: #FFFDF6; border: 1.5px solid var(--bg--darker-beige);
     border-radius: 18px; margin-bottom: 1rem; position: relative;
@@ -183,7 +169,6 @@ body { overflow-x: hidden; }
 }
 .ticket-remove:hover { background: #FFECEC; color: var(--primary-color); transform: rotate(90deg); }
 
-/* Garis sobekan + lubang tiket */
 .ticket-cut { position: relative; height: 0; border-top: 2px dashed var(--bg--darker-beige); margin: 0 .8rem; }
 .notch {
     position: absolute; top: -9px; width: 18px; height: 18px; border-radius: 50%;
@@ -221,7 +206,6 @@ body { overflow-x: hidden; }
 .add-more i { transition: transform .25s; }
 .add-more:hover i { transform: scale(1.25); }
 
-/* ---------- Form ---------- */
 .form-label { font-weight: 800; font-size: .88rem; }
 .req { color: var(--primary-color); }
 .optional { color: var(--gray-color); font-weight: 600; font-size: .85em; }
@@ -241,7 +225,6 @@ body { overflow-x: hidden; }
     40%, 60% { transform: translateX(3px); }
 }
 
-/* Kartu pilihan (radio) */
 .choice-card { display: block; cursor: pointer; }
 .choice-card input { position: absolute; opacity: 0; pointer-events: none; }
 .choice-inner {
@@ -262,7 +245,6 @@ body { overflow-x: hidden; }
 .choice-inner.row-mode .choice-ic { font-size: 1.25rem; }
 @keyframes wiggle { 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
 
-/* ---------- Struk (ringkasan) ---------- */
 .receipt-zone { position: sticky; top: 1.25rem; }
 .receipt-card {
     background: #FFFEFA;
@@ -306,7 +288,6 @@ body { overflow-x: hidden; }
 .receipt-zigzag svg { width: 100%; height: 100%; display: block; }
 .receipt-zigzag polygon { fill: #FFFEFA; }
 
-/* ---------- Tombol utama ---------- */
 .btn-main {
     background: var(--primary-color); border: none; color: #fff;
     font-weight: 800; font-size: .95rem;
@@ -328,7 +309,6 @@ body { overflow-x: hidden; }
 }
 .btn-ghost:hover { border-color: var(--gray-color); color: var(--text-dark); background: #fff; }
 
-/* ---------- Modal ---------- */
 .mc { border: none; border-radius: 22px; overflow: hidden; }
 .mc-head {
     display: flex; align-items: center; justify-content: space-between;
@@ -342,7 +322,6 @@ body { overflow-x: hidden; }
     border-radius: 16px; padding: .9rem 1.1rem; font-size: .92rem;
 }
 
-/* Modal sukses */
 .success-body { text-align: center; padding: 2.2rem 1.6rem 2rem; position: relative; overflow: hidden; }
 .bowl-mini { width: 108px; margin: 0 auto .6rem; animation: floaty 3s ease-in-out infinite; }
 .success-title { font-family: var(--font-heading); font-weight: 700; color: var(--darker-brown); }
@@ -376,11 +355,9 @@ body { overflow-x: hidden; }
 .confetti-piece { position: absolute; top: -12px; border-radius: 2px; animation: confettiFall linear forwards; }
 @keyframes confettiFall { to { transform: translateY(360px) rotate(560deg); opacity: 0; } }
 
-/* ---------- Toast ---------- */
 .toast { border: none; border-radius: 14px; background: var(--darker-brown); color: #fff; }
 .toast-body { font-weight: 700; font-size: .92rem; }
 
-/* ---------- Bottom bar mobile ---------- */
 .mobile-bar {
     position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 1030;
     display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -393,7 +370,6 @@ body { overflow-x: hidden; }
 .mobile-bar small { color: var(--gray-color); font-weight: 800; }
 .m-total { font-weight: 900; font-size: 1.2rem; color: var(--primary-color); line-height: 1.1; font-variant-numeric: tabular-nums; }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 991.98px) {
     body { padding-bottom: 96px; }
 }
@@ -407,7 +383,6 @@ body { overflow-x: hidden; }
     .marquee-wrap { margin: 1.2rem -8px 1.8rem; }
 }
 
-/* Hormati preferensi pengguna yang kurangi animasi */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }

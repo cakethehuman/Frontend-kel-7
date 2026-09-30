@@ -1,37 +1,22 @@
-/* ============================================================
-   HALAMAN PESANAN — Mie Belitung (FRONTEND ONLY)
-   ============================================================
-   🔗 TITIK SAMBUNG BACKEND (cuma 2 fungsi ini):
-   1. getOrderItems()        → ambil isi keranjang dari DB/API
-   2. sendOrderToBackend()   → kirim payload pesanan saat konfirmasi
-   ============================================================ */
-
 const TAX_RATE = 0.10;
 
-/* ---------- DATA DUMMY (GANTI DENGAN DATA ASLI) ---------- */
 const DUMMY_ITEMS = [
-    { id: 1, name: 'Mie Bangka Biasa',     desc: 'Mie kering khas Bangka', price: 15000, qty: 2, img: 'https://placehold.co/300x300/FCE5C6/B06A3B/png?text=Mie+Bangka' },
-    { id: 2, name: 'Es Jeruk Kunci',       desc: 'Jeruk segar asli Belitung', price: 7000,  qty: 3, img: 'https://placehold.co/300x300/B06A3B/FFF8EA/png?text=Es+Jeruk' },
-    { id: 3, name: 'Mie Belitung Spesial', desc: 'Tambah seafood & ceplok',  price: 22000, qty: 1, img: 'https://placehold.co/300x300/FF3131/FFFFFF/png?text=Mie+Spesial' },
-    { id: 4, name: 'Kerupuk Mile',         desc: 'Camilan renyah pendamping', price: 5000,  qty: 2, img: 'https://placehold.co/300x300/8C4B26/FFF8EA/png?text=Kerupuk' }
+    { id: 1, name: 'Mie Bangka biasa', desc: 'Mie Biasa', price: 15000, qty: 2, img: 'IMG/menu/mie_belitung.webp' },
+    { id: 2, name: 'Es Jeruk Kunci',   desc: 'Es Jeruk',  price: 7000,  qty: 1, img: 'IMG/menu/EsJerukKunci.webp' }
 ];
 
-/* 🔗 HOOK 1 — sumber data keranjang */
 function getOrderItems() {
-    // TODO (backend): ganti dengan query ke cart/cart_items atau fetch API.
-    // Format yang diharapkan: [{ id, name, desc, price, qty, img }]
-    if (new URLSearchParams(location.search).has('empty')) return []; // preview empty state
+
+    if (new URLSearchParams(location.search).has('empty')) return [];
     return JSON.parse(JSON.stringify(DUMMY_ITEMS));
 }
 
-/* 🔗 HOOK 2 — kirim pesanan saat dikonfirmasi */
 function sendOrderToBackend(payload) {
-    // TODO (backend): POST ke server / INSERT ke tabel orders & order_items.
+
     console.log('[ORDER PAYLOAD → backend]', payload);
-    return new Promise(res => setTimeout(res, 900)); // simulasi network delay
+    return new Promise(res => setTimeout(res, 900));
 }
 
-/* ================= STATE & UTIL ================= */
 let items = [];
 let busy = false;
 let confirmModal, successModal, toastInstance;
@@ -47,7 +32,6 @@ const getTotal    = () => getSubtotal() + getTax();
 const getTotalQty = () => items.reduce((s, i) => s + i.qty, 0);
 const ticketEl    = id => $('#item-list .ticket').filter(function () { return $(this).data('id') == id; });
 
-/* Angka menghitung (count-up) */
 function animateNumber($el, to, duration = 550) {
     const from = Number($el.data('val') || 0);
     if (from === to) { $el.text(rupiah(to)); return; }
@@ -55,13 +39,12 @@ function animateNumber($el, to, duration = 550) {
     const t0 = performance.now();
     (function frame(now) {
         const p = Math.min(1, (now - t0) / duration);
-        const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        const e = 1 - Math.pow(1 - p, 3);
         $el.text(rupiah(Math.round(from + (to - from) * e)));
         if (p < 1) requestAnimationFrame(frame);
     })(performance.now());
 }
 
-/* ================= INIT ================= */
  $(function () {
     confirmModal  = new bootstrap.Modal('#confirmModal');
     successModal  = new bootstrap.Modal('#successModal');
@@ -76,7 +59,6 @@ function animateNumber($el, to, duration = 550) {
     initReveal();
 });
 
-/* ================= RENDER ================= */
 function renderItems() {
     const $list = $('#item-list').empty();
     items.forEach((it, i) => {
@@ -125,7 +107,6 @@ function syncEmptyState() {
     $('#mobile-bar').toggleClass('d-none', empty);
 }
 
-/* Barcode dekoratif (random tiap load) */
 function drawBarcode() {
     const $b = $('#barcode').empty();
     for (let i = 0; i < 34; i++) {
@@ -134,7 +115,6 @@ function drawBarcode() {
     $('#barcode-num').text('MB·' + Math.floor(100000 + Math.random() * 899999));
 }
 
-/* Reveal on scroll */
 function initReveal() {
     const io = new IntersectionObserver(entries => {
         entries.forEach(e => {
@@ -147,7 +127,6 @@ function initReveal() {
     });
 }
 
-/* ================= AKSI KERANJANG ================= */
 function changeQty(id, step) {
     const it = items.find(x => x.id === id);
     if (!it) return;
@@ -189,7 +168,6 @@ function clearCart() {
     }, $tickets.length * 90 + 300);
 }
 
-/* ================= VALIDASI ================= */
 function validateForm() {
     let ok = true;
     const missing = [];
@@ -214,7 +192,6 @@ function validateForm() {
     return ok;
 }
 
-/* ================= CHECKOUT ================= */
 const getTypeText = () => {
     const t = $('input[name="order-type"]:checked').val();
     return t === 'dinein'
@@ -263,13 +240,13 @@ function placeOrder() {
     const orderNumber = 'MB-' + String(Math.floor(100000 + Math.random() * 899999));
     const payload = buildPayload(orderNumber);
 
-    sendOrderToBackend(payload).then(() => {
+    sendOrderToBackend(payload).then(res => {
+        if (res && res.orderNumber) payload.orderNumber = res.orderNumber;
         confirmModal.hide();
         $('#confirmModal').one('hidden.bs.modal', () => showSuccess(payload));
     });
 }
 
-/* ================= MODAL SUKSES ================= */
 function showSuccess(payload) {
     $('#stamp').removeClass('show');
     typeOrderNumber(payload.orderNumber);
@@ -285,13 +262,11 @@ function showSuccess(payload) {
     spawnConfetti();
     successModal.show();
 
-    // Reset state & tombol
     $('#final-confirm-btn').prop('disabled', false)
         .html('<i class="bi bi-check2-circle"></i> Ya, Pesan!');
     busy = false;
 }
 
-/* Nomor pesanan "tercetak" per karakter, lalu stempel muncul */
 function typeOrderNumber(num) {
     const $el = $('#order-number').empty().addClass('typing');
     let i = 0;
@@ -320,7 +295,6 @@ function spawnConfetti() {
     }
 }
 
-/* ================= EVENTS ================= */
 function bindEvents() {
     $('#item-list')
         .on('click', '.qty-btn', function () {
@@ -332,7 +306,6 @@ function bindEvents() {
 
     $('#clear-btn').on('click', clearCart);
 
-    // Nomor meja muncul hanya saat "Makan di Tempat"
     $('input[name="order-type"]').on('change', function () {
         if (this.value === 'dinein') {
             $('#table-field').removeClass('d-none').hide().slideDown(250);
@@ -351,7 +324,6 @@ function bindEvents() {
     $('#checkout-btn, #m-checkout-btn').on('click', openConfirmModal);
     $('#final-confirm-btn').on('click', placeOrder);
 
-    // Setelah modal sukses ditutup → keranjang kosong, form reset
     $('#successModal').on('hidden.bs.modal', function () {
         $('#order-form')[0].reset();
         $('input[name="order-type"]').first().prop('checked', true).trigger('change');
@@ -364,7 +336,6 @@ function bindEvents() {
     });
 }
 
-/* ================= TOAST ================= */
 function showToast(msg, isWarning = false) {
     $('#toast-body').text(msg);
     const $t = $('#liveToast');
