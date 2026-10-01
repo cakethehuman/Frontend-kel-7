@@ -58,6 +58,7 @@ function createSchema(db) {
             item_id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             description TEXT,
+            item_type TEXT,
             price REAL NOT NULL DEFAULT 0,
             image VARCHAR NOT NULL
         );
