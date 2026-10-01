@@ -1,25 +1,13 @@
+import { initDb, saveDb } from './db.js';
+import * as store from './cart-store.js';
+
 const TAX_RATE = 0.10;
 
-const DUMMY_ITEMS = [
-    { id: 1, name: 'Mie Bangka biasa', desc: 'Mie Biasa', price: 15000, qty: 2, img: 'IMG/menu/mie_belitung.webp' },
-    { id: 2, name: 'Es Jeruk Kunci',   desc: 'Es Jeruk',  price: 7000,  qty: 1, img: 'IMG/menu/EsJerukKunci.webp' }
-];
-
-function getOrderItems() {
-
-    if (new URLSearchParams(location.search).has('empty')) return [];
-    return JSON.parse(JSON.stringify(DUMMY_ITEMS));
-}
-
-function sendOrderToBackend(payload) {
-
-    console.log('[ORDER PAYLOAD → backend]', payload);
-    return new Promise(res => setTimeout(res, 900));
-}
-
+let db;
+let catalog = [];
 let items = [];
 let busy = false;
-let confirmModal, successModal, toastInstance;
+let confirmModal, successModal, addModal, toastInstance;
 
 const rupiah = n => 'Rp' + Math.round(n).toLocaleString('id-ID');
 const escapeHtml = s => String(s ?? '')
@@ -27,10 +15,25 @@ const escapeHtml = s => String(s ?? '')
     .replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 
 const getSubtotal = () => items.reduce((s, i) => s + i.price * i.qty, 0);
-const getTax      = () => Math.round(getSubtotal() * TAX_RATE);
-const getTotal    = () => getSubtotal() + getTax();
+const getTax = () => Math.round(getSubtotal() * TAX_RATE);
+const getTotal = () => getSubtotal() + getTax();
 const getTotalQty = () => items.reduce((s, i) => s + i.qty, 0);
-const ticketEl    = id => $('#item-list .ticket').filter(function () { return $(this).data('id') == id; });
+const ticketEl = id => $('#item-list .ticket').filter(function () { return $(this).data('id') == id; });
+
+function loadCatalog() {
+    const res = db.exec('SELECT item_id, name, description, price, image FROM items ORDER BY item_id');
+    if (!res.length) return [];
+    return res[0].values.map(([id, name, desc, price, img]) => ({ id, name, desc, price, img }));
+}
+
+function buildItems() {
+    const list = [];
+    store.getCart().forEach(c => {
+        const base = catalog.find(x => x.id === c.id);
+        if (base) list.push({ ...base, qty: c.qty });
+    });
+    return list;
+}
 
 function animateNumber($el, to, duration = 550) {
     const from = Number($el.data('val') || 0);
@@ -45,50 +48,88 @@ function animateNumber($el, to, duration = 550) {
     })(performance.now());
 }
 
- $(function () {
-    confirmModal  = new bootstrap.Modal('#confirmModal');
-    successModal  = new bootstrap.Modal('#successModal');
+$(async function () {
+    confirmModal = new bootstrap.Modal('#confirmModal');
+    successModal = new bootstrap.Modal('#successModal');
+    addModal = new bootstrap.Modal('#addModal');
     toastInstance = new bootstrap.Toast('#liveToast', { delay: 2400 });
 
-    items = getOrderItems();
-    renderItems();
-    updateSummary(false);
-    drawBarcode();
-    syncEmptyState();
     bindEvents();
     initReveal();
+    drawBarcode();
+
+    db = await initDb();
+    catalog = loadCatalog();
+    items = buildItems();
+    renderItems();
+    updateSummary(false);
+    syncEmptyState();
 });
+
+function bindImgFallback($scope) {
+    $scope.find('img').on('error', function () {
+        const cls = $(this).hasClass('pick-img') ? 'pick-img pick-img-ph' : 'ticket-img-ph';
+        $(this).replaceWith(`<div class="${cls}"><i class="bi bi-cup-straw"></i></div>`);
+    });
+}
+
+function ticketHtml(it, i) {
+    const img = it.img
+        ? `<img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.name)}" class="ticket-img">`
+        : `<div class="ticket-img-ph"><i class="bi bi-cup-straw"></i></div>`;
+    return `
+        <article class="ticket" data-id="${it.id}" style="--i:${i}">
+            <div class="ticket-top">
+                ${img}
+                <div class="min-w-0">
+                    <h3 class="ticket-name">${escapeHtml(it.name)}</h3>
+                    <p class="ticket-meta mb-0">@ ${rupiah(it.price)}${it.desc ? ` <span class="text-nowrap">· ${escapeHtml(it.desc)}</span>` : ''}</p>
+                </div>
+                <button type="button" class="ticket-remove" aria-label="Hapus ${escapeHtml(it.name)}"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="ticket-cut"><span class="notch notch-l"></span><span class="notch notch-r"></span></div>
+            <div class="ticket-bottom">
+                <div class="qty">
+                    <button type="button" class="qty-btn" data-step="-1" ${it.qty <= 1 ? 'disabled' : ''} aria-label="Kurangi"><i class="bi bi-dash-lg"></i></button>
+                    <span class="qty-num">${it.qty}</span>
+                    <button type="button" class="qty-btn" data-step="1" aria-label="Tambah"><i class="bi bi-plus-lg"></i></button>
+                </div>
+                <span class="ticket-sum">${rupiah(it.price * it.qty)}</span>
+            </div>
+        </article>`;
+}
 
 function renderItems() {
     const $list = $('#item-list').empty();
-    items.forEach((it, i) => {
-        const img = it.img
-            ? `<img src="${it.img}" alt="${escapeHtml(it.name)}" class="ticket-img">`
-            : `<div class="ticket-img-ph"><i class="bi bi-cup-straw"></i></div>`;
-        $list.append(`
-            <article class="ticket" data-id="${it.id}" style="--i:${i}">
-                <div class="ticket-top">
-                    ${img}
-                    <div class="min-w-0">
-                        <h3 class="ticket-name">${escapeHtml(it.name)}</h3>
-                        <p class="ticket-meta mb-0">@ ${rupiah(it.price)}${it.desc ? ` <span class="text-nowrap">· ${escapeHtml(it.desc)}</span>` : ''}</p>
-                    </div>
-                    <button type="button" class="ticket-remove" aria-label="Hapus ${escapeHtml(it.name)}"><i class="bi bi-x-lg"></i></button>
-                </div>
-                <div class="ticket-cut"><span class="notch notch-l"></span><span class="notch notch-r"></span></div>
-                <div class="ticket-bottom">
-                    <div class="qty">
-                        <button type="button" class="qty-btn" data-step="-1" ${it.qty <= 1 ? 'disabled' : ''} aria-label="Kurangi"><i class="bi bi-dash-lg"></i></button>
-                        <span class="qty-num">${it.qty}</span>
-                        <button type="button" class="qty-btn" data-step="1" aria-label="Tambah"><i class="bi bi-plus-lg"></i></button>
-                    </div>
-                    <span class="ticket-sum">${rupiah(it.price * it.qty)}</span>
-                </div>
-            </article>`);
-    });
-    $list.find('.ticket-img').on('error', function () {
-        $(this).replaceWith('<div class="ticket-img-ph"><i class="bi bi-cup-straw"></i></div>');
-    });
+    items.forEach((it, i) => $list.append(ticketHtml(it, i)));
+    bindImgFallback($list);
+}
+
+function pickHtml(it) {
+    const img = it.img
+        ? `<img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.name)}" class="pick-img">`
+        : `<div class="pick-img pick-img-ph"><i class="bi bi-cup-straw"></i></div>`;
+    return `
+        <div class="pick-item" data-id="${it.id}">
+            ${img}
+            <div class="pick-info">
+                <h4 class="pick-name">${escapeHtml(it.name)}</h4>
+                ${it.desc ? `<p class="pick-meta">${escapeHtml(it.desc)}</p>` : ''}
+                <span class="pick-price">${rupiah(it.price)}</span>
+            </div>
+            <button type="button" class="btn-main pick-add"><i class="bi bi-plus-lg"></i> Tambah</button>
+        </div>`;
+}
+
+function renderPicker() {
+    const available = catalog.filter(c => !items.some(i => i.id === c.id));
+    const $p = $('#pick-list').empty();
+    if (!available.length) {
+        $p.html('<p class="pick-empty">Semua menu yang tersedia sudah ada di pesananmu.</p>');
+        return;
+    }
+    available.forEach(it => $p.append(pickHtml(it)));
+    bindImgFallback($p);
 }
 
 function updateSummary(animate = true) {
@@ -127,12 +168,28 @@ function initReveal() {
     });
 }
 
+function addMenu(id) {
+    const base = catalog.find(x => x.id === id);
+    if (!base || items.some(i => i.id === id)) return;
+    store.addToCart(id);
+    const it = { ...base, qty: 1 };
+    items.push(it);
+    const $el = $(ticketHtml(it, 0));
+    $('#item-list').append($el);
+    bindImgFallback($el);
+    updateSummary(true);
+    syncEmptyState();
+    renderPicker();
+    showToast(it.name + ' ditambahkan');
+}
+
 function changeQty(id, step) {
     const it = items.find(x => x.id === id);
     if (!it) return;
     const q = Math.min(99, Math.max(1, it.qty + step));
     if (q === it.qty) return;
     it.qty = q;
+    store.setCartQty(id, q);
 
     const $t = ticketEl(id);
     $t.find('.qty-num').text(q).removeClass('pop').addClass('pop');
@@ -146,6 +203,7 @@ function removeItem(id) {
     $t.addClass('out');
     setTimeout(() => {
         items = items.filter(x => x.id !== id);
+        store.removeFromCart(id);
         $t.slideUp(220, function () { $(this).remove(); });
         updateSummary(false);
         syncEmptyState();
@@ -153,7 +211,7 @@ function removeItem(id) {
     }, 280);
 }
 
-function clearCart() {
+function clearOrder() {
     const $tickets = $('#item-list .ticket');
     if (!$tickets.length) return;
     $tickets.each(function (i) {
@@ -161,10 +219,11 @@ function clearCart() {
     });
     setTimeout(() => {
         items = [];
+        store.clearCart();
         $('#item-list').empty();
         updateSummary(false);
         syncEmptyState();
-        showToast('Keranjang dikosongkan');
+        showToast('Pesanan dikosongkan');
     }, $tickets.length * 90 + 300);
 }
 
@@ -211,17 +270,16 @@ function openConfirmModal() {
     confirmModal.show();
 }
 
-function buildPayload(orderNumber) {
+function buildPayload() {
+    const type = $('input[name="order-type"]:checked').val();
     return {
-        orderNumber,
-        createdAt: new Date().toISOString(),
         customer: {
-            name:   $('#cust-name').val().trim(),
-            phone:  $('#cust-phone').val().trim(),
-            type:   $('input[name="order-type"]:checked').val(),
-            table:  $('input[name="order-type"]:checked').val() === 'dinein' ? $('#cust-table').val() : null,
+            name: $('#cust-name').val().trim(),
+            phone: $('#cust-phone').val().trim(),
+            type,
+            table: type === 'dinein' ? $('#cust-table').val() : null,
             payment: $('input[name="payment-method"]:checked').val(),
-            note:   $('#order-note').val().trim()
+            note: $('#order-note').val().trim()
         },
         items: items.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
         subtotal: getSubtotal(),
@@ -230,21 +288,44 @@ function buildPayload(orderNumber) {
     };
 }
 
-function placeOrder() {
+async function saveOrder(payload) {
+    const user = JSON.parse(sessionStorage.getItem('currentUser') || 'null');
+    const userId = user?.user_id ?? 0;
+
+    db.run('INSERT INTO orders (user_id, total, status) VALUES (?, ?, ?)', [userId, payload.total, 'pending']);
+    const orderId = db.exec('SELECT last_insert_rowid()')[0].values[0][0];
+
+    const stmt = db.prepare('INSERT INTO order_items (order_id, item_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)');
+    payload.items.forEach(i => stmt.run([orderId, i.id, i.qty, i.price]));
+    stmt.free();
+
+    await saveDb(db);
+    return 'MB-' + String(orderId).padStart(6, '0');
+}
+
+function resetConfirmButton() {
+    $('#final-confirm-btn').prop('disabled', false)
+        .html('<i class="bi bi-check2-circle"></i> Ya, Pesan!');
+    busy = false;
+}
+
+async function placeOrder() {
     if (busy) return;
     busy = true;
-    const $btn = $('#final-confirm-btn');
-    $btn.prop('disabled', true)
+    $('#final-confirm-btn').prop('disabled', true)
         .html('<span class="spinner-border spinner-border-sm me-2"></span>Memproses…');
 
-    const orderNumber = 'MB-' + String(Math.floor(100000 + Math.random() * 899999));
-    const payload = buildPayload(orderNumber);
-
-    sendOrderToBackend(payload).then(res => {
-        if (res && res.orderNumber) payload.orderNumber = res.orderNumber;
+    try {
+        const payload = buildPayload();
+        payload.orderNumber = await saveOrder(payload);
+        store.clearCart();
         confirmModal.hide();
         $('#confirmModal').one('hidden.bs.modal', () => showSuccess(payload));
-    });
+    } catch (err) {
+        console.error(err);
+        showToast('Pesanan gagal disimpan, coba lagi', true);
+        resetConfirmButton();
+    }
 }
 
 function showSuccess(payload) {
@@ -254,17 +335,14 @@ function showSuccess(payload) {
     const c = payload.customer;
     $('#success-recap').html(`
         <div class="r-row"><span>Atas Nama</span><b>${escapeHtml(c.name)}</b></div>
-        <div class="r-row"><span>Tipe Pesanan</span><b>${c.type === 'dinein' ? 'Makan di Tempat · Meja ' + c.table : 'Bungkus'}</b></div>
+        <div class="r-row"><span>Tipe Pesanan</span><b>${c.type === 'dinein' ? 'Makan di Tempat · Meja ' + escapeHtml(c.table) : 'Bungkus'}</b></div>
         <div class="r-row"><span>Metode Bayar</span><b>${c.payment}</b></div>
         ${c.note ? `<div class="r-row"><span>Catatan</span><b>${escapeHtml(c.note)}</b></div>` : ''}
         <div class="r-row"><span>Total Bayar</span><b class="text-danger">${rupiah(payload.total)}</b></div>`);
 
     spawnConfetti();
     successModal.show();
-
-    $('#final-confirm-btn').prop('disabled', false)
-        .html('<i class="bi bi-check2-circle"></i> Ya, Pesan!');
-    busy = false;
+    resetConfirmButton();
 }
 
 function typeOrderNumber(num) {
@@ -304,7 +382,16 @@ function bindEvents() {
             removeItem($(this).closest('.ticket').data('id'));
         });
 
-    $('#clear-btn').on('click', clearCart);
+    $('#clear-btn').on('click', clearOrder);
+
+    $('#add-more-btn').on('click', function () {
+        renderPicker();
+        addModal.show();
+    });
+
+    $('#pick-list').on('click', '.pick-add', function () {
+        addMenu($(this).closest('.pick-item').data('id'));
+    });
 
     $('input[name="order-type"]').on('change', function () {
         if (this.value === 'dinein') {
@@ -338,7 +425,6 @@ function bindEvents() {
 
 function showToast(msg, isWarning = false) {
     $('#toast-body').text(msg);
-    const $t = $('#liveToast');
-    $t.css('background', isWarning ? 'var(--roast-brown)' : 'var(--darker-brown)');
+    $('#liveToast').css('background', isWarning ? 'var(--roast-brown)' : 'var(--darker-brown)');
     toastInstance.show();
 }

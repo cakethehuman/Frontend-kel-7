@@ -198,6 +198,7 @@ body { overflow-x: hidden; }
 .ticket-sum { font-weight: 800; color: var(--primary-deep); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
 
 .add-more {
+    width: 100%; background: transparent; font-family: inherit; font-size: inherit; cursor: pointer;
     display: flex; align-items: center; justify-content: center; gap: .5rem;
     padding: .7rem; border: 2px dashed var(--lighter-brown); border-radius: 16px;
     color: var(--rich-brown); font-weight: 800; text-decoration: none; transition: .2s; margin-top: .2rem;
@@ -387,3 +388,23 @@ body { overflow-x: hidden; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
 }
+
+.pick-item {
+    display: flex; align-items: center; gap: .9rem; padding: .8rem;
+    border: 1.5px solid var(--bg--darker-beige); border-radius: 16px;
+    background: #FFFDF6; margin-bottom: .8rem;
+    transition: transform .2s, box-shadow .2s;
+}
+.pick-item:last-child { margin-bottom: 0; }
+.pick-item:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(74, 40, 20, .12); }
+.pick-img {
+    width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex-shrink: 0;
+    border: 2px solid var(--bg-beige);
+}
+.pick-img-ph { background: var(--blob-peach); color: var(--rich-brown); display: grid; place-items: center; font-size: 1.5rem; }
+.pick-info { flex: 1; min-width: 0; }
+.pick-name { font-weight: 800; font-size: 1rem; margin: 0 0 .1rem; }
+.pick-meta { color: var(--gray-color); font-size: .8rem; margin: 0 0 .2rem; }
+.pick-price { font-weight: 800; color: var(--primary-deep); font-variant-numeric: tabular-nums; }
+.pick-add { padding: .5rem 1rem; font-size: .85rem; flex-shrink: 0; }
+.pick-empty { text-align: center; color: var(--gray-color); font-weight: 700; margin: 1rem 0; }

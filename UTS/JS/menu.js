@@ -1,23 +1,28 @@
-import { initDb } from "./db.js";
+import { initDb, saveDb } from "./db.js";
+import { addToCart } from "./cart-store.js";
 
 (async function () {
     const db = await initDb();
-
-    db.exec(`
-        INSERT INTO items (name, description, price, image)
-        VALUES
-            ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp'),
-            ('Es Jeruk Kunci', 'Es Jeruk', 7000, 'IMG/menu/EsJerukKunci.webp');
-    `);
+    
+    const total = db.exec('SELECT COUNT(*) FROM items')[0].values[0][0];
+    if (total === 0) {
+        db.exec(`
+            INSERT INTO items (name, description, price, image)
+            VALUES
+                ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp'), 
+                ('Es Jeruk Kunci', 'Es Jeruk', 7000, 'IMG/menu/EsJerukKunci.webp');
+        `);
+        await saveDb(db);
+    }
 
     const results = db.exec(`
         SELECT * FROM items;
     `);
-
+    
     const $menu = $('.main-menu .container .row');
     const columns = results[0].columns;
     const rows = results[0].values;
-
+    
     rows.forEach(row => {
         const item = Object.fromEntries(columns.map((col, i) => [col, row[i]]));
 
@@ -47,8 +52,6 @@ import { initDb } from "./db.js";
 })();
 
 $(document).on('click', '.add-to-cart', function(){
-    const itemId = $(this).data('item-id');
-    console.log(itemId);
-
-    window.location.href = "pesanan.html";
-});
+    addToCart(Number($(this).data('item-id')));
+    window.location.href = 'pesanan.html';
+})
