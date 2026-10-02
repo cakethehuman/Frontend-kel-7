@@ -5,6 +5,6 @@ $('#shopping-cart').on('click', function(){
 })
 
 $(document).on('click', '.add-to-cart', function(){
-    CartStore.add(CartStore.fromCard($(this).closest('.menu-card')));
+    CartStore.start(CartStore.fromCard($(this).closest('.menu-card')));
     window.location.href = "cart-info.html";
 })

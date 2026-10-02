@@ -4,7 +4,7 @@ const CartStore = (function () {
 
     function read() {
         try {
-            const data = JSON.parse(localStorage.getItem(KEY));
+            const data = JSON.parse(sessionStorage.getItem(KEY));
             return Array.isArray(data) ? data : [];
         } catch (e) {
             return [];
@@ -13,7 +13,7 @@ const CartStore = (function () {
 
     function write(cart) {
         try {
-            localStorage.setItem(KEY, JSON.stringify(cart));
+            sessionStorage.setItem(KEY, JSON.stringify(cart));
         } catch (e) {}
     }
 
@@ -49,6 +49,10 @@ const CartStore = (function () {
         write(cart);
     }
 
+    function start(item) {
+        write([Object.assign({}, item, { qty: 1 })]);
+    }
+
     function setQty(id, qty) {
         const cart = read();
         const found = cart.find(function (c) { return c.id === id; });
@@ -63,9 +67,9 @@ const CartStore = (function () {
 
     function clear() {
         try {
-            localStorage.removeItem(KEY);
+            sessionStorage.removeItem(KEY);
         } catch (e) {}
     }
 
-    return { get: read, fromCard: fromCard, add: add, setQty: setQty, remove: remove, clear: clear };
+    return { get: read, fromCard: fromCard, add: add, start: start, setQty: setQty, remove: remove, clear: clear };
 })();
