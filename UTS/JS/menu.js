@@ -1,5 +1,4 @@
-import { initDb, saveDb } from "./db.js";
-import { addToCart } from "./cart-store.js";
+import { initDb } from "./db.js";
 
 (async function () {
     const db = await initDb();
@@ -58,6 +57,6 @@ import { addToCart } from "./cart-store.js";
 })();
 
 $(document).on('click', '.add-to-cart', function(){
-    addToCart(Number($(this).data('item-id')));
-    window.location.href = 'pesanan.html';
+    const $itemId = $(this).data('item-id');
+    console.log($itemId)
 })
