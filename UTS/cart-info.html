@@ -1,11 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/constants.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/cart-info.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/navbar.js" defer></script>
+    <script src="JS/footer.js" defer></script>
+    <script src="JS/cart-store.js" defer></script>
+    <script src="JS/cart-info.js" defer></script>
+    <title>Mie Belitung - Pesanan</title>
 </head>
-<body>
-    
+<body class="bg-beige">
+    <div id="navbar-placeholder"></div>
+
+    <main class="container py-4 py-lg-5">
+        <h1 class="text-danger text-center mb-4">PESANAN</h1>
+
+        <section id="empty-state" class="d-none">
+            <div class="empty-box bg-light rounded-4 p-5 text-center mx-auto">
+                <i class="bi bi-bag fs-1 text-danger"></i>
+                <h2 class="h4 text-danger mt-2">Pesanan masih kosong</h2>
+                <p class="text-muted">Pilih menu dulu, lalu kembali ke sini untuk memeriksa dan mengonfirmasi pesananmu.</p>
+                <a href="menu.html" class="btn btn-red">Lihat Menu</a>
+            </div>
+        </section>
+
+        <div id="order-content" class="row g-4 d-none">
+            <div class="col-lg-7 d-flex flex-column gap-4">
+                <section class="bg-light rounded-4 p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="h4 text-danger mb-0">Daftar Pesanan</h2>
+                        <button type="button" id="clear-btn" class="btn btn-link link-secondary btn-sm text-decoration-none"><i class="bi bi-trash3"></i> Kosongkan</button>
+                    </div>
+                    <hr class="border-3 w-100 border-danger">
+                    <div id="item-list"></div>
+                </section>
+
+                <section class="bg-light rounded-4 p-4">
+                    <h2 class="h4 text-danger mb-0">Tambah Menu Lain</h2>
+                    <hr class="border-3 w-100 border-danger">
+                    <div id="more-list"></div>
+                </section>
+
+                <section class="bg-light rounded-4 p-4">
+                    <h2 class="h4 text-danger mb-0">Data Pemesan</h2>
+                    <hr class="border-3 w-100 border-danger">
+                    <form id="order-form" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="cust-name" class="form-label fw-bold">Nama Pemesan</label>
+                                <input type="text" class="form-control" id="cust-name" placeholder="cth: Budi Santoso" autocomplete="name">
+                                <div class="invalid-feedback">Nama minimal 3 karakter.</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="cust-phone" class="form-label fw-bold">No. WhatsApp</label>
+                                <input type="tel" class="form-control" id="cust-phone" placeholder="cth: 081234567890" autocomplete="tel">
+                                <div class="invalid-feedback">Masukkan nomor WhatsApp yang valid.</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <span class="form-label fw-bold d-block">Tipe Pesanan</span>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <input type="radio" class="btn-check" name="order-type" id="type-dinein" value="dinein" checked>
+                                    <label class="btn option w-100" for="type-dinein"><i class="bi bi-shop me-2"></i>Makan di Tempat</label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="radio" class="btn-check" name="order-type" id="type-takeaway" value="takeaway">
+                                    <label class="btn option w-100" for="type-takeaway"><i class="bi bi-bag me-2"></i>Bungkus</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="table-field" class="mt-3">
+                            <label for="cust-table" class="form-label fw-bold">Nomor Meja</label>
+                            <input type="number" class="form-control" id="cust-table" min="1" max="99" placeholder="cth: 7">
+                            <div class="invalid-feedback">Isi nomor meja antara 1 sampai 99.</div>
+                        </div>
+
+                        <div class="mt-3">
+                            <span class="form-label fw-bold d-block">Metode Pembayaran</span>
+                            <div class="row g-2">
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="payment-method" id="pay-cash" value="Cash" checked>
+                                    <label class="btn option w-100" for="pay-cash"><i class="bi bi-cash-coin me-2"></i>Cash</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="payment-method" id="pay-qris" value="QRIS">
+                                    <label class="btn option w-100" for="pay-qris"><i class="bi bi-qr-code me-2"></i>QRIS</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="radio" class="btn-check" name="payment-method" id="pay-transfer" value="Transfer">
+                                    <label class="btn option w-100" for="pay-transfer"><i class="bi bi-bank2 me-2"></i>Transfer</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="order-note" class="form-label fw-bold">Catatan Tambahan <span class="text-muted fw-normal">(opsional)</span></label>
+                            <textarea class="form-control" id="order-note" rows="2" placeholder="cth: tidak terlalu pedas"></textarea>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="col-lg-5">
+                <aside class="summary bg-light rounded-4 p-4">
+                    <h2 class="h4 text-danger mb-0">Ringkasan</h2>
+                    <hr class="border-3 w-100 border-danger">
+                    <div class="d-flex justify-content-between mb-2"><span class="text-muted">Total item</span><span class="fw-bold" id="sum-count">0 porsi</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span class="text-muted">Subtotal</span><span class="fw-bold" id="sum-sub">Rp 0</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span class="text-muted">Pajak (10%)</span><span class="fw-bold" id="sum-tax">Rp 0</span></div>
+                    <hr class="my-3">
+                    <div class="d-flex justify-content-between align-items-baseline mb-4">
+                        <span class="fw-bold">Total bayar</span>
+                        <span class="fs-3 fw-bold text-danger" id="sum-total">Rp 0</span>
+                    </div>
+                    <button type="button" id="checkout-btn" class="btn btn-red w-100">Konfirmasi Pesanan</button>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-light rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h2 class="modal-title h4 text-danger" id="confirmTitle">Konfirmasi Pesanan</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Kamu akan memesan <b id="cf-count">0 porsi</b> dengan total <b class="text-danger" id="cf-total">Rp 0</b>.</p>
+                    <div id="cf-recap"></div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-outline-brown" data-bs-dismiss="modal">Edit Dulu</button>
+                    <button type="button" class="btn btn-red" id="final-confirm-btn">Ya, Pesan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="successTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content bg-light rounded-4">
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-check-circle fs-1 text-danger"></i>
+                    <h2 class="h4 text-danger mt-2" id="successTitle">Pesanan Diterima</h2>
+                    <p class="text-muted">Tunjukkan nomor pesanan ini ke kasir.</p>
+                    <div class="order-number rounded-3 d-inline-block px-4 py-2 mb-3" id="order-number"></div>
+                    <div id="success-recap"></div>
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center">
+                    <button type="button" class="btn btn-outline-brown" data-bs-dismiss="modal">Tutup</button>
+                    <a href="menu.html" class="btn btn-red">Pesan Lagi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer-placeholder"></div>
+    </footer>
 </body>
 </html>
