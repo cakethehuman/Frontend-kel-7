@@ -1,15 +1,11 @@
 <section class="cb-widget" id="cb-widget" aria-label="Asisten Virtual Mie Belitung">
-
     <p class="cb-teaser" id="cb-teaser">Tanya apa saja soal Mie Belitung! </p>
-
     <button type="button" class="cb-fab" id="cb-fab" aria-label="Buka chat asisten Mie Belitung" aria-expanded="false" aria-controls="cb-panel">
         <i class="bi bi-chat-heart-fill cb-fab-open"></i>
         <i class="bi bi-x-lg cb-fab-close"></i>
         <span class="cb-dot" id="cb-dot"></span>
     </button>
-
     <div class="cb-panel" id="cb-panel" role="dialog" aria-labelledby="cb-title" aria-hidden="true">
-
         <header class="cb-header">
             <div class="cb-avatar" aria-hidden="true"><i class="bi bi-cup-hot-fill"></i></div>
             <div class="cb-head-text">
@@ -22,7 +18,6 @@
                 <button type="button" class="cb-icon-btn" id="cb-close" aria-label="Tutup chat"><i class="bi bi-dash-lg"></i></button>
             </div>
         </header>
-
         <div class="cb-search cb-hidden" id="cb-search-bar">
             <label for="cb-search" class="cb-sr">Cari pesan</label>
             <input type="search" class="cb-search-input" id="cb-search" placeholder="Cari kata kunci..." autocomplete="off">
@@ -31,7 +26,6 @@
             </button>
             <span class="cb-count" id="cb-count" role="status"></span>
         </div>
-
         <div class="cb-clear-bar cb-hidden" id="cb-clear-bar">
             <span>Hapus semua riwayat chat?</span>
             <div class="cb-clear-actions">
@@ -39,7 +33,6 @@
                 <button type="button" class="cb-mini-btn" id="cb-clear-no">Batal</button>
             </div>
         </div>
-
         <div class="cb-body" id="cb-messages" aria-live="polite">
             <div id="cb-list"></div>
             <div class="cb-typing cb-hidden" id="cb-typing" aria-label="Asisten sedang mengetik">
@@ -52,14 +45,11 @@
                 <p>Tidak ada pesan yang cocok.</p>
             </div>
         </div>
-
         <div class="cb-chips" id="cb-chips" aria-label="Saran pertanyaan"></div>
-
         <form class="cb-form" id="cb-form" novalidate>
             <label for="cb-input" class="cb-sr">Tulis pertanyaanmu</label>
             <input type="text" class="cb-input" id="cb-input" placeholder="Tulis pertanyaanmu di sini..." maxlength="200" autocomplete="off">
             <button type="submit" class="cb-send" id="cb-send" aria-label="Kirim pesan"><i class="bi bi-send-fill"></i></button>
         </form>
-
     </div>
 </section>
