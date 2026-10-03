@@ -96,7 +96,31 @@
                 <h2 class="pf-heading" id="fav-title">Kuliner Nusantara Favoritku</h2>
                 <p class="pf-sub">Catat makanan khas daerah yang ingin kamu coba, tandai kalau sudah, dan hapus kalau tidak jadi.</p>
             </header>
-            <div class="pf-card pf-tools"></div>
+            <div class="pf-card pf-tools">
+                <form id="fav-form" class="row g-2 align-items-end" novalidate>
+                    <div class="col-md-5">
+                        <label for="fav-input-name" class="form-label fw-bold">Nama Kuliner</label>
+                        <input type="text" class="form-control" id="fav-input-name" placeholder="cth: Rawon" maxlength="40" autocomplete="off">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fav-input-region" class="form-label fw-bold">Asal Wilayah</label>
+                        <select class="form-select" id="fav-input-region">
+                            <option value="Sumatra">Sumatra</option>
+                            <option value="Jawa">Jawa</option>
+                            <option value="Bali &amp; Nusa Tenggara">Bali &amp; Nusa Tenggara</option>
+                            <option value="Kalimantan">Kalimantan</option>
+                            <option value="Sulawesi">Sulawesi</option>
+                            <option value="Maluku &amp; Papua">Maluku &amp; Papua</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-profile w-100"><i class="bi bi-plus-lg"></i> Tambah</button>
+                    </div>
+                </form>
+                <p id="fav-message" class="pf-message" role="status"></p>
+                <hr class="pf-divider">
+            </div>
+
         </section>
 
     
