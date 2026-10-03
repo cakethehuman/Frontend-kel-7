@@ -119,21 +119,32 @@
                 </form>
                 <p id="fav-message" class="pf-message" role="status"></p>
                 <hr class="pf-divider">
+                
+                <div class="row g-2 align-items-center">
+                    <div class="col-lg-6">
+                        <label for="fav-search" class="visually-hidden">Cari Kuliner</label>
+                        <div class="input-grup">
+                            <span class="input-group-text pf-search-icon"><i class="bi bi-search"></i></span>
+                            <input type="search" class="form-control" id="fav-search" placeholder="Cari nama atau wilayah..." autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pf-filters" role="group" aria-label="Filter status">
+                            <button type="button" class="pf-filter active" data-filter="all">Semua</button>
+                            <button type="button" class="pf-filter" data-filter="belum">Belum dicoba</button>
+                            <button type="button" class="pf-filter" data-filter="sudah">Sudah dicoba</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <p class="pf-counter" id="fav-counter"></p>
+            <div class="row g-3" id="fav-list"></div>
+            <div class="pf-empty d-none" id="fav-empty">
+                <i class="bi bi-emoji-neutral"></i>
+                <p id="fav-empty-text" class="mb-0"></p>
+            </div>
         </section>
-
-    
-        
-    
-
-
-
-
-
-
-
-
     </main>
     
 </body>
