@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/constants.css">
+</head>
+<body class="bg-beige">
+  <div class="container-fluid">
+    <div class="row min-vh-100">
+      <div id="admin-navbar" class="col-md-3 col-lg-2 p-0"></div>
+
+
+      <main class="col-md-9 col-lg-10 p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="h4 mb-0">Admin Dashboard</h2>
+          <span class="text-secondary small">admin@example.com</span>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="card"><div class="card-body">
+              <div class="text-secondary small">Total users</div>
+              <div class="fs-2">1000</div>
+            </div></div>
+          </div>
+          <div class="col-md-4">
+            <div class="card"><div class="card-body">
+              <div class="text-secondary small">New Users this week</div>
+              <div class="fs-2">30</div>
+            </div></div>
+          </div>
+          <div class="col-md-4">
+            <div class="card"><div class="card-body">
+              <div class="text-secondary small">Live Users</div>
+              <div class="fs-2">5</div>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h3 class="h6 mb-0">Recent users</h3>
+          <button class="btn bg-primary-color btn-sm text-white">Add user</button>
+        </div>
+
+        <div class="table-responsive bg-white border rounded">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Role</th><th class="text-end">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Budi Santoso</td><td>budi@mail.com</td>
+                <td><span class="badge bg-primary-color">admin</span></td>
+                <td class="text-end"><a href="#" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="#" class="btn btn-outline-danger btn-sm">Delete</a></td>
+              </tr>
+              <tr>
+                <td>Sari Dewi</td><td>sari@mail.com</td>
+                <td><span class="badge text-bg-secondary">user</span></td>
+                <td class="text-end"><a href="#" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="#" class="btn btn-outline-danger btn-sm">Delete</a></td>
+              </tr>
+              <tr>
+                <td>Andi Wijaya</td><td>andi@mail.com</td>
+                <td><span class="badge text-bg-secondary">user</span></td>
+                <td class="text-end"><a href="#" class="btn btn-outline-secondary btn-sm">Edit</a> <a href="#" class="btn btn-outline-danger btn-sm">Delete</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="JS/admin-navbar.js"></script>
+</body>
+</html>

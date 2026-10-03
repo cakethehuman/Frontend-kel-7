@@ -3,11 +3,12 @@ import { initDb } from "./db.js";
 (async function () {
     const db = await initDb();
     
-    db.exec(`
-        INSERT INTO items (name, description, price, image)
-        VALUES
-            ('Mie Bangka biasa', 'Mie Biasa', 15000, 'IMG/menu/mie_belitung.webp');
-    `);
+    // db.exec(`
+    //     INSERT INTO items (name, description, item_type, price, image)
+    //     VALUES
+    //         ('Mie Bangka biasa', 'Mie Biasa', 'main' ,15000, 'IMG/menu/mie_belitung.webp'), 
+    //         ('Es Jeruk Kunci', 'Es Jeruk', 'drink' ,7000, 'IMG/menu/EsJerukKunci.webp');
+    // `);
 
     const results = db.exec(`
         SELECT * FROM items;
@@ -19,8 +20,10 @@ import { initDb } from "./db.js";
     
     rows.forEach(row => {
         const item = Object.fromEntries(columns.map((col, i) => [col, row[i]]));
+        let info;
 
-        const card = `
+        if(item.item_type == 'main'){
+            info = `
             <div class="col-md-4">
                 <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
                     <img src=${item.image} class="w-100">
@@ -40,8 +43,16 @@ import { initDb } from "./db.js";
                         </div>
                     </div>
                 </div>
-            </div>`;
-        $menu.append(card);
+            </div>;
+            `
+        } else if(item.item_type == 'drink'){
+            info = `
+            
+            
+            `
+        }
+
+        $menu.append(info);
     });
 })();
 
