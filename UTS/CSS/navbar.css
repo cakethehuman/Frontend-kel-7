@@ -2,10 +2,11 @@
     background-color: var(--bg-light);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 10px 10px;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
-    ;
 }
 
 .navbar-brand {
@@ -13,8 +14,8 @@
 }
 
 .navbar-logo {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -45,4 +46,28 @@
 
 .navbar .nav-link:hover {
     color: #e67e22;
+}
+
+@media screen and (max-width: 576px) {
+    .navbar {
+        padding: 8px 12px;
+    }
+
+    .navbar-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .navbar-brand {
+        gap: 8px !important;
+        margin-right: 0;
+    }
+
+    .logo-main {
+        font-size: 24px;
+    }
+
+    .logo-sub {
+        font-size: 12px;
+    }
 }
