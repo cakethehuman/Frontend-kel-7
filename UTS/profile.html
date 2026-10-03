@@ -41,9 +41,9 @@
                 <div class="col-lg-8 d-flex flex-column gap-4">
                     <article class="pf-card pf-bio">
                         <p class="pf-label">About Me</p>
-                        <h2 class="pf-title">Student & Programmer</h2>
+                        <h2 class="pf-title" id="pf-title">Student & Programmer</h2>
                         <p class="pf-bio-text" id="pf-bio-text"></p>
-                        <div class="d-flex flex-wrap gap-2">
+                        <div class="d-flex flex-wrap gap-2" id="pf-tags">
                             <span class="pf-tag">#AnimLovers</span>
                             <span class="pf-tag">#Full Stack Developer</span>
                             <span class="pf-tag">#Untarian</span>
@@ -142,7 +142,7 @@
         </section>
     </main>
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editTitle" aria-hidden="true">
+     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-light pf-modal">
                 <div class="modal-header border-0 pb-0">
@@ -154,9 +154,18 @@
                         <label for="edit-name" class="form-label fw-bold">Nama</label>
                         <input type="text" class="form-control" id="edit-name" maxlength="30">
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-3">
+                        <label for="edit-role" class="form-label fw-bold">Role</label>
+                        <input type="text" class="form-control" id="edit-role" maxlength="40" placeholder="cth: Student &amp; Programmer">
+                    </div>
+                    <div class="mb-3">
                         <label for="edit-bio" class="form-label fw-bold">Bio</label>
                         <textarea class="form-control" id="edit-bio" rows="4" maxlength="220"></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label for="edit-tags" class="form-label fw-bold">Hashtag</label>
+                        <input type="text" class="form-control" id="edit-tags" maxlength="120" placeholder="cth: AnimLovers, Full Stack Developer, Untarian">
+                        <div class="form-text">Pisahkan dengan koma, maksimal 6 hashtag.</div>
                     </div>
                     <p id="edit-error" class="pf-message pf-msg-error mb-0"></p>
                 </div>
@@ -167,7 +176,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-light pf-modal">
