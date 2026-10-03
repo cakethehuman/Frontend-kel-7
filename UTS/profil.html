@@ -166,7 +166,23 @@
         </div>
     </div>
 
-
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-light pf-modal">
+                <div class="modal-header border-0 pb-0">
+                    <h2 class="modal-title h4" id="deleteTitle">Hapus dari daftar?</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0"><b id="delete-name"></b> akan dihapus dari daftar favoritmu.</p>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-profile-outline" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-profile" id="confirm-delete">Ya, Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
