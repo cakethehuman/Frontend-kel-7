@@ -154,5 +154,43 @@ h1, h2, h3 {
     color: var(--primary-color);
 }
 
+.pf-label {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
 
+.pf-title {
+    font-size: 26px;
+    margin-bottom: 12px;
+}
+
+.pf-heading {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.pf-sub {
+    color: var(--gray-color);
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.pf-bio-text {
+    line-height: 1.7;
+    color: var(--darker-brown);
+}
+
+.pf-tag {
+    background: var(--bg-beige);
+    color: var(--rich-brown);
+    border: 1px solid var(--lighter-brown);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 700;
+}
 
