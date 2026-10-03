@@ -217,3 +217,19 @@ h1, h2, h3 {
     font-size: 14px;
 }
 
+.pf-progress .progress {
+    height: 14px;
+    border-radius: 10px;
+    background: var(--bg-beige);
+}
+
+.pf-progress .progress-bar {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+.pf-progress-text {
+    color: var(--primary-deep);
+    font-weight: 700;
+}
