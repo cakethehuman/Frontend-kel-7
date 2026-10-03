@@ -69,3 +69,15 @@ h1, h2, h3 {
     margin-top: 64px;
 }
 
+.pf-card {
+    background: var(--bg-light);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pf-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.13);
+}
