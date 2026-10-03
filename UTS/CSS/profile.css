@@ -233,3 +233,78 @@ h1, h2, h3 {
     color: var(--primary-deep);
     font-weight: 700;
 }
+
+.pf-tools {
+    padding: 26px;
+}
+
+.pf-tools:hover {
+    transform: none;
+}
+
+.pf-divider {
+    margin: 20px 0;
+    border-color: var(--lighter-brown);
+    opacity: 0.5;
+}
+
+.pf-message {
+    min-height: 22px;
+    margin: 10px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.pf-msg-ok {
+    color: #5c5828;
+}
+
+.pf-msg-error {
+    color: var(--primary-deep);
+}
+
+.pf-search-icon {
+    background: var(--bg-beige);
+    color: var(--rich-brown);
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+}
+
+.pf-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.pf-filter {
+    background: var(--bg-beige);
+    color: var(--rich-brown);
+    border: 1px solid var(--lighter-brown);
+    border-radius: 20px;
+    padding: 7px 18px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.pf-filter:hover {
+    background: var(--bg--darker-beige);
+}
+
+.pf-filter.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+
