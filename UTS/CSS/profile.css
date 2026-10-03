@@ -472,3 +472,37 @@ h1, h2, h3 {
     }
 }
 
+@media (max-width: 576px) {
+    body {
+        padding-top: 72px;
+    }
+
+    .pf-card,
+    .pf-tools {
+        padding: 18px;
+    }
+
+    .pf-id-card {
+        padding: 0;
+    }
+
+    .pf-cover {
+        height: 170px;
+    }
+
+    .pf-title {
+        font-size: 22px;
+    }
+
+    .pf-heading {
+        font-size: 24px;
+    }
+
+    .pf-stat-num {
+        font-size: 30px;
+    }
+
+    .pf-fav {
+        margin-top: 44px;
+    }
+}
