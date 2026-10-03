@@ -194,3 +194,26 @@ h1, h2, h3 {
     font-weight: 700;
 }
 
+.pf-stat {
+    text-align: center;
+    padding: 20px 14px;
+    height: 100%;
+}
+
+.pf-stat i {
+    font-size: 26px;
+    color: var(--primary-color);
+}
+
+.pf-stat-num {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.pf-stat-label {
+    color: var(--gray-color);
+    font-size: 14px;
+}
+
