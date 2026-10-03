@@ -1,0 +1,10 @@
+body {
+    padding-top: 90px;
+    font-family: var(--font-body);
+    color: var(--text-dark);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
