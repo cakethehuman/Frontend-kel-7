@@ -453,3 +453,22 @@ h1, h2, h3 {
     }
 }
 
+@media (max-width: 991px) {
+    .pf-page {
+        padding-top: 28px;
+    }
+
+    .pf-heading {
+        font-size: 28px;
+    }
+
+    .pf-filters {
+        justify-content: flex-start;
+        margin-top: 4px;
+    }
+
+    .pf-cover {
+        height: 220px;
+    }
+}
+
