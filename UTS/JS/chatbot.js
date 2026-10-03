@@ -26,14 +26,14 @@ $(function () {
         {
             id: 'harga',
             keys: ['harga', 'berapa', 'biaya', 'price', 'tarif'],
-            reply: 'Beberapa harga standar di kedai kami:\n• Mie Belitung Special Rp 25.000\n• Es Teh Manis Rp 6.000\n• Kerupuk Rp 3.000\nUntuk pesanan melalui website, terdapat pajak 10% yang dihitung otomatis di halaman Pesanan. Harga menu selengkapnya dapat dicek di halaman Menu.',
+            reply: 'Beberapa harga standar di kedai kami:\n• Mie Belitung Rp 20.000\n• Es Jeruk Kunci Rp 10.000\n• Kopi Belitung Rp 8.000\nUntuk pesanan melalui website, terdapat pajak 10% yang dihitung otomatis di halaman Pesanan. Harga menu selengkapnya dapat dicek di halaman Menu.',
             link: { href: 'menu.html', label: 'Lihat semua harga' },
             next: ['Metode pembayaran', 'Cara pesan', 'Promo']
         },
         {
             id: 'rekomendasi',
             keys: ['rekomendasi', 'best seller', 'terlaris', 'paling enak', 'andalan', 'favorit kalian', 'bingung pilih', 'enaknya'],
-            reply: 'Pilihan yang paling kami rekomendasikan adalah Mie Belitung Special dipadukan dengan Es Teh Manis dan kerupuk.\nSaran penyajian: nikmati selagi kuahnya hangat dan atur tingkat kepedasannya sedikit demi sedikit sesuai selera.',
+            reply: 'Pilihan yang paling kami rekomendasikan adalah Mie Belitung dipadukan dengan Es Jeruk Kunci.\nSaran penyajian: nikmati selagi kuahnya hangat dan atur tingkat kepedasannya sedikit demi sedikit sesuai selera.',
             next: ['Rasanya seperti apa', 'Level pedas', 'Lihat menu']
         },
         {
