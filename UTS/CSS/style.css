@@ -13,6 +13,8 @@
 
 body {
     background: var(--bg-beige);
+    overflow-x: hidden;
+    padding-top: 90px;
 }
 
 .text-and-button-wrapper a {

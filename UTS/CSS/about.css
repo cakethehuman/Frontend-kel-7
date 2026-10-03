@@ -18,6 +18,8 @@ html {
 body{
     background: var(--bg-beige);
     color: var(--text-dark);
+    padding-top: 60px;
+    overflow-x: hidden;
 }
 
 .heading {
