@@ -271,6 +271,10 @@ main {
     transform: translate(0);
 }
 
+.button-third {
+    bottom: 12%;
+    right: 25%;
+}
 
 .button-third:hover + .info-num-3,
 .info-num-3:hover {
@@ -278,7 +282,6 @@ main {
     visibility: visible;
     transform: translate(0);
 }
-
 
 .desc2 {
     max-width: 30ch;
@@ -411,6 +414,22 @@ main {
     .icon-and-text-wrapper {
         text-align: left;
     }
+    .info-num-1,
+    .info-num-2,
+    .info-num-3 {
+        width: 60%;
+        top: auto;
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        margin-left: -30%;
+    }
+
+    .info-num-1::after,
+    .info-num-2::after,
+    .info-num-3::after {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -443,5 +462,8 @@ main {
 
     .why-us-heading {
         font-size: 26px;
+    }
+    .why-us-card h4 {
+        font-size: 16px;
     }
 }
