@@ -10,6 +10,8 @@ body {
   background: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.6;
+  padding-top: 60px;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h5 {
