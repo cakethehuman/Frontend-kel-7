@@ -19,14 +19,14 @@ $(function () {
         {
             id: 'menu',
             keys: ['menu', 'makanan', 'minuman', 'jual apa', 'daftar makanan', 'ada apa saja'],
-            reply: 'Menu andalan kami adalah Mie Belitung Special: mie kuning basah dengan kuah kaldu udang kental, udang, tahu goreng, kentang rebus, tauge, timun, dan emping.\nPendampingnya ada Es Teh Manis dan Kerupuk. Daftar lengkap beserta fotonya tersedia di halaman Menu.',
+            reply: 'Menu andalan kami adalah Mie Belitung Special: mie kuning basah dengan kuah kaldu udang kental, udang, tahu goreng, kentang rebus, tauge, timun, dan emping.\nPendampingnya ada Es Jeruk Kunci dan Es Belitung. Daftar lengkap beserta fotonya tersedia di halaman Menu.',
             link: { href: 'menu.html', label: 'Buka halaman Menu' },
             next: ['Harga', 'Rekomendasi', 'Cara pesan']
         },
         {
             id: 'harga',
             keys: ['harga', 'berapa', 'biaya', 'price', 'tarif'],
-            reply: 'Beberapa harga standar di kedai kami:\n• Mie Belitung Rp 20.000\n• Es Jeruk Kunci Rp 10.000\n• Kopi Belitung Rp 8.000\nUntuk pesanan melalui website, terdapat pajak 10% yang dihitung otomatis di halaman Pesanan. Harga menu selengkapnya dapat dicek di halaman Menu.',
+            reply: 'Beberapa harga standar di kedai kami:\n• Mie Belitung Rp 20.000\n• Es Jeruk Kunci Rp 10.000\n• Es Belitung Rp 10.000\nUntuk pesanan melalui website, terdapat pajak 10% yang dihitung otomatis di halaman Pesanan. Harga menu selengkapnya dapat dicek di halaman Menu.',
             link: { href: 'menu.html', label: 'Lihat semua harga' },
             next: ['Metode pembayaran', 'Cara pesan', 'Promo']
         },
