@@ -26,13 +26,14 @@ const CartStore = (function () {
     }
 
     function fromCard($card) {
-        const name = $card.find('h5.fw-bold').first().text().trim();
+        const name = $card.find('h3.fw-bold').first().text().trim();
         const section = ($card.closest('section').attr('id') || '').replace('-menu', '');
+
         return {
-            id: slug(name),
+            id: $card.find('.add-to-cart').data('item-id') || slug(name),
             name: name,
             desc: $card.find('p.flex-grow-1').first().text().trim(),
-            price: parsePrice($card.find('h5.text-danger').first().text()),
+            price: parsePrice($card.find('p.h5.text-danger').first().text()),
             img: ($card.find('img').first().attr('src') || '').replace(/\\/g, '/'),
             cat: CATEGORIES.indexOf(section) >= 0 ? section : 'other'
         };
@@ -40,12 +41,16 @@ const CartStore = (function () {
 
     function add(item) {
         const cart = read();
-        const found = cart.find(function (c) { return c.id === item.id; });
+        const found = cart.find(function (c) {
+            return c.id === item.id;
+        });
+
         if (found) {
             found.qty = Math.min(99, found.qty + 1);
         } else {
             cart.push(Object.assign({}, item, { qty: 1 }));
         }
+
         write(cart);
     }
 
@@ -55,14 +60,20 @@ const CartStore = (function () {
 
     function setQty(id, qty) {
         const cart = read();
-        const found = cart.find(function (c) { return c.id === id; });
+        const found = cart.find(function (c) {
+            return c.id === id;
+        });
+
         if (!found) return;
+
         found.qty = Math.min(99, Math.max(1, qty));
         write(cart);
     }
 
     function remove(id) {
-        write(read().filter(function (c) { return c.id !== id; }));
+        write(read().filter(function (c) {
+            return c.id !== id;
+        }));
     }
 
     function clear() {
@@ -71,5 +82,13 @@ const CartStore = (function () {
         } catch (e) {}
     }
 
-    return { get: read, fromCard: fromCard, add: add, start: start, setQty: setQty, remove: remove, clear: clear };
+    return {
+        get: read,
+        fromCard: fromCard,
+        add: add,
+        start: start,
+        setQty: setQty,
+        remove: remove,
+        clear: clear
+    };
 })();
