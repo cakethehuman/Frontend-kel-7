@@ -1,0 +1,91 @@
+.menu-header {
+    scroll-margin-top: 80px;
+}
+
+.menu-title-line {
+    width: 80px;
+}
+
+.menu-navigation {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 8px 0;
+    background-color: inherit;
+}
+
+.menu-category {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-category:hover,
+.menu-category:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.menu-section {
+    scroll-margin-top: 70px;
+    padding: 12px 0;
+}
+
+.menu-section + .menu-section {
+    padding-top: 24px;
+}
+
+.menu-panel {
+    overflow: hidden;
+}
+
+.menu-section-header hr {
+    width: 100%;
+    margin: 0 auto 24px;
+}
+
+.menu-card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.menu-card-image {
+    display: block;
+    height: 220px;
+    object-fit: cover;
+}
+
+.menu-card .add-to-cart {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 10px;
+}
+
+.menu-card .add-to-cart:hover,
+.menu-card .add-to-cart:focus-visible {
+    filter: brightness(0.9);
+}
+
+@media (max-width: 575.98px) {
+    .menu-navigation {
+        position: static;
+    }
+
+    .menu-category {
+        flex: 1 1 auto;
+        justify-content: center;
+    }
+
+    .menu-card-image {
+        height: 200px;
+    }
+}
+
