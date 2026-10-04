@@ -21,7 +21,7 @@ $('#registerForm').on('submit', async function(e){
     }
 
     const db = await initDb();
-    const user = register(db, name, email, password);
+    const user = await register(db, name, email, password);
 
     if (user){
         console.log("bisa");
@@ -36,7 +36,7 @@ $('#loginForm').on('submit', async function(e){
     $("#result").remove();
 
     const db = await initDb();
-    const user = login(db, email, password);
+    const user = await login(db, email, password);
 
     if (user) {
         sessionStorage.setItem('currentUser', JSON.stringify(user));

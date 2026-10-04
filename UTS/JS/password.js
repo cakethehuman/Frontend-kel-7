@@ -1,4 +1,4 @@
-const bcrypt = window.bcrypt;
+const bcrypt = window.dcodeIO.bcrypt;
 
 /**
  * Hash a plain text password
