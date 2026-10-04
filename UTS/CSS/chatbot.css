@@ -259,12 +259,12 @@
 
 .cb-search-input:focus {
     border-color: var(--secondary-color, #A49F4D);
-    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+    box-shadow: 0 0 0 2px rgba(164, 159, 77, 0.25);
 }
 
 .cb-input:focus {
     border-color: var(--secondary-color, #A49F4D);
-    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+    box-shadow: 0 0 0 2px rgba(164, 159, 77, 0.25);
 }
 
 .cb-star-filter {

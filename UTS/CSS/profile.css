@@ -270,12 +270,12 @@ h1, h2, h3 {
 
 .form-control:focus {
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+    box-shadow: 0 0 0 2px rgba(164, 159, 77, 0.25);
 }
 
 .form-select:focus {
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 0.2rem rgba(164, 159, 77, 0.25);
+    box-shadow: 0 0 0 2px rgba(164, 159, 77, 0.25);
 }
 
 .pf-filters {
