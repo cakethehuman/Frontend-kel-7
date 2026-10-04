@@ -3,214 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="description" content="Mie Belitung menu featuring traditional Belitung food and drinks.">
+    <title>Mie Belitung - Menu</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="CSS/constants.css">
     <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/menu.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JS/navbar.js" defer></script>
     <script src="JS/footer.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Mie Belitung - Menu</title>
 </head>
+
 <body class="bg-beige">
-    <div id="navbar-placeholder"></div> 
+    <div id="navbar-placeholder"></div>
     <div id="shopping-cart"></div>
 
-    <section class="title">
-        <div class="d-flex justify-content-center pt-4 pb-2">
-           <h1 class="text-danger">MENU</h1>
-           <hr class="border-5">
-        </div>
-    </section>
+    <main>
+        <header class="menu-header py-4">
+            <div class="container text-center">
+                <h1 class="text-danger fw-bold mb-2">MENU</h1>
+                <hr class="border-3 border-danger opacity-100 mx-auto menu-title-line">
+            </div>
+        </header>
 
-    <div class="d-flex justify-content-center gap-2">
-        <div class="border bg-primary-color d-flex align-items-center gap-2 rounded-pill px-3 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fork-knife" viewBox="0 0 16 16">
-                <path d="M13 .5c0-.276-.226-.506-.498-.465-1.703.257-2.94 2.012-3 8.462a.5.5 0 0 0 .498.5c.56.01 1 .13 1 1.003v5.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5zM4.25 0a.25.25 0 0 1 .25.25v5.122a.128.128 0 0 0 .256.006l.233-5.14A.25.25 0 0 1 5.24 0h.522a.25.25 0 0 1 .25.238l.233 5.14a.128.128 0 0 0 .256-.006V.25A.25.25 0 0 1 6.75 0h.29a.5.5 0 0 1 .498.458l.423 5.07a1.69 1.69 0 0 1-1.059 1.711l-.053.022a.92.92 0 0 0-.58.884L6.47 15a.971.971 0 1 1-1.942 0l.202-6.855a.92.92 0 0 0-.58-.884l-.053-.022a1.69 1.69 0 0 1-1.059-1.712L3.462.458A.5.5 0 0 1 3.96 0z"/>
-            </svg>
-            <a href="#main-menu" class="text-white text-decoration-none">Main</a>
-        </div>
+        <nav class="menu-navigation mb-4" aria-label="Menu categories">
+            <div class="container">
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <a href="#main-menu" class="menu-category bg-primary-color text-white text-decoration-none rounded-pill px-3 py-2 d-flex align-items-center gap-2">
+                        <i class="bi bi-fork-knife" aria-hidden="true"></i>
+                        <span>Main</span>
+                    </a>
 
-        <div class="border bg-primary-color d-flex align-items-center gap-2 rounded-pill px-3 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cup-hot" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6zM13 12.5a2 2 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5M2.64 13.825 1.123 7h11.754l-1.517 6.825A1.5 1.5 0 0 1 9.896 15H4.104a1.5 1.5 0 0 1-1.464-1.175"/>
-                <path d="m4.4.8-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 3.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 6.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 9.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8"/>
-            </svg>
-            <a href="#drink-menu" class="text-white text-decoration-none">Drinks</a>
-        </div>
+                    <a href="#drink-menu" class="menu-category bg-primary-color text-white text-decoration-none rounded-pill px-3 py-2 d-flex align-items-center gap-2">
+                        <i class="bi bi-cup-hot" aria-hidden="true"></i>
+                        <span>Drinks</span>
+                    </a>
 
-
-        <div class="border bg-primary-color d-flex align-items-center gap-2 rounded-pill px-3 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fork-knife" viewBox="0 0 16 16">
-                <path d="M13 .5c0-.276-.226-.506-.498-.465-1.703.257-2.94 2.012-3 8.462a.5.5 0 0 0 .498.5c.56.01 1 .13 1 1.003v5.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5zM4.25 0a.25.25 0 0 1 .25.25v5.122a.128.128 0 0 0 .256.006l.233-5.14A.25.25 0 0 1 5.24 0h.522a.25.25 0 0 1 .25.238l.233 5.14a.128.128 0 0 0 .256-.006V.25A.25.25 0 0 1 6.75 0h.29a.5.5 0 0 1 .498.458l.423 5.07a1.69 1.69 0 0 1-1.059 1.711l-.053.022a.92.92 0 0 0-.58.884L6.47 15a.971.971 0 1 1-1.942 0l.202-6.855a.92.92 0 0 0-.58-.884l-.053-.022a1.69 1.69 0 0 1-1.059-1.712L3.462.458A.5.5 0 0 1 3.96 0z"/>
-            </svg>
-            <a href="#other-menu" class="text-white text-decoration-none">Other</a>
-        </div>
-
-    </div>
-
-    <section class="main-menu" id="main-menu">
-        <div class="d-flex justify-content-center px-5 py-2">
-            <div class="w-100 bg-light rounded-4">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex justify-content-center">
-                        <h1 class="text-danger">Main Menu</h1>
-                    </div>
-                    <hr class="border-3 w-100 border-danger">
+                    <a href="#other-menu" class="menu-category bg-primary-color text-white text-decoration-none rounded-pill px-3 py-2 d-flex align-items-center gap-2">
+                        <i class="bi bi-egg-fried" aria-hidden="true"></i>
+                        <span>Other</span>
+                    </a>
                 </div>
-                <div class="container p-3">
+            </div>
+        </nav>
+
+        <section id="main-menu" class="menu-section">
+            <div class="container">
+                <div class="menu-panel bg-light rounded-4 p-3 p-md-4">
+                    <div class="menu-section-header text-center">
+                        <h2 class="text-danger fw-bold mb-2">Main Menu</h2>
+                        <hr class="border-3 border-danger opacity-100 mx-auto">
+                    </div>
+
                     <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                                <img src='IMG\menu\mie_belitung.webp' class="w-100">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <article class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
+                                <img src="IMG/menu/mie_belitung.webp" class="menu-card-image w-100" alt="Mie Belitung">
+
                                 <div class="p-4 d-flex flex-column">
-                                    <h5 class="fw-bold mb-2">Mie Belitung</h5>
-                                    <p class="text-muted small flex-grow-1">Mie kenyal dengan kuah kental gurih, topping udang segar, dan emping renyah.</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <h3 class="h5 fw-bold mb-2">Mie Belitung</h3>
+
+                                    <p class="text-muted small flex-grow-1 mb-3">
+                                        Mie kenyal dengan kuah kental gurih, topping udang segar, dan emping renyah.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-end gap-3">
                                         <div>
                                             <p class="text-muted small mb-0">Harga</p>
-                                            <h5 class="fw-bold text-danger">Rp 20.000</h5>
+                                            <p class="h5 fw-bold text-danger mb-0">Rp 20.000</p>
                                         </div>
-                                        <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-primary-color text-light add-to-cart"
+                                            data-item-id="mie-belitung"
+                                            aria-label="Tambahkan Mie Belitung ke keranjang">
+                                            <i class="bi bi-cart" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="drink-menu" id="drink-menu">
-        <div class="d-flex justify-content-center px-5 py-2">
-            <div class="w-100 bg-light rounded-4">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex justify-content-center">
-                        <h1 class="text-danger">Drink Menu</h1>
+        <section id="drink-menu" class="menu-section">
+            <div class="container">
+                <div class="menu-panel bg-light rounded-4 p-3 p-md-4">
+                    <div class="menu-section-header text-center">
+                        <h2 class="text-danger fw-bold mb-2">Drink Menu</h2>
+                        <hr class="border-3 border-danger opacity-100 mx-auto">
                     </div>
-                    <hr class="border-3 w-100 border-danger">
-                </div>
-                <div class="container p-3">
+
                     <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                                <img src='IMG\menu\EsJerukKunci.webp' class="w-100">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <article class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
+                                <img src="IMG/menu/EsJerukKunci.webp" class="menu-card-image w-100" alt="Es Jeruk Kunci">
+
                                 <div class="p-4 d-flex flex-column">
-                                    <h5 class="fw-bold mb-2">Es Jeruk Kunci</h5>
-                                    <p class="text-muted small flex-grow-1"> Perpaduan jeruk kunci dan es, cocok untuk melepas dahaga.</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <h3 class="h5 fw-bold mb-2">Es Jeruk Kunci</h3>
+
+                                    <p class="text-muted small flex-grow-1 mb-3">
+                                        Perpaduan jeruk kunci dan es, cocok untuk melepas dahaga.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-end gap-3">
                                         <div>
                                             <p class="text-muted small mb-0">Harga</p>
-                                            <h5 class="fw-bold text-danger">Rp 10.000</h5>
+                                            <p class="h5 fw-bold text-danger mb-0">Rp 10.000</p>
                                         </div>
-                                        <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-primary-color text-light add-to-cart"
+                                            data-item-id="es-jeruk-kunci"
+                                            aria-label="Tambahkan Es Jeruk Kunci ke keranjang">
+                                            <i class="bi bi-cart" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </div>
-                        <div class="col-md-4">
-                            <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                                <img src='IMG\menu\kopiBelitung.webp' class="w-100">
+
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <article class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
+                                <img src="IMG/menu/kopiBelitung.webp" class="menu-card-image w-100" alt="Kopi Belitung">
+
                                 <div class="p-4 d-flex flex-column">
-                                    <h5 class="fw-bold mb-2">Kopi Belitung</h5>
-                                    <p class="text-muted small flex-grow-1">Rasa kopi otentik Belitung yang kuat, sedikit manis, penuh karakter</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <h3 class="h5 fw-bold mb-2">Kopi Belitung</h3>
+
+                                    <p class="text-muted small flex-grow-1 mb-3">
+                                        Rasa kopi otentik Belitung yang kuat, sedikit manis, penuh karakter.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-end gap-3">
                                         <div>
                                             <p class="text-muted small mb-0">Harga</p>
-                                            <h5 class="fw-bold text-danger">Rp 8.000</h5>
+                                            <p class="h5 fw-bold text-danger mb-0">Rp 8.000</p>
                                         </div>
-                                        <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-primary-color text-light add-to-cart"
+                                            data-item-id="kopi-belitung"
+                                            aria-label="Tambahkan Kopi Belitung ke keranjang">
+                                            <i class="bi bi-cart" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="other-menu" id="other-menu">
-        <div class="d-flex justify-content-center px-5 py-2">
-            <div class="w-100 bg-light rounded-4">
-                <div class="d-flex flex-column p-2">
-                    <div class="d-flex justify-content-center">
-                        <h1 class="text-danger">Other Menu</h1>
+        <section id="other-menu" class="menu-section">
+            <div class="container">
+                <div class="menu-panel bg-light rounded-4 p-3 p-md-4">
+                    <div class="menu-section-header text-center">
+                        <h2 class="text-danger fw-bold mb-2">Other Menu</h2>
+                        <hr class="border-3 border-danger opacity-100 mx-auto">
                     </div>
-                    <hr class="border-3 w-100 border-danger">
-                </div>
-                <div class="container p-3">
+
                     <div class="row g-4">
-                        <div class="col-md-4">
-                            <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                                <img src='IMG\menu\nasiTim.webp' class="w-100">
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <article class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
+                                <img src="IMG/menu/nasiTim.webp" class="menu-card-image w-100" alt="Nasi Tim Ayam">
+
                                 <div class="p-4 d-flex flex-column">
-                                    <h5 class="fw-bold mb-2">Nasi Tim Ayam</h5>
-                                    <p class="text-muted small flex-grow-1">Nasi kukus lembut dengan ayam berbumbu dan kaldu hangat.</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <h3 class="h5 fw-bold mb-2">Nasi Tim Ayam</h3>
+
+                                    <p class="text-muted small flex-grow-1 mb-3">
+                                        Nasi kukus lembut dengan ayam berbumbu dan kaldu hangat.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-end gap-3">
                                         <div>
                                             <p class="text-muted small mb-0">Harga</p>
-                                            <h5 class="fw-bold text-danger">Rp 15.000</h5>
+                                            <p class="h5 fw-bold text-danger mb-0">Rp 15.000</p>
                                         </div>
-                                        <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-primary-color text-light add-to-cart"
+                                            data-item-id="nasi-tim-ayam"
+                                            aria-label="Tambahkan Nasi Tim Ayam ke keranjang">
+                                            <i class="bi bi-cart" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
-                                <img src='IMG\menu\esBelitung.webp' class="w-100">
-                                <div class="p-4 d-flex flex-column">
-                                    <h5 class="fw-bold mb-2">Es Belitung</h5>
-                                    <p class="text-muted small flex-grow-1">Paduan manis dan dingin, penutup tradisional yang menyegarkan.</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-2">
-                                        <div>
-                                            <p class="text-muted small mb-0">Harga</p>
-                                            <h5 class="fw-bold text-danger">Rp 10.000</h5>
-                                        </div>
-                                        <button class="btn btn-sm bg-primary-color text-light p-2 add-to-cart" data-item-id="${item.item_id}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            </article>
                         </div>
 
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <article class="menu-card bg-darker-beige rounded-4 h-100 overflow-hidden">
+                                <img src="IMG/menu/esBelitung.webp" class="menu-card-image w-100" alt="Es Belitung">
+
+                                <div class="p-4 d-flex flex-column">
+                                    <h3 class="h5 fw-bold mb-2">Es Belitung</h3>
+
+                                    <p class="text-muted small flex-grow-1 mb-3">
+                                        Paduan manis dan dingin, penutup tradisional yang menyegarkan.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-end gap-3">
+                                        <div>
+                                            <p class="text-muted small mb-0">Harga</p>
+                                            <p class="h5 fw-bold text-danger mb-0">Rp 10.000</p>
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-sm bg-primary-color text-light add-to-cart"
+                                            data-item-id="es-belitung"
+                                            aria-label="Tambahkan Es Belitung ke keranjang">
+                                            <i class="bi bi-cart" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
-    <script type="module" src="JS/db.js"></script>
-    <script type="module" src="JS/menu.js"></script>
-    <script src="JS/navbar.js" defer></script>
-    <script src="JS/cart-store.js" defer></script>
-    <script src="JS/cart.js" defer></script>
+        </section>
+    </main>
 
     <footer>
         <div id="footer-placeholder"></div>
     </footer>
-    <script src="JS/chatbot.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.13.0/sql-wasm.js"></script>
+    <script type="module" src="JS/db.js"></script>
+    <script type="module" src="JS/menu.js"></script>
+    <script src="JS/cart-store.js" defer></script>
+    <script src="JS/cart.js" defer></script>
+    <script src="JS/chatbot.js" defer></script>
 </body>
 </html>
