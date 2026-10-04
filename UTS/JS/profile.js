@@ -192,6 +192,7 @@ $(function () {
         $('#delete-name').text($item.find('.pf-fav-name').text());
         deleteModal.show();
     });
+
     $('#confirm-delete').on('click', function () {
         favorites = $.grep(favorites, function (item) {
             return item.id !== pendingDeleteId;
@@ -294,4 +295,8 @@ $(function () {
     favorites = loadFavorites();
     loadProfile();
     renderList();
+});
+
+$('.btn-logout').on('click', function(){
+    window.location.href = "login.html";
 });

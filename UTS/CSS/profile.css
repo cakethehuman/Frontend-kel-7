@@ -317,6 +317,37 @@ h1, h2, h3 {
     transition: background 0.3s, transform 0.3s;
 }
 
+.btn-logout {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 8px 20px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.btn-logout:hover {
+    background: var(--primary-deep);
+    border-color: var(--primary-deep);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.btn-logout-outline {
+    background: transparent;
+    color: var(--rich-brown);
+    border: 2px solid var(--rich-brown);
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 8px 20px;
+}
+
+.btn-logout-outline:hover {
+    background: var(--rich-brown);
+    color: var(--text-light);
+}
+
 .btn-profile:hover {
     background: var(--primary-deep);
     border-color: var(--primary-deep);
