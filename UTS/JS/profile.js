@@ -229,7 +229,7 @@ $(function () {
 
     function loadProfile() {
         let name = 'Wilson Hung';
-        let email = 'wilson@gmail.com';
+        let email = 'frontend@gmail.com';
         let bio = DEFAULT_BIO;
         let role = DEFAULT_ROLE;
         let tags = DEFAULT_TAGS.slice();
