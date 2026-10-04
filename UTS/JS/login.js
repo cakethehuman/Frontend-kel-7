@@ -6,6 +6,7 @@ export async function login(db, email, password){
         FROM users
         WHERE email = :email
     `);
+
     stmt.bind({ ':email': email});
 
     
@@ -15,7 +16,7 @@ export async function login(db, email, password){
         console.log("Data User Ditemukan:");
     }
     stmt.free();
-    const match = await passwordMatched(password, user.password);
+    const match = passwordMatched(password, user.password);
     if (!match) return null;
     delete user.password;
     
