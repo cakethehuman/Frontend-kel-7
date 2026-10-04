@@ -1,4 +1,4 @@
-<section class="cb-widget" id="cb-widget" aria-label="Asisten Virtual Mie Belitung">
+<!-- <section class="cb-widget" id="cb-widget" aria-label="Asisten Virtual Mie Belitung">
     <p class="cb-teaser" id="cb-teaser">Tanya apa saja soal Mie Belitung! </p>
     <button type="button" class="cb-fab" id="cb-fab" aria-label="Buka chat asisten Mie Belitung" aria-expanded="false" aria-controls="cb-panel">
         <i class="bi bi-chat-heart-fill cb-fab-open"></i>
@@ -52,4 +52,56 @@
             <button type="submit" class="cb-send" id="cb-send" aria-label="Kirim pesan"><i class="bi bi-send-fill"></i></button>
         </form>
     </div>
+</section> -->
+
+<!-- =====================================================================
+     chatbot.html
+     Fragment ini DIMUAT ke dalam <div id="chatbot-placeholder"></div>
+     lewat jQuery .load() di JS/chatbot.js — persis pola yang sama dengan
+     navbar.html (navbar.js) dan footer.html (footer.js) yang sudah ada
+     di proyek ini.
+===================================================================== -->
+
+<!-- Tombol bulat (FAB) pemicu chat, selalu terlihat di setiap halaman -->
+<button type="button" id="mbChatToggle" class="mb-chat-fab" aria-label="Buka Asisten Mie Belitung">
+    <span class="mb-chat-fab-icon">💬</span>
+</button>
+
+<!-- Jendela chat -->
+<section id="mbChatWindow" class="mb-chat-window d-none" aria-live="polite">
+
+    <!-- Header -->
+    <header class="mb-chat-header">
+        <div class="mb-chat-header-info">
+            <div class="mb-chat-avatar">🍜</div>
+            <div>
+                <p class="mb-chat-title">Mbak Lia</p>
+                <p class="mb-chat-subtitle"><span class="mb-status-dot"></span>Asisten Virtual Mie Belitung</p>
+            </div>
+        </div>
+        <button type="button" id="mbChatClose" class="mb-chat-close" aria-label="Tutup chat">✕</button>
+    </header>
+
+    <!-- Kolom pencarian / filter riwayat chat -->
+    <div class="mb-chat-search-wrap">
+        <span class="mb-search-icon">🔍</span>
+        <input type="text" id="mbChatSearch" class="mb-chat-search" placeholder="Cari di riwayat chat...">
+    </div>
+
+    <!-- Area bubble chat -->
+    <div id="mbChatBody" class="mb-chat-body"></div>
+
+    <!-- Topik cepat -->
+    <div class="mb-chat-quickreplies" id="mbQuickReplies">
+        <button type="button" class="mb-quick-btn" data-q="Menu apa saja yang ada?">🍜 Menu</button>
+        <button type="button" class="mb-quick-btn" data-q="Ceritakan sejarah Mie Belitung">📜 Sejarah</button>
+        <button type="button" class="mb-quick-btn" data-q="Berapa kisaran harganya?">💰 Harga</button>
+        <button type="button" class="mb-quick-btn" data-q="Apa saja bahan kuahnya?">🧂 Resep</button>
+    </div>
+
+    <!-- Form kirim pesan -->
+    <form id="mbChatForm" class="mb-chat-input-wrap" autocomplete="off">
+        <input type="text" id="mbChatInput" class="mb-chat-input" placeholder="Tulis pertanyaanmu di sini..." maxlength="200">
+        <button type="submit" class="mb-chat-send" aria-label="Kirim pesan">➤</button>
+    </form>
 </section>

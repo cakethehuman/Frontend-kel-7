@@ -269,7 +269,7 @@ body{
 }
 
 .timeline-content:hover{
-    transform: translateX(-0.6rem);
+    transform: translateX(-6px);
 }
 
 .timeline-content h3 {
