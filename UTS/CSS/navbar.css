@@ -1,73 +1,104 @@
-.navbar {
-    background-color: var(--bg-light);
+:root {
+    --navbar-height: 90px; 
+}
+
+#navbar-placeholder .navbar {
+    --nb-bg: var(--bg-light, #FFF8EA);
+    --nb-font-heading: var(--font-heading, 'Libre Baskerville', Georgia, serif);
+    --nb-font-body: var(--font-body, 'Nunito', 'Segoe UI', sans-serif);
+
+    background-color: var(--nb-bg);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px 10px;
+    padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: var(--navbar-height);
     z-index: 1000;
+    box-sizing: border-box;
 }
 
-.navbar-brand {
+#navbar-placeholder .navbar-brand {
     text-decoration: none;
+    margin: 0;
+    padding: 0;
 }
 
-.navbar-logo {
+#navbar-placeholder .navbar-logo {
     width: 70px;
     height: 70px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.logo-main {
-    font-family: var(--font-heading);
+#navbar-placeholder .logo-main {
+    font-family: var(--nb-font-heading);
     font-size: 40px;
     font-weight: 900;
     line-height: 1;
     color: #2c3e50;
 }
 
-.logo-sub {
-    font-family: var(--font-body);
+#navbar-placeholder .logo-sub {
+    font-family: var(--nb-font-body);
     font-size: 17.6px;
     font-weight: 600;
     color: #7f8c8d;
     margin-top: 2px;
 }
 
-.navbar .nav-link {
-    font-family: var(--font-body);
+#navbar-placeholder .navbar .nav-link {
+    font-family: var(--nb-font-body);
     font-size: 20px;
     font-weight: 600;
     color: #2c3e50;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.navbar .nav-link:hover {
+#navbar-placeholder .navbar .nav-link:hover {
     color: #e67e22;
 }
 
+#navbar-placeholder {
+    height: var(--navbar-height);
+}
+
+html body {
+    padding-top: 0 !important;
+}
+
 @media screen and (max-width: 576px) {
-    .navbar {
+    :root {
+        --navbar-height: 56px; 
+    }
+
+    #navbar-placeholder .navbar {
         padding: 8px 12px;
     }
 
-    .navbar-logo {
+    #navbar-placeholder .navbar-logo {
         width: 40px;
         height: 40px;
     }
 
-    .navbar-brand {
+    #navbar-placeholder .navbar-brand {
         gap: 8px !important;
-        margin-right: 0;
     }
 
-    .logo-main {
+    #navbar-placeholder .logo-main {
         font-size: 24px;
     }
 
-    .logo-sub {
+    #navbar-placeholder .logo-sub {
         font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 991.98px) {
+    #navbar-placeholder .navbar {
+        height: auto;
+        min-height: var(--navbar-height);
     }
 }
