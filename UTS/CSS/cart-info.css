@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5 {
 
 .summary {
     position: sticky;
-    top: 6.5rem;
+    top: 104px;
 }
 
 .cart-row + .cart-row,
@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5 {
     place-items: center;
     background: var(--bg-beige);
     color: var(--rich-brown);
-    font-size: 1.5rem;
+    font-size: 24px;
 }
 
 .qty {
@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5 {
     border-radius: 999px;
     color: #fff;
     font-weight: 800;
-    padding: .65rem 1.5rem;
+    padding: 10.4px 24px;
     transition: background .2s, transform .2s;
 }
 
@@ -118,18 +118,18 @@ h1, h2, h3, h4, h5 {
 .form-control {
     background: #fff;
     border-color: var(--bg--darker-beige);
-    border-radius: .75rem;
+    border-radius: 12px;
 }
 
 .form-control:focus {
     border-color: var(--lighter-brown);
-    box-shadow: 0 0 0 .2rem rgba(176, 137, 104, .25);
+    box-shadow: 0 0 0 3.2px rgba(176, 137, 104, .25);
 }
 
 .option {
     background: #fff;
     border: 1px solid var(--bg--darker-beige);
-    border-radius: .75rem;
+    border-radius: 12px;
     color: var(--text-dark);
     font-weight: 700;
 }
@@ -145,7 +145,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .btn-check:focus-visible + .option {
-    box-shadow: 0 0 0 .2rem rgba(176, 137, 104, .25);
+    box-shadow: 0 0 0 3.2px rgba(176, 137, 104, .25);
 }
 
 .order-number {
@@ -153,7 +153,7 @@ h1, h2, h3, h4, h5 {
     border: 1px solid var(--rich-brown);
     color: var(--darker-brown);
     font-family: var(--font-heading);
-    font-size: 1.6rem;
+    font-size: 25.6px;
     font-weight: 700;
     letter-spacing: 2px;
 }
