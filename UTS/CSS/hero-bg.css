@@ -1,0 +1,130 @@
+.belitung-hero {
+    --bh-image: url("../IMG/background-2.webp");
+    --bh-pull: 188px;
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: calc(-1 * var(--bh-pull));
+    padding-top: var(--bh-pull);
+    padding-bottom: 40px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    clip-path: inset(0 -100vw);
+}
+.belitung-hero > .container { width: 100%; }
+
+.about > .about-intro {
+    --bh-image: url("../IMG/background-1.webp");
+    --bh-pull: 140px;
+    position: relative;
+    isolation: isolate;
+    margin-top: calc(-1 * var(--bh-pull));
+    padding-top: var(--bh-pull);
+    padding-bottom: 40px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    clip-path: inset(0 -100vw);
+}
+
+.belitung-hero::before, .belitung-hero::after,
+.about > .about-intro::before, .about > .about-intro::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.belitung-hero::before, .about > .about-intro::before {
+    background-color: var(--bg-beige, #FCE5C6);
+    background-image:
+        linear-gradient(90deg, rgba(252, 229, 198, .84) 0%, rgba(252, 229, 198, .6) 34%, rgba(252, 229, 198, 0) 62%),
+        var(--bh-image);
+    background-size: 100% 100%, cover;
+    background-position: 0 0, 50% 50%;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
+    transform-origin: 50% 40%;
+    will-change: transform;
+    animation: bh-bg-in 1.5s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+.belitung-hero::after, .about > .about-intro::after {
+    opacity: 0;
+    background-image: linear-gradient(105deg, rgba(255, 252, 240, 0) 38%, rgba(255, 252, 240, .6) 50%, rgba(255, 252, 240, 0) 62%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    mix-blend-mode: soft-light;
+}
+
+@keyframes bh-bg-in {
+    from { scale: 1.1; filter: blur(8px); }
+    to   { scale: 1;   filter: blur(0); }
+}
+
+@supports (animation-timeline: scroll()) {
+    @keyframes bh-bg-scroll {
+        to { transform: translate3d(0, 20vh, 0) scale(1.16); opacity: .15; }
+    }
+    @keyframes bh-shine-scroll {
+        0%   { background-position: 100% 0; opacity: 0; }
+        25%  { opacity: 1; }
+        75%  { opacity: 1; }
+        100% { background-position: 0 0; opacity: 0; }
+    }
+    @keyframes bh-content-scroll {
+        to { translate: 0 -6vh; opacity: .3; }
+    }
+
+    .belitung-hero::before, .about > .about-intro::before {
+        animation: bh-bg-in 1.5s cubic-bezier(.2, .7, .2, 1) both, bh-bg-scroll linear both;
+        animation-timeline: auto, scroll(root block);
+        animation-range: normal, 0px 100vh;
+    }
+    .belitung-hero::after, .about > .about-intro::after {
+        animation: bh-shine-scroll linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0px 100vh;
+    }
+
+    .belitung-hero > .container,
+    .about > .about-intro > .about-intro-text,
+    .about > .about-intro > .about-intro-img {
+        animation: bh-content-scroll linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0px 100vh;
+    }
+}
+
+@media (max-width: 991px) {
+    .belitung-hero { --bh-pull: 168px; }
+    .belitung-hero::before, .about > .about-intro::before {
+        background-image:
+            linear-gradient(180deg, rgba(252, 229, 198, .72) 0%, rgba(252, 229, 198, .5) 100%),
+            var(--bh-image);
+    }
+}
+@media (max-width: 576px) {
+    .belitung-hero { --bh-pull: 158px; }
+}
+@media (max-width: 480px) {
+    .about > .about-intro { --bh-pull: 120px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .belitung-hero::before, .belitung-hero::after,
+    .about > .about-intro::before, .about > .about-intro::after,
+    .belitung-hero > .container,
+    .about > .about-intro > .about-intro-text,
+    .about > .about-intro > .about-intro-img {
+        animation: none !important;
+    }
+}
