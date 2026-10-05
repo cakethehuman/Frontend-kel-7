@@ -42,15 +42,14 @@
 }
 
 .belitung-hero::before, .about > .about-intro::before {
-    background-color: var(--bg-beige, #FCE5C6);
     background-image:
         linear-gradient(90deg, rgba(252, 229, 198, .84) 0%, rgba(252, 229, 198, .6) 34%, rgba(252, 229, 198, 0) 62%),
         var(--bh-image);
     background-size: 100% 100%, cover;
     background-position: 0 0, 50% 50%;
     background-repeat: no-repeat;
-    -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
-            mask-image: linear-gradient(to bottom, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 94%);
+            mask-image: linear-gradient(to bottom, #000 78%, transparent 94%);
     transform-origin: 50% 40%;
     will-change: transform;
     animation: bh-bg-in 1.5s cubic-bezier(.2, .7, .2, 1) both;
@@ -72,7 +71,7 @@
 
 @supports (animation-timeline: scroll()) {
     @keyframes bh-bg-scroll {
-        to { transform: translate3d(0, 20vh, 0) scale(1.16); opacity: .15; }
+        to { transform: scale(1.08); opacity: 0; }
     }
     @keyframes bh-shine-scroll {
         0%   { background-position: 100% 0; opacity: 0; }
