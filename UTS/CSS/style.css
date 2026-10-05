@@ -79,32 +79,60 @@ main {
 }
 #container-pertama {
     display: flex;
-    gap: 40%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5%;
     margin-bottom: 1%;
 }
 
+.text-and-button-wrapper {
+    width: 50%;
+}
+
+.image-and-content-wrapper {
+    position: relative;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.image-wrapper {
+    position: relative;
+    width: 80%;
+    max-width: 420px;
+    aspect-ratio: 1 / 1;
+
+    display: inline-block;
+
+    border: 7px solid var(--secondary-color);
+    border-radius: 50%;
+
+    overflow: visible;
+}
+
+
+
+.image-clip {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+    overflow: hidden;
+}
 
 .round-img {
     width: 100%;
     height: 100%;
+
+    display: block;
+
     border-radius: 50%;
-    
     object-fit: cover;
 
     transition: transform 0.4s ease-in-out;
-}
-
-.text-and-button-wrapper {
-    width: 90%;
-}
-
-.image-wrapper {
-    width: 80%;
-    height: 100%;
-    overflow: hidden;
-    border: 7px solid var(--secondary-color);
-    display: inline-block;
-    border-radius: 50%;
 }
 
 .image-wrapper:hover .round-img {
@@ -112,129 +140,197 @@ main {
 }
 
 
-.image-and-content-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 .plus-button {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
+
     text-decoration: none;
-    color: inherit;
+    color: var(--primary-color);
+
     cursor: pointer;
+
     background-color: var(--text-light);
     border: 2px solid var(--primary-color);
-    
-    color: var(--primary-color);
+
     width: 28px;
     height: 28px;
+
     border-radius: 50%;
+
     position: absolute;
-    transition: background-color 0.3s ease-in-out;
+
+    z-index: 5;
+
+    transition:
+        background-color 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+}
+
+.plus-button:hover {
+    color: var(--text-light);
+    background-color: var(--primary-color);
 }
 
 
-.info-num-1 {
+
+.button-first {
+    top: 48%;
+    left: -14px;
+}
+
+.button-second {
+    top: 35%;
+    right: 7%;
+}
+
+.button-third {
+    bottom: 12%;
+    right: -14px;
+}
+
+
+.info-num-1,
+.info-num-2,
+.info-num-3 {
     position: absolute;
+
+    border-radius: 10%;
+    background-color: var(--darker-roast-brown);
+
+    visibility: hidden;
+
+    transform: translate(10px);
+    opacity: 0;
+
+    transition:
+        opacity 0.5s ease-in-out,
+        visibility 0.5s ease-in-out,
+        transform 0.5s ease-in-out;
+
+    z-index: 4;
+}
+
+
+
+.info-num-1 {
     width: 50%;
     top: 25%;
     right: 75%;
-    border-radius: 10%;
-    background-color: var(--darker-roast-brown);
-    
-    visibility: hidden;
-    transform: translate(10px);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .info-num-1::after {
     content: "";
+
     position: absolute;
+
     bottom: 10px;
     right: -10px;
-    
-    
+
     border-width: 15px 0 0 25px;
     border-style: solid;
-    border-color: transparent transparent transparent var(--darker-roast-brown);
+
+    border-color:
+        transparent
+        transparent
+        transparent
+        var(--darker-roast-brown);
 }
 
+
+
+
 .info-num-2 {
-    position: absolute;
     width: 50%;
     top: 5%;
     right: -18%;
-    border-radius: 10%;
-    background-color: var(--darker-roast-brown);
-    
-    visibility: hidden;
-    transform: translate(10px);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
 .info-num-2::after {
     content: "";
+
     position: absolute;
+
     bottom: -3px;
     left: 0;
-    
-    
+
     border-width: 15px 20px 0 0;
-    border-style: solid;    
-    border-color: var(--darker-roast-brown) transparent transparent transparent;
+    border-style: solid;
+
+    border-color:
+        var(--darker-roast-brown)
+        transparent
+        transparent
+        transparent;
 }
+
+
 
 
 .info-num-3 {
-    position: absolute;
     width: 60%;
     bottom: 5%;
     right: 10%;
-    border-radius: 10%;
-    background-color: var(--darker-roast-brown);
-    
-    visibility: hidden;
-    transform: translate(10px);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
-
-
 
 .info-num-3::after {
     content: "";
+
     position: absolute;
+
     top: -10px;
     right: 50%;
 
-
     border-width: 15px 0 0 25px;
     border-style: solid;
-    border-color: transparent transparent transparent var(--darker-roast-brown);
+
+    border-color:
+        transparent
+        transparent
+        transparent
+        var(--darker-roast-brown);
 }
+
+
+
 
 .info-num-1 h6,
-.info-num-1 p {
-    font-size: small;
-}
-
+.info-num-1 p,
 .info-num-2 h6,
-.info-num-2 p {
-    font-size: small;
-}
-
+.info-num-2 p,
 .info-num-3 h6,
 .info-num-3 p {
     font-size: small;
 }
 
+.info-description {
+    margin: 0;
+}
+
+
+
+.button-first:hover + .info-num-1,
+.info-num-1:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
+
+.button-second:hover + .info-num-2,
+.info-num-2:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
+
+.button-third:hover + .info-num-3,
+.info-num-3:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0);
+}
 
 .info-description {
     margin: 0;
@@ -373,13 +469,8 @@ main {
     color: var(--primary-color);
 }
 
-@media screen and (max-width: 1200px) {
-    #container-pertama {
-        gap: 8%;
-    }
-}
-
 @media screen and (max-width: 991px) {
+
     main {
         padding: 30px 25px;
     }
@@ -401,8 +492,8 @@ main {
     .image-wrapper {
         width: 55%;
         max-width: 320px;
-        margin: 0 auto;
     }
+
 
     #footer-pertama-image-and-description-wrapper {
         width: 100%;
@@ -414,14 +505,20 @@ main {
     .icon-and-text-wrapper {
         text-align: left;
     }
+
+
+
     .info-num-1,
     .info-num-2,
     .info-num-3 {
         width: 60%;
+
         top: auto;
         bottom: 0;
+
         left: 50%;
         right: auto;
+
         margin-left: -30%;
     }
 
@@ -432,7 +529,9 @@ main {
     }
 }
 
+
 @media screen and (max-width: 576px) {
+
     main {
         padding: 20px 15px;
     }
@@ -463,6 +562,7 @@ main {
     .why-us-heading {
         font-size: 26px;
     }
+
     .why-us-card h4 {
         font-size: 16px;
     }
