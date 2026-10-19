@@ -1,0 +1,75 @@
+:root{
+    --primary-color: #FF3131;   
+    --primary-deep: #d92626;
+    --secondary-color:#A49F4D; 
+    --bg-light: #FFF8EA;        
+    --bg-beige: #FCE5C6;
+    --bg--darker-beige: #ede3d3;    
+    --text-dark: #393A3C ;      
+    --text-light: #FFFFFF;
+    --gray-color: #757070;       
+    --rich-brown: #B06A3B;
+    --darker-brown: #4A2814;
+    --lighter-brown: #B08968;
+    --roast-brown: #8C4B26 ;
+    --darker-roast-brown: #5C2E15;
+    --blob-peach: #F5D5A0;
+    --font-heading: var(--font-libre), Georgia, serif;
+    --font-body: var(--font-nunito), 'Segoe UI', sans-serif;
+}
+
+.bg-primary-color{
+    background-color: var(--primary-color) !important;
+}
+
+.border-primary-color{
+    border-color: var(--primary-color) !important;
+}
+
+.bg-secondary-color{
+    background-color: var(--secondary-color) !important;
+}
+
+.bg-beige{
+    background-color: var(--bg-beige) !important;
+}
+
+.bg-darker-beige{
+    background-color: var(--bg--darker-beige) !important;
+}
+
+.bg-light{
+    background-color: var(--bg-light) !important;
+}
+
+.bg-lighter-brown{
+    background-color: var(--lighter-brown);
+}
+
+.bg-darker-brown{
+    background-color: var(--darker-brown);
+}
+
+.menu-card {
+    transition: transform 0.20s ease-in-out, box-shadow 0.20s ease-in-out;
+}
+
+.menu-card:hover {
+    transform: translateY(-1px);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: .35;
+    background-image: url("/IMG/background-3.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
