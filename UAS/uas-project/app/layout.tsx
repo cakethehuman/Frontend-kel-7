@@ -35,7 +35,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id" className={`${libre.variable} ${nunito.variable}`}>
-      <body className="d-flex flex-column min-vh-100 bg-beige">
+      <body className="d-flex flex-column min-vh-100 bg-beige text-dark">
         <Navbar />
         {children}
         {/* TODO: pasang <Footer /> di sini setelah komponen footer dibuat */}
