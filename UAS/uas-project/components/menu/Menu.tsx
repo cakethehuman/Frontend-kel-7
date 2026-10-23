@@ -19,14 +19,14 @@ const menus = {
       image: "/IMG/mie_belitung.webp",
       name: "Mie Belitung Special",
       description: "Mie Belitung dengan topping spesial.",
-      price: "Rp 25.000",
+      price: "Rp 28.000",
     },
     {
       id: 3,
       image: "/IMG/mie_belitung.webp",
-      name: "Mie Belitung Special",
-      description: "Mie Belitung dengan topping spesial.",
-      price: "Rp 25.000",
+      name: "Mie Belitung Complit",
+      description: "Mie Belitung dengan topping complit.",
+      price: "Rp 29.000",
     },
 
   ],
@@ -69,7 +69,7 @@ const menus = {
       image: "/IMG/esBelitung.webp",
       name: "es belitung",
       description: "es belitung enak",
-      price: "Rp 25.000",
+      price: "Rp 13.000",
     },
 
 
