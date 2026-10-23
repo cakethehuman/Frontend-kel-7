@@ -1,10 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Eyebrow from "@/components/contact/Eyebrow";
 
 const address =
@@ -30,8 +27,7 @@ export default function LocationSection() {
             <Eyebrow>Lokasi</Eyebrow>
             <h2 className="section-title">Dapur Kami di Tanjung Pandan</h2>
             <p className="section-copy">
-              Kedai kami gampang ditandai: cari genteng merah dan bangku kayu
-              panjang di depan.
+              Kedai kami gampang ditandai: cari genteng merah dan bangku kayu panjang di depan.
             </p>
 
             <div className="info-item d-flex gap-3">
@@ -39,8 +35,7 @@ export default function LocationSection() {
               <div>
                 <h5 className="text-uppercase">Alamat</h5>
                 <p className="m-0 fw-bold">
-                  Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten
-                  Belitung 33411
+                  Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten Belitung 33411
                 </p>
                 <button
                   type="button"

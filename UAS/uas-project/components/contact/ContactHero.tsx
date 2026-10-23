@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Eyebrow from "@/components/contact/Eyebrow";
 
 import { useSyncExternalStore } from "react";
@@ -52,8 +49,7 @@ export default function ContactHero() {
               Mari Ngobrol, Sambil Sepiring <em>Mie Belitung</em>
             </h1>
             <p className="hero-lead">
-              Punya saran resep, mau reservasi meja, atau cuma penasaran kami
-              ada di mana? Semuanya ada di halaman ini.
+              Punya saran resep, mau reservasi meja, atau cuma penasaran kami ada di mana? Semuanya ada di halaman ini.
             </p>
 
             <div className="hero-cta d-flex">
