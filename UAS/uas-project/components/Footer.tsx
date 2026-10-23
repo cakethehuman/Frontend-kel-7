@@ -56,8 +56,7 @@ export default function Footer() {
               className="order-1 d-flex justify-content-center justify-content-lg-start">
               <Link
                 href="/"
-                className="footer-brand d-inline-flex flex-column flex-lg-row align-items-center text-decoration-none"
-                aria-label="Mie Belitung - ke beranda">
+                className="footer-brand d-inline-flex flex-column flex-lg-row align-items-center text-decoration-none">
                 <span className="footer-brand-logo flex-shrink-0">
                   <Image
                     src="/IMG/logo.webp"
@@ -87,7 +86,6 @@ export default function Footer() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={social.name}
                       className="footer-social-icon d-flex align-items-center justify-content-center rounded-circle flex-shrink-0">
                       <Image
                         src={social.icon}

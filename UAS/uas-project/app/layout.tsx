@@ -7,7 +7,8 @@ import "./css/constants.css";
 import "./css/style.css";
 import "./css/navbar.css";
 import "./css/hero-bg.css";
-import "./css/footer.css"
+import "./css/footer.css";
+import "./css/contact.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
