@@ -1,4 +1,3 @@
-
 "use client";
 
 import "@/app/css/constants.css";
@@ -10,38 +9,70 @@ const menus = {
   Main: [
     {
       id: 1,
-      image: "/images/mie-belitung.jpg",
+      image: "/IMG/mie_belitung.webp",
       name: "Mie Belitung",
       description: "Mie Belitung dengan kuah khas.",
       price: "Rp 20.000",
     },
     {
       id: 2,
-      image: "/images/mie-belitung-special.jpg",
+      image: "/IMG/mie_belitung.webp",
       name: "Mie Belitung Special",
       description: "Mie Belitung dengan topping spesial.",
-      price: "Rp 25.000",
+      price: "Rp 28.000",
     },
+    {
+      id: 3,
+      image: "/IMG/mie_belitung.webp",
+      name: "Mie Belitung Complit",
+      description: "Mie Belitung dengan topping complit.",
+      price: "Rp 29.000",
+    },
+
   ],
 
   Drink: [
     {
-      id: 3,
-      image: "/images/es-teh.jpg",
-      name: "Es Teh",
-      description: "Teh manis dingin yang menyegarkan.",
+      id: 1,
+      image: "/IMG/EsJerukKunci.webp",
+      name: "Es Jeruk Kunci",
+      description: "Teh jeruk kunci yang dingin yang menyegarkan.",
       price: "Rp 5.000",
     },
+    {
+      id: 2,
+      image: "/IMG/kopiBelitung.webp",
+      name: "Kopi belitung",
+      description: "Teh jeruk kunci yang dingin yang menyegarkan.",
+      price: "Rp 5.000",
+    },
+
   ],
 
   Others: [
     {
-      id: 4,
-      image: "/images/kerupuk.jpg",
-      name: "Kerupuk",
-      description: "Kerupuk renyah sebagai pelengkap.",
+      id: 1,
+      image: "/IMG/kerupukBelitung.webp",
+      name: "Kerupuk belitung",
+      description: "Kerupuk belitung",
       price: "Rp 3.000",
     },
+    {
+      id: 2,
+      image: "/IMG/nasiTim.avif",
+      name: "nasi tim",
+      description: "Mie Belitung dengan topping spesial.",
+      price: "Rp 25.000",
+    },
+    {
+      id: 3,
+      image: "/IMG/esBelitung.webp",
+      name: "es belitung",
+      description: "es belitung enak",
+      price: "Rp 13.000",
+    },
+
+
   ],
 };
 
@@ -51,14 +82,16 @@ export default function Menu() {
       {menuType.map((menuFoodType) => (
         <section key={menuFoodType} id={menuFoodType}>
           <div className="d-flex justify-content-center">
-            <h2 className="text-danger">{menuFoodType} Menu</h2>
+            <h2 className="text-danger">
+              {menuFoodType} Menu
+            </h2>
           </div>
 
-          <Container className="py-3 px-5 w-75">
-            <Row xs={1} md={2} lg={3} className="g-2">
+          <Container className="py-3 px-3">
+            <Row xs={1} md={2} lg={3} className="g-1">
               {menus[menuFoodType].map((item) => (
-                <Col key={item.id} className="px-2 py-2">
-                  <div className="bg-darker-beige rounded p-3 h-100">
+                <Col key={item.id} className="px-2 py-1">
+                  <div className="bg-darker-beige w-75 rounded p-3 h-100">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -74,7 +107,9 @@ export default function Menu() {
 
                     <div className="d-flex justify-content-between align-items-end gap-3">
                       <div>
-                        <p className="text-muted small mb-0">Harga</p>
+                        <p className="text-muted small mb-0">
+                          Harga
+                        </p>
                         <p className="h5 fw-bold text-danger mb-0">
                           {item.price}
                         </p>
@@ -102,4 +137,3 @@ export default function Menu() {
     </Stack>
   );
 }
-
