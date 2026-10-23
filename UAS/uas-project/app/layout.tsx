@@ -7,8 +7,10 @@ import "./css/constants.css";
 import "./css/style.css";
 import "./css/navbar.css";
 import "./css/hero-bg.css";
+import "./css/footer.css"
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const libre = Libre_Baskerville({
   subsets: ["latin"],
@@ -38,7 +40,7 @@ export default function RootLayout({
       <body className="d-flex flex-column min-vh-100 bg-beige text-dark">
         <Navbar />
         {children}
-        {/* TODO: pasang <Footer /> di sini setelah komponen footer dibuat */}
+        <Footer />
       </body>
     </html>
   );
