@@ -58,8 +58,8 @@ export default function Login() {
 
             <div className="d-flex justify-content-center p-2">
               <div className="d-flex flex-column gap-2 text-center">
-                <a href="/register">Don't have an account?</a>
-                <a href="/forget-password">Forgot your password?</a>
+                <a href="/auth/register">Don't have an account?</a>
+                <a href="/auth/forget-password">Forgot your password?</a>
               </div>
             </div>
           </div>
