@@ -49,11 +49,11 @@ export default function CartInfo() {
   const [placed, setPlaced] = useState<Order | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const refs: FieldRefs = {
-    name: useRef<HTMLInputElement>(null),
-    phone: useRef<HTMLInputElement>(null),
-    table: useRef<HTMLInputElement>(null),
-  };
+  const nameRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const tableRef = useRef<HTMLInputElement>(null);
+
+  const refs: FieldRefs = { name: nameRef, phone:phoneRef, table:tableRef };
 
   const count = items.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -159,8 +159,7 @@ export default function CartInfo() {
                 <Button variant="link" size="sm" className="link-secondary text-decoration-none" onClick={() => CartStore.clear()} >
                   <i className="bi bi-trash3" /> Kosongkan
                 </Button>
-              }
-            >
+              }>
               {items.map((item) => (
                 <CartRow key={item.id} item={item} onStep={stepQty} onRemove={removeItem}/>
               ))}
