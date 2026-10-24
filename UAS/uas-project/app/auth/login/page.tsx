@@ -7,7 +7,6 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Connect your authentication logic here
   };
 
   return (
