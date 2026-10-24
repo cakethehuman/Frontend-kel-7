@@ -11,7 +11,7 @@ const menus = {
       id: 1,
       image: "/IMG/mie_belitung.webp",
       name: "Mie Belitung",
-      description: "Mie Belitung dengan kuah khas.",
+      description: "Mie Belitung dengan kuah khas dengan toping yang pas.",
       price: "Rp 20.000",
     },
     {
@@ -61,7 +61,7 @@ const menus = {
       id: 2,
       image: "/IMG/nasiTim.avif",
       name: "nasi tim",
-      description: "Mie Belitung dengan topping spesial.",
+      description: "Nasi tim paling enak",
       price: "Rp 25.000",
     },
     {
@@ -89,7 +89,7 @@ export default function Menu() {
 
           <Container className="py-3 px-3">
             <Row xs={1} md={2} lg={3} className="g-1">
-              {menus[menuFoodType].map((item) => (
+              {menus[menuFoodType as keyof typeof menus].map((item) => (
                 <Col key={item.id} className="px-2 py-1">
                   <div className="bg-darker-beige w-75 rounded p-3 h-100">
                     <img
