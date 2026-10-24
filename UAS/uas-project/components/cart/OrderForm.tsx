@@ -1,7 +1,6 @@
 import { Col, Form, Row, ToggleButton } from "react-bootstrap";
 import type { FieldRefs, FormErrors, FormState, OrderType, Payment } from "@/lib/cartTypes";
 
-
 const orderTypes: { value: OrderType; label: string; icon: string }[] = [
   { value: "dinein", label: "Makan di Tempat", icon: "bi-shop" },
   { value: "takeaway", label: "Bungkus", icon: "bi-bag" },
@@ -20,7 +19,7 @@ interface OrderFormProps {
   refs: FieldRefs;
 }
 
-export default function OrderForm({ form, errors, onChange, refs }: OrderFormProps) {
+export default function OrderForm({ form, errors, onChange, refs}: OrderFormProps) {
   return (
     <Form noValidate onSubmit={(e) => e.preventDefault()}>
       <Row className="g-3">
