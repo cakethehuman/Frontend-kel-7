@@ -37,10 +37,7 @@ export default function LocationSection() {
                 <p className="m-0 fw-bold">
                   Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten Belitung 33411
                 </p>
-                <button
-                  type="button"
-                  className="copy-btn mt-2 bg-transparent border-0 p-0"
-                  onClick={copyAddress}>
+                <button type="button" className="copy-btn mt-2 bg-transparent border-0 p-0" onClick={copyAddress}>
                   <i className={`bi ${copied ? "bi-check-lg" : "bi-clipboard"}`}/>
                   {" "} {copied ? "Tersalin!" : "Salin Alamat"}
                 </button>
@@ -55,24 +52,14 @@ export default function LocationSection() {
               </div>
             </div>
 
-            <Button
-              as="a"
-              href="https://www.google.com/maps/dir/?api=1&destination=-2.7416,107.6358"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0 mt-3">
+            <Button as="a" href="https://www.google.com/maps/dir/?api=1&destination=-2.7416,107.6358" target="_blank" rel="noopener noreferrer" className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0 mt-3">
               <i className="bi bi-signpost-split" /> Petunjuk Arah
             </Button>
           </Col>
 
           <Col lg={6}>
             <div className="map-frame rounded-4 overflow-hidden">
-              <iframe
-                title="Peta lokasi Sahang Kitchen Belitung"
-                src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-100 border-0 d-block"/>
+              <iframe title="Peta lokasi Sahang Kitchen Belitung" src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-100 border-0 d-block"/>
             </div>
           </Col>
         </Row>

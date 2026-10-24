@@ -53,16 +53,10 @@ export default function ContactHero() {
             </p>
 
             <div className="hero-cta d-flex">
-              <Button
-                as="a"
-                href="#lokasi"
-                className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0">
+              <Button as="a" href="#lokasi" className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0">
                 <i className="bi bi-geo-alt" /> Lihat Lokasi
               </Button>
-              <Button
-                as="a"
-                href="#ulasan"
-                className="btn-app btn-ghost d-inline-flex align-items-center gap-2 rounded-pill">
+              <Button as="a" href="#ulasan" className="btn-app btn-ghost d-inline-flex align-items-center gap-2 rounded-pill">
                 <i className="bi bi-pencil-square" /> Tulis Masukan
               </Button>
             </div>
@@ -71,14 +65,7 @@ export default function ContactHero() {
 
           <Col lg={5}>
             <div className="hero-art">
-              <Image
-                src="/IMG/gambar1_contact.webp"
-                alt="Mie Belitung"
-                width={1200}
-                height={900}
-                sizes="(max-width: 992px) 280px, 320px"
-                className="hero-img"
-                priority/>
+              <Image src="/IMG/gambar1_contact.webp" alt="Mie Belitung" width={1200} height={900} sizes="(max-width: 992px) 280px, 320px" className="hero-img" priority/>
             </div>
           </Col>
         </Row>
