@@ -1,10 +1,7 @@
 export default function adminMain(){
   return (
     <>
-      <h1>Welcome Admin</h1>
-
-
-
+      <h1>Welcome admin</h1>
     </>
   );
 }
