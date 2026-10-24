@@ -9,9 +9,11 @@ import "./css/navbar.css";
 import "./css/hero-bg.css";
 import "./css/footer.css";
 import "./css/contact.css";
+import "./css/cart-info.css";
 
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"
+import CartButton from "@/components/CartButton";
 
 const libre = Libre_Baskerville({
   subsets: ["latin"],
@@ -42,6 +44,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <CartButton />
       </body>
     </html>
   );
