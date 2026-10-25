@@ -1,11 +1,17 @@
-export default function FeatureBox (props: any) {
-    return (
-        <div className="feature-box">
-            <div className="feature-icon">
-                <i className={props.icon}></i>
-                <h4>{props.title}</h4>
-                <p>{props.children}</p>
-            </div>
-        </div>
-    );
+import type { ReactNode } from "react";
+
+interface FeatureBoxProps {
+  icon: string;
+  judul: string;
+  children: ReactNode;
+}
+
+export default function FeatureBox(props: FeatureBoxProps) {
+  return (
+    <div className="feature-box">
+      <i className={props.icon}></i>
+      <h4>{props.judul}</h4>
+      <p>{props.children}</p>
+    </div>
+  );
 }
