@@ -7,7 +7,7 @@ import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import CartRow from "@/components/cart/CartRow";
 import MoreList from "@/components/cart/MoreList";
 import OrderForm from "@/components/cart/OrderForm";
-import Panel from "@/components/cart/Panel";
+import Panel from "@/components/ui/Panel";
 import Recap from "@/components/cart/Recap";
 import type { FieldKey, FieldRefs, FormErrors, FormState, Order } from "@/lib/cartTypes";
 import type { MenuItem } from "@/data/menu";
@@ -53,7 +53,7 @@ export default function CartInfo() {
   const phoneRef = useRef<HTMLInputElement>(null);
   const tableRef = useRef<HTMLInputElement>(null);
 
-  const refs: FieldRefs = { name: nameRef, phone:phoneRef, table:tableRef };
+  const refs: FieldRefs = { name: nameRef, phone: phoneRef, table: tableRef };
 
   const count = items.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -62,9 +62,11 @@ export default function CartInfo() {
   const empty = items.length === 0;
 
   const changeField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
-    setForm((prev) => ({ ...prev, [key]: value, ...(key === "type" && value === "takeaway" ? { table: "" } : {}),
+    setForm((prev) => ({
+      ...prev, [key]: value, ...(key === "type" && value === "takeaway" ? { table: "" } : {}),
     }));
-    setErrors((prev) => ({ ...prev, [key]: false, ...(key === "type" ? { table: false } : {}),
+    setErrors((prev) => ({
+      ...prev, [key]: false, ...(key === "type" ? { table: false } : {}),
     }));
   };
 
@@ -156,12 +158,12 @@ export default function CartInfo() {
         <Row className="g-4">
           <Col lg={7} className="d-flex flex-column gap-4">
             <Panel title="Daftar Pesanan" action={
-                <Button variant="link" size="sm" className="link-secondary text-decoration-none" onClick={() => CartStore.clear()} >
-                  <i className="bi bi-trash3" /> Kosongkan
-                </Button>
-              }>
+              <Button variant="link" size="sm" className="link-secondary text-decoration-none" onClick={() => CartStore.clear()} >
+                <i className="bi bi-trash3" /> Kosongkan
+              </Button>
+            }>
               {items.map((item) => (
-                <CartRow key={item.id} item={item} onStep={stepQty} onRemove={removeItem}/>
+                <CartRow key={item.id} item={item} onStep={stepQty} onRemove={removeItem} />
               ))}
             </Panel>
 
@@ -170,7 +172,7 @@ export default function CartInfo() {
             </Panel>
 
             <Panel title="Data Pemesan">
-              <OrderForm form={form} errors={errors} onChange={changeField} refs={refs}/>
+              <OrderForm form={form} errors={errors} onChange={changeField} refs={refs} />
             </Panel>
           </Col>
 

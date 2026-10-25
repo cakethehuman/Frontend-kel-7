@@ -1,7 +1,7 @@
 "use client";
 
 import Container from "react-bootstrap/Container";
-import Eyebrow from "@/components/contact/Eyebrow";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 interface ContactInfo {
   icon: string;
@@ -37,11 +37,11 @@ export default function ContactList() {
   return (
     <section id="hubungi" className="section band">
       <Container className="wrap">
-        <Eyebrow>Hubungi Kami</Eyebrow>
-        <h2 className="section-title">
-          Telepon Lebih Cepat Daripada Nasi Dingin
-        </h2>
-
+        <SectionHeading
+          variant="section"
+          eyebrow="Hubungi Kami"
+          title="Telepon Lebih Cepat Daripada Nasi Dingin"
+        />
         <div className="contact-list mt-4">
           {contacts.map((contact) => (
             <a

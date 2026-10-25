@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
-import Eyebrow from "@/components/contact/Eyebrow";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const starLabels = [
   "Belum dinilai",
@@ -94,10 +94,11 @@ export default function FeedbackForm() {
       <Container className="wrap">
         <Row className="align-items-center gy-4 gx-lg-5">
           <Col lg={6}>
-            <Eyebrow>Saran &amp; Masukan</Eyebrow>
-            <h2 className="section-title">
-              Katakan Apa Saja, Dapur Kami Mendengar
-            </h2>
+            <SectionHeading
+              variant="section"
+              eyebrow="Saran & Masukan"
+              title="Katakan Apa Saja, Dapur Kami Mendengar"
+            />
             <p className="section-copy">
               Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.
             </p>
@@ -119,11 +120,11 @@ export default function FeedbackForm() {
               ) : (
                 <Form noValidate onSubmit={handleSubmit}>
                   <Field id="nama" label="Nama Kamu" required error={errors.nama}>
-                    <Form.Control id="nama" className="f-control w-100" placeholder="Misal: Sahang Belitung" value={form.nama} onChange={(e) => setField("nama", e.target.value)}/>
+                    <Form.Control id="nama" className="f-control w-100" placeholder="Misal: Sahang Belitung" value={form.nama} onChange={(e) => setField("nama", e.target.value)} />
                   </Field>
 
                   <Field id="email" label="Email (opsional)" error={errors.email}>
-                    <Form.Control id="email" type="email" className="f-control w-100" placeholder="biar kami bisa membalas" value={form.email} onChange={(e) => setField("email", e.target.value)}/>
+                    <Form.Control id="email" type="email" className="f-control w-100" placeholder="biar kami bisa membalas" value={form.email} onChange={(e) => setField("email", e.target.value)} />
                   </Field>
 
                   <div className={`field ${errors.rating ? "has-error" : ""}`}>
@@ -155,7 +156,7 @@ export default function FeedbackForm() {
                   </Field>
 
                   <Field id="pesan" label="Pesan Kamu" required error={errors.pesan}>
-                    <Form.Control as="textarea" id="pesan" rows={4} maxLength={500} className="f-control w-100" placeholder="Ceritakan pengalamanmu..." value={form.pesan} onChange={(e) => setField("pesan", e.target.value)}/>
+                    <Form.Control as="textarea" id="pesan" rows={4} maxLength={500} className="f-control w-100" placeholder="Ceritakan pengalamanmu..." value={form.pesan} onChange={(e) => setField("pesan", e.target.value)} />
                     <div className="char-count d-block text-end mt-1">
                       {form.pesan.length}/500
                     </div>

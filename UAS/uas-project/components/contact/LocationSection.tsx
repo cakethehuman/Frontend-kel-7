@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import Eyebrow from "@/components/contact/Eyebrow";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const address =
   "Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Belitung 33411";
@@ -24,8 +24,11 @@ export default function LocationSection() {
       <Container className="wrap">
         <Row className="align-items-center gy-4 gx-lg-5">
           <Col lg={6}>
-            <Eyebrow>Lokasi</Eyebrow>
-            <h2 className="section-title">Dapur Kami di Tanjung Pandan</h2>
+            <SectionHeading
+              variant="section"
+              eyebrow="Lokasi"
+              title="Dapur Kami di Tanjung Pandan"
+            />
             <p className="section-copy">
               Kedai kami gampang ditandai: cari genteng merah dan bangku kayu panjang di depan.
             </p>
@@ -38,7 +41,7 @@ export default function LocationSection() {
                   Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten Belitung 33411
                 </p>
                 <button type="button" className="copy-btn mt-2 bg-transparent border-0 p-0" onClick={copyAddress}>
-                  <i className={`bi ${copied ? "bi-check-lg" : "bi-clipboard"}`}/>
+                  <i className={`bi ${copied ? "bi-check-lg" : "bi-clipboard"}`} />
                   {" "} {copied ? "Tersalin!" : "Salin Alamat"}
                 </button>
               </div>
@@ -59,7 +62,7 @@ export default function LocationSection() {
 
           <Col lg={6}>
             <div className="map-frame rounded-4 overflow-hidden">
-              <iframe title="Peta lokasi Sahang Kitchen Belitung" src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-100 border-0 d-block"/>
+              <iframe title="Peta lokasi Sahang Kitchen Belitung" src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-100 border-0 d-block" />
             </div>
           </Col>
         </Row>
