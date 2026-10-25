@@ -2,6 +2,7 @@
 
 import { Container, Form, Button } from "react-bootstrap";
 import "@/app/css/constants.css";
+import Link from "next/link";
 
 export default function Login() {
   const handleSubmit = (event) => {
@@ -57,8 +58,8 @@ export default function Login() {
 
             <div className="d-flex justify-content-center p-2">
               <div className="d-flex flex-column gap-2 text-center">
-                <a href="/auth/register">Don't have an account?</a>
-                <a href="/auth/forget-password">Forgot your password?</a>
+                <Link href="/auth/register">Don't have an account?</Link>
+                <Link href="/auth/forget-password">Forgot your password?</Link>
               </div>
             </div>
           </div>
