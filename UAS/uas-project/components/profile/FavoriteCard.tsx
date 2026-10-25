@@ -1,4 +1,14 @@
-export default function FavoriteCard(props: any) {
+import type { ReactNode } from "react";
+
+interface FavoriteCardProps {
+  region: string;
+  done: boolean;
+  onMark: () => void;
+  onDelete: () => void;
+  children: ReactNode;
+}
+
+export default function FavoriteCard(props: FavoriteCardProps) {
   const doneClass = props.done ? " is-done" : "";
   const statusText = props.done ? "Sudah dicoba" : "Belum dicoba";
   const markText = props.done ? "Batal Tandai" : "Tandai Sudah";
@@ -23,7 +33,6 @@ export default function FavoriteCard(props: any) {
           <button
             type="button"
             className="btn btn-trash btn-del"
-            aria-label={"Hapus " + props.children}
             onClick={props.onDelete}
           >
             <i className="bi bi-trash3-fill"></i>
