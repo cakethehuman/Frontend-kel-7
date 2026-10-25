@@ -59,6 +59,11 @@
     transition: color 0.3s ease;
 }
 
+#navbar-placeholder .navbar .nav-link.active {
+    color: #e67e22;
+    border-bottom: 3px solid #e67e22;
+}
+
 #navbar-placeholder .navbar .nav-link:hover {
     color: #e67e22;
 }
@@ -69,6 +74,11 @@
 
 html body {
     padding-top: 0 !important;
+}
+
+a.button-container-pertama {
+    display: inline-block;
+    text-align: center;
 }
 
 @media screen and (max-width: 576px) {
