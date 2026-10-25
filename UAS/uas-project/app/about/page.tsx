@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import TimelineItem from "@/components/about/TimelineItem";
 import FeatureBox from "@/components/about/FeatureBox";
@@ -20,9 +21,9 @@ export default function AboutPage() {
 
   function klikFaq(nomor: number) {
     if (faqAktif === nomor) {
-      setFaqAktif(0); 
+      setFaqAktif(0);
     } else {
-      setFaqAktif(nomor); 
+      setFaqAktif(nomor);
     }
   }
 
@@ -82,16 +83,19 @@ export default function AboutPage() {
               {bukaSelengkapnya ? "Tutup " : "Baca Selengkapnya "}
               <i className="bx bx-chevron-down"></i>
             </button>
-            <br />
+
             <Link href="/menu" className="btn-cta">
               Pesan Sekarang
             </Link>
           </div>
 
           <div className="about-intro-img">
-            <img
+            <Image
               src="/IMG/Mie Belitung Close-Up.webp"
               alt="Mie Belitung Close-Up"
+              width={380}
+              height={380}
+              priority
             />
             <span className="doodle doodle-leaf-1">
               <i className="bx bx-leaf"></i>
@@ -165,7 +169,13 @@ export default function AboutPage() {
 
         <div className="about-recipe" id="komponen">
           <div className="about-recipe-img">
-            <img src="/IMG/Bahan Mie Belitung.webp" alt="Bahan Segar" />
+            <Image
+              src="/IMG/Bahan Mie Belitung.webp"
+              alt="Bahan Segar"
+              width={600}
+              height={400}
+              style={{ width: "100%", height: "auto" }}
+            />
           </div>
           <div className="about-recipe-text">
             <h2 className="heading heading-left">Komponen Utama</h2>
@@ -233,9 +243,12 @@ export default function AboutPage() {
 
         <div className="about-closing">
           <div className="about-closing-img">
-            <img
+            <Image
               src="/IMG/Mie Belitung Daun Simpor.webp"
               alt="Mie Belitung Daun Simpor"
+              width={600}
+              height={400}
+              style={{ width: "100%", height: "auto" }}
             />
           </div>
           <div className="about-closing-text">
