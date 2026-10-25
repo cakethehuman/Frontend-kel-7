@@ -5,6 +5,16 @@
     font-family: var(--font-body);
 }
 
+.about .feature-box h4 {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
 .about .heading {
     font-family: var(--font-heading);
     font-weight: 700;
