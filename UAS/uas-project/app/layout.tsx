@@ -10,6 +10,8 @@ import "./css/hero-bg.css";
 import "./css/footer.css";
 import "./css/contact.css";
 import "./css/cart-info.css";
+import "./css/about.css";
+import "./css/profile.css";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"
