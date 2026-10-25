@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import BsNavbar from "react-bootstrap/Navbar";
@@ -15,11 +16,14 @@ const links = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [expanded, setExpanded] = useState(false);
   const closeMenu = () => setExpanded(false);
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
-    // id ini dipertahankan karena navbar.css memakai selector #navbar-placeholder
     <div id="navbar-placeholder">
       <BsNavbar expand="lg" expanded={expanded} onToggle={setExpanded}>
         <Container fluid>
@@ -52,6 +56,7 @@ export default function Navbar() {
                   key={link.href}
                   as={Link}
                   href={link.href}
+                  active={isActive(link.href)}
                   onClick={closeMenu}
                 >
                   {link.label}

@@ -50,16 +50,12 @@ export default function Home() {
               </p>
             </div>
 
-            <Link href="/menu">
-              <button className="pesan-sekarang button-container-pertama">
+            <Link href="/menu" className="pesan-sekarang button-container-pertama">
                 Pesan Sekarang
-              </button>
             </Link>
 
-            <Link href="/about">
-              <button className="baca-selengkapnya button-container-pertama">
+            <Link href="/about" className="baca-selengkapnya button-container-pertama">
                 Baca Selengkapnya
-              </button>
             </Link>
           </div>
 
@@ -81,7 +77,7 @@ export default function Home() {
               </a>
 
               <div className="info-num-1 p-2">
-                <h6 className="text-warning font-weight-bold">
+                <h6 className="text-warning fw-bold">
                   🍲 Kuah Kaldu Kental
                 </h6>
                 <p className="info-description text-white">
@@ -95,7 +91,7 @@ export default function Home() {
               </a>
 
               <div className="info-num-2 p-2">
-                <h6 className="text-warning font-weight-bold">
+                <h6 className="text-warning fw-bold">
                   🍃 Daun Simpor
                 </h6>
                 <p className="info-description text-white">
@@ -109,7 +105,7 @@ export default function Home() {
               </a>
 
               <div className="info-num-3 p-2">
-                <h6 className="text-warning font-weight-bold">
+                <h6 className="text-warning fw-bold">
                   🦐 Udang Laut Segar
                 </h6>
                 <p className="info-description text-white">
