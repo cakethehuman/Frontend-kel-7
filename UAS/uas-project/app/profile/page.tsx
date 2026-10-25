@@ -1,13 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Modal } from "react-bootstrap";
 import ProfileCard from "@/components/profile/ProfileCard";
 import StatCard from "@/components/profile/StatCard";
 import FavoriteCard from "@/components/profile/FavoriteCard";
 
-const DATA_AWAL = [
+interface FavoriteItem {
+  id: number;
+  name: string;
+  region: string;
+  done: boolean;
+}
+
+const DATA_AWAL: FavoriteItem[] = [
   { id: 1, name: "Mie Belitung", region: "Sumatra", done: true },
   { id: 2, name: "Rendang", region: "Sumatra", done: true },
   { id: 3, name: "Gudeg", region: "Jawa", done: true },
@@ -20,58 +28,69 @@ const DATA_AWAL = [
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [name, setName] = useState("Wilson Putra");
+
+  const [name, setName] = useState("Wilson Hung");
   const [email, setEmail] = useState("wilson@gmail.com");
   const [role, setRole] = useState("Student & Programmer");
   const [bio, setBio] = useState(
     "I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo."
   );
-  const [tags, setTags] = useState(["AnimLovers", "Untarian", "Soushin"]);
+  const [tags, setTags] = useState<string[]>([
+    "AnimLovers",
+    "Untarian",
+    "Soushin",
+  ]);
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("");
   const [editBio, setEditBio] = useState("");
   const [editTags, setEditTags] = useState("");
   const [editError, setEditError] = useState("");
-  const [favorites, setFavorites] = useState(DATA_AWAL);
+
+  const [favorites, setFavorites] = useState<FavoriteItem[]>(DATA_AWAL);
   const [inputName, setInputName] = useState("");
   const [inputRegion, setInputRegion] = useState("Sumatra");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [messageText, setMessageText] = useState("");
   const [messageType, setMessageType] = useState("ok");
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
   useEffect(() => {
-    try {
-      const savedFav = localStorage.getItem("mb_favorites");
-      if (savedFav) {
-        setFavorites(JSON.parse(savedFav));
-      }
+    const timer = setTimeout(() => {
+      try {
+        const savedFav = localStorage.getItem("mb_favorites");
+        if (savedFav) {
+          setFavorites(JSON.parse(savedFav));
+        }
 
-      const currentUser = sessionStorage.getItem("currentUser");
-      if (currentUser) {
-        const userObj = JSON.parse(currentUser);
-        if (userObj.name) setName(userObj.name);
-        if (userObj.email) setEmail(userObj.email);
-      }
+        const currentUser = sessionStorage.getItem("currentUser");
+        if (currentUser) {
+          const userObj = JSON.parse(currentUser);
+          if (userObj.name) setName(userObj.name);
+          if (userObj.email) setEmail(userObj.email);
+        }
 
-      const savedProfile = localStorage.getItem("mb_profile");
-      if (savedProfile) {
-        const profObj = JSON.parse(savedProfile);
-        if (profObj.name) setName(profObj.name);
-        if (profObj.role) setRole(profObj.role);
-        if (profObj.bio) setBio(profObj.bio);
-        if (Array.isArray(profObj.tags)) setTags(profObj.tags);
+        const savedProfile = localStorage.getItem("mb_profile");
+        if (savedProfile) {
+          const profObj = JSON.parse(savedProfile);
+          if (profObj.name) setName(profObj.name);
+          if (profObj.role) setRole(profObj.role);
+          if (profObj.bio) setBio(profObj.bio);
+          if (Array.isArray(profObj.tags)) setTags(profObj.tags);
+        }
+      } catch (e) {
+        console.log(e);
       }
-    } catch (e) {
-      console.log(e);
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
-  function simpanKeLocal(dataBaru: any) {
+  function simpanKeLocal(dataBaru: FavoriteItem[]) {
     setFavorites(dataBaru);
     try {
       localStorage.setItem("mb_favorites", JSON.stringify(dataBaru));
@@ -88,7 +107,7 @@ export default function ProfilePage() {
     }, 3000);
   }
 
-  function tambahKuliner(e: any) {
+  function tambahKuliner(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const namaBersih = inputName.trim();
 
@@ -109,7 +128,7 @@ export default function ProfilePage() {
       return;
     }
 
-    const itemBaru = {
+    const itemBaru: FavoriteItem = {
       id: Date.now(),
       name: namaBersih,
       region: inputRegion,
@@ -140,7 +159,7 @@ export default function ProfilePage() {
     simpanKeLocal(daftarBaru);
   }
 
-  function bukaModalHapus(item: any) {
+  function bukaModalHapus(item: FavoriteItem) {
     setDeleteTargetId(item.id);
     setDeleteTargetName(item.name);
     setShowDeleteModal(true);
@@ -258,10 +277,13 @@ export default function ProfilePage() {
           <div className="col-lg-4">
             <ProfileCard className="pf-id-card h-100">
               <figure className="pf-cover m-0">
-                <img
+                <Image
                   src="/IMG/mie_belitung_muantap.webp"
                   alt="Mie Belitung, kuliner favorit utama"
+                  width={400}
+                  height={190}
                   className="pf-cover-img"
+                  priority
                 />
                 <figcaption className="pf-cover-caption">
                   <i className="bi bi-heart-fill"></i> Favorit Utama
