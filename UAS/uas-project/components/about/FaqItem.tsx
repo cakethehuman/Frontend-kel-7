@@ -1,13 +1,22 @@
-export default function FaqItem(props: any) {
-    return (
-        <div className={props.isOpen ? "faq-item active" : "faq-item"}>
-            <button type="button" className="faq-header" onClick={props.onClick}>
-                {props.judul}
-                <i className="bx bx-chevron-down"></i>
-            </button>
-            <div className="faq-body">
-                <p>{props.children}</p>
-            </div>
-        </div>
-    );
+import type { ReactNode } from "react";
+
+interface FaqItemProps {
+  judul: string;
+  isOpen: boolean;
+  onClick: () => void;
+  children: ReactNode;
+}
+
+export default function FaqItem(props: FaqItemProps) {
+  return (
+    <div className={props.isOpen ? "faq-item active" : "faq-item"}>
+      <button type="button" className="faq-header" onClick={props.onClick}>
+        {props.judul}
+        <i className="bx bx-chevron-down"></i>
+      </button>
+      <div className="faq-body">
+        <p>{props.children}</p>
+      </div>
+    </div>
+  );
 }
