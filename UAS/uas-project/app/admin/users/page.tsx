@@ -6,9 +6,9 @@ import { Badge, Button, Table } from "react-bootstrap";
 type User = { id: number; name: string; email: string; role: "user" | "admin" };
 
 const initial: User[] = [
-  { id: 1, name: "Admin", email: "admin@mail.com", role: "admin" },
-  { id: 2, name: "Budi", email: "budi@mail.com", role: "user" },
-  { id: 3, name: "Sari", email: "sari@mail.com", role: "user" },
+  { id: 1, name: "Happy", email: "admin@mail.com", role: "admin" },
+  { id: 2, name: "mikel", email: "mikel@mail.com", role: "user" },
+  { id: 3, name: "luis", email: "luis@mail.com", role: "user" },
 ];
 
 export default function AdminUsersPage() {
