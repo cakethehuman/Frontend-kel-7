@@ -40,7 +40,7 @@ export default function ContactList() {
         <SectionHeading
           variant="section"
           eyebrow="Hubungi Kami"
-          title="Telepon Lebih Cepat Daripada Nasi Dingin"
+          title="Telepon Segera, Sebelum Kami Datangi"
         />
         <div className="contact-list mt-4">
           {contacts.map((contact) => (
