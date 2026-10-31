@@ -20,6 +20,7 @@ model User {
 
   cart   Cart?
   orders Order[]
+  feedbacks Feedback[]
 
   @@map("users")
 }
@@ -38,6 +39,7 @@ model Menu {
   item_type   String?
   price       Float   @default(0)
   image       String
+  slug        String? @unique
 
   cart_items  CartItem[]
   order_items OrderItem[]
@@ -100,12 +102,12 @@ model OrderItem {
   order Order @relation(fields: [order_id], references: [order_id])
   menu  Menu  @relation(fields: [menu_id], references: [menu_id])
 
-  @@unique([order_id, item_id])
+  @@unique([order_id, menu_id])
   @@map("order_items")
 }
 
 model Feedback {
-  feedback_id   Int
+  feedback_id   Int   @id @default(autoincrement())
   user_id       Int
   name          String
   email         String?
