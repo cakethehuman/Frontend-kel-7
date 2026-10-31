@@ -65,7 +65,7 @@ export default function ContactHero() {
 
           <Col lg={5}>
             <div className="hero-art">
-              <Image src="/IMG/gambar1_contact.webp" alt="Mie Belitung" width={1200} height={900} sizes="(max-width: 992px) 280px, 320px" className="hero-img" priority />
+              <Image src="/IMG/gambar1_contact.webp" alt="Mie Belitung" width={1200} height={900} sizes="(max-width: 991px) 100vw, 460px" className="hero-img" priority />
             </div>
           </Col>
         </Row>
