@@ -28,8 +28,8 @@ model Store {
   @@map("store")
 }
 
-model Item {
-  item_id     Int     @id @default(autoincrement())
+model Menu {
+  menu_id     Int     @id @default(autoincrement())
   name        String
   description String?
   item_type   String?
@@ -39,7 +39,7 @@ model Item {
   cart_items  CartItem[]
   order_items OrderItem[]
 
-  @@map("items")
+  @@map("menus")
 }
 
 model Cart {
@@ -56,13 +56,13 @@ model Cart {
 model CartItem {
   cart_item_id Int @id @default(autoincrement())
   cart_id      Int
-  item_id      Int
+  menu_id      Int
   quantity     Int @default(1)
 
   cart Cart @relation(fields: [cart_id], references: [cart_id])
-  item Item @relation(fields: [item_id], references: [item_id])
+  menu Menu @relation(fields: [menu_id], references: [menu_id])
 
-  @@unique([cart_id, item_id])
+  @@unique([cart_id, menu_id])
   @@map("cart_items")
 }
 
@@ -82,12 +82,13 @@ model Order {
 model OrderItem {
   order_item_id     Int   @id @default(autoincrement())
   order_id          Int
-  item_id           Int
+  menu_id           Int
   quantity          Int
   price_at_purchase Float
 
   order Order @relation(fields: [order_id], references: [order_id])
-  item  Item  @relation(fields: [item_id], references: [item_id])
+  menu  Menu  @relation(fields: [menu_id], references: [menu_id])
 
   @@map("order_items")
 }
+
