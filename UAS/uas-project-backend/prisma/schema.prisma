@@ -14,6 +14,9 @@ model User {
   password      String
   is_admin      Int     @default(0)
   total_balance Float   @default(0)
+  role          String  @default("Student & Programmer)
+  bio           String  @default("I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo.")
+  tags          String  @default("AnimLovers,Untarian,Soushin")
 
   cart   Cart?
   orders Order[]
@@ -114,4 +117,13 @@ model Feedback {
   user User @relation(fields: [user_id], references: [user_id])
 
   @@map("feedback")
+}
+
+model Favorite {
+  id            Int
+  name          String
+  region        String?
+  done          Boolean @default(false)
+
+  @@map("favorites")
 }

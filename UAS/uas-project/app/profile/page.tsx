@@ -29,7 +29,7 @@ const DATA_AWAL: FavoriteItem[] = [
 export default function ProfilePage() {
   const router = useRouter();
 
-  const [name, setName] = useState("Wilson Hung");
+  const [name, setName] = useState("Wilson");
   const [email, setEmail] = useState("wilson@gmail.com");
   const [role, setRole] = useState("Student & Programmer");
   const [bio, setBio] = useState(
