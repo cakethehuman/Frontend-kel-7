@@ -8,9 +8,9 @@ type Status = "pending" | "cooking" | "done";
 type Order = { id: number; customer: string; total: number; status: Status };
 
 const initial: Order[] = [
-  { id: 1, customer: "Budi", total: 50000, status: "pending" },
-  { id: 2, customer: "Sari", total: 35000, status: "cooking" },
-  { id: 3, customer: "Andi", total: 72000, status: "done" },
+  { id: 1, customer: "Luis", total: 50000, status: "pending" },
+  { id: 2, customer: "Mikel", total: 35000, status: "cooking" },
+  { id: 3, customer: "Hangga", total: 72000, status: "done" },
 ];
 
 const colors: Record<Status, string> = {

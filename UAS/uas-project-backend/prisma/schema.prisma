@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  user_id       Int     @id @default(autoincrement())
+  name          String
+  email         String  @unique
+  password      String
+  is_admin      Int     @default(0)
+  total_balance Float   @default(0)
+
+  cart   Cart?
+  orders Order[]
+
+  @@map("users")
+}
+
+model Store {
+  store_id      Int   @id @default(autoincrement())
+  store_balance Float @default(0)
+
+  @@map("store")
+}
+
+model Item {
+  item_id     Int     @id @default(autoincrement())
+  name        String
+  description String?
+  item_type   String?
+  price       Float   @default(0)
+  image       String
+
+  cart_items  CartItem[]
+  order_items OrderItem[]
+
+  @@map("items")
+}
+
+model Cart {
+  cart_id    Int      @id @default(autoincrement())
+  user_id    Int      @unique
+  created_at DateTime @default(now())
+
+  user       User       @relation(fields: [user_id], references: [user_id])
+  cart_items CartItem[]
+
+  @@map("cart")
+}
+
+model CartItem {
+  cart_item_id Int @id @default(autoincrement())
+  cart_id      Int
+  item_id      Int
+  quantity     Int @default(1)
+
+  cart Cart @relation(fields: [cart_id], references: [cart_id])
+  item Item @relation(fields: [item_id], references: [item_id])
+
+  @@unique([cart_id, item_id])
+  @@map("cart_items")
+}
+
+model Order {
+  order_id   Int      @id @default(autoincrement())
+  user_id    Int
+  total      Float    @default(0)
+  status     String   @default("pending")
+  created_at DateTime @default(now())
+
+  user        User        @relation(fields: [user_id], references: [user_id])
+  order_items OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  order_item_id     Int   @id @default(autoincrement())
+  order_id          Int
+  item_id           Int
+  quantity          Int
+  price_at_purchase Float
+
+  order Order @relation(fields: [order_id], references: [order_id])
+  item  Item  @relation(fields: [item_id], references: [item_id])
+
+  @@map("order_items")
+}
