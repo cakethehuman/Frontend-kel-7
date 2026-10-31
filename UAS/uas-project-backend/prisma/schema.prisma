@@ -72,6 +72,14 @@ model Order {
   total      Float    @default(0)
   status     String   @default("pending")
   created_at DateTime @default(now())
+  tax_rate   Float    @default(0.1)
+
+  customer_name   String    
+  phone           String
+  order_type      String
+  table_number    Int?
+  payment_method  String
+  note            String?
 
   user        User        @relation(fields: [user_id], references: [user_id])
   order_items OrderItem[]
@@ -89,6 +97,21 @@ model OrderItem {
   order Order @relation(fields: [order_id], references: [order_id])
   menu  Menu  @relation(fields: [menu_id], references: [menu_id])
 
+  @@unique([order_id, item_id])
   @@map("order_items")
 }
 
+model Feedback {
+  feedback_id   Int
+  user_id       Int
+  name          String
+  email         String?
+  rating        Int
+  category      String
+  message       String
+  created_at    DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [user_id])
+
+  @@map("feedback")
+}
