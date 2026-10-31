@@ -53,12 +53,12 @@ router.patch("/", async (req, res) => {
 router.patch("/", async (req, res) => {
     const body = req.body;
 
-    const itemUpdate = await prisma.favorite.create({
+    const itemUpdate = await prisma.favorite.update({
         where: { id: Number(body.id) },
         data: { done: Boolean(body.done) },
     });
 
-    res.status(itemUpdate);
+    res.json(itemUpdate);
 });
 
 router.patch("/", async (req, res) => {
