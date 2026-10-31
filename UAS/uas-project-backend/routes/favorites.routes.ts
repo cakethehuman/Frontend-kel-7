@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { exportArrayBuffer } from "node:ffi";
 
 const router = Router();
 
@@ -31,7 +30,7 @@ router.get ("/", async (_req, res) => {
     res.json(favorites);
 });
 
-router.patch("/", async (req, res) => {
+router.post("/", async (req, res) => {
     const body = req.body;
 
     if (!body.name || !body.region) {
@@ -61,7 +60,7 @@ router.patch("/", async (req, res) => {
     res.json(itemUpdate);
 });
 
-router.patch("/", async (req, res) => {
+router.delete("/", async (req, res) => {
     const body = req.body;
 
     await prisma.favorite.delete({
