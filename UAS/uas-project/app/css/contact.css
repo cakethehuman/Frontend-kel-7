@@ -12,10 +12,7 @@
     color: inherit;
 }
 
-.contact-page h1,
-.contact-page h2,
-.contact-page h3,
-.contact-page h5 {
+.contact-page h1, .contact-page h2, .contact-page h3, .contact-page h5 {
     font-family: var(--font-heading);
     font-weight: 700;
     margin: 0 0 12px;
@@ -423,15 +420,13 @@
         box-shadow 0.2s;
 }
 
-.contact-page .f-control.form-control,
-.contact-page .f-control.form-select {
+.contact-page .f-control.form-control, .contact-page .f-control.form-select {
     background-color: #fff;
     color: var(--text-dark);
     box-shadow: none;
 }
 
-.contact-page .f-control.form-control:focus,
-.contact-page .f-control.form-select:focus {
+.contact-page .f-control.form-control:focus, .contact-page .f-control.form-select:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 49, 49, 0.18);
@@ -497,8 +492,7 @@
     color: var(--roast-brown);
 }
 
-.contact-page .form-alert,
-.contact-page .form-success {
+.contact-page .form-alert, .contact-page .form-success {
     display: none;
     gap: 10px;
     padding: 12px 16px;
@@ -592,8 +586,7 @@
         font-size: 26px;
     }
 
-    .contact-page .map-frame,
-    .contact-page .map-frame iframe {
+    .contact-page .map-frame, .contact-page .map-frame iframe {
         min-height: 280px;
     }
 

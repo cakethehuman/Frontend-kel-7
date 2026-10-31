@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import { menuCategories, menuItems } from "@/data/menu";
 import type { MenuItem } from "@/data/menu";
 import type { CartItem } from "@/lib/cartStore";
@@ -24,26 +26,30 @@ export default function MoreList({ items, onAdd }: MoreListProps) {
     const group = available.filter((menu) => menu.category === category);
     if (!group.length) return null;
 
-        return (
-          <div key={category}>
-            <h3 className="more-group h6 text-uppercase text-muted mt-3 mb-1">
-              {category} Menu
-            </h3>
-            {group.map((menu) => (
-              <div
-                key={menu.id}
-                className="more-row d-flex align-items-center gap-3 py-2">
-                <Image src={menu.img} alt={menu.name} width={96} height={96} className="more-thumb rounded-3" />
-                <div className="flex-grow-1 min-w-0">
-                  <div className="fw-bold">{menu.name}</div>
-                  <div className="text-muted small">{rupiah(menu.price)}</div>
+    return (
+      <div key={category}>
+        <h3 className="more-group h6 text-uppercase text-muted mt-3 mb-2">
+          {category} Menu
+        </h3>
+        <Row xs={2} sm={3} className="g-3">
+          {group.map((menu) => (
+            <Col key={menu.id}>
+              <div className="bg-white border rounded-3 overflow-hidden h-100 d-flex flex-column">
+                <div className="ratio ratio-4x3">
+                  <Image src={menu.img} alt={menu.name} fill sizes="(max-width: 575px) 45vw, 190px" className="object-fit-cover" />
                 </div>
-                <Button size="sm" className="btn-outline-brown" onClick={() => onAdd(menu)}>
-                  <i className="bi bi-plus-lg" /> Tambah
-                </Button>
+                <div className="p-3 d-flex flex-column flex-grow-1">
+                  <div className="fw-bold lh-sm">{menu.name}</div>
+                  <div className="text-muted small mb-2">{rupiah(menu.price)}</div>
+                  <Button size="sm" className="btn-outline-brown mt-auto" onClick={() => onAdd(menu)}>
+                    <i className="bi bi-plus-lg" /> Tambah
+                  </Button>
+                </div>
               </div>
-            ))}
-          </div>
-        );
-    });
+            </Col>
+          ))}
+        </Row>
+      </div>
+    );
+  });
 }

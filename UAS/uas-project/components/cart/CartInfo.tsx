@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import CartRow from "@/components/cart/CartRow";
@@ -176,29 +177,62 @@ export default function CartInfo() {
             </Panel>
           </Col>
 
-          <Col lg={5}>
-            <Panel as="aside" title="Ringkasan" className="summary">
-              <div className="d-flex justify-content-between mb-2">
-                <span className="text-muted">Total item</span>
-                <span className="fw-bold">{count} porsi</span>
+          <Col lg={5} className="d-flex flex-column gap-4">
+            <div className="d-none d-lg-block position-relative rounded-4 overflow-hidden shadow-sm">
+              <div className="ratio ratio-4x3">
+                <Image
+                  src="/IMG/Mie Belitung Close-Up.webp"
+                  alt="Semangkuk Mie Belitung"
+                  fill
+                  sizes="(max-width: 991px) 100vw, 40vw"
+                  className="object-fit-cover"
+                />
               </div>
-              <div className="d-flex justify-content-between mb-2">
-                <span className="text-muted">Subtotal</span>
-                <span className="fw-bold">{rupiah(subtotal)}</span>
+              <div className="side-photo-caption position-absolute bottom-0 start-0 end-0 px-4 pb-4 pt-5 text-white">
+                <div className="small text-uppercase">Mie Belitung</div>
+                <p className="h5 mb-0">Cita rasa Mie Belitung khas Tanjung Pandan</p>
               </div>
-              <div className="d-flex justify-content-between mb-2">
-                <span className="text-muted">Pajak (10%)</span>
-                <span className="fw-bold">{rupiah(tax)}</span>
+            </div>
+
+            <div className="summary d-flex flex-column gap-4">
+              <Panel as="aside" title="Ringkasan">
+                <div className="d-flex justify-content-between mb-2">
+                  <span className="text-muted">Total item</span>
+                  <span className="fw-bold">{count} porsi</span>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <span className="text-muted">Subtotal</span>
+                  <span className="fw-bold">{rupiah(subtotal)}</span>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <span className="text-muted">Pajak (10%)</span>
+                  <span className="fw-bold">{rupiah(tax)}</span>
+                </div>
+                <hr className="my-3" />
+                <div className="d-flex justify-content-between align-items-baseline mb-4">
+                  <span className="fw-bold">Total bayar</span>
+                  <span className="fs-3 fw-bold text-danger">{rupiah(total)}</span>
+                </div>
+                <Button className="btn-red w-100" onClick={checkout}>
+                  Konfirmasi Pesanan
+                </Button>
+              </Panel>
+
+              <div className="position-relative bg-white rounded-4 shadow-sm p-3 d-flex align-items-center gap-3">
+                <i className="bi bi-whatsapp fs-2 text-danger" />
+                <div>
+                  <div className="fw-bold">Butuh bantuan soal pesanan?</div>
+                  <a
+                    href="https://wa.me/6287892544939?text=Halo%20Mie%20Belitung!"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="stretched-link text-decoration-none text-danger fw-bold small">
+                    Chat WhatsApp 0878-9254-4939
+                  </a>
+                  <div className="text-muted small">Buka setiap hari, 10.00 – 21.30 WIB</div>
+                </div>
               </div>
-              <hr className="my-3" />
-              <div className="d-flex justify-content-between align-items-baseline mb-4">
-                <span className="fw-bold">Total bayar</span>
-                <span className="fs-3 fw-bold text-danger">{rupiah(total)}</span>
-              </div>
-              <Button className="btn-red w-100" onClick={checkout}>
-                Konfirmasi Pesanan
-              </Button>
-            </Panel>
+            </div>
           </Col>
         </Row>
       )}
