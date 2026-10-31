@@ -42,4 +42,3 @@ router.get("/type/:type", async (req, res) => {
   }
 });
 export default router;
-
