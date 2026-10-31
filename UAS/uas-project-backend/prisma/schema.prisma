@@ -14,7 +14,7 @@ model User {
   password      String
   is_admin      Int     @default(0)
   total_balance Float   @default(0)
-  role          String  @default("Student & Programmer)
+  role          String  @default("Student & Programmer")
   bio           String  @default("I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo.")
   tags          String  @default("AnimLovers,Untarian,Soushin")
 
@@ -122,7 +122,7 @@ model Feedback {
 }
 
 model Favorite {
-  id            Int
+  id            Int     @id @default(autoincrement())
   name          String
   region        String?
   done          Boolean @default(false)
