@@ -183,3 +183,7 @@
         position: static;
     }
 }
+
+.side-photo-caption {
+    background: linear-gradient(180deg, transparent, rgba(74, 40, 20, 0.85));
+}

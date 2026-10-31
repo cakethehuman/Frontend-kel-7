@@ -62,7 +62,7 @@ export default function LocationSection() {
 
           <Col lg={6}>
             <div className="map-frame rounded-4 overflow-hidden">
-              <iframe title="Peta lokasi Sahang Kitchen Belitung" src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-100 border-0 d-block" />
+              <iframe title="Peta lokasi Mie Belitung" src="https://www.google.com/maps?q=-2.7416,107.6358&z=15&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-100 border-0 d-block" />
             </div>
           </Col>
         </Row>
