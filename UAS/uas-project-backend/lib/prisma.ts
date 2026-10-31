@@ -4,3 +4,4 @@ import { PrismaClient } from "../generated/prisma/client";
 
 const adapter = new PrismaBetterSqlite3({ url: `${process.env.DATABASE_URL}` });
 export const prisma = new PrismaClient({ adapter });
+
