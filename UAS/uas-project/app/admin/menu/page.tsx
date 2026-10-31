@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { Button, Form, Modal, Table } from "react-bootstrap";
 
@@ -63,7 +63,7 @@ export default function AdminMenuPage() {
           {items.map((i) => (
             <tr key={i.id}>
               <td>
-                <img src={i.image} alt={i.name} width={56} height={56} className="img-thumbnail object-fit-cover" />
+                <Image src={i.image} alt={i.name} width={56} height={56} className="img-thumbnail object-fit-cover" />
               </td>
               <td>{i.name}</td>
               <td>{i.category}</td>

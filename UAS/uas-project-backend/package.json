@@ -7,6 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "bare-url": "^2.5.5",
     "before-after-hook": "^4.0.0",
     "better-result": "^2.10.0",
+    "better-sqlite3": "^13.0.3",
     "bindings": "^1.5.0",
     "brace-expansion": "^5.0.12",
     "bundle-name": "^4.1.1",
@@ -219,8 +221,5 @@
     "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
-  },
-  "scripts": {
-    "dev": "tsx watch server.ts"
   }
 }
