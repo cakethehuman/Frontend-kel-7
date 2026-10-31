@@ -36,7 +36,7 @@
 
 #navbar-placeholder .logo-main {
     font-family: var(--nb-font-heading);
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 900;
     line-height: 1;
     color: #2c3e50;
@@ -44,7 +44,7 @@
 
 #navbar-placeholder .logo-sub {
     font-family: var(--nb-font-body);
-    font-size: 17.6px;
+    font-size: 15px;
     font-weight: 600;
     color: #7f8c8d;
     margin-top: 2px;
