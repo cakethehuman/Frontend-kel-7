@@ -15,21 +15,11 @@ interface FavoriteItem {
   done: boolean;
 }
 
-const DATA_AWAL: FavoriteItem[] = [
-  { id: 1, name: "Mie Belitung", region: "Sumatra", done: true },
-  { id: 2, name: "Rendang", region: "Sumatra", done: true },
-  { id: 3, name: "Gudeg", region: "Jawa", done: true },
-  { id: 4, name: "Rawon", region: "Jawa", done: false },
-  { id: 5, name: "Ayam Betutu", region: "Bali & Nusa Tenggara", done: false },
-  { id: 6, name: "Coto Makassar", region: "Sulawesi", done: false },
-  { id: 7, name: "Papeda", region: "Maluku & Papua", done: false },
-  { id: 8, name: "Soto Banjar", region: "Kalimantan", done: false },
-];
+const API_URL = "http://localhost:3001";
 
 export default function ProfilePage() {
   const router = useRouter();
-
-  const [name, setName] = useState("Wilson");
+  const [name, setName] = useState("Wilson Widodo");
   const [email, setEmail] = useState("wilson@gmail.com");
   const [role, setRole] = useState("Student & Programmer");
   const [bio, setBio] = useState(
@@ -48,7 +38,7 @@ export default function ProfilePage() {
   const [editTags, setEditTags] = useState("");
   const [editError, setEditError] = useState("");
 
-  const [favorites, setFavorites] = useState<FavoriteItem[]>(DATA_AWAL);
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [inputName, setInputName] = useState("");
   const [inputRegion, setInputRegion] = useState("Sumatra");
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -61,43 +51,32 @@ export default function ProfilePage() {
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    async function ambilDataDariBackend() {
       try {
-        const savedFav = localStorage.getItem("mb_favorites");
-        if (savedFav) {
-          setFavorites(JSON.parse(savedFav));
+        const resProfile = await fetch(API_URL + "/api/profile");
+        if (resProfile.ok) {
+          const dataUser = await resProfile.json();
+          if (dataUser.name) setName(dataUser.name);
+          if (dataUser.email) setEmail(dataUser.email);
+          if (dataUser.role) setRole(dataUser.role);
+          if (dataUser.bio) setBio(dataUser.bio);
+          if (dataUser.tags) {
+            setTags(dataUser.tags.split(","));
+          }
         }
-
-        const currentUser = sessionStorage.getItem("currentUser");
-        if (currentUser) {
-          const userObj = JSON.parse(currentUser);
-          if (userObj.name) setName(userObj.name);
-          if (userObj.email) setEmail(userObj.email);
-        }
-
-        const savedProfile = localStorage.getItem("mb_profile");
-        if (savedProfile) {
-          const profObj = JSON.parse(savedProfile);
-          if (profObj.name) setName(profObj.name);
-          if (profObj.role) setRole(profObj.role);
-          if (profObj.bio) setBio(profObj.bio);
-          if (Array.isArray(profObj.tags)) setTags(profObj.tags);
+        
+        const resFav = await fetch(API_URL + "/api/favorites");
+        if (resFav.ok) {
+          const dataFav = await resFav.json();
+          setFavorites(dataFav);
         }
       } catch (e) {
         console.log(e);
       }
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
-
-  function simpanKeLocal(dataBaru: FavoriteItem[]) {
-    setFavorites(dataBaru);
-    try {
-      localStorage.setItem("mb_favorites", JSON.stringify(dataBaru));
-    } catch (e) {
-      console.log(e);
     }
-  }
+
+    ambilDataDariBackend();
+  }, []);
 
   function tampilkanPesan(teks: string, tipe: string) {
     setMessageText(teks);
@@ -107,7 +86,7 @@ export default function ProfilePage() {
     }, 3000);
   }
 
-  function tambahKuliner(e: FormEvent<HTMLFormElement>) {
+  async function tambahKuliner(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const namaBersih = inputName.trim();
 
@@ -128,35 +107,66 @@ export default function ProfilePage() {
       return;
     }
 
-    const itemBaru: FavoriteItem = {
-      id: Date.now(),
-      name: namaBersih,
-      region: inputRegion,
-      done: false,
-    };
+    try {
+      const res = await fetch(API_URL + "/api/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: namaBersih,
+          region: inputRegion,
+        }),
+      });
 
-    const daftarBaru = [itemBaru, ...favorites];
-    simpanKeLocal(daftarBaru);
+      if (res.ok) {
+        const itemBaru: FavoriteItem = await res.json();
+        const daftarBaru = [itemBaru, ...favorites];
+        setFavorites(daftarBaru);
 
-    setInputName("");
-    setSearchKeyword("");
-    setActiveFilter("all");
-    tampilkanPesan(namaBersih + " berhasil ditambahkan!", "ok");
+        setInputName("");
+        setSearchKeyword("");
+        setActiveFilter("all");
+        tampilkanPesan(namaBersih + " berhasil ditambahkan!", "ok");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  function tandaiKuliner(id: number) {
-    const daftarBaru = favorites.map(function (item) {
-      if (item.id === id) {
-        return {
-          id: item.id,
-          name: item.name,
-          region: item.region,
-          done: !item.done,
-        };
+  async function tandaiKuliner(id: number) {
+    let statusBaru = false;
+    for (let i = 0; i < favorites.length; i++) {
+      if (favorites[i].id === id) {
+        statusBaru = !favorites[i].done;
       }
-      return item;
-    });
-    simpanKeLocal(daftarBaru);
+    }
+
+    try {
+      const res = await fetch(API_URL + "/api/favorites", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: id,
+          done: statusBaru,
+        }),
+      });
+
+      if (res.ok) {
+        const daftarBaru = favorites.map(function (item) {
+          if (item.id === id) {
+            return {
+              id: item.id,
+              name: item.name,
+              region: item.region,
+              done: statusBaru,
+            };
+          }
+          return item;
+        });
+        setFavorites(daftarBaru);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function bukaModalHapus(item: FavoriteItem) {
@@ -165,14 +175,28 @@ export default function ProfilePage() {
     setShowDeleteModal(true);
   }
 
-  function konfirmasiHapus() {
-    const daftarBaru = favorites.filter(function (item) {
-      return item.id !== deleteTargetId;
-    });
-    simpanKeLocal(daftarBaru);
-    setShowDeleteModal(false);
-    setDeleteTargetId(null);
-    tampilkanPesan("Kuliner berhasil dihapus.", "ok");
+  async function konfirmasiHapus() {
+    if (deleteTargetId === null) return;
+
+    try {
+      const res = await fetch(API_URL + "/api/favorites", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: deleteTargetId }),
+      });
+
+      if (res.ok) {
+        const daftarBaru = favorites.filter(function (item) {
+          return item.id !== deleteTargetId;
+        });
+        setFavorites(daftarBaru);
+        setShowDeleteModal(false);
+        setDeleteTargetId(null);
+        tampilkanPesan("Kuliner berhasil dihapus.", "ok");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function bukaModalEdit() {
@@ -184,7 +208,7 @@ export default function ProfilePage() {
     setShowEditModal(true);
   }
 
-  function simpanProfil() {
+  async function simpanProfil() {
     const namaBaru = editName.trim();
     const roleBaru = editRole.trim();
     const bioBaru = editBio.trim();
@@ -207,26 +231,28 @@ export default function ProfilePage() {
       }
     }
 
-    setName(namaBaru);
-    setRole(roleBaru);
-    setBio(bioBaru);
-    setTags(tagBersih);
-
     try {
-      localStorage.setItem(
-        "mb_profile",
-        JSON.stringify({
+      const res = await fetch(API_URL + "/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name: namaBaru,
           role: roleBaru,
           bio: bioBaru,
-          tags: tagBersih,
-        })
-      );
+          tags: tagBersih.join(","),
+        }),
+      });
+
+      if (res.ok) {
+        setName(namaBaru);
+        setRole(roleBaru);
+        setBio(bioBaru);
+        setTags(tagBersih);
+        setShowEditModal(false);
+      }
     } catch (e) {
       console.log(e);
     }
-
-    setShowEditModal(false);
   }
 
   function handleLogout() {
