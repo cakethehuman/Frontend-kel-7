@@ -21,6 +21,7 @@ model User {
   cart   Cart?
   orders Order[]
   feedbacks Feedback[]
+  favorites Favorite[]
 
   @@map("users")
 }
@@ -123,9 +124,12 @@ model Feedback {
 
 model Favorite {
   id            Int     @id @default(autoincrement())
+  user_id       Int 
   name          String
   region        String?
   done          Boolean @default(false)
+
+  user User @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
 
   @@map("favorites")
 }
