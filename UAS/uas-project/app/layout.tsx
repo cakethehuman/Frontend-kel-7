@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   description: "Mie Belitung - Makanan Khas Belitung",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

@@ -89,13 +89,9 @@ router.post("/", async (req, res) => {
   try {
     const body = req.body ?? {};
 
-<<<<<<< HEAD
     const user = await prisma.user.findUnique({
       where: { user_id: Number(body.user_id) },
     });
-=======
-    const user = await prisma.user.findFirst();
->>>>>>> ccc6616b6ac8732b9970fb7c473b286adefba577
 
     if (!user) {
       res.status(401).json({ message: "Kamu Harus Login Dulu." });
