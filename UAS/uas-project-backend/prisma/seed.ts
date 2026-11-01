@@ -6,7 +6,6 @@ async function main() {
   try {
     console.log("Memulai proses seeding database...");
 
-    // 1. Seed Admin Account with salted and hashed password
     const adminPasswordHash = hashPassword("admin123");
     const adminUser = await prisma.user.upsert({
       where: { email: "admin@belitung.com" },

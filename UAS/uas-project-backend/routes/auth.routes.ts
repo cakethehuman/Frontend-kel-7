@@ -5,7 +5,6 @@ import { hashPassword, verifyPassword } from "../lib/auth";
 const router = Router();
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// POST /api/auth/login
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body ?? {};
@@ -38,7 +37,6 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    // Return safe user object (excluding password)
     res.json({
       message: "Login berhasil",
       user: {
@@ -57,7 +55,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// POST /api/auth/register
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body ?? {};
@@ -76,7 +73,6 @@ router.post("/register", async (req, res) => {
       return;
     }
 
-    // Password measurements: minimum 6 characters
     if (cleanPassword.length < 6) {
       res.status(400).json({ message: "Password minimal 6 karakter demi keamanan." });
       return;
@@ -123,7 +119,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// GET /api/auth/me
 router.get("/me", async (req, res) => {
   try {
     const userIdHeader = req.headers["x-user-id"];

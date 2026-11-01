@@ -77,15 +77,14 @@ router.post("/", async (req, res) => {
   try {
     const { name, description, item_type, category, price, image, img, slug } = req.body;
 
-    if (!name || String(name).trim().length < 2) {
-      res.status(400).json({ message: "Nama menu minimal 2 karakter." });
+    if (!name || String(name).trim().length < 1) {
+      res.status(400).json({ message: "Minimal ada 1 huruf" });
       return;
     }
 
     const chosenType = item_type || category || "Others";
     const chosenImage = image || img || "/IMG/mie_belitung.webp";
     
-    // Generate unique slug
     let generatedSlug =
       slug ||
       String(name ?? "")
