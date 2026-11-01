@@ -92,10 +92,9 @@ export default function AdminDashboardPage() {
         </div>
       ) : (
         <>
-          {/* Top Metric Cards */}
           <Row className="g-3 mb-4">
             <Col xs={12} sm={6} lg={3}>
-              <Card className="border-0 shadow-sm rounded-3 h-100 border-start border-4 border-primary">
+              <Card className="rounded-3 h-100">
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
@@ -116,7 +115,7 @@ export default function AdminDashboardPage() {
             </Col>
 
             <Col xs={12} sm={6} lg={3}>
-              <Card className="border-0 shadow-sm rounded-3 h-100 border-start border-4 border-warning">
+              <Card className="rounded-3 h-100">
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
@@ -137,7 +136,7 @@ export default function AdminDashboardPage() {
             </Col>
 
             <Col xs={12} sm={6} lg={3}>
-              <Card className="border-0 shadow-sm rounded-3 h-100 border-start border-4 border-danger">
+              <Card className="rounded-3 h-100">
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
@@ -158,7 +157,7 @@ export default function AdminDashboardPage() {
             </Col>
 
             <Col xs={12} sm={6} lg={3}>
-              <Card className="border-0 shadow-sm rounded-3 h-100 border-start border-4 border-success">
+              <Card className="rounded-3 h-100">
                 <Card.Body>
                   <div className="d-flex justify-content-between align-items-center">
                     <div>

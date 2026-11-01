@@ -107,7 +107,6 @@ export default function Navbar() {
                 </Nav.Link>
               ))}
 
-              {/* Admin Panel link visible if logged in user is admin */}
               {currentUser && currentUser.is_admin === 1 && (
                 <Nav.Link
                   as={Link}
@@ -116,12 +115,10 @@ export default function Navbar() {
                   onClick={closeMenu}
                   className="fw-bold text-danger d-flex align-items-center gap-1"
                 >
-                  <i className="bi bi-shield-lock-fill"></i>
                   <span>Admin Panel</span>
                 </Nav.Link>
               )}
 
-              {/* Authentication Actions */}
               {currentUser ? (
                 <div className="d-flex align-items-center gap-2 ms-lg-2 mt-2 mt-lg-0">
                   <span className="small text-muted d-none d-xl-inline">
