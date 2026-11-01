@@ -5,32 +5,26 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const userId = Number(req.query.user_id || req.headers["x-user-id"]);
+    const userIdParam = Number(req.query.user_id);
+    const emailParam = req.query.email ? String(req.query.email) : "";
 
     let user = null;
-    if (Number.isInteger(userId) && userId > 0) {
-      user = await prisma.user.findUnique({
-        where: { user_id: userId },
-      });
-    }
 
-    if (!user) {
+    if (userIdParam) {
+      user = await prisma.user.findUnique({
+        where: { user_id: userIdParam },
+      });
+    } else if (emailParam) {
+      user = await prisma.user.findUnique({
+        where: { email: emailParam },
+      });
+    } else {
       user = await prisma.user.findFirst();
     }
 
     if (!user) {
-      user = await prisma.user.create({
-        data: {
-          name: "Wilson Widodo",
-          email: "wilson@gmail.com",
-          password: "user123",
-          is_admin: 0,
-          total_balance: 0,
-          role: "Student & Programmer",
-          bio: "I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo.",
-          tags: "Animlovers, Untarian, Soushin",
-        },
-      });
+      res.status(404).json({ message: "User tidak ditemukan." });
+      return;
     }
 
     res.json({
@@ -51,31 +45,28 @@ router.get("/", async (req, res) => {
 router.patch("/", async (req, res) => {
   try {
     const body = req.body ?? {};
+    const userId = Number(body.user_id);
 
-    if (!body.name || !body.role) {
-      res.status(400).json({ message: "Nama dan Role Wajib Diisi." });
+    let targetUser = null;
+    if (userId) {
+      targetUser = await prisma.user.findUnique({
+        where: { user_id: userId },
+      });
+    } else {
+      targetUser = await prisma.user.findFirst();
+    }
+
+    if (!targetUser) {
+      res.status(404).json({ message: "User tidak ditemukan." });
       return;
     }
 
-    const userId = Number(body.user_id || req.headers["x-user-id"]);
-    let targetId = userId;
-
-    if (!Number.isInteger(targetId) || targetId <= 0) {
-      const firstUser = await prisma.user.findFirst();
-      if (!firstUser) {
-        res.status(400).json({ message: "User Tidak Ditemukan." });
-        return;
-      }
-      targetId = firstUser.user_id;
-    }
-
     const userUpdate = await prisma.user.update({
-      where: { user_id: targetId },
+      where: { user_id: targetUser.user_id },
       data: {
-        name: String(body.name).trim(),
-        role: String(body.role).trim(),
-        bio: String(body.bio ?? "").trim(),
-        tags: String(body.tags ?? "").trim(),
+        role: body.role ? String(body.role).trim() : targetUser.role,
+        bio: body.bio !== undefined ? String(body.bio).trim() : targetUser.bio,
+        tags: body.tags !== undefined ? String(body.tags) : targetUser.tags,
       },
     });
 
@@ -90,7 +81,7 @@ router.patch("/", async (req, res) => {
     });
   } catch (error) {
     console.error("Error updating profile:", error);
-    res.status(500).json({ message: "Gagal memperbarui profil pengguna." });
+    res.status(500).json({ message: "Gagal memperbarui profil." });
   }
 });
 

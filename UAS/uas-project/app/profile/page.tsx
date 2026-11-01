@@ -10,15 +10,18 @@ import FavoriteCard from "@/components/profile/FavoriteCard";
 
 interface FavoriteItem {
   id: number;
+  user_id?: number;
   name: string;
   region: string;
   done: boolean;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = "http://localhost:3001";
 
 export default function ProfilePage() {
   const router = useRouter();
+
+  const [userId, setUserId] = useState<number | null>(null);
   const [name, setName] = useState("Wilson Widodo");
   const [email, setEmail] = useState("wilson@gmail.com");
   const [role, setRole] = useState("Student & Programmer");
@@ -32,7 +35,6 @@ export default function ProfilePage() {
   ]);
 
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("");
   const [editBio, setEditBio] = useState("");
   const [editTags, setEditTags] = useState("");
@@ -50,34 +52,61 @@ export default function ProfilePage() {
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
-  const [currentUser, setCurrentUser] = useState<any>(null);
-  
-  useEffect(() => {
-    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-
-    if (raw) {
-      setCurrentUser(JSON.parse(raw));
-    } else {
-      setCurrentUser(null);
-    }
-  }, []);
-
   useEffect(() => {
     async function ambilDataDariBackend() {
       try {
-        const resProfile = await fetch(API_URL + "/api/profile");
+        let loggedInId = 0;
+        let loggedInEmail = "";
+        let loggedInName = "";
+
+        const rawUser =
+          localStorage.getItem("user") ||
+          sessionStorage.getItem("currentUser");
+
+        if (rawUser) {
+          const parsed = JSON.parse(rawUser);
+          if (parsed.user_id) loggedInId = Number(parsed.user_id);
+          else if (parsed.id) loggedInId = Number(parsed.id);
+          if (parsed.email) loggedInEmail = String(parsed.email);
+          if (parsed.name) loggedInName = String(parsed.name);
+        }
+
+        let urlProfile = API_URL + "/api/profile";
+        if (loggedInId > 0) {
+          urlProfile = API_URL + "/api/profile?user_id=" + loggedInId;
+        } else if (loggedInEmail !== "") {
+          urlProfile =
+            API_URL +
+            "/api/profile?email=" +
+            encodeURIComponent(loggedInEmail);
+        }
+
+        const resProfile = await fetch(urlProfile);
+        let activeUserId = loggedInId;
+
         if (resProfile.ok) {
           const dataUser = await resProfile.json();
-          if (dataUser.name) setName(dataUser.name);
-          if (dataUser.email) setEmail(dataUser.email);
+          activeUserId = Number(dataUser.user_id);
+          setUserId(activeUserId);
+          setName(loggedInName || dataUser.name);
+          setEmail(dataUser.email);
           if (dataUser.role) setRole(dataUser.role);
           if (dataUser.bio) setBio(dataUser.bio);
           if (dataUser.tags) {
-            setTags(dataUser.tags.split(","));
+            setTags(
+              String(dataUser.tags)
+                .split(",")
+                .filter((t) => t.trim() !== "")
+            );
           }
         }
-        
-        const resFav = await fetch(API_URL + "/api/favorites");
+
+        const urlFav =
+          activeUserId > 0
+            ? API_URL + "/api/favorites?user_id=" + activeUserId
+            : API_URL + "/api/favorites";
+
+        const resFav = await fetch(urlFav);
         if (resFav.ok) {
           const dataFav = await resFav.json();
           setFavorites(dataFav);
@@ -124,6 +153,7 @@ export default function ProfilePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          user_id: userId,
           name: namaBersih,
           region: inputRegion,
         }),
@@ -212,7 +242,6 @@ export default function ProfilePage() {
   }
 
   function bukaModalEdit() {
-    setEditName(name);
     setEditRole(role);
     setEditBio(bio);
     setEditTags(tags.join(", "));
@@ -221,14 +250,9 @@ export default function ProfilePage() {
   }
 
   async function simpanProfil() {
-    const namaBaru = editName.trim();
     const roleBaru = editRole.trim();
     const bioBaru = editBio.trim();
 
-    if (namaBaru.length < 3) {
-      setEditError("Nama minimal 3 karakter ya.");
-      return;
-    }
     if (roleBaru.length < 3) {
       setEditError("Role minimal 3 karakter ya.");
       return;
@@ -248,7 +272,7 @@ export default function ProfilePage() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: namaBaru,
+          user_id: userId,
           role: roleBaru,
           bio: bioBaru,
           tags: tagBersih.join(","),
@@ -256,7 +280,6 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        setName(namaBaru);
         setRole(roleBaru);
         setBio(bioBaru);
         setTags(tagBersih);
@@ -268,13 +291,8 @@ export default function ProfilePage() {
   }
 
   function handleLogout() {
-    try {
-      localStorage.removeItem("user");
-      sessionStorage.removeItem("currentUser");
-      window.dispatchEvent(new Event("authChange"));
-    } catch (e) {
-      console.error(e);
-    }
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("currentUser");
     router.push("/auth/login");
   }
 
@@ -339,7 +357,7 @@ export default function ProfilePage() {
               </div>
               <div className="pf-id-body text-center">
                 <h1 className="pf-name" id="pf-name">
-                  {currentUser?.name}
+                  {name}
                 </h1>
                 <p className="pf-email" id="pf-email">
                   {email}
@@ -618,10 +636,13 @@ export default function ProfilePage() {
               type="text"
               className="form-control"
               id="edit-name"
-              maxLength={30}
-              value={editName}
-              onChange={(e) => setEditName(e.target.value)}
+              value={name}
+              disabled
+              readOnly
             />
+            <div className="form-text">
+              Nama sesuai akun pendaftaran dan tidak dapat diubah.
+            </div>
           </div>
           <div className="mb-3">
             <label htmlFor="edit-role" className="form-label fw-bold">
