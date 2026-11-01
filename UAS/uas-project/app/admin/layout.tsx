@@ -24,7 +24,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         router.replace("/menu");
         return;
       }
-
       setAuthorized(true);
     } catch (e) {
       console.error("Auth check error in admin layout:", e);
