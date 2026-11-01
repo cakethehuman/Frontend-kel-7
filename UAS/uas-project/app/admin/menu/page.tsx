@@ -256,7 +256,6 @@ export default function AdminMenuPage() {
         </Card>
       )}
 
-      {/* Add / Edit Menu Modal */}
       <Modal show={show} onHide={() => !saving && setShow(false)} centered>
         <Form onSubmit={save}>
           <Modal.Header closeButton>
@@ -310,13 +309,10 @@ export default function AdminMenuPage() {
               <Form.Control
                 as="textarea"
                 rows={2}
-                placeholder="Deskripsi singkat lezat (sekitar 50 karakter agar seragam)"
+                placeholder="Deskripsi singkat untuk makanan"
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
               />
-              <Form.Text className="text-muted">
-                Tip: Deskripsi sekitar 40-55 karakter membuat tampilan kartu menu seragam dan rapi tanpa overflow/underflow.
-              </Form.Text>
             </Form.Group>
 
             <Form.Group>

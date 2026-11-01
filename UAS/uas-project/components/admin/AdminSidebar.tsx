@@ -40,13 +40,6 @@ export default function AdminSidebar() {
 
   const nav = (
     <Nav className="flex-column gap-2">
-      <div className="mb-3 px-2 py-2 bg-dark bg-opacity-25 rounded text-light">
-        <div className="small text-white-50">Login sebagai:</div>
-        <div className="fw-bold text-truncate">{adminName}</div>
-        <Badge bg="warning" text="dark" className="mt-1">
-          Administrator
-        </Badge>
-      </div>
 
       {links.map((l) => (
         <Nav.Link
@@ -58,21 +51,9 @@ export default function AdminSidebar() {
             pathname === l.href ? "bg-dark bg-opacity-50 fw-bold border-start border-4 border-white" : "hover-bg-danger-dark"
           }`}
         >
-          <i className={`bi ${l.icon}`}></i>
           <span>{l.label}</span>
         </Nav.Link>
       ))}
-
-      <hr className="my-3 border-light opacity-25" />
-
-      <Nav.Link
-        as={Link}
-        href="/menu"
-        className="rounded px-3 text-light d-flex align-items-center gap-2 text-white-50"
-      >
-        <i className="bi bi-arrow-left-circle"></i>
-        <span>Lihat Menu Publik</span>
-      </Nav.Link>
 
       <button className="btn btn-outline-light mt-3 d-flex align-items-center justify-content-center gap-2" onClick={logout}>
         <i className="bi bi-box-arrow-right"></i>
@@ -85,7 +66,6 @@ export default function AdminSidebar() {
     <>
       <div className="d-md-none bg-danger text-light d-flex align-items-center justify-content-between px-3 py-2 sticky-top shadow-sm">
         <div className="d-flex align-items-center gap-2">
-          <i className="bi bi-shield-lock-fill fs-5"></i>
           <span className="fw-bold">Admin Panel</span>
         </div>
         <button
@@ -100,7 +80,6 @@ export default function AdminSidebar() {
       <Offcanvas show={show} onHide={() => setShow(false)} className="bg-danger text-light">
         <Offcanvas.Header closeButton closeVariant="white">
           <Offcanvas.Title className="d-flex align-items-center gap-2">
-            <i className="bi bi-shield-lock-fill"></i>
             Admin Panel
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -112,7 +91,6 @@ export default function AdminSidebar() {
           <i className="bi bi-shield-lock-fill fs-4"></i>
           <div>
             <h5 className="mb-0 fw-bold">Admin Panel</h5>
-            <small className="text-white-50">Mie Belitung</small>
           </div>
         </div>
         {nav}
