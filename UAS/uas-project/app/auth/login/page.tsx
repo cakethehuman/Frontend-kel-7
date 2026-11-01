@@ -5,7 +5,7 @@ import "@/app/css/constants.css";
 import Link from "next/link";
 
 export default function Login() {
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
   };

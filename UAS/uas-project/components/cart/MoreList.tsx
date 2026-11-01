@@ -1,11 +1,15 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { menuCategories, menuItems } from "@/data/menu";
-import type { MenuItem } from "@/data/menu";
+import { menuCategories, menuItems, type MenuItem } from "@/data/menu";
 import type { CartItem } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface MoreListProps {
   items: CartItem[];
@@ -13,8 +17,33 @@ interface MoreListProps {
 }
 
 export default function MoreList({ items, onAdd }: MoreListProps) {
+  const [allMenus, setAllMenus] = useState<MenuItem[]>(menuItems);
+
+  useEffect(() => {
+    async function fetchMenu() {
+      try {
+        const res = await fetch(`${API_URL}/menu`);
+        if (res.ok) {
+          const data = await res.json();
+          const mapped: MenuItem[] = data.map((item: any) => ({
+            id: item.id || item.slug || String(item.menu_id),
+            name: item.name,
+            description: item.description || "",
+            price: Number(item.price) || 0,
+            img: item.img || item.image || "/IMG/mie_belitung.webp",
+            category: item.category || item.item_type || "Others",
+          }));
+          setAllMenus(mapped);
+        }
+      } catch (err) {
+        console.error("Gagal mengambil menu untuk MoreList:", err);
+      }
+    }
+    fetchMenu();
+  }, []);
+
   const inCart = new Set(items.map((item) => item.id));
-  const available = menuItems.filter((menu) => !inCart.has(menu.id));
+  const available = allMenus.filter((menu) => !inCart.has(menu.id));
 
   if (!available.length) {
     return (
@@ -23,7 +52,9 @@ export default function MoreList({ items, onAdd }: MoreListProps) {
   }
 
   return menuCategories.map((category) => {
-    const group = available.filter((menu) => menu.category === category);
+    const group = available.filter(
+      (menu) => menu.category.toLowerCase() === category.toLowerCase()
+    );
     if (!group.length) return null;
 
     return (
