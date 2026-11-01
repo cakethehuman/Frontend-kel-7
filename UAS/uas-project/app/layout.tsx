@@ -41,7 +41,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" className={`${libre.variable} ${nunito.variable}`}>
+    <html lang="id" className={`${libre.variable} ${nunito.variable}`} suppressHydrationWarning>
       <body className="d-flex flex-column min-vh-100 bg-beige text-dark">
         <Navbar />
         {children}
