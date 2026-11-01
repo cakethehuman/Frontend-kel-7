@@ -8,7 +8,6 @@ const DAFTAR_TIPE = ["dinein", "takeaway"];
 const DAFTAR_PEMBAYARAN = ["Cash", "QRIS", "Transfer"];
 const DAFTAR_STATUS = ["pending", "cooking", "done", "cancelled"];
 
-// GET /api/orders - Fetch all orders (for admin dashboard and orders page)
 router.get("/", async (_req, res) => {
   try {
     const orders = await prisma.order.findMany({
@@ -51,7 +50,6 @@ router.get("/", async (_req, res) => {
   }
 });
 
-// PATCH /api/orders/:id - Update order status (pending, cooking, done, cancelled)
 router.patch("/:id", async (req, res) => {
   try {
     const orderId = Number(req.params.id);
@@ -84,7 +82,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// POST /api/orders - Create new order
 router.post("/", async (req, res) => {
   try {
     const body = req.body ?? {};
@@ -151,7 +148,6 @@ router.post("/", async (req, res) => {
     }
 
     const daftarKeys = Object.keys(jumlahPerSlug);
-    // Find menus matching either slug or menu_id
     const menus = await prisma.menu.findMany({
       where: {
         OR: [

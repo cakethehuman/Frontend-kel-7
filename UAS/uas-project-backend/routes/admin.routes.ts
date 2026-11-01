@@ -3,7 +3,6 @@ import { prisma } from "../lib/prisma";
 
 const router = Router();
 
-// GET /api/admin/stats - Overview statistics for admin dashboard
 router.get("/stats", async (_req, res) => {
   try {
     const [userCount, orderCount, menuCount, orders] = await Promise.all([
