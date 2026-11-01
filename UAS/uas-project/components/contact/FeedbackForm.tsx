@@ -17,6 +17,16 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const API_URL = "http://localhost:3001";
 
+function getLoggedInUserId(): number | null {
+  try {
+    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
+    const id = raw ? Number(JSON.parse(raw)?.user_id) : NaN;
+    return Number.isInteger(id) && id > 0 ? id : null;
+  } catch {
+    return null;
+  }
+}
+
 interface FormState {
   nama: string;
   email: string;
@@ -82,6 +92,12 @@ export default function FeedbackForm() {
     event.preventDefault();
     if (sending) return;
 
+    const userId = getLoggedInUserId();
+    if (userId === null) {
+      setAlertMsg("Login dulu untuk mengirim masukan.");
+      return;
+    }
+
     const result = validate();
     setErrors(result);
     if (Object.keys(result).length) {
@@ -97,6 +113,7 @@ export default function FeedbackForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          user_id: userId,
           name: form.nama.trim(),
           email: form.email.trim(),
           rating: form.rating,
