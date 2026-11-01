@@ -25,7 +25,7 @@ export default function OrderForm({ form, errors, onChange, refs}: OrderFormProp
       <Row className="g-3">
         <Col md={6}>
           <Form.Label htmlFor="cust-name" className="fw-bold">
-            Nama Pemesan
+            Atas Nama
           </Form.Label>
           <Form.Control id="cust-name" ref={refs.name} placeholder="cth: Budi Santoso" autoComplete="name" value={form.name} isInvalid={errors.name} onChange={(e) => onChange("name", e.target.value)}
           />
