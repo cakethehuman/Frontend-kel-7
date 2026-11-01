@@ -75,36 +75,65 @@ export default function Menu() {
   }
 
   return (
-    <Stack gap={3} className="px-3 py-2">
+    <Stack gap={4} className="px-3 py-3">
       {menuCategories.map((category) => {
         const categoryItems = menuList.filter(
           (item) => item.category.toLowerCase() === category.toLowerCase()
         );
 
+        if (categoryItems.length === 0) return null;
+
         return (
-          <section key={category} id={category}>
-            <div className="d-flex justify-content-center">
-              <h2 className="text-danger">{category} Menu</h2>
+          <section key={category} id={category} className="my-2">
+            <div className="d-flex justify-content-center mb-3">
+              <h2 className="text-danger fw-bold border-bottom border-danger pb-1">
+                {category} Menu
+              </h2>
             </div>
 
-            <Container className="py-3 px-3">
-              <Row xs={1} md={2} lg={3} className="g-1">
+            <Container className="py-2 px-3">
+              <Row xs={1} md={2} lg={3} className="g-4">
                 {categoryItems.map((item) => (
-                  <Col key={item.id} className="px-2 py-1">
-                    <div className="bg-darker-beige w-75 rounded p-3 h-100">
-                      <Image
-                        src={item.img}
-                        alt={item.name}
-                        width={400}
-                        height={200}
-                        className="img-fluid rounded mb-3 w-100"
-                        style={{ height: "200px", objectFit: "cover" }}
-                      />
+                  <Col key={item.id}>
+                    <div className="bg-darker-beige w-100 rounded-4 p-3 h-100 shadow-sm d-flex flex-column justify-content-between transition-hover">
+                      <div>
+                        <div className="position-relative overflow-hidden rounded-3 mb-3" style={{ height: "200px" }}>
+                          <Image
+                            src={item.img}
+                            alt={item.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-fit-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "/IMG/mie_belitung.webp";
+                            }}
+                          />
+                        </div>
 
-                      <h3>{item.name}</h3>
-                      <p>{item.description}</p>
+                        <h3 className="h5 fw-bold text-dark text-truncate mb-2" title={item.name}>
+                          {item.name}
+                        </h3>
 
-                      <div className="d-flex justify-content-between align-items-end gap-3">
+                        {/* Uniform height description to prevent overflow and underflow */}
+                        <p
+                          className="text-muted small mb-3"
+                          style={{
+                            minHeight: "44px",
+                            maxHeight: "44px",
+                            lineHeight: "22px",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                          title={item.description}
+                        >
+                          {item.description || "Hidangan khas Belitung lezat dan nikmat pilihan."}
+                        </p>
+                      </div>
+
+                      <div className="d-flex justify-content-between align-items-end pt-2 border-top border-dark border-opacity-10">
                         <div>
                           <p className="text-muted small mb-0">Harga</p>
                           <p className="h5 fw-bold text-danger mb-0">
@@ -114,11 +143,12 @@ export default function Menu() {
 
                         <button
                           type="button"
-                          className="btn btn-sm bg-primary-color text-light add-to-cart"
+                          className="btn btn-sm bg-primary-color text-light add-to-cart px-3 py-2 rounded-3 shadow-sm d-flex align-items-center gap-1"
                           aria-label={`Tambahkan ${item.name} ke keranjang`}
                           onClick={() => order(item)}
                         >
-                          <i className="bi bi-cart" aria-hidden="true"></i>
+                          <i className="bi bi-cart-plus" aria-hidden="true"></i>
+                          <span>Pesan</span>
                         </button>
                       </div>
                     </div>

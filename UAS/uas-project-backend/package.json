@@ -116,7 +116,6 @@
     "libsodium-wrappers": "^0.8.4",
     "libsql": "^0.5.29",
     "lightningcss": "^1.33.0",
-    "lightningcss-win32-x64-msvc": "^1.33.0",
     "lilconfig": "^2.1.0",
     "lodash": "^4.17.21",
     "lru-cache": "^11.5.3",

@@ -15,7 +15,7 @@ interface FavoriteItem {
   done: boolean;
 }
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -256,6 +256,13 @@ export default function ProfilePage() {
   }
 
   function handleLogout() {
+    try {
+      localStorage.removeItem("user");
+      sessionStorage.removeItem("currentUser");
+      window.dispatchEvent(new Event("authChange"));
+    } catch (e) {
+      console.error(e);
+    }
     router.push("/auth/login");
   }
 

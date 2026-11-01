@@ -15,7 +15,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "mie-belitung",
     name: "Mie Belitung",
-    description: "Mie Belitung dengan kuah khas.",
+    description: "Mie Belitung lezat berkuah kaldu udang khas gurih.",
     price: 20000,
     img: "/IMG/mie_belitung.webp",
     category: "Main",
@@ -23,7 +23,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "mie-belitung-special",
     name: "Mie Belitung Special",
-    description: "Mie Belitung dengan topping spesial.",
+    description: "Mie Belitung spesial aneka topping telur yang pas.",
     price: 28000,
     img: "/IMG/mie_belitung.webp",
     category: "Main",
@@ -31,7 +31,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "mie-belitung-complit",
     name: "Mie Belitung Complit",
-    description: "Mie Belitung dengan topping complit.",
+    description: "Mie Belitung komplit limpahan rasa sedap nikmatnya.",
     price: 29000,
     img: "/IMG/mie_belitung.webp",
     category: "Main",
@@ -39,7 +39,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "es-jeruk-kunci",
     name: "Es Jeruk Kunci",
-    description: "Teh jeruk kunci yang dingin yang menyegarkan.",
+    description: "Es jeruk kunci segar khas Belitung pelepas dahaga.",
     price: 5000,
     img: "/IMG/EsJerukKunci.webp",
     category: "Drink",
@@ -47,7 +47,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "kopi-belitung",
     name: "Kopi Belitung",
-    description: "Kopi khas Belitung.",
+    description: "Kopi Belitung racikan tradisional beraroma harum.",
     price: 5000,
     img: "/IMG/kopiBelitung.webp",
     category: "Drink",
@@ -55,7 +55,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "kerupuk-belitung",
     name: "Kerupuk Belitung",
-    description: "Kerupuk Belitung.",
+    description: "Kerupuk ikan Belitung garing renyah teman santap.",
     price: 3000,
     img: "/IMG/kerupukBelitung.webp",
     category: "Others",
@@ -63,7 +63,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "nasi-tim",
     name: "Nasi Tim",
-    description: "Nasi tim hangat.",
+    description: "Nasi tim hangat lembut dengan suwiran ayam gurih.",
     price: 25000,
     img: "/IMG/nasiTim.avif",
     category: "Others",
@@ -71,7 +71,7 @@ export const menuItems: MenuItem[] = [
   {
     id: "es-belitung",
     name: "Es Belitung",
-    description: "Es Belitung segar.",
+    description: "Es campur Belitung manis segar aneka jelly alami.",
     price: 13000,
     img: "/IMG/esBelitung.webp",
     category: "Others",

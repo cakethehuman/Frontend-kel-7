@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./uas-project-backend
+      dockerfile: Dockerfile
+    container_name: uas-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DATABASE_URL=file:./dev.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./uas-project
+      dockerfile: Dockerfile
+    container_name: uas-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+      - PORT=3000
+    depends_on:
+      - backend
+    restart: unless-stopped

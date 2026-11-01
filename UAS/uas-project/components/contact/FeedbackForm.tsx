@@ -16,14 +16,17 @@ const starLabels = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 function ambilUserId(): number | null {
   try {
-    const saved = sessionStorage.getItem("currentUser");
+    const saved =
+      sessionStorage.getItem("currentUser") ||
+      localStorage.getItem("currentUser") ||
+      localStorage.getItem("user");
     if (saved) {
       const userObj = JSON.parse(saved);
-      const id = Number(userObj.user_id);
+      const id = Number(userObj.user_id || userObj.id);
       if (Number.isInteger(id) && id > 0) return id;
     }
   } catch (e) {

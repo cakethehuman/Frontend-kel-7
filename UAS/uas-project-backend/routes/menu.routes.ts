@@ -77,19 +77,34 @@ router.post("/", async (req, res) => {
   try {
     const { name, description, item_type, category, price, image, img, slug } = req.body;
 
+    if (!name || String(name).trim().length < 2) {
+      res.status(400).json({ message: "Nama menu minimal 2 karakter." });
+      return;
+    }
+
     const chosenType = item_type || category || "Others";
     const chosenImage = image || img || "/IMG/mie_belitung.webp";
-    const generatedSlug =
+    
+    // Generate unique slug
+    let generatedSlug =
       slug ||
       String(name ?? "")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
 
+    const existingSlug = await prisma.menu.findUnique({
+      where: { slug: generatedSlug },
+    });
+
+    if (existingSlug) {
+      generatedSlug = `${generatedSlug}-${Date.now()}`;
+    }
+
     const menu = await prisma.menu.create({
       data: {
-        name,
-        description: description || null,
+        name: String(name).trim(),
+        description: description ? String(description).trim() : null,
         item_type: chosenType,
         price: Number(price) || 0,
         image: chosenImage,
@@ -107,13 +122,19 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
+
+    if (!Number.isInteger(id)) {
+      res.status(400).json({ message: "ID menu tidak valid" });
+      return;
+    }
+
     const { name, description, item_type, category, price, image, img, slug } = req.body;
 
     const updated = await prisma.menu.update({
       where: { menu_id: id },
       data: {
-        ...(name !== undefined && { name }),
-        ...(description !== undefined && { description }),
+        ...(name !== undefined && { name: String(name).trim() }),
+        ...(description !== undefined && { description: String(description).trim() }),
         ...(item_type !== undefined || category !== undefined
           ? { item_type: item_type || category }
           : {}),
@@ -133,9 +154,24 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const id = Number(req.params.id);
+
+    if (!Number.isInteger(id)) {
+      res.status(400).json({ message: "ID menu tidak valid" });
+      return;
+    }
+
+    // Clean up dependent foreign keys first to prevent FK constraint failures
+    await prisma.cartItem.deleteMany({
+      where: { menu_id: id },
+    });
+    await prisma.orderItem.deleteMany({
+      where: { menu_id: id },
+    });
+
     await prisma.menu.delete({
       where: { menu_id: id },
     });
+
     res.json({ message: "Menu berhasil dihapus" });
   } catch (error) {
     console.error("Failed to delete menu:", error);
