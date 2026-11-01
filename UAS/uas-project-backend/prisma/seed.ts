@@ -52,7 +52,6 @@ async function main() {
     });
     console.log(`✓ Normal user berhasil di-seed: ${normalUser.email} (password: user123)`);
 
-    // 3. Seed Menus with equal-length descriptions
     for (const item of menuItems) {
       await prisma.menu.upsert({
         where: { slug: item.id },
@@ -75,7 +74,6 @@ async function main() {
     }
     console.log(`✓ Seed menu selesai: ${menuItems.length} menu dengan deskripsi seragam berhasil disimpan.`);
 
-    // 4. Seed initial sample order for normal user if no orders exist
     const orderCount = await prisma.order.count();
     if (orderCount === 0) {
       const mieItem = await prisma.menu.findFirst({ where: { slug: "mie-belitung" } });

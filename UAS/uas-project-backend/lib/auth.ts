@@ -36,7 +36,6 @@ export function verifyPassword(password: string, storedHash: string): boolean {
       return crypto.timingSafeEqual(keyBuffer, derivedKey);
     }
 
-    // Fallback for legacy plain-text passwords
     return password === storedHash;
   } catch (error) {
     console.error("Error verifying password:", error);
