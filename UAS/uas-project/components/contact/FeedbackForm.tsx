@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
-import Link from "next/link";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -17,20 +16,6 @@ const starLabels = [
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const API_URL = "http://localhost:3001";
-
-function ambilUserId(): number | null {
-  try {
-    const saved = sessionStorage.getItem("currentUser");
-    if (saved) {
-      const userObj = JSON.parse(saved);
-      const id = Number(userObj.user_id);
-      if (Number.isInteger(id) && id > 0) return id;
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  return null;
-}
 
 interface FormState {
   nama: string;
@@ -74,7 +59,6 @@ export default function FeedbackForm() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
-  const [needLogin, setNeedLogin] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -102,19 +86,10 @@ export default function FeedbackForm() {
     setErrors(result);
     if (Object.keys(result).length) {
       setAlertMsg("Ups, ada isian yang belum lengkap.");
-      setNeedLogin(false);
-      return;
-    }
-
-    const userId = ambilUserId();
-    if (userId === null) {
-      setAlertMsg("Kamu harus login dulu untuk mengirim masukan.");
-      setNeedLogin(true);
       return;
     }
 
     setAlertMsg(null);
-    setNeedLogin(false);
     setSending(true);
 
     try {
@@ -122,7 +97,6 @@ export default function FeedbackForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: form.nama.trim(),
           email: form.email.trim(),
           rating: form.rating,
@@ -135,7 +109,6 @@ export default function FeedbackForm() {
         setSent(true);
       } else {
         const data = await res.json();
-        setNeedLogin(res.status === 401);
         setAlertMsg(data.message ?? "Masukan gagal dikirim. Coba lagi.");
       }
     } catch (e) {
@@ -166,12 +139,6 @@ export default function FeedbackForm() {
               {alertMsg && !sent && (
                 <div className="form-alert show align-items-center fw-bold" role="alert">
                   <i className="bi bi-wifi-off" /> {alertMsg}
-                  {needLogin && (
-                    <>
-                      {" "}
-                      <Link href="/auth/login">Login di sini</Link>
-                    </>
-                  )}
                 </div>
               )}
 
