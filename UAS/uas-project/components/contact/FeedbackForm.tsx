@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, type ReactNode } from "react";
+import Link from "next/link";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -14,6 +15,22 @@ const starLabels = [
 ];
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const API_URL = "http://localhost:3001";
+
+function ambilUserId(): number | null {
+  try {
+    const saved = sessionStorage.getItem("currentUser");
+    if (saved) {
+      const userObj = JSON.parse(saved);
+      const id = Number(userObj.user_id);
+      if (Number.isInteger(id) && id > 0) return id;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return null;
+}
 
 interface FormState {
   nama: string;
@@ -56,7 +73,8 @@ function Field({ id, label, required, error, children }: FieldProps) {
 export default function FeedbackForm() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [showAlert, setShowAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState<string | null>(null);
+  const [needLogin, setNeedLogin] = useState(false);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -76,17 +94,56 @@ export default function FeedbackForm() {
     return result;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (sending) return;
+
     const result = validate();
     setErrors(result);
     if (Object.keys(result).length) {
-      setShowAlert(true);
+      setAlertMsg("Ups, ada isian yang belum lengkap.");
+      setNeedLogin(false);
       return;
     }
-    setShowAlert(false);
+
+    const userId = ambilUserId();
+    if (userId === null) {
+      setAlertMsg("Kamu harus login dulu untuk mengirim masukan.");
+      setNeedLogin(true);
+      return;
+    }
+
+    setAlertMsg(null);
+    setNeedLogin(false);
     setSending(true);
-    setTimeout(() => setSent(true), 900);
+
+    try {
+      const res = await fetch(API_URL + "/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: userId,
+          name: form.nama.trim(),
+          email: form.email.trim(),
+          rating: form.rating,
+          category: form.kategori,
+          message: form.pesan.trim(),
+        }),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const data = await res.json();
+        setNeedLogin(res.status === 401);
+        setAlertMsg(data.message ?? "Masukan gagal dikirim. Coba lagi.");
+      }
+    } catch (e) {
+      console.log(e);
+      setAlertMsg("Tidak bisa terhubung ke server. Pastikan backend sudah berjalan.");
+    }
+
+    setSending(false);
   };
 
   return (
@@ -106,9 +163,15 @@ export default function FeedbackForm() {
 
           <Col lg={6}>
             <div className="form-panel bg-white">
-              {showAlert && !sent && (
+              {alertMsg && !sent && (
                 <div className="form-alert show align-items-center fw-bold" role="alert">
-                  <i className="bi bi-wifi-off" /> Ups, ada isian yang belum lengkap.
+                  <i className="bi bi-wifi-off" /> {alertMsg}
+                  {needLogin && (
+                    <>
+                      {" "}
+                      <Link href="/auth/login">Login di sini</Link>
+                    </>
+                  )}
                 </div>
               )}
 

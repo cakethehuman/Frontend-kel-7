@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Modal, Row } from "react-bootstrap";
 import CartRow from "@/components/cart/CartRow";
 import MoreList from "@/components/cart/MoreList";
 import OrderForm from "@/components/cart/OrderForm";
@@ -20,6 +20,7 @@ import { rupiah } from "@/lib/format";
 
 
 const TAX_RATE = 0.1;
+const API_URL = "http://localhost:3001";
 
 const emptyForm: FormState = {
   name: "",
@@ -30,13 +31,18 @@ const emptyForm: FormState = {
   note: "",
 };
 
-function nextOrderNumber(): string {
-  let seq = 1;
+function ambilUserId(): number | null {
   try {
-    seq = Number(localStorage.getItem("mb_order_seq") || 0) + 1;
-    localStorage.setItem("mb_order_seq", String(seq));
-  } catch { }
-  return "MB-" + String(seq).padStart(4, "0");
+    const saved = sessionStorage.getItem("currentUser");
+    if (saved) {
+      const userObj = JSON.parse(saved);
+      const id = Number(userObj.user_id);
+      if (Number.isInteger(id) && id > 0) return id;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+  return null;
 }
 
 export default function CartInfo() {
@@ -49,6 +55,9 @@ export default function CartInfo() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [placed, setPlaced] = useState<Order | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [needLogin, setNeedLogin] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -116,14 +125,56 @@ export default function CartInfo() {
   const checkout = () => {
     if (empty || !validate()) return;
     setPreview(buildOrder());
+    setSubmitError(null);
+    setNeedLogin(false);
     setShowConfirm(true);
   };
 
-  const finalConfirm = () => {
-    if (!preview || placed) return;
-    setPlaced({ ...preview, number: nextOrderNumber() });
-    CartStore.clear();
-    setShowConfirm(false);
+  const finalConfirm = async () => {
+    if (!preview || placed || submitting) return;
+
+    const userId = ambilUserId();
+    if (userId === null) {
+      setSubmitError("Kamu harus login dulu untuk memesan.");
+      setNeedLogin(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError(null);
+    setNeedLogin(false);
+
+    try {
+      const res = await fetch(API_URL + "/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: userId,
+          name: preview.name,
+          phone: preview.phone,
+          type: preview.type,
+          table: preview.table,
+          payment: preview.payment,
+          note: preview.note,
+          items: preview.items.map((item) => ({ id: item.id, qty: item.qty })),
+        }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setPlaced({ ...preview, number: data.order_number, total: data.total });
+        CartStore.clear();
+        setShowConfirm(false);
+      } else {
+        setNeedLogin(res.status === 401);
+        setSubmitError(data.message ?? "Pesanan gagal dikirim. Coba lagi.");
+      }
+    } catch (e) {
+      console.log(e);
+      setSubmitError("Tidak bisa terhubung ke server. Pastikan backend sudah berjalan.");
+    }
+
+    setSubmitting(false);
   };
 
   const afterConfirmHidden = () => {
@@ -239,7 +290,7 @@ export default function CartInfo() {
 
       <Modal
         show={showConfirm}
-        onHide={() => setShowConfirm(false)}
+        onHide={() => !submitting && setShowConfirm(false)}
         onExited={afterConfirmHidden}
         centered
         scrollable
@@ -259,15 +310,28 @@ export default function CartInfo() {
                 <b className="text-danger">{rupiah(preview.total)}</b>.
               </p>
               <Recap order={preview} />
+              {submitError && (
+                <Alert variant="danger" className="mt-3 mb-0" role="alert">
+                  {submitError}
+                  {needLogin && (
+                    <>
+                      {" "}
+                      <Link href="/auth/login" className="alert-link">
+                        Login di sini
+                      </Link>
+                    </>
+                  )}
+                </Alert>
+              )}
             </>
           )}
         </Modal.Body>
         <Modal.Footer className="border-0 pt-0">
-          <Button className="btn-outline-brown" onClick={() => setShowConfirm(false)}>
+          <Button className="btn-outline-brown" disabled={submitting} onClick={() => setShowConfirm(false)}>
             Edit Dulu
           </Button>
-          <Button className="btn-red" onClick={finalConfirm}>
-            Ya, Pesan
+          <Button className="btn-red" disabled={submitting} onClick={finalConfirm}>
+            {submitting ? "Mengirim..." : "Ya, Pesan"}
           </Button>
         </Modal.Footer>
       </Modal>
