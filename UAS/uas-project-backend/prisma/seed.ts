@@ -29,12 +29,11 @@ async function main() {
     });
     console.log(`✓ Admin user berhasil di-seed: ${adminUser.email} (password: admin123)`);
 
-    // 2. Seed Normal Person Account with salted and hashed password
     const userPasswordHash = hashPassword("user123");
     const normalUser = await prisma.user.upsert({
       where: { email: "user@belitung.com" },
       update: {
-        name: "Wilson Widodo",
+        name: "Willson kaoruko",
         password: userPasswordHash,
         is_admin: 0,
         role: "Student & Programmer",

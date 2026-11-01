@@ -50,6 +50,18 @@ export default function ProfilePage() {
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
+  const [currentUser, setCurrentUser] = useState<any>(null);
+  
+  useEffect(() => {
+    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
+
+    if (raw) {
+      setCurrentUser(JSON.parse(raw));
+    } else {
+      setCurrentUser(null);
+    }
+  }, []);
+
   useEffect(() => {
     async function ambilDataDariBackend() {
       try {
@@ -327,7 +339,7 @@ export default function ProfilePage() {
               </div>
               <div className="pf-id-body text-center">
                 <h1 className="pf-name" id="pf-name">
-                  {name}
+                  {currentUser?.name}
                 </h1>
                 <p className="pf-email" id="pf-email">
                   {email}
