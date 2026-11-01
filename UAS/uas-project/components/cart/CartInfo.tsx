@@ -22,6 +22,16 @@ import { rupiah } from "@/lib/format";
 const TAX_RATE = 0.1;
 const API_URL = "http://localhost:3001";
 
+function getLoggedInUserId(): number | null {
+  try {
+    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
+    const id = raw ? Number(JSON.parse(raw)?.user_id) : NaN;
+    return Number.isInteger(id) && id > 0 ? id : null;
+  } catch {
+    return null;
+  }
+}
+
 const emptyForm: FormState = {
   name: "",
   phone: "",
@@ -117,6 +127,12 @@ export default function CartInfo() {
   const finalConfirm = async () => {
     if (!preview || placed || submitting) return;
 
+    const userId = getLoggedInUserId();
+    if (userId === null) {
+      setSubmitError("Login dulu untuk mengirim pesanan.");
+      return;
+    }
+
     setSubmitting(true);
     setSubmitError(null);
 
@@ -125,6 +141,7 @@ export default function CartInfo() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          user_id: userId,
           name: preview.name,
           phone: preview.phone,
           type: preview.type,
