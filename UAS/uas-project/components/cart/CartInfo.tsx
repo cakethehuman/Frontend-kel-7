@@ -31,20 +31,6 @@ const emptyForm: FormState = {
   note: "",
 };
 
-function ambilUserId(): number | null {
-  try {
-    const saved = sessionStorage.getItem("currentUser");
-    if (saved) {
-      const userObj = JSON.parse(saved);
-      const id = Number(userObj.user_id);
-      if (Number.isInteger(id) && id > 0) return id;
-    }
-  } catch (e) {
-    console.log(e);
-  }
-  return null;
-}
-
 export default function CartInfo() {
   const hydrated = useHydrated();
   const items = useCart();
@@ -57,7 +43,6 @@ export default function CartInfo() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [needLogin, setNeedLogin] = useState(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -126,30 +111,20 @@ export default function CartInfo() {
     if (empty || !validate()) return;
     setPreview(buildOrder());
     setSubmitError(null);
-    setNeedLogin(false);
     setShowConfirm(true);
   };
 
   const finalConfirm = async () => {
     if (!preview || placed || submitting) return;
 
-    const userId = ambilUserId();
-    if (userId === null) {
-      setSubmitError("Kamu harus login dulu untuk memesan.");
-      setNeedLogin(true);
-      return;
-    }
-
     setSubmitting(true);
     setSubmitError(null);
-    setNeedLogin(false);
 
     try {
       const res = await fetch(API_URL + "/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: preview.name,
           phone: preview.phone,
           type: preview.type,
@@ -166,7 +141,6 @@ export default function CartInfo() {
         CartStore.clear();
         setShowConfirm(false);
       } else {
-        setNeedLogin(res.status === 401);
         setSubmitError(data.message ?? "Pesanan gagal dikirim. Coba lagi.");
       }
     } catch (e) {
@@ -313,14 +287,6 @@ export default function CartInfo() {
               {submitError && (
                 <Alert variant="danger" className="mt-3 mb-0" role="alert">
                   {submitError}
-                  {needLogin && (
-                    <>
-                      {" "}
-                      <Link href="/auth/login" className="alert-link">
-                        Login di sini
-                      </Link>
-                    </>
-                  )}
                 </Alert>
               )}
             </>

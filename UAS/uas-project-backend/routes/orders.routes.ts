@@ -10,9 +10,7 @@ const DAFTAR_PEMBAYARAN = ["Cash", "QRIS", "Transfer"];
 router.post("/", async (req, res) => {
     const body = req.body ?? {};
 
-    const user = await prisma.user.findUnique({
-        where: { user_id: Number(body.user_id) },
-    });
+    const user = await prisma.user.findFirst();
 
     if (!user) {
         res.status(401).json({ message: "Kamu Harus Login Dulu." });
