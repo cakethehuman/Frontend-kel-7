@@ -26,6 +26,7 @@ const statusColors: Record<string, string> = {
   pending: "warning",
   cooking: "info",
   done: "success",
+  finished: "dark",
   cancelled: "secondary",
 };
 

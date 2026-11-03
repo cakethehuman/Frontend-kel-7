@@ -10,6 +10,7 @@ const links = [
   { href: "/admin/menu", label: "Menu", icon: "bi-cup-hot" },
   { href: "/admin/orders", label: "Orders", icon: "bi-receipt" },
   { href: "/admin/users", label: "Users", icon: "bi-people" },
+  { href: "/admin/feedback", label: "Feedback", icon: "bi-chat-dots" },
   { href: "/admin/profit", label: "Profit", icon: "bi-graph-up" },
 ];
 

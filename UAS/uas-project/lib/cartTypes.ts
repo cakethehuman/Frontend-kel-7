@@ -15,7 +15,11 @@ export interface FormState {
 
 export type FieldKey = "name" | "phone" | "table";
 export type FormErrors = Partial<Record<FieldKey, boolean>>;
-export type FieldRefs = Record<FieldKey, RefObject<HTMLInputElement | null>>;
+export interface FieldRefs {
+  name: RefObject<HTMLInputElement | null>;
+  phone: RefObject<HTMLInputElement | null>;
+  table: RefObject<HTMLSelectElement | null>;
+}
 
 export interface Order {
   name: string;

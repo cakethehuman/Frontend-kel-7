@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +21,7 @@ import { rupiah } from "@/lib/format";
 
 const TAX_RATE = 0.1;
 const API_URL = "http://localhost:3001";
+const MAX_TABLE = 15;
 
 function getLoggedInUserId(): number | null {
   try {
@@ -53,10 +54,26 @@ export default function CartInfo() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [takenTables, setTakenTables] = useState<number[]>([]);
+
+  const loadTables = useCallback(async () => {
+    try {
+      const res = await fetch(API_URL + "/api/orders/tables");
+      if (!res.ok) return;
+      const data = await res.json();
+      setTakenTables(Array.isArray(data.taken) ? data.taken : []);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  useEffect(() => {
+    loadTables();
+  }, [loadTables]);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
-  const tableRef = useRef<HTMLInputElement>(null);
+  const tableRef = useRef<HTMLSelectElement>(null);
 
   const refs: FieldRefs = { name: nameRef, phone: phoneRef, table: tableRef };
 
@@ -85,7 +102,9 @@ export default function CartInfo() {
     const result: Record<FieldKey, boolean> = {
       name: form.name.trim().length < 3,
       phone: phone.length < 9 || phone.length > 15,
-      table: form.type === "dinein" && !(table >= 1 && table <= 99),
+      table:
+        form.type === "dinein" &&
+        !(table >= 1 && table <= MAX_TABLE && !takenTables.includes(table)),
     };
     setErrors(result);
 
@@ -159,6 +178,11 @@ export default function CartInfo() {
         setShowConfirm(false);
       } else {
         setSubmitError(data.message ?? "Pesanan gagal dikirim. Coba lagi.");
+        if (res.status === 409) {
+          await loadTables();
+          setShowConfirm(false);
+          setForm((prev) => ({ ...prev, table: "" }));
+        }
       }
     } catch (e) {
       console.log(e);
@@ -215,7 +239,7 @@ export default function CartInfo() {
             </Panel>
 
             <Panel title="Data Pemesan">
-              <OrderForm form={form} errors={errors} onChange={changeField} refs={refs} />
+              <OrderForm form={form} errors={errors} onChange={changeField} refs={refs} takenTables={takenTables} maxTable={MAX_TABLE} />
             </Panel>
           </Col>
 

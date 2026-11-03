@@ -17,9 +17,11 @@ interface OrderFormProps {
   errors: FormErrors;
   onChange: <K extends keyof FormState>(key: K, value: FormState[K]) => void;
   refs: FieldRefs;
+  takenTables: number[];
+  maxTable: number;
 }
 
-export default function OrderForm({ form, errors, onChange, refs}: OrderFormProps) {
+export default function OrderForm({ form, errors, onChange, refs, takenTables, maxTable }: OrderFormProps) {
   return (
     <Form noValidate onSubmit={(e) => e.preventDefault()}>
       <Row className="g-3">
@@ -63,9 +65,19 @@ export default function OrderForm({ form, errors, onChange, refs}: OrderFormProp
           <Form.Label htmlFor="cust-table" className="fw-bold">
             Nomor Meja
           </Form.Label>
-          <Form.Control id="cust-table" ref={refs.table} type="number" min={1} max={99} placeholder="cth: 7" value={form.table} isInvalid={errors.table} onChange={(e) => onChange("table", e.target.value)}/>
+          <Form.Select id="cust-table" ref={refs.table} value={form.table} isInvalid={errors.table} onChange={(e) => onChange("table", e.target.value)}>
+            <option value="">Pilih nomor meja</option>
+            {Array.from({ length: maxTable }, (_, i) => i + 1).map((n) => {
+              const taken = takenTables.includes(n);
+              return (
+                <option key={n} value={String(n)} disabled={taken}>
+                  Meja {n} — {taken ? "Terpakai" : "Tersedia"}
+                </option>
+              );
+            })}
+          </Form.Select>
           <Form.Control.Feedback type="invalid">
-            Isi nomor meja antara 1 sampai 99.
+            Pilih meja yang tersedia.
           </Form.Control.Feedback>
         </div>
       )}
