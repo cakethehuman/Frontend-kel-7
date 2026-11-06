@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.10.1",
+    "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "abbrev": "^3.0.1",
     "acorn": "^8.19.0",
@@ -144,6 +145,7 @@
     "pathe": "^2.0.3",
     "pend": "^1.2.0",
     "perfect-debounce": "^2.1.0",
+    "pg": "^8.23.1",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.7",
     "pkg-types": "^2.4.0",
@@ -221,6 +223,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
     "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
