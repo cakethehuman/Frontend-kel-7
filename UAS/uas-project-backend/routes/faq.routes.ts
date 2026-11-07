@@ -14,13 +14,13 @@ type InputFaq =
   | { ok: false; message: string };
 
 function formatFaq(faq: {
-  faq_id: number;
+  id: number;
   question: string;
   answer: string;
   sort_order: number;
 }) {
   return {
-    id: faq.faq_id,
+    id: faq.id,
     question: faq.question,
     answer: faq.answer,
     sort_order: faq.sort_order,
@@ -51,7 +51,7 @@ function bacaInput(body: Record<string, unknown>): InputFaq {
 router.get("/", async (_req, res) => {
   try {
     const faqs = await prisma.faq.findMany({
-      orderBy: [{ sort_order: "asc" }, { faq_id: "asc" }],
+      orderBy: [{ sort_order: "asc" }, { id: "asc" }],
     });
     res.json(faqs.map(formatFaq));
   } catch (error) {
@@ -101,7 +101,7 @@ router.put("/:id", requireAdmin, async (req, res) => {
       return;
     }
 
-    const ada = await prisma.faq.findUnique({ where: { faq_id: id } });
+    const ada = await prisma.faq.findUnique({ where: { id } });
     if (!ada) {
       res.status(404).json({ message: "FAQ tidak ditemukan." });
       return;
@@ -118,7 +118,7 @@ router.put("/:id", requireAdmin, async (req, res) => {
     }
 
     const updated = await prisma.faq.update({
-      where: { faq_id: id },
+      where: { id },
       data,
     });
 
@@ -137,13 +137,13 @@ router.delete("/:id", requireAdmin, async (req, res) => {
       return;
     }
 
-    const ada = await prisma.faq.findUnique({ where: { faq_id: id } });
+    const ada = await prisma.faq.findUnique({ where: { id } });
     if (!ada) {
       res.status(404).json({ message: "FAQ tidak ditemukan." });
       return;
     }
 
-    await prisma.faq.delete({ where: { faq_id: id } });
+    await prisma.faq.delete({ where: { id } });
     res.json({ message: "FAQ berhasil dihapus." });
   } catch (error) {
     console.error("Error deleting faq:", error);
