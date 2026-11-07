@@ -144,3 +144,12 @@ model Faq {
 
   @@map("faqs")
 }
+
+
+model SiteContent {
+  key        String   @id
+  value      String
+  updated_at DateTime @updatedAt
+
+  @@map("site_content")
+}
