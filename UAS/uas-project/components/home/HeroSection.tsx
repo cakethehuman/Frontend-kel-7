@@ -1,40 +1,42 @@
+"use client";
+
 import Image from "next/image";
 import ButtonLink from "@/components/ui/ButtonLink";
 import HeroHotspot from "@/components/home/HeroHotspot";
 import HeroFeatureBar from "@/components/home/HeroFeatureBar";
 import { heroHotspots } from "@/data/home";
+import { useContent } from "@/lib/siteContent";
 
 export default function HeroSection() {
+  const { teks, daftar } = useContent();
+  const hotspots = daftar("home.hotspots");
+
   return (
     <section className="belitung-hero">
       <div id="container-pertama" className="container">
         <div className="text-and-button-wrapper">
           <h1>
-            <b>Makanan Lezat Dari Belitung</b>
+            <b>{teks("home.hero.title")}</b>
           </h1>
 
-          <h3>Rasa Makanan Terbaik</h3>
+          <h3>{teks("home.hero.subtitle")}</h3>
 
           <div className="description">
-            <p>
-              Temukan sensasi perpaduan bumbu rempah pilihan dan kaldu udang
-              kental khas Belitung. Nikmat warisan kuliner autentik yang siap
-              memanjakan lidah Anda sejak suapan pertama
-            </p>
+            <p>{teks("home.hero.description")}</p>
           </div>
 
           <ButtonLink
             href="/menu"
             className="pesan-sekarang button-container-pertama"
           >
-            Pesan Sekarang
+            {teks("home.hero.cta_primary")}
           </ButtonLink>
 
           <ButtonLink
             href="/about"
             className="baca-selengkapnya button-container-pertama"
           >
-            Baca Selengkapnya
+            {teks("home.hero.cta_secondary")}
           </ButtonLink>
         </div>
 
@@ -51,8 +53,13 @@ export default function HeroSection() {
               />
             </div>
 
-            {heroHotspots.map((hotspot) => (
-              <HeroHotspot key={hotspot.infoClass} {...hotspot} />
+            {heroHotspots.map((hotspot, i) => (
+              <HeroHotspot
+                key={hotspot.infoClass}
+                {...hotspot}
+                title={hotspots[i]?.title ?? hotspot.title}
+                description={hotspots[i]?.description ?? hotspot.description}
+              />
             ))}
           </div>
         </div>

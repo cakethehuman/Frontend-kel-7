@@ -19,4 +19,4 @@ RUN npx prisma generate --schema=prisma/schema.prisma
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx tsx prisma/seed.ts && npx tsx server.ts"]
+CMD ["sh", "-c", "npx prisma db push --config prisma7.config.ts && npx tsx prisma/seed.ts && npx tsx server.ts"]

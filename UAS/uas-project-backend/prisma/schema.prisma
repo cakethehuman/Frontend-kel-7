@@ -133,3 +133,23 @@ model Favorite {
 
   @@map("favorites")
 }
+
+model Faq {
+  id         Int      @id @default(autoincrement())
+  question   String
+  answer     String
+  sort_order Int      @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+
+model SiteContent {
+  key        String   @id
+  value      String
+  updated_at DateTime @updatedAt
+
+  @@map("site_content")
+}
