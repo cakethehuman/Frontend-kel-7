@@ -1,6 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import {
+  Alert,
+  Button,
+  Card,
+  Form,
+  Modal,
+  Spinner,
+  Table,
+} from "react-bootstrap";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface Faq {
   id: number;
@@ -9,73 +20,111 @@ interface Faq {
   sort_order: number;
 }
 
+const emptyForm = { question: "", answer: "", sort_order: 0 };
+
+function headerAdmin(): Record<string, string> {
+  let userId = "";
+  try {
+    const raw =
+      localStorage.getItem("user") || sessionStorage.getItem("currentUser");
+    if (raw) userId = String(JSON.parse(raw).user_id ?? "");
+  } catch {
+    userId = "";
+  }
+  return { "Content-Type": "application/json", "x-user-id": userId };
+}
+
 export default function AdminFaqPage() {
   const [faqs, setFaqs] = useState<Faq[]>([]);
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const fetchFaqs = async () => {
-  try {
-    const res = await fetch("http://localhost:3001/api/faqs");
-    const data = await res.json();
-    if (Array.isArray(data)) {
-      setFaqs(data);
-    } else {
-      setFaqs([]);
-    }
-  } catch (err) {
-    console.error("Gagal memuat FAQ:", err);
-    setFaqs([]);
-  }
-};
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [muatUlang, setMuatUlang] = useState(0);
+  const [show, setShow] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [form, setForm] = useState(emptyForm);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetchFaqs();
-  }, []);
+    let aktif = true;
 
-  const handleAddFaq = async (e: React.FormEvent) => {
+    const muat = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/faqs`);
+        if (!res.ok) throw new Error("Gagal mengambil data FAQ dari server.");
+        const data: unknown = await res.json();
+        if (aktif) {
+          setFaqs(Array.isArray(data) ? (data as Faq[]) : []);
+          setError(null);
+        }
+      } catch (err) {
+        if (aktif) {
+          setError(err instanceof Error ? err.message : "Gagal memuat FAQ.");
+        }
+      } finally {
+        if (aktif) setLoading(false);
+      }
+    };
+
+    muat();
+    return () => {
+      aktif = false;
+    };
+  }, [muatUlang]);
+
+  const bukaTambah = () => {
+    setEditingId(null);
+    setForm(emptyForm);
+    setShow(true);
+  };
+
+  const bukaEdit = (faq: Faq) => {
+    setEditingId(faq.id);
+    setForm({
+      question: faq.question,
+      answer: faq.answer,
+      sort_order: faq.sort_order,
+    });
+    setShow(true);
+  };
+
+  const simpan = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setMessage("");
+    setSaving(true);
 
     try {
-      const res = await fetch("http://localhost:3001/api/faqs", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-user-id": "1",
+      const sedangEdit = editingId !== null;
+      const res = await fetch(
+        sedangEdit ? `${API_URL}/api/faqs/${editingId}` : `${API_URL}/api/faqs`,
+        {
+          method: sedangEdit ? "PUT" : "POST",
+          headers: headerAdmin(),
+          body: JSON.stringify({
+            question: form.question.trim(),
+            answer: form.answer.trim(),
+            sort_order: form.sort_order,
+          }),
         },
-        body: JSON.stringify({ question, answer }),
-      });
+      );
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Gagal menyimpan FAQ");
 
-      if (!res.ok) {
-        throw new Error(data.message || "Gagal menambah FAQ");
-      }
-
-      setMessage("FAQ berhasil ditambahkan!");
-      setQuestion("");
-      setAnswer("");
-      fetchFaqs();
-    } catch (err: any) {
-      setMessage(err.message);
+      setShow(false);
+      setMuatUlang((n) => n + 1);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Gagal menyimpan FAQ");
     } finally {
-      setLoading(false);
+      setSaving(false);
     }
   };
 
-  const handleDeleteFaq = async (id: number) => {
-    if (!confirm("Yakin ingin menghapus FAQ ini?")) return;
+  const hapus = async (faq: Faq) => {
+    if (!confirm(`Yakin ingin menghapus FAQ "${faq.question}"?`)) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/api/faqs/${id}`, {
+      const res = await fetch(`${API_URL}/api/faqs/${faq.id}`, {
         method: "DELETE",
-        headers: {
-          "x-user-id": "1",
-        },
+        headers: headerAdmin(),
       });
 
       if (!res.ok) {
@@ -83,72 +132,175 @@ export default function AdminFaqPage() {
         throw new Error(data.message || "Gagal menghapus FAQ");
       }
 
-      fetchFaqs();
-    } catch (err: any) {
-      alert(err.message);
+      setMuatUlang((n) => n + 1);
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Gagal menghapus FAQ");
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Manajemen FAQ (Admin)</h1>
-
-      {message && <div className="mb-4 p-3 bg-blue-100 text-blue-800 rounded">{message}</div>}
-
-      <form onSubmit={handleAddFaq} className="bg-white p-4 shadow rounded mb-8 space-y-4">
-        <h2 className="text-lg font-semibold">Tambah FAQ Baru</h2>
+    <div className="container-fluid px-0">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Pertanyaan</label>
-          <input
-            type="text"
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            className="w-full border p-2 rounded"
-            required
-          />
+          <h2 className="fw-bold mb-1">Manajemen FAQ</h2>
+          <p className="text-muted mb-0">
+            Tambah, edit, atau hapus pertanyaan yang tampil di halaman utama.
+          </p>
         </div>
-        <div>
-          <label className="block text-sm font-medium mb-1">Jawaban</label>
-          <textarea
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            className="w-full border p-2 rounded"
-            rows={3}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+        <Button
+          variant="danger"
+          onClick={bukaTambah}
+          className="d-flex align-items-center gap-1"
         >
-          {loading ? "Menyimpan..." : "Simpan FAQ"}
-        </button>
-      </form>
-
-      <div className="bg-white p-4 shadow rounded">
-        <h2 className="text-lg font-semibold mb-4">Daftar FAQ Saat Ini</h2>
-        {Array.isArray(faqs) && faqs.length > 0 ? (
-          <div className="space-y-4">
-            {faqs.map((faq) => (
-              <div key={faq.id} className="border-b pb-4 flex justify-between items-start">
-                <div>
-                  <h3 className="font-semibold text-gray-800">{faq.question}</h3>
-                  <p className="text-gray-600 text-sm mt-1">{faq.answer}</p>
-                </div>
-                <button
-                  onClick={() => handleDeleteFaq(faq.id)}
-                  className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 ml-4"
-                >
-                  Hapus
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500">Belum ada data FAQ.</p>
-        )}
+          <i className="bi bi-plus-lg"></i>
+          <span>Tambah FAQ</span>
+        </Button>
       </div>
+
+      {error && (
+        <Alert variant="danger" dismissible onClose={() => setError(null)}>
+          {error}
+        </Alert>
+      )}
+
+      {loading ? (
+        <div className="text-center py-5">
+          <Spinner animation="border" variant="danger" />
+          <p className="mt-2 text-muted">Memuat data FAQ...</p>
+        </div>
+      ) : (
+        <Card className="border-0 shadow-sm rounded-3 overflow-hidden">
+          <Table striped hover responsive className="align-middle mb-0">
+            <thead className="table-light">
+              <tr>
+                <th style={{ width: "80px" }}>Urutan</th>
+                <th>Pertanyaan</th>
+                <th>Jawaban</th>
+                <th className="text-end">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {faqs.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="text-center text-muted py-4">
+                    Belum ada data FAQ.
+                  </td>
+                </tr>
+              ) : (
+                faqs.map((faq) => (
+                  <tr key={faq.id}>
+                    <td className="fw-semibold">{faq.sort_order}</td>
+                    <td className="fw-bold">{faq.question}</td>
+                    <td style={{ maxWidth: "320px" }}>
+                      <div
+                        className="small text-muted text-truncate"
+                        title={faq.answer}
+                      >
+                        {faq.answer}
+                      </div>
+                    </td>
+                    <td className="text-end text-nowrap">
+                      <Button
+                        size="sm"
+                        variant="outline-primary"
+                        className="me-2"
+                        onClick={() => bukaEdit(faq)}
+                      >
+                        <i className="bi bi-pencil-square me-1"></i>
+                        Edit
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline-danger"
+                        onClick={() => hapus(faq)}
+                      >
+                        <i className="bi bi-trash3 me-1"></i>
+                        Hapus
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </Table>
+        </Card>
+      )}
+
+      <Modal show={show} onHide={() => !saving && setShow(false)} centered>
+        <Form onSubmit={simpan}>
+          <Modal.Header closeButton>
+            <Modal.Title className="fw-bold text-danger">
+              {editingId === null ? "Tambah FAQ Baru" : "Edit FAQ"}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">
+                Pertanyaan{" "}
+                <small className="text-muted fw-normal">
+                  ({form.question.length}/200)
+                </small>
+              </Form.Label>
+              <Form.Control
+                required
+                minLength={5}
+                maxLength={200}
+                placeholder="Contoh: Apakah ada tempat parkir?"
+                value={form.question}
+                onChange={(e) => setForm({ ...form, question: e.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label className="fw-semibold">
+                Jawaban{" "}
+                <small className="text-muted fw-normal">
+                  ({form.answer.length}/1000)
+                </small>
+              </Form.Label>
+              <Form.Control
+                required
+                as="textarea"
+                rows={4}
+                minLength={5}
+                maxLength={1000}
+                placeholder="Tulis jawaban singkat dan jelas"
+                value={form.answer}
+                onChange={(e) => setForm({ ...form, answer: e.target.value })}
+              />
+            </Form.Group>
+
+            {editingId !== null && (
+              <Form.Group>
+                <Form.Label className="fw-semibold">Urutan tampil</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={0}
+                  value={form.sort_order}
+                  onChange={(e) =>
+                    setForm({ ...form, sort_order: Number(e.target.value) })
+                  }
+                />
+                <Form.Text className="text-muted">
+                  Angka lebih kecil tampil lebih dulu.
+                </Form.Text>
+              </Form.Group>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              disabled={saving}
+              onClick={() => setShow(false)}
+            >
+              Batal
+            </Button>
+            <Button variant="danger" type="submit" disabled={saving}>
+              {saving ? "Menyimpan..." : "Simpan FAQ"}
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
     </div>
   );
 }
