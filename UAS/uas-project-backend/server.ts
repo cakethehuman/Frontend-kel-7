@@ -9,12 +9,12 @@ import ordersRoutes from "./routes/orders.routes";
 import authRoutes from "./routes/auth.routes";
 import usersRoutes from "./routes/users.routes";
 import adminRoutes from "./routes/admin.routes";
+import faqRoutes from "./routes/faq.routes";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
 app.use("/menu", menuRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/profile", profileRoutes);
@@ -24,8 +24,8 @@ app.use("/api/orders", ordersRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/faqs", faqRoutes);
 
-// Global healthcheck route
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", time: new Date().toISOString() });
 });
