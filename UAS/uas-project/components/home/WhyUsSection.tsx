@@ -1,18 +1,27 @@
+"use client";
+
 import SectionHeading from "@/components/ui/SectionHeading";
 import WhyUsCard from "@/components/home/WhyUsCard";
-import { whyUs } from "@/data/home";
+import { useContent } from "@/lib/siteContent";
 
 export default function WhyUsSection() {
+  const { teks, daftar } = useContent();
+
   return (
     <div className="container why-us-section">
       <SectionHeading
-        title="Kenapa Pilih Kami?"
-        subtitle="Bukan sekadar mie, tapi warisan rasa Belitung yang kami jaga dari dapur sampai ke meja Anda."
+        title={teks("home.whyus.title")}
+        subtitle={teks("home.whyus.subtitle")}
       />
 
       <div className="row text-center g-4">
-        {whyUs.map((item) => (
-          <WhyUsCard key={item.title} {...item} />
+        {daftar("home.whyus.cards").map((item, i) => (
+          <WhyUsCard
+            key={i}
+            icon={item.icon}
+            title={item.title}
+            text={item.text}
+          />
         ))}
       </div>
     </div>
