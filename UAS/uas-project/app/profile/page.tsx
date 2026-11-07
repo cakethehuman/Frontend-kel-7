@@ -7,6 +7,7 @@ import { Modal } from "react-bootstrap";
 import ProfileCard from "@/components/profile/ProfileCard";
 import StatCard from "@/components/profile/StatCard";
 import FavoriteCard from "@/components/profile/FavoriteCard";
+import { useSiteContent } from "@/lib/siteContent";
 
 interface FavoriteItem {
   id: number;
@@ -20,6 +21,11 @@ const API_URL = "http://localhost:3001";
 
 export default function ProfilePage() {
   const router = useRouter();
+  const { teks } = useSiteContent("profile");
+  const daftarPilihanWilayah = teks("profile.regions")
+    .split("\n")
+    .map((w) => w.trim())
+    .filter((w) => w !== "");
 
   const [userId, setUserId] = useState<number | null>(null);
   const [name, setName] = useState("Wilson Widodo");
@@ -43,6 +49,9 @@ export default function ProfilePage() {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [inputName, setInputName] = useState("");
   const [inputRegion, setInputRegion] = useState("Sumatra");
+  const wilayahDipilih = daftarPilihanWilayah.includes(inputRegion)
+    ? inputRegion
+    : (daftarPilihanWilayah[0] ?? "");
   const [searchKeyword, setSearchKeyword] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [messageText, setMessageText] = useState("");
@@ -155,7 +164,7 @@ export default function ProfilePage() {
         body: JSON.stringify({
           user_id: userId,
           name: namaBersih,
-          region: inputRegion,
+          region: wilayahDipilih,
         }),
       });
 
@@ -349,7 +358,7 @@ export default function ProfilePage() {
                   priority
                 />
                 <figcaption className="pf-cover-caption">
-                  <i className="bi bi-heart-fill"></i> Favorit Utama
+                  <i className="bi bi-heart-fill"></i> {teks("profile.cover.caption")}
                 </figcaption>
               </figure>
               <div className="pf-avatar" id="pf-avatar" aria-hidden="true">
@@ -363,7 +372,7 @@ export default function ProfilePage() {
                   {email}
                 </p>
                 <p className="pf-loc">
-                  <i className="bi bi-geo-alt-fill"></i> Jakarta, Indonesia
+                  <i className="bi bi-geo-alt-fill"></i> {teks("profile.location")}
                 </p>
                 <div className="d-flex justify-content-center gap-2 flex-wrap">
                   <button
@@ -387,7 +396,7 @@ export default function ProfilePage() {
 
           <div className="col-lg-8 d-flex flex-column gap-4">
             <ProfileCard className="pf-bio">
-              <p className="pf-label">About Me</p>
+              <p className="pf-label">{teks("profile.about.label")}</p>
               <h2 className="pf-title" id="pf-title">
                 {role}
               </h2>
@@ -455,13 +464,11 @@ export default function ProfilePage() {
         aria-labelledby="fav-title"
       >
         <header className="text-center mb-4">
-          <p className="pf-label">Daftar Jelajah Kuliner</p>
+          <p className="pf-label">{teks("profile.fav.label")}</p>
           <h2 className="pf-heading" id="fav-title">
-            Kuliner Nusantara Favoritku
+            {teks("profile.fav.title")}
           </h2>
-          <p className="pf-sub">
-            Catat makanan khas daerah yang ingin kamu coba
-          </p>
+          <p className="pf-sub">{teks("profile.fav.subtitle")}</p>
         </header>
 
         <div className="pf-card pf-tools">
@@ -493,17 +500,14 @@ export default function ProfilePage() {
               <select
                 className="form-select"
                 id="fav-input-region"
-                value={inputRegion}
+                value={wilayahDipilih}
                 onChange={(e) => setInputRegion(e.target.value)}
               >
-                <option value="Sumatra">Sumatra</option>
-                <option value="Jawa">Jawa</option>
-                <option value="Bali & Nusa Tenggara">
-                  Bali &amp; Nusa Tenggara
-                </option>
-                <option value="Kalimantan">Kalimantan</option>
-                <option value="Sulawesi">Sulawesi</option>
-                <option value="Maluku & Papua">Maluku &amp; Papua</option>
+                {daftarPilihanWilayah.map((wilayah) => (
+                  <option key={wilayah} value={wilayah}>
+                    {wilayah}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col-md-3">
