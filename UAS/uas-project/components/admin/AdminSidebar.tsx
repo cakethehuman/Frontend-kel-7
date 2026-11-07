@@ -11,6 +11,7 @@ const links = [
   { href: "/admin/orders", label: "Orders", icon: "bi-receipt" },
   { href: "/admin/users", label: "Users", icon: "bi-people" },
   { href: "/admin/feedback", label: "Feedback", icon: "bi-chat-dots" },
+  { href: "/admin/faq", label: "FAQ", icon: "bi-question-circle" },
   { href: "/admin/profit", label: "Profit", icon: "bi-graph-up" },
 ];
 
