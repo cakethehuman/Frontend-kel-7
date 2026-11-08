@@ -39,7 +39,7 @@ export default function AdminFaqPage() {
 
     const muat = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/faqs`, { credentials: "include" });
+        const res = await fetch(`${API_URL}/faqs`, { credentials: "include" });
         if (!res.ok) throw new Error("Gagal mengambil data FAQ dari server.");
         const data: unknown = await res.json();
         if (aktif) {
@@ -84,7 +84,7 @@ export default function AdminFaqPage() {
     try {
       const sedangEdit = editingId !== null;
       const res = await fetch(
-        sedangEdit ? `${API_URL}/api/faqs/${editingId}` : `${API_URL}/api/faqs`,
+        sedangEdit ? `${API_URL}/faqs/${editingId}` : `${API_URL}/faqs`,
         {
           method: sedangEdit ? "PUT" : "POST",
           headers: { "Content-Type": "application/json" },
@@ -113,7 +113,7 @@ export default function AdminFaqPage() {
     if (!confirm(`Yakin ingin menghapus FAQ "${faq.question}"?`)) return;
 
     try {
-      const res = await fetch(`${API_URL}/api/faqs/${faq.id}`, {
+      const res = await fetch(`${API_URL}/faqs/${faq.id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         credentials: "include"

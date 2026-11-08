@@ -10,7 +10,7 @@ import { rupiah } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContent";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Menu() {
   const { user, loading: authLoading } = useAuth();
@@ -115,6 +115,8 @@ export default function Menu() {
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "/IMG/mie_belitung.webp";
                             }}
+                            priority={false}
+                            unoptimized
                           />
                         </div>
 

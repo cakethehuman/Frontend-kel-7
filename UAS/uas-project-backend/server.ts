@@ -21,7 +21,7 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/menu", menuRoutes);
+app.use("api/menu", menuRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/favorites", favoritesRoutes);
