@@ -5,11 +5,13 @@ import ButtonLink from "@/components/ui/ButtonLink";
 import HeroHotspot from "@/components/home/HeroHotspot";
 import HeroFeatureBar from "@/components/home/HeroFeatureBar";
 import { heroHotspots } from "@/data/home";
+import { gambarAman } from "@/lib/content";
 import { useContent } from "@/lib/siteContent";
 
 export default function HeroSection() {
   const { teks, daftar } = useContent();
   const hotspots = daftar("home.hotspots");
+  const gambar = gambarAman("home.hero.image", teks("home.hero.image"));
 
   return (
     <section className="belitung-hero">
@@ -45,8 +47,8 @@ export default function HeroSection() {
             <div className="image-clip">
               <Image
                 className="round-img"
-                src="/IMG/mie_belitung_muantap.webp"
-                alt="Semangkuk Mie Belitung"
+                src={gambar}
+                alt={teks("home.hero.image_alt")}
                 width={420}
                 height={420}
                 priority
