@@ -33,7 +33,7 @@ export default function AdminFeedbackPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/feedback`);
+      const res = await fetch(`${API_URL}/api/feedback`, { credentials: "include" });
       if (!res.ok) {
         throw new Error("Gagal mengambil data feedback dari server.");
       }

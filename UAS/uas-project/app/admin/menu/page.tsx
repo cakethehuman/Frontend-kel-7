@@ -98,6 +98,7 @@ export default function AdminMenuPage() {
             image: form.image.trim() || "/IMG/mie_belitung.webp",
             description: form.description.trim(),
           }),
+          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();
@@ -114,6 +115,7 @@ export default function AdminMenuPage() {
             image: form.image.trim() || "/IMG/mie_belitung.webp",
             description: form.description.trim(),
           }),
+          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();
@@ -135,6 +137,7 @@ export default function AdminMenuPage() {
       try {
         const res = await fetch(`${API_URL}/menu/${item.id}`, {
           method: "DELETE",
+          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();
@@ -214,8 +217,8 @@ export default function AdminMenuPage() {
                         i.category === "Main"
                           ? "danger"
                           : i.category === "Drink"
-                          ? "primary"
-                          : "secondary"
+                            ? "primary"
+                            : "secondary"
                       }
                     >
                       {i.category}

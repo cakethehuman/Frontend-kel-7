@@ -1,43 +1,27 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import AdminSidebar from "@/components/admin/AdminSidebar";
 import { Spinner } from "react-bootstrap";
+import AdminSidebar from "@/components/admin/AdminSidebar";
+import { useAuth } from "@/lib/AuthContent";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [authorized, setAuthorized] = useState(false);
-  const [checking, setChecking] = useState(true);
+  const { user, loading } = useAuth();
+  const isAdmin = user?.is_admin === 1;
 
   useEffect(() => {
-    try {
-      const rawUser = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-      if (!rawUser) {
-        router.replace("/auth/login");
-        return;
-      }
+    if (loading) return;
+    if (!user) router.replace("/auth/login");
+    else if (!isAdmin) router.replace("/menu");
+  }, [loading, user, isAdmin, router]);
 
-      const user = JSON.parse(rawUser);
-      if (user.is_admin !== 1) {
-        alert("Akses ditolak: Halaman ini hanya untuk Administrator!");
-        router.replace("/menu");
-        return;
-      }
-      setAuthorized(true);
-    } catch (e) {
-      console.error("Auth check error in admin layout:", e);
-      router.replace("/auth/login");
-    } finally {
-      setChecking(false);
-    }
-  }, [router]);
-
-  if (checking || !authorized) {
+  if (loading || !isAdmin) {
     return (
       <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light">
         <Spinner animation="border" variant="danger" />
-        <p className="mt-3 text-muted">Memeriksa hak akses admin...</p>
+        <p className="mt-3 text-muted">Memeriksa hak akses untuk admin...</p>
       </div>
     );
   }

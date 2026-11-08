@@ -5,11 +5,13 @@ import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/AuthContent";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default function Login() {
   const router = useRouter();
+  const { refresh } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,6 +33,7 @@ export default function Login() {
       setLoading(true);
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail, password }),
       });
@@ -43,17 +46,20 @@ export default function Login() {
 
       setSuccess("Login berhasil! Mengalihkan...");
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      sessionStorage.setItem("currentUser", JSON.stringify(data.user));
+      await refresh();
 
-      window.dispatchEvent(new Event("authChange"));
+      const target = new URLSearchParams(window.location.search).get("redirect");
+      const aman = target && target.startsWith("/") && !target.startsWith("//");
 
       setTimeout(() => {
-        if (data.user.is_admin === 1) {
+        if (aman) {
+          router.push(target);
+        } else if (data.user.is_admin === 1) {
           router.push("/admin");
         } else {
           router.push("/menu");
         }
+
       }, 700);
     } catch (err: any) {
       console.error("Login error:", err);

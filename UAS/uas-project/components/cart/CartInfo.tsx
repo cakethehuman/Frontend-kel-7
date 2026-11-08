@@ -17,21 +17,14 @@ import { CartStore } from "@/lib/cartStore";
 import { useCart, useHydrated } from "@/lib/useCart";
 
 import { rupiah } from "@/lib/format";
-
+import { API_URL } from "@/lib/api";
+import { useAuth } from "@/lib/AuthContent";
+import { useRouter } from "next/navigation";
 
 const TAX_RATE = 0.1;
-const API_URL = "http://localhost:3001";
 const MAX_TABLE = 15;
 
-function getLoggedInUserId(): number | null {
-  try {
-    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-    const id = raw ? Number(JSON.parse(raw)?.user_id) : NaN;
-    return Number.isInteger(id) && id > 0 ? id : null;
-  } catch {
-    return null;
-  }
-}
+
 
 const emptyForm: FormState = {
   name: "",
@@ -43,6 +36,8 @@ const emptyForm: FormState = {
 };
 
 export default function CartInfo() {
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const hydrated = useHydrated();
   const items = useCart();
 
@@ -137,7 +132,15 @@ export default function CartInfo() {
   });
 
   const checkout = () => {
-    if (empty || !validate()) return;
+    if (empty) return;
+
+    if (!authLoading) return;
+    if (!user) {
+      router.push("/auth/login?redirect=/cart-info");
+      return;
+    }
+
+    if (!validate()) return;
     setPreview(buildOrder());
     setSubmitError(null);
     setShowConfirm(true);
@@ -146,8 +149,7 @@ export default function CartInfo() {
   const finalConfirm = async () => {
     if (!preview || placed || submitting) return;
 
-    const userId = getLoggedInUserId();
-    if (userId === null) {
+    if (!user) {
       setSubmitError("Login dulu untuk mengirim pesanan.");
       return;
     }
@@ -160,7 +162,6 @@ export default function CartInfo() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: preview.name,
           phone: preview.phone,
           type: preview.type,
@@ -169,6 +170,7 @@ export default function CartInfo() {
           note: preview.note,
           items: preview.items.map((item) => ({ id: item.id, qty: item.qty })),
         }),
+        credentials: "include"
       });
       const data = await res.json();
 

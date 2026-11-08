@@ -3,11 +3,13 @@
 import { useState, useEffect, type FormEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Modal } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
 import ProfileCard from "@/components/profile/ProfileCard";
 import StatCard from "@/components/profile/StatCard";
 import FavoriteCard from "@/components/profile/FavoriteCard";
 import { useSiteContent } from "@/lib/siteContent";
+import { useAuth } from "@/lib/AuthContent";
+import { API_URL } from "@/lib/api";
 
 interface FavoriteItem {
   id: number;
@@ -17,28 +19,24 @@ interface FavoriteItem {
   done: boolean;
 }
 
-const API_URL = "http://localhost:3001";
-
 export default function ProfilePage() {
   const router = useRouter();
+  const { user, loading, logout, refresh } = useAuth();
   const { teks } = useSiteContent("profile");
   const daftarPilihanWilayah = teks("profile.regions")
     .split("\n")
     .map((w) => w.trim())
     .filter((w) => w !== "");
 
-  const [userId, setUserId] = useState<number | null>(null);
-  const [name, setName] = useState("Wilson Widodo");
-  const [email, setEmail] = useState("wilson@gmail.com");
-  const [role, setRole] = useState("Student & Programmer");
-  const [bio, setBio] = useState(
-    "I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo."
-  );
-  const [tags, setTags] = useState<string[]>([
-    "AnimLovers",
-    "Untarian",
-    "Soushin",
-  ]);
+  // Data profil diambil dari `user` (hasil /api/auth/me), bukan dari nilai dummy.
+  const name = user?.name ?? "";
+  const email = user?.email ?? "";
+  const role = user?.role ?? "";
+  const bio = user?.bio ?? "";
+  const tags = (user?.tags ?? "")
+    .split(",")
+    .map((t) => t.trim())
+    .filter((t) => t !== "");
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [editRole, setEditRole] = useState("");
@@ -62,71 +60,30 @@ export default function ProfilePage() {
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
   useEffect(() => {
-    async function ambilDataDariBackend() {
+    if (loading) return;
+
+    if (!user) {
+      router.replace("/auth/login");
+      return;
+    }
+
+    async function ambilFavorit() {
       try {
-        let loggedInId = 0;
-        let loggedInEmail = "";
-        let loggedInName = "";
-
-        const rawUser =
-          localStorage.getItem("user") ||
-          sessionStorage.getItem("currentUser");
-
-        if (rawUser) {
-          const parsed = JSON.parse(rawUser);
-          if (parsed.user_id) loggedInId = Number(parsed.user_id);
-          else if (parsed.id) loggedInId = Number(parsed.id);
-          if (parsed.email) loggedInEmail = String(parsed.email);
-          if (parsed.name) loggedInName = String(parsed.name);
+        const res = await fetch(API_URL + "/api/favorites", {
+          credentials: "include",
+        });
+        if (res.status === 401) {
+          router.replace("/auth/login");
+          return;
         }
-
-        let urlProfile = API_URL + "/api/profile";
-        if (loggedInId > 0) {
-          urlProfile = API_URL + "/api/profile?user_id=" + loggedInId;
-        } else if (loggedInEmail !== "") {
-          urlProfile =
-            API_URL +
-            "/api/profile?email=" +
-            encodeURIComponent(loggedInEmail);
-        }
-
-        const resProfile = await fetch(urlProfile);
-        let activeUserId = loggedInId;
-
-        if (resProfile.ok) {
-          const dataUser = await resProfile.json();
-          activeUserId = Number(dataUser.user_id);
-          setUserId(activeUserId);
-          setName(loggedInName || dataUser.name);
-          setEmail(dataUser.email);
-          if (dataUser.role) setRole(dataUser.role);
-          if (dataUser.bio) setBio(dataUser.bio);
-          if (dataUser.tags) {
-            setTags(
-              String(dataUser.tags)
-                .split(",")
-                .filter((t) => t.trim() !== "")
-            );
-          }
-        }
-
-        const urlFav =
-          activeUserId > 0
-            ? API_URL + "/api/favorites?user_id=" + activeUserId
-            : API_URL + "/api/favorites";
-
-        const resFav = await fetch(urlFav);
-        if (resFav.ok) {
-          const dataFav = await resFav.json();
-          setFavorites(dataFav);
-        }
+        if (res.ok) setFavorites(await res.json());
       } catch (e) {
         console.log(e);
       }
     }
 
-    ambilDataDariBackend();
-  }, []);
+    ambilFavorit();
+  }, [loading, user, router]);
 
   function tampilkanPesan(teks: string, tipe: string) {
     setMessageText(teks);
@@ -160,9 +117,9 @@ export default function ProfilePage() {
     try {
       const res = await fetch(API_URL + "/api/favorites", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: namaBersih,
           region: wilayahDipilih,
         }),
@@ -194,6 +151,7 @@ export default function ProfilePage() {
     try {
       const res = await fetch(API_URL + "/api/favorites", {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: id,
@@ -232,6 +190,7 @@ export default function ProfilePage() {
     try {
       const res = await fetch(API_URL + "/api/favorites", {
         method: "DELETE",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteTargetId }),
       });
@@ -279,9 +238,9 @@ export default function ProfilePage() {
     try {
       const res = await fetch(API_URL + "/api/profile", {
         method: "PATCH",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           role: roleBaru,
           bio: bioBaru,
           tags: tagBersih.join(","),
@@ -289,9 +248,7 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        setRole(roleBaru);
-        setBio(bioBaru);
-        setTags(tagBersih);
+        await refresh(); // sinkronkan data user di AuthContext
         setShowEditModal(false);
       }
     } catch (e) {
@@ -299,10 +256,9 @@ export default function ProfilePage() {
     }
   }
 
-  function handleLogout() {
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("currentUser");
-    router.push("/auth/login");
+  async function handleLogout() {
+    await logout(); // hapus cookie di server + reset user di context
+    router.replace("/auth/login");
   }
 
   const totalFavorit = favorites.length;
@@ -340,7 +296,16 @@ export default function ProfilePage() {
     return cocokTeks && cocokStatus;
   });
 
-  const hurufAvatar = name ? name.charAt(0).toUpperCase() : "W";
+  const hurufAvatar = name ? name.charAt(0).toUpperCase() : "?";
+
+  // Jangan render apa pun dari halaman profile sebelum status login jelas.
+  if (loading || !user) {
+    return (
+      <main className="d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
+        <Spinner animation="border" />
+      </main>
+    );
+  }
 
   return (
     <main className="pf-page">

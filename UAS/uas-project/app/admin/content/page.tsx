@@ -11,7 +11,7 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
-import { API_URL, headerAdmin } from "@/lib/api";
+import { API_URL } from "@/lib/api";
 import {
   contentEntries,
   contentPages,
@@ -275,8 +275,9 @@ export default function AdminContentPage() {
 
         const res = await fetch(`${API_URL}/api/content/${entry.key}`, {
           method: kembaliBawaan ? "DELETE" : "PUT",
-          headers: headerAdmin(),
+          headers: { "Content-Type": "application/json" },
           ...(kembaliBawaan ? {} : { body: JSON.stringify({ value: nilai }) }),
+          credentials: "include"
         });
 
         if (!res.ok) {

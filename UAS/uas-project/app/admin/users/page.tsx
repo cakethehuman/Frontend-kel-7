@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/users`);
+      const res = await fetch(`${API_URL}/api/users`, { credentials: "include" });
       if (!res.ok) {
         throw new Error("Gagal mengambil data pengguna dari server.");
       }
@@ -56,6 +56,7 @@ export default function AdminUsersPage() {
         setDeletingId(user.id);
         const res = await fetch(`${API_URL}/api/users/${user.id}`, {
           method: "DELETE",
+          credentials: "include"
         });
 
         if (!res.ok) {
