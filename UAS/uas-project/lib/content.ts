@@ -678,8 +678,6 @@ export const contentEntries: Entry[] = contentPages.flatMap((page) =>
 export const contentDefaults: Record<string, unknown> = Object.fromEntries(
   contentEntries.map((entry) => [entry.key, entry.default]),
 );
-<<<<<<< HEAD
-=======
 
 export function gambarAman(key: string, nilai: string): string {
   const entry = contentEntries.find((e) => e.key === key);
@@ -689,4 +687,4 @@ export function gambarAman(key: string, nilai: string): string {
     ? nilai
     : entry.default;
 }
->>>>>>> 5147516ccdad5787d80469ef09e3ccdb71383de5
+
