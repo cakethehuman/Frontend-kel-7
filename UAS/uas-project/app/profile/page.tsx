@@ -18,7 +18,7 @@ interface FavoriteItem {
   done: boolean;
 }
 
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function ProfilePage() {
   const router = useRouter();

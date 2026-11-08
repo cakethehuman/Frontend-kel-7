@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Table, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface User {
   id: number;
@@ -23,16 +23,40 @@ export default function AdminUsersPage() {
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
+  // Safely read JSON responses
+  const readResponse = async (res: Response) => {
+    const text = await res.text();
+
+    console.log("API Status:", res.status);
+    console.log("API Content-Type:", res.headers.get("content-type"));
+    console.log("API Response:", text);
+
+    if (!text) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(text);
+    } catch {
+      throw new Error(
+        `Server returned invalid JSON. Status: ${res.status}. Check the browser console.`
+      );
+    }
+  };
+
   const fetchUsers = async () => {
     try {
       setLoading(true);
       setError(null);
+
       const res = await fetch(`${API_URL}/users`);
+      const data = await readResponse(res);
+
       if (!res.ok) {
-        throw new Error("Gagal mengambil data pengguna dari server.");
+        throw new Error(data?.message || "Gagal mengambil data pengguna dari server.");
       }
-      const data = await res.json();
-      setUsers(data);
+
+      setUsers(Array.isArray(data) ? data : []);
     } catch (err: any) {
       console.error("Error fetching users:", err);
       setError(err.message || "Gagal memuat pengguna.");
@@ -54,13 +78,15 @@ export default function AdminUsersPage() {
     if (confirm(`Apakah Anda yakin ingin menghapus pengguna "${user.name}" (${user.email})?`)) {
       try {
         setDeletingId(user.id);
-        const res = await fetch(`${API_URL}/api/users/${user.id}`, {
+
+        const res = await fetch(`${API_URL}/users/${user.id}`, {
           method: "DELETE",
         });
 
+        const data = await readResponse(res);
+
         if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.message || "Gagal menghapus pengguna.");
+          throw new Error(data?.message || "Gagal menghapus pengguna.");
         }
 
         setUsers((prev) => prev.filter((u) => u.id !== user.id));
@@ -73,7 +99,10 @@ export default function AdminUsersPage() {
     }
   };
 
-  const adminCount = users.filter((u) => u.is_admin === 1 || u.role === "admin").length;
+  const adminCount = users.filter(
+    (u) => u.is_admin === 1 || u.role === "admin"
+  ).length;
+
   const regularCount = users.length - adminCount;
 
   return (
@@ -85,6 +114,7 @@ export default function AdminUsersPage() {
             Daftar seluruh akun pengguna yang terdaftar di sistem Mie Belitung.
           </p>
         </div>
+
         <Button
           variant="outline-danger"
           size="sm"
@@ -102,7 +132,6 @@ export default function AdminUsersPage() {
         </Alert>
       )}
 
-      {/* User Statistics Row */}
       <Row className="g-3 mb-4">
         <Col xs={12} sm={4}>
           <Card className="border-0 shadow-sm rounded-3">
@@ -165,25 +194,31 @@ export default function AdminUsersPage() {
                 <th className="text-end">Aksi</th>
               </tr>
             </thead>
+
             <tbody>
               {users.map((u) => (
                 <tr key={u.id}>
                   <td className="text-muted">#{u.id}</td>
+
                   <td>
                     <div className="fw-semibold">{u.name}</div>
                     {u.role_title && (
                       <small className="text-muted">{u.role_title}</small>
                     )}
                   </td>
+
                   <td>{u.email}</td>
+
                   <td>
                     <Badge bg={u.role === "admin" ? "danger" : "secondary"}>
                       {u.role === "admin" ? "Admin" : "Pelanggan"}
                     </Badge>
                   </td>
+
                   <td>
                     <span className="fw-semibold">{u.total_orders}</span> pesanan
                   </td>
+
                   <td className="text-end">
                     {u.role === "user" ? (
                       <Button
@@ -193,7 +228,7 @@ export default function AdminUsersPage() {
                         onClick={() => remove(u)}
                       >
                         <i className="bi bi-trash3 me-1"></i>
-                        Hapus
+                        {deletingId === u.id ? "Menghapus..." : "Hapus"}
                       </Button>
                     ) : (
                       <Badge bg="light" text="dark" className="border">
@@ -210,3 +245,4 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+
