@@ -107,6 +107,8 @@ export default function Menu() {
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "/IMG/mie_belitung.webp";
                             }}
+                            priority={false}
+                            unoptimized
                           />
                         </div>
 
