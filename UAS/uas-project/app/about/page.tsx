@@ -7,6 +7,7 @@ import TimelineItem from "@/components/about/TimelineItem";
 import FeatureBox from "@/components/about/FeatureBox";
 import FaqItem from "@/components/about/FaqItem";
 import { useSiteContent } from "@/lib/siteContent";
+import { gambarAman } from "@/lib/content";
 
 // Mengubah **teks** menjadi <b>teks</b>
 function tebal(teks: string): ReactNode[] {
@@ -42,6 +43,10 @@ function bacaBaris(mentah: string): string[] {
 
 export default function AboutPage() {
   const { teks, daftar } = useSiteContent("about");
+
+  const gambarIntro = gambarAman("about.intro.image", teks("about.intro.image"));
+  const gambarResep = gambarAman("about.recipe.image", teks("about.recipe.image"));
+  const gambarPenutup = gambarAman("about.closing.image", teks("about.closing.image"));
 
   const [bukaSelengkapnya, setBukaSelengkapnya] = useState(false);
   const [faqAktif, setFaqAktif] = useState(0);
@@ -118,8 +123,8 @@ export default function AboutPage() {
 
           <div className="about-intro-img">
             <Image
-              src="/IMG/Mie Belitung Close-Up.webp"
-              alt="Mie Belitung Close-Up"
+              src={gambarIntro}
+              alt={teks("about.intro.image_alt")}
               width={380}
               height={380}
               priority
@@ -160,8 +165,8 @@ export default function AboutPage() {
         <div className="about-recipe" id="komponen">
           <div className="about-recipe-img">
             <Image
-              src="/IMG/Bahan Mie Belitung.webp"
-              alt="Bahan Segar"
+              src={gambarResep}
+              alt={teks("about.recipe.image_alt")}
               width={600}
               height={400}
               style={{ width: "100%", height: "auto" }}
@@ -214,8 +219,8 @@ export default function AboutPage() {
         <div className="about-closing">
           <div className="about-closing-img">
             <Image
-              src="/IMG/Mie Belitung Daun Simpor.webp"
-              alt="Mie Belitung Daun Simpor"
+              src={gambarPenutup}
+              alt={teks("about.closing.image_alt")}
               width={600}
               height={400}
               style={{ width: "100%", height: "auto" }}
