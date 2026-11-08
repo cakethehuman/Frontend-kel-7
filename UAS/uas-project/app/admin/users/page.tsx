@@ -27,7 +27,7 @@ export default function AdminUsersPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/users`);
+      const res = await fetch(`${API_URL}/users`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data pengguna dari server.");
       }
