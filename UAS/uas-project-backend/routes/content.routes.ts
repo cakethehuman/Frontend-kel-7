@@ -4,7 +4,7 @@ import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
-const POLA_KUNCI = /^(home|profile|about)\.[a-z0-9._-]{1,80}$/;
+const POLA_KUNCI = /^(home|profile|about|contact)\.[a-z0-9._-]{1,80}$/;
 const POLA_PREFIX = /^[a-z0-9._-]{1,80}$/;
 const MAKS_UKURAN = 20000;
 
