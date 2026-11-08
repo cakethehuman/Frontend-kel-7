@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "uas-project": {
+      "root": "uas-project",
+      "framework": "nextjs"
+    },
+    "uas-project-backend": {
+      "root": "uas-project-backend",
+      "framework": "express"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": { "service": "uas-project-backend" } },
+    { "source": "/(.*)", "destination": { "service": "uas-project" } }
+  ]
+}
