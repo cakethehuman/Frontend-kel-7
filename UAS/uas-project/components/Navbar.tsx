@@ -8,60 +8,30 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import BsNavbar from "react-bootstrap/Navbar";
 import { Badge, Button } from "react-bootstrap";
+import { useAuth } from "@/lib/AuthContent";
 
 const baseLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/menu", label: "Menu" },
-  { href: "/profile", label: "Profile" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { user, loading, logout } = useAuth();
+  const links = user
+    ? [...baseLinks, { href: "/profile", label: "Profile" }]
+    : baseLinks;
   const [expanded, setExpanded] = useState(false);
-  const [currentUser, setCurrentUser] = useState<any>(null);
+
 
   const closeMenu = () => setExpanded(false);
 
-  const syncAuth = () => {
-    try {
-      const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-      if (raw) {
-        setCurrentUser(JSON.parse(raw));
-      } else {
-        setCurrentUser(null);
-      }
-    } catch (e) {
-      console.error("Auth sync error:", e);
-      setCurrentUser(null);
-    }
-  };
-
-  useEffect(() => {
-    syncAuth();
-
-    const handleAuthEvent = () => syncAuth();
-    window.addEventListener("authChange", handleAuthEvent);
-    window.addEventListener("storage", handleAuthEvent);
-
-    return () => {
-      window.removeEventListener("authChange", handleAuthEvent);
-      window.removeEventListener("storage", handleAuthEvent);
-    };
-  }, []);
-
-  const handleLogout = () => {
-    try {
-      localStorage.removeItem("user");
-      sessionStorage.removeItem("currentUser");
-      setCurrentUser(null);
-      window.dispatchEvent(new Event("authChange"));
-      closeMenu();
-      router.push("/auth/login");
-    } catch (e) {
-      console.error("Logout error:", e);
-    }
+  const handleLogout = async () => {
+    await logout();
+    closeMenu();
+    router.replace("/auth/login");
   };
 
   const isActive = (href: string) =>
@@ -95,7 +65,7 @@ export default function Navbar() {
 
           <BsNavbar.Collapse id="navbarNav" className="justify-content-end">
             <Nav className="gap-2 align-items-lg-center">
-              {baseLinks.map((link) => (
+              {links.map((link) => (
                 <Nav.Link
                   key={link.href}
                   as={Link}
@@ -107,7 +77,7 @@ export default function Navbar() {
                 </Nav.Link>
               ))}
 
-              {currentUser && currentUser.is_admin === 1 && (
+              {user && user.is_admin === 1 && (
                 <Nav.Link
                   as={Link}
                   href="/admin"
@@ -119,12 +89,12 @@ export default function Navbar() {
                 </Nav.Link>
               )}
 
-              {currentUser ? (
+              {loading ? null : user ? (
                 <div className="d-flex align-items-center gap-2 ms-lg-2 mt-2 mt-lg-0">
                   <span className="small text-muted d-none d-xl-inline">
-                    Halo, <b>{currentUser.name}</b>
+                    Halo, <b>{user.name}</b>
                   </span>
-                  {currentUser.is_admin === 1 && (
+                  {user.is_admin === 1 && (
                     <Badge bg="danger" className="d-none d-lg-inline">
                       Admin
                     </Badge>

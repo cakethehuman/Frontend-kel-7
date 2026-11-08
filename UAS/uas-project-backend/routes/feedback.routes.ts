@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { loggedIn } from "../middleware/authentication";
+import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
 const DAFTAR_KATEGORI = ["Makanan", "Pelayanan", "Tempat", "Lainnya"];
 const POLA_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-router.get("/", async (_req, res) => {
+router.get("/", ...requireAdmin, async (_req, res) => {
   try {
     const feedbacks = await prisma.feedback.findMany({
       orderBy: { created_at: "desc" },
@@ -23,12 +25,12 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
 
     const user = await prisma.user.findUnique({
-      where: { user_id: Number(body.user_id) },
+      where: { user_id: res.locals.user.user_id },
     });
 
     if (!user) {

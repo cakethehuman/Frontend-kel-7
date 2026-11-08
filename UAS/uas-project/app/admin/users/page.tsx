@@ -49,7 +49,7 @@ export default function AdminUsersPage() {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`${API_URL}/users`);
+      const res = await fetch(`${API_URL}/users`, { credentials: "include" });
       const data = await readResponse(res);
 
       if (!res.ok) {
@@ -81,6 +81,7 @@ export default function AdminUsersPage() {
 
         const res = await fetch(`${API_URL}/users/${user.id}`, {
           method: "DELETE",
+          credentials: "include"
         });
 
         const data = await readResponse(res);

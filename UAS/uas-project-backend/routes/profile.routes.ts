@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", loggedIn, async (req, res) => {
   try {
-    const userIdParam = Number(req.query.user_id);
+    const userIdParam = res.locals.user.user_id;
     const emailParam = req.query.email ? String(req.query.email) : "";
 
     let user = null;
@@ -42,10 +43,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
-    const userId = Number(body.user_id);
+    const userId = res.locals.user.user_id;
 
     let targetUser = null;
     if (userId) {

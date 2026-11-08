@@ -8,10 +8,12 @@ import { menuCategories, type MenuItem, type MenuCategory } from "@/data/menu";
 import { CartStore } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/AuthContent";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Menu() {
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +50,12 @@ export default function Menu() {
   }, []);
 
   const order = (item: MenuItem) => {
+    // memastikan user tidak bisa masuk ke page ini jika belum login
+    if (authLoading) return;
+    if (!user) {
+      router.push("/auth/login?redirect=/menu")
+      return;
+    }
     CartStore.add(item);
     router.push("/cart-info");
   };

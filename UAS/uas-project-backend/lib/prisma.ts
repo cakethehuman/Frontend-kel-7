@@ -1,8 +1,8 @@
-import "dotenv/config";
-import { Pool } from "pg";
+import "dotenv/config"; import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../generated/prisma/client";
 
+// ensures that the hot reloading didn't occur everytime the page reloades , it checks for old connection for the page
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function buatPrismaClient() {
