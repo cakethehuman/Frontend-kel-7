@@ -153,3 +153,5 @@ model SiteContent {
 
   @@map("site_content")
 }
+
+ 

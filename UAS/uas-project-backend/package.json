@@ -55,6 +55,7 @@
     "confbox": "^0.2.4",
     "consola": "^3.4.2",
     "content-type": "^3.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "cross-spawn": "^7.0.6",
     "debug": "^4.4.3",
@@ -111,6 +112,7 @@
     "js-base64": "^3.9.5",
     "json-with-bigint": "^3.5.12",
     "jsonc-parser": "^3.3.1",
+    "jsonwebtoken": "^9.0.3",
     "libsodium": "^0.8.4",
     "libsodium-wrappers": "^0.8.4",
     "libsql": "^0.5.29",
@@ -217,8 +219,10 @@
     "zeptomatch": "^2.1.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^26.6.6",
     "@types/pg": "^8.23.1",
     "prisma": "^7.10.1",

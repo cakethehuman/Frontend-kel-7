@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
 import { hashPassword, verifyPassword } from "../lib/auth";
+import { COOKIE_NAME, cookieOptions, signAccessToken } from "../lib/jwt";
+import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,6 +38,15 @@ router.post("/login", async (req, res) => {
       res.status(401).json({ message: "Email atau password salah." });
       return;
     }
+
+    res.cookie(
+      COOKIE_NAME,
+      signAccessToken({
+        user_id: user.user_id,
+        is_admin: user.is_admin,
+      }),
+      cookieOptions
+    );
 
     res.json({
       message: "Login berhasil",
@@ -119,18 +130,11 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/me", async (req, res) => {
+router.get("/me", loggedIn, async (req, res) => {
   try {
-    const userIdHeader = req.headers["x-user-id"];
-    const userId = Number(userIdHeader);
-
-    if (!userId || !Number.isInteger(userId)) {
-      res.status(401).json({ message: "Sesi tidak valid atau belum login." });
-      return;
-    }
 
     const user = await prisma.user.findUnique({
-      where: { user_id: userId },
+      where: { user_id: res.locals.user.user_id },
     });
 
     if (!user) {
@@ -154,5 +158,11 @@ router.get("/me", async (req, res) => {
     res.status(500).json({ message: "Gagal memeriksa sesi pengguna." });
   }
 });
+
+router.post("/logout", (_req, res) => {
+  res.clearCookie(COOKIE_NAME, cookieOptions);
+  res.json({ message: "Logout berhasil" });
+});
+
 
 export default router;
