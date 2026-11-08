@@ -9,7 +9,7 @@ import { CartStore } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
 import { useRouter } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Menu() {
   const router = useRouter();
