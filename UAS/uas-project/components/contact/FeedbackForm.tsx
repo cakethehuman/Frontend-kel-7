@@ -5,6 +5,8 @@ import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { API_URL } from "@/lib/api";
 import { useAuth } from "@/lib/AuthContent";
+import { useContent } from "@/lib/siteContent";
+const { teks } = useContent();
 
 const starLabels = [
   "Belum dinilai",
@@ -145,11 +147,11 @@ export default function FeedbackForm() {
           <Col lg={6}>
             <SectionHeading
               variant="section"
-              eyebrow="Saran & Masukan"
-              title="Katakan Apa Saja, Dapur Kami Mendengar"
+              eyebrow={teks("contact.feedback.eyebrow")}
+              title={teks("contact.feedback.title")}
             />
             <p className="section-copy">
-              Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.
+              {teks("contact.feedback.copy")}
             </p>
           </Col>
 
@@ -213,7 +215,7 @@ export default function FeedbackForm() {
 
                   <Button type="submit" disabled={sending} className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0">
                     <i className="bi bi-send" />{" "}
-                    <span>{sending ? "Mengirim..." : "Kirim Masukan"}</span>
+                    <span>{sending ? "Mengirim..." : teks("contact.feedback.submit")}</span>
                   </Button>
                 </Form>
               )}
