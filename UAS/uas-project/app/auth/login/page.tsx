@@ -22,6 +22,7 @@ export default function Login() {
     setSuccess(null);
 
     const cleanEmail = email.trim();
+
     if (!cleanEmail || !password) {
       setError("Silakan isi email dan password Anda.");
       return;
@@ -29,16 +30,42 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: cleanEmail, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: cleanEmail,
+          password,
+        }),
       });
 
-      const data = await res.json();
+      // Read response as text first
+      const text = await res.text();
+
+      // Debugging
+      console.log("Login status:", res.status);
+      console.log("Login content type:", res.headers.get("content-type"));
+      console.log("Login response:", text);
+
+      // Parse JSON safely
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(
+          "Server returned invalid JSON. Check the browser console."
+        );
+      }
 
       if (!res.ok) {
-        throw new Error(data.message || "Gagal masuk. Periksa kembali email dan password.");
+        throw new Error(
+          data.message ||
+          "Gagal masuk. Periksa kembali email dan password."
+        );
       }
 
       setSuccess("Login berhasil! Mengalihkan...");
@@ -55,6 +82,7 @@ export default function Login() {
           router.push("/menu");
         }
       }, 700);
+
     } catch (err: any) {
       console.error("Login error:", err);
       setError(err.message || "Terjadi kesalahan saat login.");
@@ -70,16 +98,24 @@ export default function Login() {
           <div className="p-4 p-md-5 w-100">
             <div className="d-flex flex-column align-items-center mb-4">
               <h1 className="fs-2 text-danger fw-bold mb-1">LOGIN</h1>
-              <p className="text-muted small">Masuk ke akun Mie Belitung Anda</p>
+              <p className="text-muted small">
+                Masuk ke akun Mie Belitung Anda
+              </p>
             </div>
 
             {error && (
-              <Alert variant="danger" onClose={() => setError(null)} dismissible>
+              <Alert
+                variant="danger"
+                onClose={() => setError(null)}
+                dismissible
+              >
                 {error}
               </Alert>
             )}
 
-            {success && <Alert variant="success">{success}</Alert>}
+            {success && (
+              <Alert variant="success">{success}</Alert>
+            )}
 
             <Form
               id="loginForm"
@@ -119,7 +155,11 @@ export default function Login() {
               >
                 {loading ? (
                   <>
-                    <Spinner size="sm" animation="border" className="me-2" />
+                    <Spinner
+                      size="sm"
+                      animation="border"
+                      className="me-2"
+                    />
                     Memproses...
                   </>
                 ) : (
@@ -130,10 +170,17 @@ export default function Login() {
 
             <div className="d-flex justify-content-center p-2 mt-3">
               <div className="d-flex flex-column gap-2 text-center small">
-                <Link href="/auth/register" className="text-decoration-none">
+                <Link
+                  href="/auth/register"
+                  className="text-decoration-none"
+                >
                   Belum punya akun? Daftar di sini
                 </Link>
-                <Link href="/auth/forget-password" className="text-decoration-none text-muted">
+
+                <Link
+                  href="/auth/forget-password"
+                  className="text-decoration-none text-muted"
+                >
                   Lupa password?
                 </Link>
               </div>
@@ -144,3 +191,4 @@ export default function Login() {
     </section>
   );
 }
+
