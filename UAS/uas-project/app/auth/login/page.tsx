@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
@@ -17,6 +17,15 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  useLayoutEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      setError(null);
+      setSuccess(null);
+    };
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

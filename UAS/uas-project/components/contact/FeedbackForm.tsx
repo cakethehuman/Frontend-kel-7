@@ -6,7 +6,6 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { API_URL } from "@/lib/api";
 import { useAuth } from "@/lib/AuthContent";
 import { useContent } from "@/lib/siteContent";
-const { teks } = useContent();
 
 const starLabels = [
   "Belum dinilai",
@@ -69,6 +68,7 @@ function Field({ id, label, required, error, children }: FieldProps) {
 
 export default function FeedbackForm() {
   const { user } = useAuth();
+  const { teks } = useContent();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
