@@ -3,7 +3,6 @@ import { prisma } from "../lib/prisma";
 
 const router = Router();
 
-// GET /api/users - Fetch all users for admin
 router.get("/", async (_req, res) => {
   try {
     const users = await prisma.user.findMany({
@@ -44,7 +43,6 @@ router.get("/", async (_req, res) => {
   }
 });
 
-// DELETE /api/users/:id - Delete a user (prevent deleting admins)
 router.delete("/:id", async (req, res) => {
   try {
     const userId = Number(req.params.id);
@@ -68,7 +66,6 @@ router.delete("/:id", async (req, res) => {
       return;
     }
 
-    // Delete related cart items, cart, feedbacks, order items before deleting user if cascade not configured
     await prisma.cartItem.deleteMany({
       where: { cart: { user_id: userId } },
     });

@@ -5,7 +5,7 @@ import { Badge, Form, Table, Spinner, Alert, Button, Card } from "react-bootstra
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
-type Status = "pending" | "cooking" | "done" | "cancelled";
+type Status = "pending" | "cooking" | "done" | "finished" | "cancelled";
 
 interface OrderItem {
   menu_id: number;
@@ -35,6 +35,7 @@ const colors: Record<Status, string> = {
   pending: "warning",
   cooking: "info",
   done: "success",
+  finished: "dark",
   cancelled: "secondary",
 };
 
@@ -209,6 +210,7 @@ export default function AdminOrdersPage() {
                       <option value="pending">pending</option>
                       <option value="cooking">cooking</option>
                       <option value="done">done</option>
+                      <option value="finished">finished</option>
                       <option value="cancelled">cancelled</option>
                     </Form.Select>
                   </td>

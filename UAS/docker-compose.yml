@@ -1,26 +1,51 @@
 services:
+  db:
+    image: postgres:15-alpine
+    container_name: uas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: uas_project
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U root -d uas_project"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
   backend:
     build:
       context: ./uas-project-backend
       dockerfile: Dockerfile
     container_name: uas-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://root:rootpassword@db:5432/uas_project?schema=public
+      PORT: "3001"
     ports:
       - "3001:3001"
-    environment:
-      - PORT=3001
-      - DATABASE_URL=file:./dev.db
-    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
 
   frontend:
     build:
       context: ./uas-project
       dockerfile: Dockerfile
     container_name: uas-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+      PORT: "3000"
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:3001
-      - PORT=3000
     depends_on:
-      - backend
-    restart: unless-stopped
+      backend:
+        condition: service_started
+
+volumes:
+  pgdata:

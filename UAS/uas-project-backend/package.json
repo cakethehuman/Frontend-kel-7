@@ -15,7 +15,7 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.10.1",
+    "@prisma/adapter-pg": "^7.10.1",
     "@prisma/client": "^7.10.1",
     "abbrev": "^3.0.1",
     "acorn": "^8.19.0",
@@ -37,7 +37,6 @@
     "bare-url": "^2.5.5",
     "before-after-hook": "^4.0.0",
     "better-result": "^2.10.0",
-    "better-sqlite3": "^13.0.3",
     "bindings": "^1.5.0",
     "brace-expansion": "^5.0.12",
     "bundle-name": "^4.1.1",
@@ -144,6 +143,7 @@
     "pathe": "^2.0.3",
     "pend": "^1.2.0",
     "perfect-debounce": "^2.1.0",
+    "pg": "^8.23.1",
     "picocolors": "^1.1.1",
     "picomatch": "^4.0.7",
     "pkg-types": "^2.4.0",
@@ -217,10 +217,10 @@
     "zeptomatch": "^2.1.0"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^9.6.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.6",
+    "@types/pg": "^8.23.1",
     "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"

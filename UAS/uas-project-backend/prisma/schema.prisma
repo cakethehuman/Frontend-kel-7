@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model User {
@@ -21,6 +21,7 @@ model User {
   cart   Cart?
   orders Order[]
   feedbacks Feedback[]
+  favorites Favorite[]
 
   @@map("users")
 }
@@ -123,9 +124,32 @@ model Feedback {
 
 model Favorite {
   id            Int     @id @default(autoincrement())
+  user_id       Int 
   name          String
   region        String?
   done          Boolean @default(false)
 
+  user User @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
   @@map("favorites")
+}
+
+model Faq {
+  id         Int      @id @default(autoincrement())
+  question   String
+  answer     String
+  sort_order Int      @default(0)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+
+model SiteContent {
+  key        String   @id
+  value      String
+  updated_at DateTime @updatedAt
+
+  @@map("site_content")
 }

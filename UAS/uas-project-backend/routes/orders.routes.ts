@@ -6,9 +6,37 @@ const router = Router();
 const TAX_RATE = 0.1;
 const DAFTAR_TIPE = ["dinein", "takeaway"];
 const DAFTAR_PEMBAYARAN = ["Cash", "QRIS", "Transfer"];
-const DAFTAR_STATUS = ["pending", "cooking", "done", "cancelled"];
+const DAFTAR_STATUS = ["pending", "cooking", "done", "finished", "cancelled"];
+const STATUS_MEJA_TERPAKAI = ["pending", "cooking", "done"];
+const MAKS_MEJA = 15;
 
-// GET /api/orders - Fetch all orders (for admin dashboard and orders page)
+async function ambilMejaTerpakai(): Promise<number[]> {
+  const aktif = await prisma.order.findMany({
+    where: {
+      order_type: "dinein",
+      table_number: { not: null },
+      status: { in: STATUS_MEJA_TERPAKAI },
+    },
+    select: { table_number: true },
+  });
+  const daftar = aktif.map((o) => o.table_number as number);
+  return Array.from(new Set(daftar)).sort((a, b) => a - b);
+}
+
+router.get("/tables", async (_req, res) => {
+  try {
+    const taken = await ambilMejaTerpakai();
+    const tables = Array.from({ length: MAKS_MEJA }, (_, i) => ({
+      number: i + 1,
+      available: !taken.includes(i + 1),
+    }));
+    res.json({ max: MAKS_MEJA, taken, tables });
+  } catch (error) {
+    console.error("Error fetching tables:", error);
+    res.status(500).json({ message: "Gagal mengambil status meja." });
+  }
+});
+
 router.get("/", async (_req, res) => {
   try {
     const orders = await prisma.order.findMany({
@@ -51,7 +79,6 @@ router.get("/", async (_req, res) => {
   }
 });
 
-// PATCH /api/orders/:id - Update order status (pending, cooking, done, cancelled)
 router.patch("/:id", async (req, res) => {
   try {
     const orderId = Number(req.params.id);
@@ -84,7 +111,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// POST /api/orders - Create new order
 router.post("/", async (req, res) => {
   try {
     const body = req.body ?? {};
@@ -127,9 +153,17 @@ router.post("/", async (req, res) => {
       return;
     }
 
-    if (tipe === "dinein" && (!Number.isInteger(meja) || meja < 1 || meja > 99)) {
-      res.status(400).json({ message: "Nomor Meja Harus 1 Sampai 99." });
+    if (tipe === "dinein" && (!Number.isInteger(meja) || meja < 1 || meja > MAKS_MEJA)) {
+      res.status(400).json({ message: `Nomor Meja Harus 1 Sampai ${MAKS_MEJA}.` });
       return;
+    }
+
+    if (tipe === "dinein") {
+      const terpakai = await ambilMejaTerpakai();
+      if (terpakai.includes(meja)) {
+        res.status(409).json({ message: `Meja ${meja} sedang dipakai. Silakan pilih meja lain.` });
+        return;
+      }
     }
 
     if (daftarItem.length === 0) {
@@ -151,7 +185,6 @@ router.post("/", async (req, res) => {
     }
 
     const daftarKeys = Object.keys(jumlahPerSlug);
-    // Find menus matching either slug or menu_id
     const menus = await prisma.menu.findMany({
       where: {
         OR: [

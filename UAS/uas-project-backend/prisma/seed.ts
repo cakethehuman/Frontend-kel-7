@@ -2,6 +2,39 @@ import { prisma } from "../lib/prisma";
 import { menuItems } from "../data/menu";
 import { hashPassword } from "../lib/auth";
 
+const faqAwal = [
+  {
+    question: "Dari mana asal Mie Belitung?",
+    answer:
+      "Mie Belitung adalah kuliner khas Pulau Belitung yang terkenal dengan kuah kaldu udang kental dan disajikan di atas daun simpor.",
+  },
+  {
+    question: "Apa saja pilihan menu yang tersedia?",
+    answer:
+      "Kami menyediakan beberapa varian Mie Belitung, mulai dari original hingga topping tambahan seperti udang dan kerupuk. Cek selengkapnya di halaman Menu.",
+  },
+  {
+    question: "Bagaimana cara memesan Mie Belitung?",
+    answer:
+      'Klik tombol "Pesan Sekarang" di halaman utama atau buka halaman Menu, pilih menu yang diinginkan, lalu ikuti proses pemesanannya.',
+  },
+  {
+    question: "Apakah bisa request tingkat kepedasan?",
+    answer:
+      "Bisa. Kamu dapat menambahkan catatan tingkat kepedasan saat melakukan pemesanan.",
+  },
+  {
+    question: "Apakah kemasan aman untuk dibawa pulang?",
+    answer:
+      "Aman. Kemasan kami dirancang kedap agar kuah tidak tumpah dan makanan tetap hangat selama perjalanan.",
+  },
+  {
+    question: "Metode pembayaran apa saja yang diterima?",
+    answer:
+      "Kami menerima pembayaran tunai maupun transfer/QRIS, tergantung metode yang tersedia saat checkout.",
+  },
+];
+
 async function main() {
   try {
     console.log("Memulai proses seeding database...");
@@ -52,7 +85,6 @@ async function main() {
     });
     console.log(`✓ Normal user berhasil di-seed: ${normalUser.email} (password: user123)`);
 
-    // 3. Seed Menus with equal-length descriptions
     for (const item of menuItems) {
       await prisma.menu.upsert({
         where: { slug: item.id },
@@ -75,7 +107,6 @@ async function main() {
     }
     console.log(`✓ Seed menu selesai: ${menuItems.length} menu dengan deskripsi seragam berhasil disimpan.`);
 
-    // 4. Seed initial sample order for normal user if no orders exist
     const orderCount = await prisma.order.count();
     if (orderCount === 0) {
       const mieItem = await prisma.menu.findFirst({ where: { slug: "mie-belitung" } });
@@ -116,6 +147,14 @@ async function main() {
         });
         console.log("✓ Sample pesanan awal berhasil dibuat.");
       }
+    }
+
+    const faqCount = await prisma.faq.count();
+    if (faqCount === 0) {
+      await prisma.faq.createMany({
+        data: faqAwal.map((item, i) => ({ ...item, sort_order: i + 1 })),
+      });
+      console.log(`✓ Seed FAQ selesai: ${faqAwal.length} data.`);
     }
 
     console.log("Seeding database berhasil dan tuntas!");

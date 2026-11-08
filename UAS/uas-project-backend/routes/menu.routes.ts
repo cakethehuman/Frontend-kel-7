@@ -159,7 +159,6 @@ router.delete("/:id", async (req, res) => {
       return;
     }
 
-    // Clean up dependent foreign keys first to prevent FK constraint failures
     await prisma.cartItem.deleteMany({
       where: { menu_id: id },
     });
