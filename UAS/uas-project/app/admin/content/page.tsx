@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   Alert,
   Badge,
@@ -29,9 +30,13 @@ const sama = (a: unknown, b: unknown) =>
 
 function rapikan(entry: Entry, mentah: unknown): Nilai {
   if (entry.kind === "text") {
-    return typeof mentah === "string" && mentah.trim() !== ""
-      ? mentah
-      : entry.default;
+    if (typeof mentah !== "string" || mentah.trim() === "") {
+      return entry.default;
+    }
+    if (entry.options && !entry.options.some((o) => o.value === mentah)) {
+      return entry.default;
+    }
+    return mentah;
   }
 
   const panjangCocok = entry.fixed
@@ -96,6 +101,32 @@ function IsiTeks({
   nilai: string;
   onChange: (v: string) => void;
 }) {
+  if (entry.options) {
+    return (
+      <div className="d-flex flex-column flex-sm-row gap-3 align-items-start">
+        <Form.Select
+          value={nilai}
+          onChange={(e) => onChange(e.target.value)}
+          style={{ maxWidth: "360px" }}
+        >
+          {entry.options.map((opsi) => (
+            <option key={opsi.value} value={opsi.value}>
+              {opsi.label}
+            </option>
+          ))}
+        </Form.Select>
+        <Image
+          src={nilai}
+          alt="Pratinjau gambar"
+          width={160}
+          height={110}
+          className="rounded border"
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       {entry.multiline ? (

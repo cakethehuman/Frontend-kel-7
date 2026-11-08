@@ -6,6 +6,8 @@ export type FieldDef = {
   hint?: string;
 };
 
+export type OpsiGambar = { value: string; label: string };
+
 export type TextEntry = {
   kind: "text";
   key: string;
@@ -13,6 +15,7 @@ export type TextEntry = {
   maxLength: number;
   multiline?: boolean;
   hint?: string;
+  options?: OpsiGambar[];
   default: string;
 };
 
@@ -31,6 +34,26 @@ export type ListEntry = {
 export type Entry = TextEntry | ListEntry;
 export type Section = { id: string; label: string; entries: Entry[] };
 export type PageDef = { id: string; label: string; sections: Section[] };
+
+export const opsiGambar: OpsiGambar[] = [
+  {
+    value: "/IMG/mie_belitung_muantap.webp",
+    label: "Mie Belitung (foto utama)",
+  },
+  { value: "/IMG/Mie Belitung Close-Up.webp", label: "Mie Belitung Close-Up" },
+  { value: "/IMG/Bahan Mie Belitung.webp", label: "Bahan Mie Belitung" },
+  {
+    value: "/IMG/Mie Belitung Daun Simpor.webp",
+    label: "Mie Belitung di Daun Simpor",
+  },
+  { value: "/IMG/mie_belitung.webp", label: "Mie Belitung (standar)" },
+  { value: "/IMG/esBelitung.webp", label: "Es Belitung" },
+  { value: "/IMG/EsJerukKunci.webp", label: "Es Jeruk Kunci" },
+  { value: "/IMG/kopiBelitung.webp", label: "Kopi Belitung" },
+  { value: "/IMG/kerupukBelitung.webp", label: "Kerupuk Belitung" },
+  { value: "/IMG/nasiTim.avif", label: "Nasi Tim" },
+  { value: "/IMG/gambar1_contact.webp", label: "Foto Contact" },
+];
 
 export const contentPages: PageDef[] = [
   {
@@ -77,6 +100,23 @@ export const contentPages: PageDef[] = [
             label: "Label tombol kedua",
             maxLength: 30,
             default: "Baca Selengkapnya",
+          },
+          {
+            kind: "text",
+            key: "home.hero.image",
+            label: "Gambar utama (bulat)",
+            maxLength: 80,
+            options: opsiGambar,
+            hint: "Pilih dari gambar yang tersedia di folder public/IMG.",
+            default: "/IMG/mie_belitung_muantap.webp",
+          },
+          {
+            kind: "text",
+            key: "home.hero.image_alt",
+            label: "Teks alternatif gambar utama",
+            maxLength: 120,
+            hint: "Deskripsi singkat gambar untuk pembaca layar. Sesuaikan jika gambar diganti.",
+            default: "Semangkuk Mie Belitung",
           },
         ],
       },
@@ -236,6 +276,23 @@ export const contentPages: PageDef[] = [
         id: "kartu",
         label: "Kartu profil dan About",
         entries: [
+          {
+            kind: "text",
+            key: "profile.cover.image",
+            label: "Foto cover",
+            maxLength: 80,
+            options: opsiGambar,
+            hint: "Pilih dari gambar yang tersedia di folder public/IMG.",
+            default: "/IMG/mie_belitung_muantap.webp",
+          },
+          {
+            kind: "text",
+            key: "profile.cover.alt",
+            label: "Teks alternatif foto cover",
+            maxLength: 120,
+            hint: "Deskripsi singkat gambar untuk pembaca layar. Sesuaikan jika gambar diganti.",
+            default: "Mie Belitung, kuliner favorit utama",
+          },
           {
             kind: "text",
             key: "profile.cover.caption",
@@ -621,3 +678,15 @@ export const contentEntries: Entry[] = contentPages.flatMap((page) =>
 export const contentDefaults: Record<string, unknown> = Object.fromEntries(
   contentEntries.map((entry) => [entry.key, entry.default]),
 );
+<<<<<<< HEAD
+=======
+
+export function gambarAman(key: string, nilai: string): string {
+  const entry = contentEntries.find((e) => e.key === key);
+  if (entry?.kind !== "text" || !entry.options) return nilai;
+
+  return entry.options.some((opsi) => opsi.value === nilai)
+    ? nilai
+    : entry.default;
+}
+>>>>>>> 5147516ccdad5787d80469ef09e3ccdb71383de5
