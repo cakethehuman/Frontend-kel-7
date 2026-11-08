@@ -2,11 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "services": {
     "uas-project": {
-      "root": "uas-project",
+      "root": "UAS/uas-project",
       "framework": "nextjs"
     },
     "uas-project-backend": {
-      "root": "uas-project-backend",
+      "root": "UAS/uas-project-backend",
       "framework": "express"
     }
   },
