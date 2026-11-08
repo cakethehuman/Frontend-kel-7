@@ -346,14 +346,14 @@ export default function ProfilePage() {
                     className="btn btn-profile"
                     onClick={bukaModalEdit}
                   >
-                    <i className="bi bi-pencil-square"></i> Edit Profil
+                    <i className="bi bi-pencil-square"></i>{teks("profile.btn.edit")}
                   </button>
                   <button
                     type="button"
                     className="btn btn-logout"
                     onClick={handleLogout}
                   >
-                    <i className="bi bi-door-closed"></i> Logout
+                    <i className="bi bi-door-closed"></i>{teks("profile.btn.logout")}
                   </button>
                 </div>
               </div>
@@ -382,21 +382,21 @@ export default function ProfilePage() {
 
             <div className="row g-3">
               <StatCard icon="bi-bookmark-heart-fill" angka={totalFavorit}>
-                Total Favorit
+                {teks("profile.stat.total")}
               </StatCard>
 
               <StatCard icon="bi-check-circle-fill" angka={totalSudahDicoba}>
-                Sudah Dicoba
+                {teks("profile.stat.done")}
               </StatCard>
 
               <StatCard icon="bi-compass-fill" angka={totalWilayah}>
-                Wilayah Dijelajahi
+                {teks("profile.stat.regions")}
               </StatCard>
             </div>
 
             <aside
               className="pf-card pf-progress"
-              aria-label="Progres jelajah kuliner"
+              aria-label={teks("profile.progress.title")}
             >
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <span className="fw-bold">Progres Jelajah Kuliner</span>
@@ -446,13 +446,13 @@ export default function ProfilePage() {
           >
             <div className="col-md-5">
               <label htmlFor="fav-input-name" className="form-label fw-bold">
-                Nama Kuliner
+                {teks("profile.form.name_label")}
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="fav-input-name"
-                placeholder="cth: Teh Pucuk"
+                placeholder={teks("profile.form.name_placeholder")}
                 maxLength={40}
                 autoComplete="off"
                 value={inputName}
@@ -461,7 +461,7 @@ export default function ProfilePage() {
             </div>
             <div className="col-md-4">
               <label htmlFor="fav-input-region" className="form-label fw-bold">
-                Asal Wilayah
+                {teks("profile.form.region_label")}
               </label>
               <select
                 className="form-select"
@@ -478,7 +478,7 @@ export default function ProfilePage() {
             </div>
             <div className="col-md-3">
               <button type="submit" className="btn btn-profile w-100">
-                <i className="bi bi-plus-lg"></i> Tambah
+                <i className="bi bi-plus-lg"></i> {teks("profile.form.add")}
               </button>
             </div>
           </form>
@@ -509,7 +509,7 @@ export default function ProfilePage() {
                   type="search"
                   className="form-control"
                   id="fav-search"
-                  placeholder="Cari nama atau wilayah..."
+                  placeholder={teks("profile.search.placeholder")}
                   autoComplete="off"
                   value={searchKeyword}
                   onChange={(e) => setSearchKeyword(e.target.value)}
@@ -529,7 +529,7 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("all")}
                 >
-                  Semua
+                  {teks("profile.filter.all")}
                 </button>
                 <button
                   type="button"
@@ -538,8 +538,7 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("belum")}
                 >
-                  Belum dicoba
-                </button>
+                  {teks("profile.filter.todo")}                </button>
                 <button
                   type="button"
                   className={
@@ -547,8 +546,7 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("sudah")}
                 >
-                  Sudah dicoba
-                </button>
+                  {teks("profile.filter.done")}                </button>
               </div>
             </div>
           </div>
@@ -579,8 +577,8 @@ export default function ProfilePage() {
             <i className="bi bi-emoji-neutral"></i>
             <p id="fav-empty-text" className="mb-0">
               {favorites.length === 0
-                ? "Daftarmu masih kosong. Yuk tambah kuliner pertamamu!"
-                : "Tidak ada kuliner yang cocok dengan pencarian atau filter ini."}
+                ? teks("profile.empty.none")
+                : teks("profile.empty.nomatch")}
             </p>
           </div>
         )}
@@ -689,7 +687,7 @@ export default function ProfilePage() {
       >
         <Modal.Header closeButton className="border-0 pb-0">
           <Modal.Title as="h2" className="h4" id="deleteTitle">
-            Hapus dari daftar?
+            {teks("profile.delete.title")}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -712,7 +710,7 @@ export default function ProfilePage() {
             id="confirm-delete"
             onClick={konfirmasiHapus}
           >
-            Ya, Hapus
+            {teks("profile.delete.confirm")}
           </button>
         </Modal.Footer>
       </Modal>

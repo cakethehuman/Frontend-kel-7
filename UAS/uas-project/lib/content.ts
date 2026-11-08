@@ -55,6 +55,20 @@ export const opsiGambar: OpsiGambar[] = [
   { value: "/IMG/gambar1_contact.webp", label: "Foto Contact" },
 ];
 
+const teksPendek = (
+  key: string,
+  label: string,
+  nilaiBawaan: string,
+  maxLength = 40,
+
+): TextEntry => ({
+  kind: "text",
+  key,
+  label,
+  maxLength,
+  default: nilaiBawaan
+});
+
 export const contentPages: PageDef[] = [
   {
     id: "home",
@@ -274,7 +288,7 @@ export const contentPages: PageDef[] = [
     sections: [
       {
         id: "kartu",
-        label: "Kartu profil dan About",
+        label: "Profile",
         entries: [
           {
             kind: "text",
@@ -351,6 +365,52 @@ export const contentPages: PageDef[] = [
             default:
               "Sumatra\nJawa\nBali & Nusa Tenggara\nKalimantan\nSulawesi\nMaluku & Papua",
           },
+        ],
+      },
+      {
+        id: "tombol",
+        label: "Tombol, statistik, dan progres",
+        entries: [
+          teksPendek("profile.btn.edit", "Tombol edit profil", "Edit Profil", 30),
+          teksPendek("profile.btn.logout", "Tombol logout", "Logout", 30),
+          teksPendek("profile.stat.total", "Statistik: total favorit", "Total Favorit"),
+          teksPendek("profile.stat.done", "Statistik: sudah dicoba", "Sudah Dicoba"),
+          teksPendek("profile.stat.regions", "Statistik: wilayah dijelajahi", "Wilayah Dijelajahi"),
+          teksPendek("profile.progress.title", "Judul progres", "Progres Jelajah Kuliner", 50),
+        ],
+      },
+      {
+        id: "form",
+        label: "Form tambah, pencarian, dan filter",
+        entries: [
+          teksPendek("profile.form.name_label", "Label nama kuliner", "Nama Kuliner"),
+          teksPendek("profile.form.name_placeholder", "Contoh isian nama kuliner", "cth: Teh Pucuk"),
+          teksPendek("profile.form.region_label", "Label asal wilayah", "Asal Wilayah"),
+          teksPendek("profile.form.add", "Tombol tambah", "Tambah", 20),
+          teksPendek("profile.search.placeholder", "Teks kolom pencarian", "Cari nama atau wilayah...", 50),
+          teksPendek("profile.filter.all", "Filter: semua", "Semua", 20),
+          teksPendek("profile.filter.todo", "Filter: belum dicoba", "Belum dicoba", 20),
+          teksPendek("profile.filter.done", "Filter: sudah dicoba", "Sudah dicoba", 20),
+        ],
+      },
+      {
+        id: "pesan",
+        label: "Pesan daftar kosong dan konfirmasi hapus",
+        entries: [
+          teksPendek(
+            "profile.empty.none",
+            "Pesan saat daftar masih kosong",
+            "Daftarmu masih kosong. Yuk tambah kuliner pertamamu!",
+            120,
+          ),
+          teksPendek(
+            "profile.empty.nomatch",
+            "Pesan saat pencarian atau filter tidak cocok",
+            "Tidak ada kuliner yang cocok dengan pencarian atau filter ini.",
+            120,
+          ),
+          teksPendek("profile.delete.title", "Judul konfirmasi hapus", "Hapus dari daftar?", 50),
+          teksPendek("profile.delete.confirm", "Tombol konfirmasi hapus", "Ya, Hapus", 30),
         ],
       },
     ],
