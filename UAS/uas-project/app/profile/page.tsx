@@ -7,6 +7,7 @@ import { Modal } from "react-bootstrap";
 import ProfileCard from "@/components/profile/ProfileCard";
 import StatCard from "@/components/profile/StatCard";
 import FavoriteCard from "@/components/profile/FavoriteCard";
+import { gambarAman } from "@/lib/content";
 import { useSiteContent } from "@/lib/siteContent";
 
 interface FavoriteItem {
@@ -350,8 +351,8 @@ export default function ProfilePage() {
             <ProfileCard className="pf-id-card h-100">
               <figure className="pf-cover m-0">
                 <Image
-                  src="/IMG/mie_belitung_muantap.webp"
-                  alt="Mie Belitung, kuliner favorit utama"
+                  src={gambarAman("profile.cover.image", teks("profile.cover.image"))}
+                  alt={teks("profile.cover.alt")}
                   width={400}
                   height={190}
                   className="pf-cover-img"
