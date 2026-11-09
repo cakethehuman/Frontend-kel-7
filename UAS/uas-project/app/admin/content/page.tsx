@@ -248,7 +248,7 @@ export default function AdminContentPage() {
 
     const muat = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/content`);
+        const res = await fetch(`${API_URL}/content`);
         if (!res.ok) throw new Error("Gagal mengambil konten dari server.");
 
         const data: unknown = await res.json();
@@ -304,7 +304,7 @@ export default function AdminContentPage() {
         const nilai = bersihkan(entry, draf[entry.key]);
         const kembaliBawaan = sama(nilai, entry.default);
 
-        const res = await fetch(`${API_URL}/api/content/${entry.key}`, {
+        const res = await fetch(`${API_URL}/content/${entry.key}`, {
           method: kembaliBawaan ? "DELETE" : "PUT",
           headers: headerAdmin(),
           ...(kembaliBawaan ? {} : { body: JSON.stringify({ value: nilai }) }),
