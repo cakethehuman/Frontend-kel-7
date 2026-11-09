@@ -156,7 +156,7 @@ export default function CartInfo() {
     setSubmitError(null);
 
     try {
-      const res = await fetch(API_URL + "/api/orders", {
+      const res = await fetch(API_URL + "/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
