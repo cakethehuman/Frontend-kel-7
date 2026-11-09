@@ -9,7 +9,7 @@ import { menuCategories, menuItems, type MenuItem } from "@/data/menu";
 import type { CartItem } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface MoreListProps {
   items: CartItem[];
