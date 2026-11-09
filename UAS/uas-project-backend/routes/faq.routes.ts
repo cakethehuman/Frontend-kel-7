@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { requireAdmin } from "../lib/requireAdmin";
+import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
@@ -60,7 +60,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.post("/", requireAdmin, async (req, res) => {
+router.post("/", ...requireAdmin, async (req, res) => {
   try {
     const input = bacaInput(req.body ?? {});
     if (!input.ok) {
@@ -87,7 +87,7 @@ router.post("/", requireAdmin, async (req, res) => {
   }
 });
 
-router.put("/:id", requireAdmin, async (req, res) => {
+router.put("/:id", ...requireAdmin, async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) {
@@ -129,7 +129,7 @@ router.put("/:id", requireAdmin, async (req, res) => {
   }
 });
 
-router.delete("/:id", requireAdmin, async (req, res) => {
+router.delete("/:id", ...requireAdmin, async (req, res) => {
   try {
     const id = Number(req.params.id);
     if (!Number.isInteger(id)) {

@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
-router.get("/stats", async (_req, res) => {
+router.get("/stats", ...requireAdmin, async (_req, res) => {
   try {
     const [userCount, orderCount, menuCount, orders] = await Promise.all([
       prisma.user.count(),
