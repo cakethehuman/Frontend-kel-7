@@ -1,10 +1,10 @@
 "use client";
 
-import { API_URL } from "@/lib/api";
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, Modal, Table, Spinner, Alert, Card, Badge } from "react-bootstrap";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface Item {
   id: number;
@@ -98,7 +98,6 @@ export default function AdminMenuPage() {
             image: form.image.trim() || "/IMG/mie_belitung.webp",
             description: form.description.trim(),
           }),
-          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();
@@ -115,7 +114,6 @@ export default function AdminMenuPage() {
             image: form.image.trim() || "/IMG/mie_belitung.webp",
             description: form.description.trim(),
           }),
-          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();
@@ -137,7 +135,6 @@ export default function AdminMenuPage() {
       try {
         const res = await fetch(`${API_URL}/api/menu/${item.id}`, {
           method: "DELETE",
-          credentials: "include"
         });
         if (!res.ok) {
           const data = await res.json();

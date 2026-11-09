@@ -18,7 +18,7 @@ export default function FaqAccordion() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/faqs`)
+    fetch(`${API_URL}/faqs`)
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {

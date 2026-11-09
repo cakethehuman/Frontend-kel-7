@@ -35,7 +35,8 @@ export async function readJson<T = any>(res: Response): Promise<T> {
     );
     throw new Error(
       `Server membalas bukan JSON (status ${res.status}) dari ${res.url}. ` +
-        `Isi respons: "${cuplikan}". Cek apakah backend berjalan dan NEXT_PUBLIC_API_URL benar.`,
+      `Isi respons: "${cuplikan}". Cek apakah backend berjalan dan NEXT_PUBLIC_API_URL benar.`,
     );
   }
 }
+

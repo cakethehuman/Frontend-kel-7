@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Card, Row, Col, Table, Badge, Button, Spinner, Alert } from "react-bootstrap";
-import { API_URL } from "@/lib/api";
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface DashboardStats {
   user_count: number;
@@ -40,7 +39,7 @@ export default function AdminDashboardPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/admin/stats`, { credentials: "include" });
+      const res = await fetch(`${API_URL}/admin/stats`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data statistik dashboard.");
       }

@@ -3,14 +3,12 @@
 import { useState, useEffect, type FormEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Modal, Spinner } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import ProfileCard from "@/components/profile/ProfileCard";
 import StatCard from "@/components/profile/StatCard";
 import FavoriteCard from "@/components/profile/FavoriteCard";
 import { gambarAman } from "@/lib/content";
 import { useSiteContent } from "@/lib/siteContent";
-import { useAuth } from "@/lib/AuthContent";
-import { API_URL } from "@/lib/api";
 
 interface FavoriteItem {
   id: number;
@@ -20,24 +18,28 @@ interface FavoriteItem {
   done: boolean;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
 export default function ProfilePage() {
   const router = useRouter();
-  const { user, loading, logout, refresh } = useAuth();
   const { teks } = useSiteContent("profile");
   const daftarPilihanWilayah = teks("profile.regions")
     .split("\n")
     .map((w) => w.trim())
     .filter((w) => w !== "");
 
-  // Data profil diambil dari `user` (hasil /api/auth/me), bukan dari nilai dummy.
-  const name = user?.name ?? "";
-  const email = user?.email ?? "";
-  const role = user?.role ?? "";
-  const bio = user?.bio ?? "";
-  const tags = (user?.tags ?? "")
-    .split(",")
-    .map((t) => t.trim())
-    .filter((t) => t !== "");
+  const [userId, setUserId] = useState<number | null>(null);
+  const [name, setName] = useState("Wilson Widodo");
+  const [email, setEmail] = useState("wilson@gmail.com");
+  const [role, setRole] = useState("Student & Programmer");
+  const [bio, setBio] = useState(
+    "I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo."
+  );
+  const [tags, setTags] = useState<string[]>([
+    "AnimLovers",
+    "Untarian",
+    "Soushin",
+  ]);
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [editRole, setEditRole] = useState("");
@@ -61,30 +63,71 @@ export default function ProfilePage() {
   const [deleteTargetName, setDeleteTargetName] = useState("");
 
   useEffect(() => {
-    if (loading) return;
-
-    if (!user) {
-      router.replace("/auth/login");
-      return;
-    }
-
-    async function ambilFavorit() {
+    async function ambilDataDariBackend() {
       try {
-        const res = await fetch(API_URL + "/api/favorites", {
-          credentials: "include",
-        });
-        if (res.status === 401) {
-          router.replace("/auth/login");
-          return;
+        let loggedInId = 0;
+        let loggedInEmail = "";
+        let loggedInName = "";
+
+        const rawUser =
+          localStorage.getItem("user") ||
+          sessionStorage.getItem("currentUser");
+
+        if (rawUser) {
+          const parsed = JSON.parse(rawUser);
+          if (parsed.user_id) loggedInId = Number(parsed.user_id);
+          else if (parsed.id) loggedInId = Number(parsed.id);
+          if (parsed.email) loggedInEmail = String(parsed.email);
+          if (parsed.name) loggedInName = String(parsed.name);
         }
-        if (res.ok) setFavorites(await res.json());
+
+        let urlProfile = API_URL + "/profile";
+        if (loggedInId > 0) {
+          urlProfile = API_URL + "/profile?user_id=" + loggedInId;
+        } else if (loggedInEmail !== "") {
+          urlProfile =
+            API_URL +
+            "/profile?email=" +
+            encodeURIComponent(loggedInEmail);
+        }
+
+        const resProfile = await fetch(urlProfile);
+        let activeUserId = loggedInId;
+
+        if (resProfile.ok) {
+          const dataUser = await resProfile.json();
+          activeUserId = Number(dataUser.user_id);
+          setUserId(activeUserId);
+          setName(loggedInName || dataUser.name);
+          setEmail(dataUser.email);
+          if (dataUser.role) setRole(dataUser.role);
+          if (dataUser.bio) setBio(dataUser.bio);
+          if (dataUser.tags) {
+            setTags(
+              String(dataUser.tags)
+                .split(",")
+                .filter((t) => t.trim() !== "")
+            );
+          }
+        }
+
+        const urlFav =
+          activeUserId > 0
+            ? API_URL + "/favorites?user_id=" + activeUserId
+            : API_URL + "/favorites";
+
+        const resFav = await fetch(urlFav);
+        if (resFav.ok) {
+          const dataFav = await resFav.json();
+          setFavorites(dataFav);
+        }
       } catch (e) {
         console.log(e);
       }
     }
 
-    ambilFavorit();
-  }, [loading, user, router]);
+    ambilDataDariBackend();
+  }, []);
 
   function tampilkanPesan(teks: string, tipe: string) {
     setMessageText(teks);
@@ -116,11 +159,11 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "POST",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          user_id: userId,
           name: namaBersih,
           region: wilayahDipilih,
         }),
@@ -150,9 +193,8 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "PATCH",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: id,
@@ -189,9 +231,8 @@ export default function ProfilePage() {
     if (deleteTargetId === null) return;
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "DELETE",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteTargetId }),
       });
@@ -237,11 +278,11 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/profile", {
+      const res = await fetch(API_URL + "/profile", {
         method: "PATCH",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          user_id: userId,
           role: roleBaru,
           bio: bioBaru,
           tags: tagBersih.join(","),
@@ -249,7 +290,9 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        await refresh(); // sinkronkan data user di AuthContext
+        setRole(roleBaru);
+        setBio(bioBaru);
+        setTags(tagBersih);
         setShowEditModal(false);
       }
     } catch (e) {
@@ -257,9 +300,10 @@ export default function ProfilePage() {
     }
   }
 
-  async function handleLogout() {
-    await logout(); // hapus cookie di server + reset user di context
-    router.replace("/auth/login");
+  function handleLogout() {
+    localStorage.removeItem("user");
+    sessionStorage.removeItem("currentUser");
+    router.push("/auth/login");
   }
 
   const totalFavorit = favorites.length;
@@ -297,16 +341,7 @@ export default function ProfilePage() {
     return cocokTeks && cocokStatus;
   });
 
-  const hurufAvatar = name ? name.charAt(0).toUpperCase() : "?";
-
-  // Jangan render apa pun dari halaman profile sebelum status login jelas.
-  if (loading || !user) {
-    return (
-      <main className="d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5">
-        <Spinner animation="border" />
-      </main>
-    );
-  }
+  const hurufAvatar = name ? name.charAt(0).toUpperCase() : "W";
 
   return (
     <main className="pf-page">
@@ -346,14 +381,14 @@ export default function ProfilePage() {
                     className="btn btn-profile"
                     onClick={bukaModalEdit}
                   >
-                    <i className="bi bi-pencil-square"></i>{teks("profile.btn.edit")}
+                    <i className="bi bi-pencil-square"></i> Edit Profil
                   </button>
                   <button
                     type="button"
                     className="btn btn-logout"
                     onClick={handleLogout}
                   >
-                    <i className="bi bi-door-closed"></i>{teks("profile.btn.logout")}
+                    <i className="bi bi-door-closed"></i> Logout
                   </button>
                 </div>
               </div>
@@ -382,21 +417,21 @@ export default function ProfilePage() {
 
             <div className="row g-3">
               <StatCard icon="bi-bookmark-heart-fill" angka={totalFavorit}>
-                {teks("profile.stat.total")}
+                Total Favorit
               </StatCard>
 
               <StatCard icon="bi-check-circle-fill" angka={totalSudahDicoba}>
-                {teks("profile.stat.done")}
+                Sudah Dicoba
               </StatCard>
 
               <StatCard icon="bi-compass-fill" angka={totalWilayah}>
-                {teks("profile.stat.regions")}
+                Wilayah Dijelajahi
               </StatCard>
             </div>
 
             <aside
               className="pf-card pf-progress"
-              aria-label={teks("profile.progress.title")}
+              aria-label="Progres jelajah kuliner"
             >
               <div className="d-flex justify-content-between align-items-center mb-2">
                 <span className="fw-bold">Progres Jelajah Kuliner</span>
@@ -446,13 +481,13 @@ export default function ProfilePage() {
           >
             <div className="col-md-5">
               <label htmlFor="fav-input-name" className="form-label fw-bold">
-                {teks("profile.form.name_label")}
+                Nama Kuliner
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="fav-input-name"
-                placeholder={teks("profile.form.name_placeholder")}
+                placeholder="cth: Teh Pucuk"
                 maxLength={40}
                 autoComplete="off"
                 value={inputName}
@@ -461,7 +496,7 @@ export default function ProfilePage() {
             </div>
             <div className="col-md-4">
               <label htmlFor="fav-input-region" className="form-label fw-bold">
-                {teks("profile.form.region_label")}
+                Asal Wilayah
               </label>
               <select
                 className="form-select"
@@ -478,7 +513,7 @@ export default function ProfilePage() {
             </div>
             <div className="col-md-3">
               <button type="submit" className="btn btn-profile w-100">
-                <i className="bi bi-plus-lg"></i> {teks("profile.form.add")}
+                <i className="bi bi-plus-lg"></i> Tambah
               </button>
             </div>
           </form>
@@ -509,7 +544,7 @@ export default function ProfilePage() {
                   type="search"
                   className="form-control"
                   id="fav-search"
-                  placeholder={teks("profile.search.placeholder")}
+                  placeholder="Cari nama atau wilayah..."
                   autoComplete="off"
                   value={searchKeyword}
                   onChange={(e) => setSearchKeyword(e.target.value)}
@@ -529,7 +564,7 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("all")}
                 >
-                  {teks("profile.filter.all")}
+                  Semua
                 </button>
                 <button
                   type="button"
@@ -538,7 +573,8 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("belum")}
                 >
-                  {teks("profile.filter.todo")}                </button>
+                  Belum dicoba
+                </button>
                 <button
                   type="button"
                   className={
@@ -546,7 +582,8 @@ export default function ProfilePage() {
                   }
                   onClick={() => setActiveFilter("sudah")}
                 >
-                  {teks("profile.filter.done")}                </button>
+                  Sudah dicoba
+                </button>
               </div>
             </div>
           </div>
@@ -577,8 +614,8 @@ export default function ProfilePage() {
             <i className="bi bi-emoji-neutral"></i>
             <p id="fav-empty-text" className="mb-0">
               {favorites.length === 0
-                ? teks("profile.empty.none")
-                : teks("profile.empty.nomatch")}
+                ? "Daftarmu masih kosong. Yuk tambah kuliner pertamamu!"
+                : "Tidak ada kuliner yang cocok dengan pencarian atau filter ini."}
             </p>
           </div>
         )}
@@ -687,7 +724,7 @@ export default function ProfilePage() {
       >
         <Modal.Header closeButton className="border-0 pb-0">
           <Modal.Title as="h2" className="h4" id="deleteTitle">
-            {teks("profile.delete.title")}
+            Hapus dari daftar?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -710,7 +747,7 @@ export default function ProfilePage() {
             id="confirm-delete"
             onClick={konfirmasiHapus}
           >
-            {teks("profile.delete.confirm")}
+            Ya, Hapus
           </button>
         </Modal.Footer>
       </Modal>

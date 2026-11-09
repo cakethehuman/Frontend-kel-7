@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Router } from "express";
 import cors from "cors";
 
 import menuRoutes from "./routes/menu.routes";
@@ -11,16 +11,12 @@ import usersRoutes from "./routes/users.routes";
 import adminRoutes from "./routes/admin.routes";
 import faqRoutes from "./routes/faq.routes";
 import contentRoutes from "./routes/content.routes";
-import cookieParser from "cookie-parser";
+
 const app = express();
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
-  credentials: true,
-}));
-// For parsing the cookie to an object
-app.use(cookieParser());
+app.use(cors());
 app.use(express.json());
 
+<<<<<<< HEAD
 
 app.use("/api/menu", menuRoutes);
 app.use("/api/profile", profileRoutes);
@@ -32,10 +28,31 @@ app.use("/api/users", usersRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/faqs", faqRoutes);
 app.use("/api/content", contentRoutes);
+=======
+const daftarRoute: [string, Router][] = [
+  ["menu", menuRoutes],
+  ["profile", profileRoutes],
+  ["favorites", favoritesRoutes],
+  ["feedback", feedbackRoutes],
+  ["orders", ordersRoutes],
+  ["auth", authRoutes],
+  ["users", usersRoutes],
+  ["admin", adminRoutes],
+  ["faqs", faqRoutes],
+  ["content", contentRoutes],
+];
+>>>>>>> 0141239416f78488e8ef1060df0d0ee2ffac920d
 
-app.get("/api/health", (_req, res) => {
+for (const [nama, router] of daftarRoute) {
+  app.use(`/api/${nama}`, router);
+  app.use(`/${nama}`, router);
+}
+
+const health = (_req: express.Request, res: express.Response) => {
   res.json({ status: "ok", time: new Date().toISOString() });
-});
+};
+app.get("/api/health", health);
+app.get("/health", health);
 
 const PORT = process.env.PORT || 3001;
 if (process.env.NODE_ENV !== "test") {

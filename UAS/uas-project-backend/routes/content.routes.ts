@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { requireAdmin } from "../middleware/requireAdmin";
+import { requireAdmin } from "../lib/requireAdmin";
 
 const router = Router();
 
-const POLA_KUNCI = /^(home|profile|about|contact)\.[a-z0-9._-]{1,80}$/;
+const POLA_KUNCI = /^(home|profile)\.[a-z0-9._-]{1,80}$/;
 const POLA_PREFIX = /^[a-z0-9._-]{1,80}$/;
 const MAKS_UKURAN = 20000;
 
@@ -43,12 +43,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/:key", ...requireAdmin, async (req, res) => {
+router.put("/:key", requireAdmin, async (req, res) => {
   try {
     const key = String(req.params.key);
     if (!POLA_KUNCI.test(key)) {
       res.status(400).json({
-        message: "Kunci tidak valid. Harus diawali home. atau profile., atau about.",
+        message: "Kunci tidak valid. Harus diawali home. atau profile.",
       });
       return;
     }
@@ -83,7 +83,7 @@ router.put("/:key", ...requireAdmin, async (req, res) => {
   }
 });
 
-router.delete("/:key", ...requireAdmin, async (req, res) => {
+router.delete("/:key", requireAdmin, async (req, res) => {
   try {
     const key = String(req.params.key);
     if (!POLA_KUNCI.test(key)) {

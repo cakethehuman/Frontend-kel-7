@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Home",
 };
 
+
 export default function Home() {
   return (
     <ContentProvider prefix="home">

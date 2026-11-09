@@ -8,12 +8,16 @@ import { menuCategories, type MenuItem, type MenuCategory } from "@/data/menu";
 import { CartStore } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { useAuth } from "@/lib/AuthContent";
 import { API_URL } from "@/lib/api";
 
+=======
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+>>>>>>> 0141239416f78488e8ef1060df0d0ee2ffac920d
 
 export default function Menu() {
-  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [menuList, setMenuList] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -50,12 +54,6 @@ export default function Menu() {
   }, []);
 
   const order = (item: MenuItem) => {
-    // memastikan user tidak bisa masuk ke page ini jika belum login
-    if (authLoading) return;
-    if (!user) {
-      router.push("/auth/login?redirect=/menu")
-      return;
-    }
     CartStore.add(item);
     router.push("/cart-info");
   };
@@ -115,6 +113,8 @@ export default function Menu() {
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = "/IMG/mie_belitung.webp";
                             }}
+                            priority={false}
+                            unoptimized
                           />
                         </div>
 
