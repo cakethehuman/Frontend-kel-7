@@ -30,4 +30,4 @@ export const signAccessToken = (payload: AuthPayload) =>
   jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 
 export const verifyAccessToken = (token: string) =>
-
+  jwt.verify(token, JWT_SECRET) as AuthPayload;
