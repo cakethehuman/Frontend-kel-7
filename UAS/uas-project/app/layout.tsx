@@ -16,7 +16,6 @@ import "./css/profile.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"
 import CartButton from "@/components/CartButton";
-import { AuthProvider } from "@/lib/AuthContent";
 
 const libre = Libre_Baskerville({
   subsets: ["latin"],
@@ -45,12 +44,10 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${libre.variable} ${nunito.variable}`} suppressHydrationWarning>
       <body className="d-flex flex-column min-vh-100 bg-beige text-dark">
-        <AuthProvider>
-          <Navbar />
-          {children}
-          <Footer />
-          <CartButton />
-        </AuthProvider>
+        <Navbar />
+        {children}
+        <Footer />
+        <CartButton />
       </body>
     </html>
   );

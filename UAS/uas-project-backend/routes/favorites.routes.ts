@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
@@ -16,9 +15,9 @@ const DATA_KULINER_AWAL = [
 ];
 
 
-router.get("/", loggedIn, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    let userId: number = res.locals.user.user_id;
+    let userId = Number(req.query.user_id);
 
     if (!userId) {
       const userPertama = await prisma.user.findFirst();
@@ -40,7 +39,7 @@ router.get("/", loggedIn, async (req, res) => {
         region: item.region,
         done: item.done,
       }));
-
+      
       await prisma.favorite.createMany({
         data: dataAwalUser,
       });
@@ -58,10 +57,10 @@ router.get("/", loggedIn, async (req, res) => {
   }
 });
 
-router.post("/", loggedIn, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const body = req.body ?? {};
-    let userId: number = res.locals.user.user_id;
+    let userId = Number(body.user_id);
 
     if (!userId) {
       const userPertama = await prisma.user.findFirst();
@@ -93,7 +92,7 @@ router.post("/", loggedIn, async (req, res) => {
   }
 });
 
-router.patch("/", loggedIn, async (req, res) => {
+router.patch("/", async (req, res) => {
   try {
     const body = req.body ?? {};
 
@@ -109,7 +108,7 @@ router.patch("/", loggedIn, async (req, res) => {
   }
 });
 
-router.delete("/", loggedIn, async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
     const body = req.body ?? {};
 
