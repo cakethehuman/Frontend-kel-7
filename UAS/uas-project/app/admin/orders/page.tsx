@@ -1,9 +1,9 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Badge, Form, Table, Spinner, Alert, Button, Card } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 type Status = "pending" | "cooking" | "done" | "finished" | "cancelled";
 
 interface OrderItem {
@@ -48,7 +48,7 @@ export default function AdminOrdersPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/orders`);
+      const res = await fetch(`${API_URL}/api/orders`, { credentials: "include" });
       if (!res.ok) {
         throw new Error("Gagal mengambil data pesanan dari server.");
       }
@@ -69,10 +69,11 @@ export default function AdminOrdersPage() {
   const setStatus = async (id: number, newStatus: Status) => {
     try {
       setUpdatingId(id);
-      const res = await fetch(`${API_URL}/orders/${id}`, {
+      const res = await fetch(`${API_URL}/api/orders/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
+        credentials: "include"
       });
 
       if (!res.ok) {

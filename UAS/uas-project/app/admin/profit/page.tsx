@@ -1,9 +1,9 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Card, Col, Form, Row, Spinner, Alert } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface MonthlyData {
   month: string;
@@ -29,7 +29,7 @@ export default function AdminProfitPage() {
     const fetchRevenue = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}/admin/stats`);
+        const res = await fetch(`${API_URL}/api/admin/stats`, { credentials: "include" });
         if (res.ok) {
           const stats = await res.json();
           setTotalRevenueReal(Number(stats.total_revenue) || 0);

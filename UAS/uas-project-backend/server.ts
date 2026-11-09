@@ -16,19 +16,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-<<<<<<< HEAD
-
-app.use("/api/menu", menuRoutes);
-app.use("/api/profile", profileRoutes);
-app.use("/api/favorites", favoritesRoutes);
-app.use("/api/feedback", feedbackRoutes);
-app.use("/api/orders", ordersRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/users", usersRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/faqs", faqRoutes);
-app.use("/api/content", contentRoutes);
-=======
 const daftarRoute: [string, Router][] = [
   ["menu", menuRoutes],
   ["profile", profileRoutes],
@@ -41,7 +28,6 @@ const daftarRoute: [string, Router][] = [
   ["faqs", faqRoutes],
   ["content", contentRoutes],
 ];
->>>>>>> 0141239416f78488e8ef1060df0d0ee2ffac920d
 
 for (const [nama, router] of daftarRoute) {
   app.use(`/api/${nama}`, router);
