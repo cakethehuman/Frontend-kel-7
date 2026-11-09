@@ -12,7 +12,7 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
-import { API_URL, headerAdmin } from "@/lib/api";
+import { headerAdmin } from "@/lib/api";
 import {
   contentEntries,
   contentPages,
@@ -24,6 +24,7 @@ import {
 type Baris = Record<string, string>;
 type Nilai = string | Baris[];
 type Peta = Record<string, Nilai>;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 const sama = (a: unknown, b: unknown) =>
   JSON.stringify(a) === JSON.stringify(b);
