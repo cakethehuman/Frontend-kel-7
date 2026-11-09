@@ -22,23 +22,9 @@ model User {
   orders Order[]
   feedbacks Feedback[]
   favorites Favorite[]
-  password_resets PasswordReset[]
 
   @@map("users")
 }
-
-model PasswordReset {
-    id Int @id @default(autoincrement())
-    user_id Int
-    otp_hash String
-    expires_at DateTime
-    attempts Int @default(0)
-    created_at DateTime @default(now())
-
-    user User @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
-    @@index([user_id])
-    @@map("password_resets")
-  }
 
 model Store {
   store_id      Int   @id @default(autoincrement())
@@ -167,5 +153,3 @@ model SiteContent {
 
   @@map("site_content")
 }
-
- 

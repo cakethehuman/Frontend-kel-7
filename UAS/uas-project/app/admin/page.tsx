@@ -39,7 +39,7 @@ export default function AdminDashboardPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/admin/stats`, { credentials: "include" });
+      const res = await fetch(`${API_URL}/api/admin/stats`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data statistik dashboard.");
       }

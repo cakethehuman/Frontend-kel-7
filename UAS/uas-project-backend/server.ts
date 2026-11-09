@@ -11,14 +11,9 @@ import usersRoutes from "./routes/users.routes";
 import adminRoutes from "./routes/admin.routes";
 import faqRoutes from "./routes/faq.routes";
 import contentRoutes from "./routes/content.routes";
-import cookieParser from "cookie-parser";
+
 const app = express();
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
-  credentials: true,
-}));
-// For parsing the cookie to an object
-app.use(cookieParser());
+app.use(cors());
 app.use(express.json());
 
 app.use("api/menu", menuRoutes);
