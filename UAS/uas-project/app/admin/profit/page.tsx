@@ -29,7 +29,7 @@ export default function AdminProfitPage() {
     const fetchRevenue = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`${API_URL}/api/admin/stats`);
+        const res = await fetch(`${API_URL}/api/admin/stats`, { credentials: "include" });
         if (res.ok) {
           const stats = await res.json();
           setTotalRevenueReal(Number(stats.total_revenue) || 0);

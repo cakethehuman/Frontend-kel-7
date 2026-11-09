@@ -20,7 +20,7 @@ import { rupiah } from "@/lib/format";
 
 
 const TAX_RATE = 0.1;
-const API_URL = "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 const MAX_TABLE = 15;
 
 function getLoggedInUserId(): number | null {
@@ -58,7 +58,7 @@ export default function CartInfo() {
 
   const loadTables = useCallback(async () => {
     try {
-      const res = await fetch(API_URL + "/api/orders/tables");
+      const res = await fetch(API_URL + "/orders/tables");
       if (!res.ok) return;
       const data = await res.json();
       setTakenTables(Array.isArray(data.taken) ? data.taken : []);

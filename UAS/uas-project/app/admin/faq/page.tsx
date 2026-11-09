@@ -11,7 +11,7 @@ import {
   Table,
 } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface Faq {
   id: number;
@@ -22,17 +22,7 @@ interface Faq {
 
 const emptyForm = { question: "", answer: "", sort_order: 0 };
 
-function headerAdmin(): Record<string, string> {
-  let userId = "";
-  try {
-    const raw =
-      localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-    if (raw) userId = String(JSON.parse(raw).user_id ?? "");
-  } catch {
-    userId = "";
-  }
-  return { "Content-Type": "application/json", "x-user-id": userId };
-}
+
 
 export default function AdminFaqPage() {
   const [faqs, setFaqs] = useState<Faq[]>([]);
@@ -49,7 +39,7 @@ export default function AdminFaqPage() {
 
     const muat = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/faqs`);
+        const res = await fetch(`${API_URL}/faqs`, { credentials: "include" });
         if (!res.ok) throw new Error("Gagal mengambil data FAQ dari server.");
         const data: unknown = await res.json();
         if (aktif) {
@@ -94,15 +84,16 @@ export default function AdminFaqPage() {
     try {
       const sedangEdit = editingId !== null;
       const res = await fetch(
-        sedangEdit ? `${API_URL}/api/faqs/${editingId}` : `${API_URL}/api/faqs`,
+        sedangEdit ? `${API_URL}/faqs/${editingId}` : `${API_URL}/faqs`,
         {
           method: sedangEdit ? "PUT" : "POST",
-          headers: headerAdmin(),
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             question: form.question.trim(),
             answer: form.answer.trim(),
             sort_order: form.sort_order,
           }),
+          credentials: "include"
         },
       );
 
@@ -122,9 +113,10 @@ export default function AdminFaqPage() {
     if (!confirm(`Yakin ingin menghapus FAQ "${faq.question}"?`)) return;
 
     try {
-      const res = await fetch(`${API_URL}/api/faqs/${faq.id}`, {
+      const res = await fetch(`${API_URL}/faqs/${faq.id}`, {
         method: "DELETE",
-        headers: headerAdmin(),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include"
       });
 
       if (!res.ok) {
