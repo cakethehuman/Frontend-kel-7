@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Router } from "express";
 import cors from "cors";
 
 import menuRoutes from "./routes/menu.routes";
@@ -16,21 +16,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("api/menu", menuRoutes);
-app.use("/api/menu", menuRoutes);
-app.use("/api/profile", profileRoutes);
-app.use("/api/favorites", favoritesRoutes);
-app.use("/api/feedback", feedbackRoutes);
-app.use("/api/orders", ordersRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/users", usersRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/faqs", faqRoutes);
-app.use("/api/content", contentRoutes);
+const daftarRoute: [string, Router][] = [
+  ["menu", menuRoutes],
+  ["profile", profileRoutes],
+  ["favorites", favoritesRoutes],
+  ["feedback", feedbackRoutes],
+  ["orders", ordersRoutes],
+  ["auth", authRoutes],
+  ["users", usersRoutes],
+  ["admin", adminRoutes],
+  ["faqs", faqRoutes],
+  ["content", contentRoutes],
+];
 
-app.get("/api/health", (_req, res) => {
+for (const [nama, router] of daftarRoute) {
+  app.use(`/api/${nama}`, router);
+  app.use(`/${nama}`, router);
+}
+
+const health = (_req: express.Request, res: express.Response) => {
   res.json({ status: "ok", time: new Date().toISOString() });
-});
+};
+app.get("/api/health", health);
+app.get("/health", health);
 
 const PORT = process.env.PORT || 3001;
 if (process.env.NODE_ENV !== "test") {
