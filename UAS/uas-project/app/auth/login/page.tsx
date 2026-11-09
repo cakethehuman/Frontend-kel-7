@@ -1,31 +1,20 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/lib/AuthContent";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Login() {
   const router = useRouter();
-  const { refresh } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  useLayoutEffect(() => {
-    return () => {
-      setEmail("");
-      setPassword("");
-      setLoading(false);
-      setError(null);
-      setSuccess(null);
-    };
-  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,7 +33,6 @@ export default function Login() {
 
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -82,20 +70,17 @@ export default function Login() {
 
       setSuccess("Login berhasil! Mengalihkan...");
 
-      await refresh();
+      localStorage.setItem("user", JSON.stringify(data.user));
+      sessionStorage.setItem("currentUser", JSON.stringify(data.user));
 
-      const target = new URLSearchParams(window.location.search).get("redirect");
-      const aman = target && target.startsWith("/") && !target.startsWith("//");
+      window.dispatchEvent(new Event("authChange"));
 
       setTimeout(() => {
-        if (aman) {
-          router.push(target);
-        } else if (data.user.is_admin === 1) {
+        if (data.user.is_admin === 1) {
           router.push("/admin");
         } else {
           router.push("/menu");
         }
-
       }, 700);
 
     } catch (err: any) {

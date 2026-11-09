@@ -3,9 +3,6 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { API_URL } from "@/lib/api";
-import { useAuth } from "@/lib/AuthContent";
-import { useContent } from "@/lib/siteContent";
 
 const starLabels = [
   "Belum dinilai",
@@ -17,6 +14,8 @@ const starLabels = [
 ];
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 function getLoggedInUserId(): number | null {
   try {
@@ -67,8 +66,6 @@ function Field({ id, label, required, error, children }: FieldProps) {
 }
 
 export default function FeedbackForm() {
-  const { user } = useAuth();
-  const { teks } = useContent();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
@@ -96,7 +93,7 @@ export default function FeedbackForm() {
     if (sending) return;
 
     const userId = getLoggedInUserId();
-    if (!user) {
+    if (userId === null) {
       setAlertMsg("Login dulu untuk mengirim masukan.");
       return;
     }
@@ -123,7 +120,6 @@ export default function FeedbackForm() {
           category: form.kategori,
           message: form.pesan.trim(),
         }),
-        credentials: "include"
       });
 
       if (res.ok) {
@@ -147,11 +143,11 @@ export default function FeedbackForm() {
           <Col lg={6}>
             <SectionHeading
               variant="section"
-              eyebrow={teks("contact.feedback.eyebrow")}
-              title={teks("contact.feedback.title")}
+              eyebrow="Saran & Masukan"
+              title="Katakan Apa Saja, Dapur Kami Mendengar"
             />
             <p className="section-copy">
-              {teks("contact.feedback.copy")}
+              Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.
             </p>
           </Col>
 
@@ -215,7 +211,7 @@ export default function FeedbackForm() {
 
                   <Button type="submit" disabled={sending} className="btn-app btn-solid d-inline-flex align-items-center gap-2 rounded-pill border-0">
                     <i className="bi bi-send" />{" "}
-                    <span>{sending ? "Mengirim..." : teks("contact.feedback.submit")}</span>
+                    <span>{sending ? "Mengirim..." : "Kirim Masukan"}</span>
                   </Button>
                 </Form>
               )}

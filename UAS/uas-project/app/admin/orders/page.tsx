@@ -49,7 +49,7 @@ export default function AdminOrdersPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/orders`, { credentials: "include" });
+      const res = await fetch(`${API_URL}/api/orders`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data pesanan dari server.");
       }
@@ -74,7 +74,6 @@ export default function AdminOrdersPage() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
-        credentials: "include"
       });
 
       if (!res.ok) {
