@@ -1,9 +1,9 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Card, Col, Form, Row, Spinner, Alert } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface MonthlyData {
   month: string;

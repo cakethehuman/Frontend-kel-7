@@ -1,9 +1,8 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Badge, Form, Table, Spinner, Alert, Button, Card } from "react-bootstrap";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 type Status = "pending" | "cooking" | "done" | "finished" | "cancelled";
 

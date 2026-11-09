@@ -8,8 +8,8 @@ import Row from "react-bootstrap/Row";
 import { menuCategories, menuItems, type MenuItem } from "@/data/menu";
 import type { CartItem } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
+import { API_URL } from "@/lib/api";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface MoreListProps {
   items: CartItem[];
@@ -22,7 +22,7 @@ export default function MoreList({ items, onAdd }: MoreListProps) {
   useEffect(() => {
     async function fetchMenu() {
       try {
-        const res = await fetch(`${API_URL}/menu`);
+        const res = await fetch(`${API_URL}/api/menu`);
         if (res.ok) {
           const data = await res.json();
           const mapped: MenuItem[] = data.map((item: any) => ({

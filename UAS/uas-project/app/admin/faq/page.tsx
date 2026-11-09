@@ -1,5 +1,6 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { FormEvent, useEffect, useState } from "react";
 import {
   Alert,
@@ -11,7 +12,6 @@ import {
   Table,
 } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface Faq {
   id: number;

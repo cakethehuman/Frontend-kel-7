@@ -1,9 +1,9 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Badge, Button, Table, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 interface Feedback {
   feedback_id: number;

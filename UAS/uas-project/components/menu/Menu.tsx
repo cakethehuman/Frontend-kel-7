@@ -9,8 +9,8 @@ import { CartStore } from "@/lib/cartStore";
 import { rupiah } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContent";
+import { API_URL } from "@/lib/api";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default function Menu() {
   const { user, loading: authLoading } = useAuth();
@@ -23,7 +23,7 @@ export default function Menu() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/menu`);
+      const res = await fetch(`${API_URL}/api/menu`);
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }

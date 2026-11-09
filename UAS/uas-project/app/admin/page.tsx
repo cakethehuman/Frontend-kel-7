@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Card, Row, Col, Table, Badge, Button, Spinner, Alert } from "react-bootstrap";
+import { API_URL } from "@/lib/api";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
 
 interface DashboardStats {
   user_count: number;

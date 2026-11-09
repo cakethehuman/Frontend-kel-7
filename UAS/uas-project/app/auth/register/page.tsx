@@ -5,8 +5,7 @@ import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "@/app/css/constants.css";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+import { API_URL } from "@/lib/api";
 
 export default function RegisterPage() {
   const router = useRouter();

@@ -1,7 +1,10 @@
 "use client";
 
+import { API_URL } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Accordion } from "react-bootstrap";
+
+
 
 interface FaqItem {
   id: number;
@@ -9,7 +12,6 @@ interface FaqItem {
   answer: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 export default function FaqAccordion() {
   const [faqs, setFaqs] = useState<FaqItem[]>([]);
