@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Table, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface Feedback {
   feedback_id: number;
@@ -33,7 +33,7 @@ export default function AdminFeedbackPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/api/feedback`);
+      const res = await fetch(`${API_URL}/feedback`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data feedback dari server.");
       }

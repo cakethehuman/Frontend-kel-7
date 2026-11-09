@@ -81,13 +81,13 @@ export default function ProfilePage() {
           if (parsed.name) loggedInName = String(parsed.name);
         }
 
-        let urlProfile = API_URL + "/api/profile";
+        let urlProfile = API_URL + "/profile";
         if (loggedInId > 0) {
-          urlProfile = API_URL + "/api/profile?user_id=" + loggedInId;
+          urlProfile = API_URL + "/profile?user_id=" + loggedInId;
         } else if (loggedInEmail !== "") {
           urlProfile =
             API_URL +
-            "/api/profile?email=" +
+            "/profile?email=" +
             encodeURIComponent(loggedInEmail);
         }
 
@@ -113,8 +113,8 @@ export default function ProfilePage() {
 
         const urlFav =
           activeUserId > 0
-            ? API_URL + "/api/favorites?user_id=" + activeUserId
-            : API_URL + "/api/favorites";
+            ? API_URL + "/favorites?user_id=" + activeUserId
+            : API_URL + "/favorites";
 
         const resFav = await fetch(urlFav);
         if (resFav.ok) {
@@ -159,7 +159,7 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -193,7 +193,7 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -231,7 +231,7 @@ export default function ProfilePage() {
     if (deleteTargetId === null) return;
 
     try {
-      const res = await fetch(API_URL + "/api/favorites", {
+      const res = await fetch(API_URL + "/favorites", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: deleteTargetId }),
@@ -278,7 +278,7 @@ export default function ProfilePage() {
     }
 
     try {
-      const res = await fetch(API_URL + "/api/profile", {
+      const res = await fetch(API_URL + "/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
