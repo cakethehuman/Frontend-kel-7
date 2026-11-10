@@ -8,8 +8,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContent";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
-
 export default function Login() {
   const { user, loading: authLoading, refresh } = useAuth();
   const router = useRouter();
@@ -53,7 +51,7 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const res = await apiFetch(`${API_URL}/auth/login`, {
+      const res = await apiFetch(`/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           email: cleanEmail,
