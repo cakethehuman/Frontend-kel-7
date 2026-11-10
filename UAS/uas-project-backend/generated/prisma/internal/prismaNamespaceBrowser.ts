@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  PasswordReset: 'PasswordReset',
   Store: 'Store',
   Menu: 'Menu',
   Cart: 'Cart',
@@ -93,6 +94,18 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PasswordResetScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  otp_hash: 'otp_hash',
+  expires_at: 'expires_at',
+  attempts: 'attempts',
+  created_at: 'created_at'
+} as const
+
+export type PasswordResetScalarFieldEnum = (typeof PasswordResetScalarFieldEnum)[keyof typeof PasswordResetScalarFieldEnum]
 
 
 export const StoreScalarFieldEnum = {
