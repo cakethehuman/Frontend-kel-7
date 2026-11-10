@@ -1,4 +1,4 @@
-const mentah = process.env.NEXT_PUBLIC_API_URL || "";
+const mentah = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 export function apiFetch(path: string, init: RequestInit = {}) {
   return fetch(`${mentah}${path}`, {
