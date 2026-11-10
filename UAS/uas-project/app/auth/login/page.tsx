@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
-import { apiFetch } from "@/lib/api"
+import { API_URL, apiFetch } from "@/lib/api"
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
@@ -52,7 +52,7 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const res = await apiFetch(`/auth/login`, {
+      const res = await apiFetch(`${API_URL}/auth/login`, {
         method: "POST",
         body: JSON.stringify({
           email: cleanEmail,
