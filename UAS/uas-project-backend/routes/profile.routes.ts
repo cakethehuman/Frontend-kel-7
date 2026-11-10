@@ -1,17 +1,26 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
-router.get("/", loggedIn, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const userIdParam = res.locals.user.user_id;
+    const userIdParam = Number(req.query.user_id);
+    const emailParam = req.query.email ? String(req.query.email) : "";
 
-    const user = await prisma.user.findUnique({
-      where: { user_id: userIdParam },
-    });
+    let user = null;
 
+    if (userIdParam) {
+      user = await prisma.user.findUnique({
+        where: { user_id: userIdParam },
+      });
+    } else if (emailParam) {
+      user = await prisma.user.findUnique({
+        where: { email: emailParam },
+      });
+    } else {
+      user = await prisma.user.findFirst();
+    }
 
     if (!user) {
       res.status(404).json({ message: "User tidak ditemukan." });
@@ -33,14 +42,19 @@ router.get("/", loggedIn, async (req, res) => {
   }
 });
 
-router.patch("/", loggedIn, async (req, res) => {
+router.patch("/", async (req, res) => {
   try {
     const body = req.body ?? {};
-    const userId = res.locals.user.user_id;
+    const userId = Number(body.user_id);
 
-    const targetUser = await prisma.user.findUnique({
-      where: { user_id: userId },
-    });
+    let targetUser = null;
+    if (userId) {
+      targetUser = await prisma.user.findUnique({
+        where: { user_id: userId },
+      });
+    } else {
+      targetUser = await prisma.user.findFirst();
+    }
 
     if (!targetUser) {
       res.status(404).json({ message: "User tidak ditemukan." });
