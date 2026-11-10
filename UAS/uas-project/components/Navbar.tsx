@@ -62,17 +62,19 @@ export default function Navbar() {
 
           <BsNavbar.Collapse id="navbarNav" className="justify-content-end">
             <Nav className="gap-2 align-items-lg-center">
-              {baseLinks.map((link) => (
-                <Nav.Link
-                  key={link.href}
-                  as={Link}
-                  href={link.href}
-                  active={isActive(link.href)}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </Nav.Link>
-              ))}
+              {baseLinks
+                .filter((link) => link.href !== "/profile" || currentUser)
+                .map((link) => (
+                  <Nav.Link
+                    key={link.href}
+                    as={Link}
+                    href={link.href}
+                    active={isActive(link.href)}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </Nav.Link>
+                ))}
 
               {currentUser && currentUser.is_admin === 1 && (
                 <Nav.Link

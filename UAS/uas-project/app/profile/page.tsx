@@ -30,8 +30,8 @@ export default function ProfilePage() {
     .map((w) => w.trim())
     .filter((w) => w !== "");
 
-  const [name, setName] = useState("Wilson Widodo");
-  const [email, setEmail] = useState("wilson@gmail.com");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [role, setRole] = useState("Student & Programmer");
   const [bio, setBio] = useState(
     "I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo."
@@ -72,11 +72,6 @@ export default function ProfilePage() {
     async function ambilDataDariBackend() {
       try {
 
-        useEffect(() => {
-          if (!authLoading && !user) router.replace("/auth/login");
-        }, [authLoading, user, router]);
-
-
         const resProfile = await apiFetch(urlProfile);
 
         if (resProfile.ok) {
@@ -96,7 +91,7 @@ export default function ProfilePage() {
         }
 
 
-        const resFav = await fetch(urlFav);
+        const resFav = await apiFetch(urlFav);
         if (resFav.ok) {
           const dataFav = await resFav.json();
           setFavorites(dataFav);
