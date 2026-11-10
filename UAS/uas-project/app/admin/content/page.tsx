@@ -12,7 +12,7 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
-import { headerAdmin } from "@/lib/api";
+import { apiFetch } from "@/lib/api";
 import {
   contentEntries,
   contentPages,
@@ -24,7 +24,6 @@ import {
 type Baris = Record<string, string>;
 type Nilai = string | Baris[];
 type Peta = Record<string, Nilai>;
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 const sama = (a: unknown, b: unknown) =>
   JSON.stringify(a) === JSON.stringify(b);
@@ -249,7 +248,7 @@ export default function AdminContentPage() {
 
     const muat = async () => {
       try {
-        const res = await fetch(`${API_URL}/content`);
+        const res = await apiFetch(`/content`);
         if (!res.ok) throw new Error("Gagal mengambil konten dari server.");
 
         const data: unknown = await res.json();
@@ -305,9 +304,8 @@ export default function AdminContentPage() {
         const nilai = bersihkan(entry, draf[entry.key]);
         const kembaliBawaan = sama(nilai, entry.default);
 
-        const res = await fetch(`${API_URL}/content/${entry.key}`, {
+        const res = await apiFetch(`/content/${entry.key}`, {
           method: kembaliBawaan ? "DELETE" : "PUT",
-          headers: headerAdmin(),
           ...(kembaliBawaan ? {} : { body: JSON.stringify({ value: nilai }) }),
         });
 

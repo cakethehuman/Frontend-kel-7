@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Nav, Offcanvas } from "react-bootstrap";
+import { useAuth } from "@/lib/AuthContent";
 
 const links = [
   { href: "/admin", label: "Dashboard", icon: "bi-speedometer2" },
@@ -20,21 +21,11 @@ export default function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [show, setShow] = useState(false);
+  const { logout: keluar } = useAuth();
 
-  useEffect(() => {
-    try {
-      const rawUser =
-        localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-      if (rawUser) JSON.parse(rawUser);
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    sessionStorage.removeItem("currentUser");
-    window.dispatchEvent(new Event("authChange"));
+  const logout = async () => {
+    await keluar();
     router.replace("/auth/login");
   };
 
@@ -46,11 +37,10 @@ export default function AdminSidebar() {
           as={Link}
           href={l.href}
           onClick={() => setShow(false)}
-          className={`rounded px-3 py-2 text-light d-flex align-items-center gap-2 ${
-            pathname === l.href
+          className={`rounded px-3 py-2 text-light d-flex align-items-center gap-2 ${pathname === l.href
               ? "bg-dark bg-opacity-50 fw-bold border-start border-4 border-white"
               : "hover-bg-danger-dark"
-          }`}
+            }`}
         >
           <span>{l.label}</span>
         </Nav.Link>

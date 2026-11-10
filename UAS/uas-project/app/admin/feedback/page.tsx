@@ -1,9 +1,10 @@
 "use client";
 
+import { apiFetch } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Badge, Button, Table, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
 
 interface Feedback {
   feedback_id: number;
@@ -33,7 +34,7 @@ export default function AdminFeedbackPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/feedback`);
+      const res = await apiFetch(`/feedback`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data feedback dari server.");
       }

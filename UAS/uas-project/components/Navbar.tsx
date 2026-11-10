@@ -8,6 +8,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import BsNavbar from "react-bootstrap/Navbar";
 import { Badge, Button } from "react-bootstrap";
+import { useAuth } from "@/lib/AuthContent";
 
 const baseLinks = [
   { href: "/", label: "Home" },
@@ -20,50 +21,16 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [expanded, setExpanded] = useState(false);
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const { user: currentUser, logout } = useAuth();
 
   const closeMenu = () => setExpanded(false);
 
-  const syncAuth = () => {
-    try {
-      const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-      if (raw) {
-        setCurrentUser(JSON.parse(raw));
-      } else {
-        setCurrentUser(null);
-      }
-    } catch (e) {
-      console.error("Auth sync error:", e);
-      setCurrentUser(null);
-    }
-  };
 
-  useEffect(() => {
-    syncAuth();
-
-    const handleAuthEvent = () => syncAuth();
-    window.addEventListener("authChange", handleAuthEvent);
-    window.addEventListener("storage", handleAuthEvent);
-
-    return () => {
-      window.removeEventListener("authChange", handleAuthEvent);
-      window.removeEventListener("storage", handleAuthEvent);
-    };
-  }, []);
-
-  const handleLogout = () => {
-    try {
-      localStorage.removeItem("user");
-      sessionStorage.removeItem("currentUser");
-      setCurrentUser(null);
-      window.dispatchEvent(new Event("authChange"));
-      closeMenu();
-      router.push("/auth/login");
-    } catch (e) {
-      console.error("Logout error:", e);
-    }
-  };
-
+  const handleLogout = async () => {
+    await logout();
+    closeMenu();
+    router.push("/auth/login");
+  }
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
@@ -95,17 +62,19 @@ export default function Navbar() {
 
           <BsNavbar.Collapse id="navbarNav" className="justify-content-end">
             <Nav className="gap-2 align-items-lg-center">
-              {baseLinks.map((link) => (
-                <Nav.Link
-                  key={link.href}
-                  as={Link}
-                  href={link.href}
-                  active={isActive(link.href)}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </Nav.Link>
-              ))}
+              {baseLinks
+                .filter((link) => link.href !== "/profile" || currentUser)
+                .map((link) => (
+                  <Nav.Link
+                    key={link.href}
+                    as={Link}
+                    href={link.href}
+                    active={isActive(link.href)}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </Nav.Link>
+                ))}
 
               {currentUser && currentUser.is_admin === 1 && (
                 <Nav.Link

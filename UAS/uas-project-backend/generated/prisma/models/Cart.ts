@@ -359,10 +359,6 @@ export type CartUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CartUpdateToOneWithWhereWithoutUserInput, Prisma.CartUpdateWithoutUserInput>, Prisma.CartUncheckedUpdateWithoutUserInput>
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type CartCreateNestedOneWithoutCart_itemsInput = {
   create?: Prisma.XOR<Prisma.CartCreateWithoutCart_itemsInput, Prisma.CartUncheckedCreateWithoutCart_itemsInput>
   connectOrCreate?: Prisma.CartCreateOrConnectWithoutCart_itemsInput

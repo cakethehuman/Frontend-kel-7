@@ -1,20 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { apiFetch } from "@/lib/api"
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/AuthContent";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Login() {
+  const { user, loading: authLoading, refresh } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    return () => {
+      setEmail("");
+      setPassword("");
+      setLoading(false);
+      setError(null);
+      setSuccess(null);
+    };
+  }, []);
+
+  // Cek apakah sudah login
+
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(user.is_admin === 1 ? "/admin" : "/menu");
+    }
+  }, [authLoading, user, router]);
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,11 +52,8 @@ export default function Login() {
     try {
       setLoading(true);
 
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await apiFetch(`/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           email: cleanEmail,
           password,
@@ -70,16 +88,13 @@ export default function Login() {
 
       setSuccess("Login berhasil! Mengalihkan...");
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      sessionStorage.setItem("currentUser", JSON.stringify(data.user));
-
-      window.dispatchEvent(new Event("authChange"));
+      await refresh();
 
       setTimeout(() => {
         if (data.user.is_admin === 1) {
-          router.push("/admin");
+          router.replace("/admin");
         } else {
-          router.push("/menu");
+          router.replace("/menu");
         }
       }, 700);
 

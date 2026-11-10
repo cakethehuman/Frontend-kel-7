@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Nunito } from "next/font/google";
 
+import { AuthProvider } from "@/lib/AuthContent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "./css/constants.css";
@@ -44,10 +45,12 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${libre.variable} ${nunito.variable}`} suppressHydrationWarning>
       <body className="d-flex flex-column min-vh-100 bg-beige text-dark">
-        <Navbar />
-        {children}
-        <Footer />
-        <CartButton />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <CartButton />
+        </AuthProvider>
       </body>
     </html>
   );

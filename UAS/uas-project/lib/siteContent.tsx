@@ -7,8 +7,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { API_URL } from "@/lib/api";
+
+
+
 import { contentEntries, type Entry } from "@/lib/content";
+import { apiFetch } from "./api";
 
 type Baris = Record<string, string>;
 type Mentah = Record<string, unknown>;
@@ -63,14 +66,14 @@ export function useSiteContent(prefix: string): Konten {
   useEffect(() => {
     let dibatalkan = false;
 
-    fetch(`${API_URL}/api/content?prefix=${prefix}.`)
+    apiFetch(`/api/content?prefix=${prefix}.`)
       .then((res) => (res.ok ? res.json() : null))
       .then((data: unknown) => {
         if (dibatalkan || !data || typeof data !== "object") return;
         simpanan[prefix] = data as Mentah;
         setMentah(data as Mentah);
       })
-      .catch(() => {});
+      .catch(() => { });
 
     return () => {
       dibatalkan = true;

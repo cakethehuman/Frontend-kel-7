@@ -4,7 +4,7 @@ import { requireAdmin } from "../lib/requireAdmin";
 
 const router = Router();
 
-const POLA_KUNCI = /^(home|profile)\.[a-z0-9._-]{1,80}$/;
+const POLA_KUNCI = /^(home|profile|about|contact)\.[a-z0-9._-]{1,80}$/;
 const POLA_PREFIX = /^[a-z0-9._-]{1,80}$/;
 const MAKS_UKURAN = 20000;
 
@@ -48,7 +48,7 @@ router.put("/:key", requireAdmin, async (req, res) => {
     const key = String(req.params.key);
     if (!POLA_KUNCI.test(key)) {
       res.status(400).json({
-        message: "Kunci tidak valid. Harus diawali home. atau profile.",
+        message: "Kunci tidak valid. Harus diawali home. atau profile., about., atau contact",
       });
       return;
     }
