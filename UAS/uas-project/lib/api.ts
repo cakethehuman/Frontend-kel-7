@@ -2,14 +2,10 @@ const mentah = process.env.NEXT_PUBLIC_API_URL || "";
 
 export const API_URL = mentah.replace(/\/+$/, "").replace(/\/api$/, "");
 
-export function headerAdmin(): Record<string, string> {
-  let userId = "";
-  try {
-    const raw =
-      localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-    if (raw) userId = String(JSON.parse(raw).user_id ?? "");
-  } catch {
-    userId = "";
-  }
-  return { "Content-Type": "application/json", "x-user-id": userId };
+export function apiFetch(path: string, init: RequestInit = {}) {
+  return fetch(`${API_URL}${path}`, {
+    ...init,
+    credentials: "include",
+    headers: { "Content-Type": "application/json", ...(init.headers ?? {}) },
+  });
 }
