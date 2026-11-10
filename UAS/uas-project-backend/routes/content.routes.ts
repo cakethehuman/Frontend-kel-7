@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { requireAdmin } from "../lib/requireAdmin";
+import { requireAdmin } from "../middleware/requireAdmin";
+
 
 const router = Router();
 
@@ -43,7 +44,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/:key", requireAdmin, async (req, res) => {
+router.put("/:key", ...requireAdmin, async (req, res) => {
   try {
     const key = String(req.params.key);
     if (!POLA_KUNCI.test(key)) {
@@ -83,7 +84,7 @@ router.put("/:key", requireAdmin, async (req, res) => {
   }
 });
 
-router.delete("/:key", requireAdmin, async (req, res) => {
+router.delete("/:key", ...requireAdmin, async (req, res) => {
   try {
     const key = String(req.params.key);
     if (!POLA_KUNCI.test(key)) {

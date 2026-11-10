@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
+import { requireAdmin } from "../middleware/requireAdmin";
+import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
 const DAFTAR_KATEGORI = ["Makanan", "Pelayanan", "Tempat", "Lainnya"];
 const POLA_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-router.get("/", async (_req, res) => {
+router.get("/", ...requireAdmin, async (_req, res) => {
   try {
     const feedbacks = await prisma.feedback.findMany({
       orderBy: { created_at: "desc" },
@@ -23,7 +25,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
 
