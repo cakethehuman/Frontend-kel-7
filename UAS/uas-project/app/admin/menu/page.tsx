@@ -1,10 +1,10 @@
 "use client";
 
+import { apiFetch } from "@/lib/api";
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
 import { Button, Form, Modal, Table, Spinner, Alert, Card, Badge } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface Item {
   id: number;
@@ -36,7 +36,7 @@ export default function AdminMenuPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`${API_URL}/menu`);
+      const res = await apiFetch(`/menu`);
       if (!res.ok) throw new Error("Gagal mengambil data menu dari server.");
       const data = await res.json();
       const mapped: Item[] = data.map((item: any) => ({
@@ -88,7 +88,7 @@ export default function AdminMenuPage() {
     try {
       setSaving(true);
       if (editingId === null) {
-        const res = await fetch(`${API_URL}/menu`, {
+        const res = await apiFetch(`/menu`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -104,7 +104,7 @@ export default function AdminMenuPage() {
           throw new Error(data.message || "Gagal menambah menu");
         }
       } else {
-        const res = await fetch(`${API_URL}/menu/${editingId}`, {
+        const res = await apiFetch(`/menu/${editingId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -133,7 +133,7 @@ export default function AdminMenuPage() {
   const remove = async (item: Item) => {
     if (confirm(`Apakah Anda yakin ingin menghapus "${item.name}"?`)) {
       try {
-        const res = await fetch(`${API_URL}/menu/${item.id}`, {
+        const res = await apiFetch(`/menu/${item.id}`, {
           method: "DELETE",
         });
         if (!res.ok) {
@@ -214,8 +214,8 @@ export default function AdminMenuPage() {
                         i.category === "Main"
                           ? "danger"
                           : i.category === "Drink"
-                          ? "primary"
-                          : "secondary"
+                            ? "primary"
+                            : "secondary"
                       }
                     >
                       {i.category}

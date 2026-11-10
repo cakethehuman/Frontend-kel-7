@@ -1,9 +1,9 @@
 "use client";
 
+import { apiFetch } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { Badge, Button, Table, Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 interface User {
   id: number;
@@ -49,7 +49,7 @@ export default function AdminUsersPage() {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(`${API_URL}/users`);
+      const res = await apiFetch(`/users`);
       const data = await readResponse(res);
 
       if (!res.ok) {
@@ -79,7 +79,7 @@ export default function AdminUsersPage() {
       try {
         setDeletingId(user.id);
 
-        const res = await fetch(`${API_URL}/users/${user.id}`, {
+        const res = await apiFetch(`/users/${user.id}`, {
           method: "DELETE",
         });
 

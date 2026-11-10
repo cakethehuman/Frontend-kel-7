@@ -1,0 +1,176 @@
+import { opsiGambar, teksPendek } from "./helpers";
+import { PageDef } from "./types";
+
+
+
+export const contactPage: PageDef =
+{
+  id: "contact",
+  label: "Contact",
+  sections: [
+    {
+      id: "hero",
+      label: "Bagian atas (hero)",
+      entries: [
+        teksPendek("contact.hero.eyebrow", "Label kecil di atas judul", "Kontak & Lokasi - Tanjung Pandan", 60),
+        teksPendek("contact.hero.title_before", "Judul: kata sebelum sorotan", "Mari Ngobrol, Sambil Sepiring", 60),
+        {
+          kind: "text",
+          key: "contact.hero.title_highlight",
+          label: "Judul: bagian sorotan",
+          maxLength: 40,
+          hint: "Judul dibaca: [sebelum] [sorotan]. Bagian sorotan tampil miring dan berwarna.",
+          default: "Mie Belitung",
+        },
+        {
+          kind: "text",
+          key: "contact.hero.lead",
+          label: "Paragraf pengantar",
+          maxLength: 300,
+          multiline: true,
+          default:
+            "Punya saran resep, mau reservasi meja, atau cuma penasaran kami ada di mana? Semuanya ada di halaman ini.",
+        },
+        teksPendek("contact.hero.btn_location", "Tombol pertama (ke lokasi)", "Lihat Lokasi", 30),
+        teksPendek("contact.hero.btn_feedback", "Tombol kedua (ke form masukan)", "Tulis Masukan", 30),
+        {
+          kind: "text",
+          key: "contact.hero.image",
+          label: "Gambar hero",
+          maxLength: 80,
+          options: opsiGambar,
+          hint: "Pilih dari gambar yang tersedia di folder public/IMG.",
+          default: "/IMG/gambar1_contact.webp",
+        },
+        teksPendek("contact.hero.image_alt", "Teks alternatif gambar hero", "Mie Belitung", 120),
+        teksPendek("contact.status.checking", "Status: saat memeriksa jam buka", "Memeriksa jam buka...", 40),
+        teksPendek("contact.status.open", "Status: sedang buka", "Buka Sekarang", 30),
+        {
+          kind: "text",
+          key: "contact.status.closed",
+          label: "Status: sedang tutup",
+          maxLength: 40,
+          hint: "Jam buka ditambahkan otomatis di belakang teks ini.",
+          default: "Tutup · Buka lagi jam",
+        },
+      ],
+    },
+    {
+      id: "location",
+      label: "Lokasi, jam buka, dan peta",
+      entries: [
+        teksPendek("contact.location.eyebrow", "Label kecil di atas judul", "Lokasi", 30),
+        teksPendek("contact.location.title", "Judul", "Dapur Kami di Tanjung Pandan", 60),
+        {
+          kind: "text",
+          key: "contact.location.copy",
+          label: "Paragraf pengantar",
+          maxLength: 200,
+          multiline: true,
+          default: "Kedai kami gampang ditandai: cari genteng merah dan bangku kayu panjang di depan.",
+        },
+        teksPendek("contact.location.address_label", "Judul kotak alamat", "Alamat", 20),
+        {
+          kind: "text",
+          key: "contact.location.address",
+          label: "Alamat lengkap",
+          maxLength: 160,
+          multiline: true,
+          hint: "Teks inilah yang disalin saat pengunjung menekan tombol salin.",
+          default: "Jl. Palembang No. 27, Air Raya, Tanjung Pandan, Kabupaten Belitung 33411",
+        },
+        teksPendek("contact.location.copy_btn", "Tombol salin alamat", "Salin Alamat", 30),
+        teksPendek("contact.location.copied", "Teks setelah alamat disalin", "Tersalin!", 30),
+        teksPendek("contact.location.hours_label", "Judul kotak jam buka", "Jam Buka", 20),
+        teksPendek("contact.hours.days", "Hari buka", "Setiap hari", 40),
+        {
+          kind: "text",
+          key: "contact.hours.open",
+          label: "Jam buka",
+          maxLength: 5,
+          hint: "Format JJ.MM, misalnya 10.00. Dipakai untuk tampilan jam dan status Buka/Tutup. Format yang salah diabaikan.",
+          default: "10.00",
+        },
+        {
+          kind: "text",
+          key: "contact.hours.close",
+          label: "Jam tutup",
+          maxLength: 5,
+          hint: "Format JJ.MM, misalnya 21.30.",
+          default: "21.30",
+        },
+        teksPendek("contact.hours.zone", "Zona waktu", "WIB", 10),
+        teksPendek("contact.location.directions_btn", "Tombol petunjuk arah", "Petunjuk Arah", 30),
+        {
+          kind: "text",
+          key: "contact.map.lat",
+          label: "Koordinat peta: lintang (latitude)",
+          maxLength: 12,
+          hint: "Angka dengan titik desimal, misalnya -2.7416. Di Google Maps, klik kanan pada titik lokasi lalu salin angka pertama.",
+          default: "-2.7416",
+        },
+        {
+          kind: "text",
+          key: "contact.map.lng",
+          label: "Koordinat peta: bujur (longitude)",
+          maxLength: 12,
+          hint: "Angka dengan titik desimal, misalnya 107.6358 (angka kedua di Google Maps).",
+          default: "107.6358",
+        },
+      ],
+    },
+    {
+      id: "hubungi",
+      label: "Daftar kontak",
+      entries: [
+        teksPendek("contact.list.eyebrow", "Label kecil di atas judul", "Hubungi Kami", 30),
+        teksPendek("contact.list.title", "Judul", "Telepon Segera, Sebelum Kami Datangi", 80),
+        {
+          kind: "list",
+          key: "contact.list.items",
+          label: "Tiga kontak",
+          itemLabel: "Kontak",
+          fixed: true,
+          max: 3,
+          hint: "Urutan tetap: telepon, WhatsApp, email. Ikon dan jenis tautan mengikuti urutan. Nomor ditulis bebas (contoh 0817-1779-4014), tautannya dibuat otomatis.",
+          fields: [
+            { name: "label", label: "Judul kontak", maxLength: 40 },
+            { name: "value", label: "Nomor atau alamat email", maxLength: 60 },
+          ],
+          default: [
+            { label: "Telepon Reservasi", value: "0817-1779-4014" },
+            { label: "WhatsApp & Pesan Antar", value: "0878-9254-4939" },
+            { label: "Email & Kerja Sama", value: "halo@sahangkitchen.id" },
+          ],
+        },
+        {
+          kind: "text",
+          key: "contact.list.wa_message",
+          label: "Pesan awal WhatsApp",
+          maxLength: 100,
+          hint: "Teks yang sudah terisi saat pengunjung membuka WhatsApp.",
+          default: "Halo Mie Belitung!",
+        },
+      ],
+    },
+    {
+      id: "feedback",
+      label: "Saran dan masukan",
+      entries: [
+        teksPendek("contact.feedback.eyebrow", "Label kecil di atas judul", "Saran & Masukan", 30),
+        teksPendek("contact.feedback.title", "Judul", "Katakan Apa Saja, Dapur Kami Mendengar", 80),
+        {
+          kind: "text",
+          key: "contact.feedback.copy",
+          label: "Paragraf pengantar",
+          maxLength: 200,
+          multiline: true,
+          default: "Setiap pesan yang masuk akan dibaca langsung oleh kepala dapur.",
+        },
+        teksPendek("contact.feedback.submit", "Tombol kirim", "Kirim Masukan", 30),
+        teksPendek("contact.feedback.success", "Pesan setelah berhasil terkirim", "Terima kasih, masukanmu sudah terkirim!", 80),
+      ],
+    },
+  ],
+}
+
