@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Card, Row, Col, Table, Badge, Button, Spinner, Alert } from "react-bootstrap";
-import { API_URL, apiFetch } from "@/lib/api";
+import { apiFetch } from "@/lib/api";
 
 interface DashboardStats {
   user_count: number;
@@ -29,6 +29,8 @@ const statusColors: Record<string, string> = {
   cancelled: "secondary",
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+
 export default function AdminDashboardPage() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +40,7 @@ export default function AdminDashboardPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await apiFetch(`/admin/stats`);
+      const res = await apiFetch(`${API_URL}/admin/stats`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data statistik dashboard.");
       }
