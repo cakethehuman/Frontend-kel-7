@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
@@ -38,7 +37,7 @@ router.get("/tables", async (_req, res) => {
   }
 });
 
-router.get("/", ...requireAdmin, async (_req, res) => {
+router.get("/", async (_req, res) => {
   try {
     const orders = await prisma.order.findMany({
       orderBy: { order_id: "desc" },
@@ -80,7 +79,7 @@ router.get("/", ...requireAdmin, async (_req, res) => {
   }
 });
 
-router.patch("/:id", ...requireAdmin, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const orderId = Number(req.params.id);
     const { status } = req.body ?? {};
@@ -112,7 +111,7 @@ router.patch("/:id", ...requireAdmin, async (req, res) => {
   }
 });
 
-router.post("/", ...requireAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const body = req.body ?? {};
 

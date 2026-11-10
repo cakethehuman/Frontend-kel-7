@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
-import { requireAdmin } from "../middleware/requireAdmin";
 
 const router = Router();
 
-router.get("/", ...requireAdmin, async (_req, res) => {
+router.get("/", async (_req, res) => {
   try {
     const users = await prisma.user.findMany({
       orderBy: { user_id: "asc" },
@@ -44,7 +43,7 @@ router.get("/", ...requireAdmin, async (_req, res) => {
   }
 });
 
-router.delete("/:id", ...requireAdmin, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const userId = Number(req.params.id);
 

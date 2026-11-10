@@ -1,6 +1,5 @@
 import express, { type Router } from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 
 import menuRoutes from "./routes/menu.routes";
 import profileRoutes from "./routes/profile.routes";
@@ -14,16 +13,7 @@ import faqRoutes from "./routes/faq.routes";
 import contentRoutes from "./routes/content.routes";
 
 const app = express();
-// Wajib di Vercel/proxy agar cookie "secure" dikenali
-app.set("trust proxy", 1);
-
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true, // izinkan browser mengirim cookie
-  }),
-);
-app.use(cookieParser());
+app.use(cors());
 app.use(express.json());
 
 const daftarRoute: [string, Router][] = [
