@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useState } from "react";
-import { API_URL, apiFetch } from "@/lib/api"
+import { apiFetch } from "@/lib/api"
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import "@/app/css/constants.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/AuthContent";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function Login() {
   const { user, loading: authLoading, refresh } = useAuth();
