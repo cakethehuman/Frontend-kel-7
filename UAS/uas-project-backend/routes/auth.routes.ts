@@ -44,6 +44,11 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+    res.cookie(
+      COOKIE_NAME,
+      signAccessToken({ user_id: user.user_id, is_admin: user.is_admin }),
+      cookieOptions,
+    );
     res.json({
       message: "Login berhasil",
       user: {
@@ -126,10 +131,10 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/me", async (req, res) => {
+router.get("/me", loggedIn, async (_req, res) => {
   try {
-    const userIdHeader = req.headers["x-user-id"];
-    const userId = Number(userIdHeader);
+    const userId = res.locals.user.user_id;
+
 
     if (!userId || !Number.isInteger(userId)) {
       res.status(401).json({ message: "Sesi tidak valid atau belum login." });
