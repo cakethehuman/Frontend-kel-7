@@ -38,7 +38,7 @@ export default function AdminDashboardPage() {
     try {
       setLoading(true);
       setError(null);
-      const res = await apiFetch(`admin/stats`);
+      const res = await apiFetch(`/admin/stats`);
       if (!res.ok) {
         throw new Error("Gagal mengambil data statistik dashboard.");
       }
