@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Cek ke backend: apakah cookie token masih valid?
   const refresh = useCallback(async () => {
     try {
-      const res = await apiFetch("/api/auth/me");
+      const res = await apiFetch("auth/me");
       setUser(res.ok ? (await res.json()).user : null);
     } catch {
       setUser(null);

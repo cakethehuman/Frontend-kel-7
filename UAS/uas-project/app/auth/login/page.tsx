@@ -109,7 +109,7 @@ export default function Login() {
     <section className="login">
       <Container className="d-flex justify-content-center align-items-center p-3 p-md-5 min-vh-100">
         <div className="d-flex bg-light col-12 col-md-8 col-lg-5 rounded-4 shadow-sm justify-content-center align-items-center">
-          <div className="p-4 p-md-5 w-100">
+          <div className="p-4 p-md-4 w-100">
             <div className="d-flex flex-column align-items-center mb-4">
               <h1 className="fs-2 text-danger fw-bold mb-1">LOGIN</h1>
               <p className="text-muted small">
