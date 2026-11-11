@@ -560,7 +560,6 @@ export default function ProfilePage() {
                 </figcaption>
               </figure>
 
-              {/* Lingkaran Avatar: Bisa diklik untuk melihat foto profil di tengah layar */}
               <div
                 className="pf-avatar pf-avatar-clickable"
                 id="pf-avatar"
@@ -834,7 +833,6 @@ export default function ProfilePage() {
         )}
       </section>
 
-      {/* ====== MODAL POPUP LIHAT FOTO PROFIL DI TENGAH LAYAR ====== */}
       <Modal
         show={showPhotoModal}
         onHide={() => setShowPhotoModal(false)}
@@ -889,7 +887,6 @@ export default function ProfilePage() {
         contentClassName="bg-light pf-modal"
       >
         {modeAturFoto ? (
-          /* ====== TAMPILAN PENGATUR POSISI FOTO (TEMA MIE BELITUNG) ====== */
           <>
             <Modal.Header className="border-0 pb-1 d-flex justify-content-between align-items-center">
               <Modal.Title as="h2" className="h5 m-0">
@@ -996,7 +993,7 @@ export default function ProfilePage() {
             </Modal.Footer>
           </>
         ) : (
-          /* ====== TAMPILAN FORM EDIT PROFIL BIASA ====== */
+
           <>
             <Modal.Header closeButton className="border-0 pb-0">
               <Modal.Title as="h2" className="h4" id="editTitle">
