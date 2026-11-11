@@ -125,6 +125,33 @@
     font-family: var(--font-heading);
     font-size: 40px;
     font-weight: 700;
+    overflow: hidden;
+}
+
+.pf-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+.pf-avatar-preview {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 12px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--text-light);
+    border: 4px solid var(--bg-light);
+    box-shadow: 0 0 0 3px var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 40px;
+    font-weight: 700;
+    overflow: hidden;
 }
 
 .pf-id-body {
