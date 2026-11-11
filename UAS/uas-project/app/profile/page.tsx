@@ -389,7 +389,7 @@ export default function ProfilePage() {
 
             <div className="row g-3">
               <StatCard icon="bi-bookmark-heart-fill" angka={totalFavorit}>
-                Total Favorit
+                Total Favorittttt
               </StatCard>
 
               <StatCard icon="bi-check-circle-fill" angka={totalSudahDicoba}>

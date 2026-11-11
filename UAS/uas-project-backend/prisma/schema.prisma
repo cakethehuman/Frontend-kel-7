@@ -17,6 +17,7 @@ model User {
   role          String  @default("Student & Programmer")
   bio           String  @default("I am an Informatics Engineering student from Belitung, and I currently run tutoring classes in Python programming, piano, basketball, and taekwondo.")
   tags          String  @default("AnimLovers,Untarian,Soushin")
+  avatar        String?
 
   cart   Cart?
   orders Order[]

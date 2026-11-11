@@ -25,6 +25,7 @@ router.get("/", loggedIn, async (req, res) => {
       role: user.role,
       bio: user.bio,
       tags: user.tags,
+      avatar: user.avatar ?? "",
       is_admin: user.is_admin,
     });
   } catch (error) {
@@ -47,12 +48,23 @@ router.patch("/", loggedIn, async (req, res) => {
       return;
     }
 
+    const namaBaru = body.name ? String(body.name).trim() : targetUser.name;
+    if (namaBaru.length < 3) {
+      res.status(400).json({ message: "Nama minimal 3 karakter."});
+    }
+
+    let avatarBaru = targetUser.avatar;
+    if (body.avatar !== undefined) {
+      avatarBaru = body.avatar ? String(body.avatar) : null;
+    }
+
     const userUpdate = await prisma.user.update({
       where: { user_id: targetUser.user_id },
       data: {
         role: body.role ? String(body.role).trim() : targetUser.role,
         bio: body.bio !== undefined ? String(body.bio).trim() : targetUser.bio,
         tags: body.tags !== undefined ? String(body.tags) : targetUser.tags,
+        avatar: avatarBaru,
       },
     });
 
@@ -63,6 +75,7 @@ router.patch("/", loggedIn, async (req, res) => {
       role: userUpdate.role,
       bio: userUpdate.bio,
       tags: userUpdate.tags,
+      avatar: userUpdate.avatar ?? "",
       is_admin: userUpdate.is_admin,
     });
   } catch (error) {
