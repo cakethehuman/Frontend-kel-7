@@ -4,14 +4,13 @@ import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
-router.get("/", loggedIn, async (req, res) => {
+router.get("/", loggedIn, async (_req, res) => {
   try {
     const userIdParam = res.locals.user.user_id;
 
     const user = await prisma.user.findUnique({
       where: { user_id: userIdParam },
     });
-
 
     if (!user) {
       res.status(404).json({ message: "User tidak ditemukan." });
@@ -50,7 +49,8 @@ router.patch("/", loggedIn, async (req, res) => {
 
     const namaBaru = body.name ? String(body.name).trim() : targetUser.name;
     if (namaBaru.length < 3) {
-      res.status(400).json({ message: "Nama minimal 3 karakter."});
+      res.status(400).json({ message: "Nama minimal 3 karakter." });
+      return;
     }
 
     let avatarBaru = targetUser.avatar;
@@ -61,6 +61,7 @@ router.patch("/", loggedIn, async (req, res) => {
     const userUpdate = await prisma.user.update({
       where: { user_id: targetUser.user_id },
       data: {
+        name: namaBaru,
         role: body.role ? String(body.role).trim() : targetUser.role,
         bio: body.bio !== undefined ? String(body.bio).trim() : targetUser.bio,
         tags: body.tags !== undefined ? String(body.tags) : targetUser.tags,
