@@ -415,10 +415,6 @@ export type MenuScalarRelationFilter = {
   isNot?: Prisma.MenuWhereInput
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type MenuCreateNestedOneWithoutCart_itemsInput = {
   create?: Prisma.XOR<Prisma.MenuCreateWithoutCart_itemsInput, Prisma.MenuUncheckedCreateWithoutCart_itemsInput>
   connectOrCreate?: Prisma.MenuCreateOrConnectWithoutCart_itemsInput

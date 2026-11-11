@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Modal } from "react-bootstrap";
@@ -20,7 +20,6 @@ interface FavoriteItem {
   done: boolean;
 }
 
-
 export default function ProfilePage() {
   const { user, loading: authLoading, logout } = useAuth();
   const router = useRouter();
@@ -29,6 +28,7 @@ export default function ProfilePage() {
     .split("\n")
     .map((w) => w.trim())
     .filter((w) => w !== "");
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,13 +41,19 @@ export default function ProfilePage() {
     "Untarian",
     "Soushin",
   ]);
+  const [avatar, setAvatar] = useState("");
 
   const [showEditModal, setShowEditModal] = useState(false);
+  const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("");
   const [editBio, setEditBio] = useState("");
   const [editTags, setEditTags] = useState("");
+  const [sumberFoto, setSumberFoto] = useState("");
+  const [editAvatar, setEditAvatar] = useState("");
+  const [posX, setPosX] = useState(0);
+  const [posY, setPosY] = useState(0);
+  const [zoomFoto, setZoomFoto] = useState(100);
   const [editError, setEditError] = useState("");
-
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [inputName, setInputName] = useState("");
   const [inputRegion, setInputRegion] = useState("Sumatra");
@@ -58,12 +64,13 @@ export default function ProfilePage() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [messageText, setMessageText] = useState("");
   const [messageType, setMessageType] = useState("ok");
-
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [deleteTargetName, setDeleteTargetName] = useState("");
+
   const urlProfile = "/profile";
-  const urlFav = "/favorites"
+  const urlFav = "/favorites";
+
   useEffect(() => {
     if (!authLoading && !user) router.replace("/auth/login");
   }, [authLoading, user, router]);
@@ -71,7 +78,6 @@ export default function ProfilePage() {
   useEffect(() => {
     async function ambilDataDariBackend() {
       try {
-
         const resProfile = await apiFetch(urlProfile);
 
         if (resProfile.ok) {
@@ -81,6 +87,9 @@ export default function ProfilePage() {
           setEmail(dataUser.email);
           if (dataUser.role) setRole(dataUser.role);
           if (dataUser.bio) setBio(dataUser.bio);
+          if (dataUser.avatar !== undefined) {
+            setAvatar(dataUser.avatar || "");
+          }
           if (dataUser.tags) {
             setTags(
               String(dataUser.tags)
@@ -89,7 +98,6 @@ export default function ProfilePage() {
             );
           }
         }
-
 
         const resFav = await apiFetch(urlFav);
         if (resFav.ok) {
@@ -101,15 +109,113 @@ export default function ProfilePage() {
       }
     }
 
-    ambilDataDariBackend();
-  }, [authLoading, user?.user_id]);
+    if (!authLoading && user) {
+      ambilDataDariBackend();
+    }
+  }, [authLoading, user]);
 
-  function tampilkanPesan(teks: string, tipe: string) {
-    setMessageText(teks);
+  function tampilkanPesan(teksPesan: string, tipe: string) {
+    setMessageText(teksPesan);
     setMessageType(tipe);
     setTimeout(function () {
       setMessageText("");
     }, 3000);
+  }
+
+  function prosesPosisiFoto(
+    dataUrlAsli: string,
+    geserX: number,
+    geserY: number,
+    skalaZoom: number
+  ) {
+    if (!dataUrlAsli) {
+      setEditAvatar("");
+      return;
+    }
+
+    const img = new window.Image();
+    img.onload = function () {
+      const ukuranCanvas = 200;
+      const canvas = document.createElement("canvas");
+      canvas.width = ukuranCanvas;
+      canvas.height = ukuranCanvas;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.fillStyle = "#a49f4d";
+      ctx.fillRect(0, 0, ukuranCanvas, ukuranCanvas);
+      const skalaDasar = Math.max(
+        ukuranCanvas / img.width,
+        ukuranCanvas / img.height
+      );
+      const skalaAkhir = skalaDasar * (skalaZoom / 100);
+
+      const lebarGambar = img.width * skalaAkhir;
+      const tinggiGambar = img.height * skalaAkhir;
+      const titikX = (ukuranCanvas - lebarGambar) / 2 + geserX;
+      const titikY = (ukuranCanvas - tinggiGambar) / 2 + geserY;
+
+      ctx.drawImage(img, titikX, titikY, lebarGambar, tinggiGambar);
+      const hasilBase64 = canvas.toDataURL("image/jpeg", 0.85);
+      setEditAvatar(hasilBase64);
+    };
+    img.src = dataUrlAsli;
+  }
+
+  function pilihFileFoto(e: ChangeEvent<HTMLInputElement>) {
+    const daftarFile = e.target.files;
+    if (!daftarFile || daftarFile.length === 0) return;
+
+    const file = daftarFile[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setEditError("File yang dipilih harus berupa gambar (JPG/PNG/WebP).");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      if (typeof reader.result === "string") {
+        setSumberFoto(reader.result);
+        setPosX(0);
+        setPosY(0);
+        setZoomFoto(100);
+        setEditError("");
+        prosesPosisiFoto(reader.result, 0, 0, 100);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function ubahPosisiX(nilaiBaru: number) {
+    setPosX(nilaiBaru);
+    prosesPosisiFoto(sumberFoto, nilaiBaru, posY, zoomFoto);
+  }
+
+  function ubahPosisiY(nilaiBaru: number) {
+    setPosY(nilaiBaru);
+    prosesPosisiFoto(sumberFoto, posX, nilaiBaru, zoomFoto);
+  }
+
+  function ubahZoomFoto(nilaiBaru: number) {
+    setZoomFoto(nilaiBaru);
+    prosesPosisiFoto(sumberFoto, posX, posY, nilaiBaru);
+  }
+
+  function resetPosisiFoto() {
+    setPosX(0);
+    setPosY(0);
+    setZoomFoto(100);
+    prosesPosisiFoto(sumberFoto, 0, 0, 100);
+  }
+
+  function hapusFotoProfil() {
+    setSumberFoto("");
+    setEditAvatar("");
+    setPosX(0);
+    setPosY(0);
+    setZoomFoto(100);
   }
 
   async function tambahKuliner(e: FormEvent<HTMLFormElement>) {
@@ -123,7 +229,8 @@ export default function ProfilePage() {
 
     let sudahAda = false;
     for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].name.toLowerCase() === namaBersih.toLowerCase()) {
+      const itemFav = favorites[i];
+      if (itemFav && itemFav.name.toLowerCase() === namaBersih.toLowerCase()) {
         sudahAda = true;
       }
     }
@@ -160,8 +267,9 @@ export default function ProfilePage() {
   async function tandaiKuliner(id: number) {
     let statusBaru = false;
     for (let i = 0; i < favorites.length; i++) {
-      if (favorites[i].id === id) {
-        statusBaru = !favorites[i].done;
+      const itemFav = favorites[i];
+      if (itemFav && itemFav.id === id) {
+        statusBaru = !itemFav.done;
       }
     }
 
@@ -224,16 +332,28 @@ export default function ProfilePage() {
   }
 
   function bukaModalEdit() {
+    setEditName(name);
     setEditRole(role);
     setEditBio(bio);
     setEditTags(tags.join(", "));
+    setSumberFoto(avatar);
+    setEditAvatar(avatar);
+    setPosX(0);
+    setPosY(0);
+    setZoomFoto(100);
     setEditError("");
     setShowEditModal(true);
   }
 
   async function simpanProfil() {
+    const namaBaru = editName.trim();
     const roleBaru = editRole.trim();
     const bioBaru = editBio.trim();
+
+    if (namaBaru.length < 3) {
+      setEditError("Nama minimal 3 karakter ya.");
+      return;
+    }
 
     if (roleBaru.length < 3) {
       setEditError("Role minimal 3 karakter ya.");
@@ -243,9 +363,12 @@ export default function ProfilePage() {
     const potonganTag = editTags.split(",");
     const tagBersih: string[] = [];
     for (let i = 0; i < potonganTag.length; i++) {
-      const t = potonganTag[i].replace(/#/g, "").trim();
-      if (t !== "" && tagBersih.length < 6) {
-        tagBersih.push(t);
+      const bagian = potonganTag[i];
+      if (bagian !== undefined) {
+        const t = bagian.replace(/#/g, "").trim();
+        if (t !== "" && tagBersih.length < 6) {
+          tagBersih.push(t);
+        }
       }
     }
 
@@ -254,20 +377,28 @@ export default function ProfilePage() {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          name: namaBaru,
           role: roleBaru,
           bio: bioBaru,
           tags: tagBersih.join(","),
+          avatar: editAvatar,
         }),
       });
 
       if (res.ok) {
+        setName(namaBaru);
         setRole(roleBaru);
         setBio(bioBaru);
         setTags(tagBersih);
+        setAvatar(editAvatar);
         setShowEditModal(false);
+        tampilkanPesan("Profil berhasil diperbarui!", "ok");
+      } else {
+        setEditError("Gagal menyimpan perubahan profil ke server.");
       }
     } catch (e) {
       console.log(e);
+      setEditError("Terjadi kesalahan jaringan saat menyimpan profil.");
     }
   }
 
@@ -281,10 +412,11 @@ export default function ProfilePage() {
   const daftarWilayah: string[] = [];
 
   for (let i = 0; i < favorites.length; i++) {
-    if (favorites[i].done === true) {
+    const itemFav = favorites[i];
+    if (itemFav && itemFav.done === true) {
       totalSudahDicoba = totalSudahDicoba + 1;
-      if (!daftarWilayah.includes(favorites[i].region)) {
-        daftarWilayah.push(favorites[i].region);
+      if (!daftarWilayah.includes(itemFav.region)) {
+        daftarWilayah.push(itemFav.region);
       }
     }
   }
@@ -312,6 +444,7 @@ export default function ProfilePage() {
   });
 
   const hurufAvatar = name ? name.charAt(0).toUpperCase() : "W";
+  const hurufPreviewEdit = editName ? editName.charAt(0).toUpperCase() : hurufAvatar;
 
   if (authLoading || !user) return null;
 
@@ -334,9 +467,20 @@ export default function ProfilePage() {
                   <i className="bi bi-heart-fill"></i> {teks("profile.cover.caption")}
                 </figcaption>
               </figure>
+
               <div className="pf-avatar" id="pf-avatar" aria-hidden="true">
-                {hurufAvatar}
+                {avatar ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={avatar}
+                    alt={name}
+                    className="pf-avatar-img"
+                  />
+                ) : (
+                  hurufAvatar
+                )}
               </div>
+
               <div className="pf-id-body text-center">
                 <h1 className="pf-name" id="pf-name">
                   {name}
@@ -605,6 +749,105 @@ export default function ProfilePage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div className="mb-3 text-center">
+            <div className="pf-avatar-preview">
+              {editAvatar ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={editAvatar}
+                  alt="Preview Foto Profil"
+                  className="pf-avatar-img"
+                />
+              ) : (
+                hurufPreviewEdit
+              )}
+            </div>
+
+            <div className="d-flex justify-content-center gap-2 flex-wrap mb-2">
+              <label htmlFor="upload-avatar" className="btn btn-profile btn-sm">
+                <i className="bi bi-camera-fill"></i>{" "}
+                {editAvatar ? "Ganti Foto" : "Upload Foto"}
+              </label>
+              <input
+                type="file"
+                id="upload-avatar"
+                accept="image/*"
+                className="d-none"
+                onChange={pilihFileFoto}
+              />
+
+              {editAvatar && (
+                <button
+                  type="button"
+                  className="btn btn-trash btn-sm"
+                  onClick={hapusFotoProfil}
+                >
+                  <i className="bi bi-trash3-fill"></i> Hapus Foto
+                </button>
+              )}
+            </div>
+
+            {sumberFoto && (
+              <div className="p-3 mt-2 rounded border bg-white text-start">
+                <div className="d-flex justify-content-between align-items-center mb-2">
+                  <span className="fw-bold small">Atur Posisi Foto di Lingkaran</span>
+                  <button
+                    type="button"
+                    className="btn btn-link btn-sm p-0 text-decoration-none"
+                    onClick={resetPosisiFoto}
+                  >
+                    Reset Posisi
+                  </button>
+                </div>
+
+                <div className="mb-2">
+                  <label htmlFor="slider-pos-x" className="form-label small mb-0">
+                    Geser Kiri / Kanan ({posX}px)
+                  </label>
+                  <input
+                    type="range"
+                    className="form-range"
+                    id="slider-pos-x"
+                    min={-100}
+                    max={100}
+                    value={posX}
+                    onChange={(e) => ubahPosisiX(Number(e.target.value))}
+                  />
+                </div>
+
+                <div className="mb-2">
+                  <label htmlFor="slider-pos-y" className="form-label small mb-0">
+                    Geser Atas / Bawah ({posY}px)
+                  </label>
+                  <input
+                    type="range"
+                    className="form-range"
+                    id="slider-pos-y"
+                    min={-100}
+                    max={100}
+                    value={posY}
+                    onChange={(e) => ubahPosisiY(Number(e.target.value))}
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="slider-zoom" className="form-label small mb-0">
+                    Ukuran / Zoom ({zoomFoto}%)
+                  </label>
+                  <input
+                    type="range"
+                    className="form-range"
+                    id="slider-zoom"
+                    min={60}
+                    max={200}
+                    value={zoomFoto}
+                    onChange={(e) => ubahZoomFoto(Number(e.target.value))}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="mb-3">
             <label htmlFor="edit-name" className="form-label fw-bold">
               Nama
@@ -613,14 +856,13 @@ export default function ProfilePage() {
               type="text"
               className="form-control"
               id="edit-name"
-              value={name}
-              disabled
-              readOnly
+              maxLength={30}
+              placeholder="Masukkan nama lengkap"
+              value={editName}
+              onChange={(e) => setEditName(e.target.value)}
             />
-            <div className="form-text">
-              Nama sesuai akun pendaftaran dan tidak dapat diubah.
-            </div>
           </div>
+
           <div className="mb-3">
             <label htmlFor="edit-role" className="form-label fw-bold">
               Role
@@ -635,6 +877,7 @@ export default function ProfilePage() {
               onChange={(e) => setEditRole(e.target.value)}
             />
           </div>
+
           <div className="mb-3">
             <label htmlFor="edit-bio" className="form-label fw-bold">
               Bio
@@ -648,6 +891,7 @@ export default function ProfilePage() {
               onChange={(e) => setEditBio(e.target.value)}
             ></textarea>
           </div>
+
           <div className="mb-2">
             <label htmlFor="edit-tags" className="form-label fw-bold">
               Hashtag
@@ -665,6 +909,7 @@ export default function ProfilePage() {
               Pisahkan dengan koma, maksimal 6 hashtag.
             </div>
           </div>
+
           <p id="edit-error" className="pf-message pf-msg-error mb-0">
             {editError}
           </p>

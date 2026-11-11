@@ -1364,7 +1364,8 @@ export const UserScalarFieldEnum = {
   total_balance: 'total_balance',
   role: 'role',
   bio: 'bio',
-  tags: 'tags'
+  tags: 'tags',
+  avatar: 'avatar'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
