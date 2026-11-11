@@ -154,6 +154,98 @@
     overflow: hidden;
 }
 
+.pf-cropper-stage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: var(--darker-brown);
+    border-radius: 14px;
+    border: 2px solid var(--lighter-brown);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    user-select: none;
+    touch-action: none; 
+}
+
+.pf-cropper-stage:active {
+    cursor: grabbing;
+}
+
+.pf-cropper-center {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.pf-cropper-img {
+    position: absolute;
+    max-width: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.pf-cropper-circle-mask {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 4px solid var(--bg-light);
+    box-shadow: 0 0 0 3px var(--secondary-color), 0 0 0 9999px rgba(74, 40, 20, 0.72);
+    pointer-events: none;
+}
+
+.pf-cropper-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-beige);
+    border: 1px solid var(--lighter-brown);
+    padding: 6px 12px;
+    border-radius: 50rem;
+}
+
+.pf-zoom-btn {
+    background-color: var(--bg-light);
+    border: 1px solid var(--lighter-brown);
+    color: var(--darker-brown);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.pf-zoom-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--text-light);
+}
+
+.pf-zoom-label {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--darker-brown);
+    min-width: 48px;
+    text-align: center;
+}
+
+.pf-cropper-hint {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--gray-color);
+}
+
 .pf-id-body {
     padding: 16px 24px 28px;
 }

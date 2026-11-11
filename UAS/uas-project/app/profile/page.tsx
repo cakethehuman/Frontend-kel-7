@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
+import {
+  useState,
+  useEffect,
+  type FormEvent,
+  type ChangeEvent,
+  type MouseEvent,
+  type TouchEvent,
+} from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Modal } from "react-bootstrap";
@@ -20,6 +27,8 @@ interface FavoriteItem {
   done: boolean;
 }
 
+const UKURAN_LINGKARAN = 220;
+
 export default function ProfilePage() {
   const { user, loading: authLoading, logout } = useAuth();
   const router = useRouter();
@@ -28,8 +37,6 @@ export default function ProfilePage() {
     .split("\n")
     .map((w) => w.trim())
     .filter((w) => w !== "");
-
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("Student & Programmer");
@@ -42,18 +49,25 @@ export default function ProfilePage() {
     "Soushin",
   ]);
   const [avatar, setAvatar] = useState("");
-
   const [showEditModal, setShowEditModal] = useState(false);
   const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("");
   const [editBio, setEditBio] = useState("");
   const [editTags, setEditTags] = useState("");
-  const [sumberFoto, setSumberFoto] = useState("");
   const [editAvatar, setEditAvatar] = useState("");
+  const [editError, setEditError] = useState("");
+  const [modeAturFoto, setModeAturFoto] = useState(false);
+  const [sumberFotoMentah, setSumberFotoMentah] = useState("");
+  const [lebarAsliFoto, setLebarAsliFoto] = useState(220);
+  const [tinggiAsliFoto, setTinggiAsliFoto] = useState(220);
   const [posX, setPosX] = useState(0);
   const [posY, setPosY] = useState(0);
-  const [zoomFoto, setZoomFoto] = useState(100);
-  const [editError, setEditError] = useState("");
+  const [skalaZoom, setSkalaZoom] = useState(1);
+  const [sedangGeser, setSedangGeser] = useState(false);
+  const [titikAwalX, setTitikAwalX] = useState(0);
+  const [titikAwalY, setTitikAwalY] = useState(0);
+  const [jarakCubitAwal, setJarakCubitAwal] = useState(0);
+  const [zoomCubitAwal, setZoomCubitAwal] = useState(1);
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [inputName, setInputName] = useState("");
   const [inputRegion, setInputRegion] = useState("Sumatra");
@@ -122,46 +136,6 @@ export default function ProfilePage() {
     }, 3000);
   }
 
-  function prosesPosisiFoto(
-    dataUrlAsli: string,
-    geserX: number,
-    geserY: number,
-    skalaZoom: number
-  ) {
-    if (!dataUrlAsli) {
-      setEditAvatar("");
-      return;
-    }
-
-    const img = new window.Image();
-    img.onload = function () {
-      const ukuranCanvas = 200;
-      const canvas = document.createElement("canvas");
-      canvas.width = ukuranCanvas;
-      canvas.height = ukuranCanvas;
-
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
-      ctx.fillStyle = "#a49f4d";
-      ctx.fillRect(0, 0, ukuranCanvas, ukuranCanvas);
-      const skalaDasar = Math.max(
-        ukuranCanvas / img.width,
-        ukuranCanvas / img.height
-      );
-      const skalaAkhir = skalaDasar * (skalaZoom / 100);
-
-      const lebarGambar = img.width * skalaAkhir;
-      const tinggiGambar = img.height * skalaAkhir;
-      const titikX = (ukuranCanvas - lebarGambar) / 2 + geserX;
-      const titikY = (ukuranCanvas - tinggiGambar) / 2 + geserY;
-
-      ctx.drawImage(img, titikX, titikY, lebarGambar, tinggiGambar);
-      const hasilBase64 = canvas.toDataURL("image/jpeg", 0.85);
-      setEditAvatar(hasilBase64);
-    };
-    img.src = dataUrlAsli;
-  }
-
   function pilihFileFoto(e: ChangeEvent<HTMLInputElement>) {
     const daftarFile = e.target.files;
     if (!daftarFile || daftarFile.length === 0) return;
@@ -177,45 +151,144 @@ export default function ProfilePage() {
     const reader = new FileReader();
     reader.onload = function () {
       if (typeof reader.result === "string") {
-        setSumberFoto(reader.result);
-        setPosX(0);
-        setPosY(0);
-        setZoomFoto(100);
-        setEditError("");
-        prosesPosisiFoto(reader.result, 0, 0, 100);
+        const dataUrl = reader.result;
+        const img = new window.Image();
+        img.onload = function () {
+          setLebarAsliFoto(img.width || 220);
+          setTinggiAsliFoto(img.height || 220);
+          setSumberFotoMentah(dataUrl);
+          setPosX(0);
+          setPosY(0);
+          setSkalaZoom(1);
+          setEditError("");
+          setModeAturFoto(true);
+        };
+        img.src = dataUrl;
       }
     };
     reader.readAsDataURL(file);
+    e.target.value = "";
   }
 
-  function ubahPosisiX(nilaiBaru: number) {
-    setPosX(nilaiBaru);
-    prosesPosisiFoto(sumberFoto, nilaiBaru, posY, zoomFoto);
+  function mulaiGeserMouse(e: MouseEvent<HTMLDivElement>) {
+    e.preventDefault();
+    setSedangGeser(true);
+    setTitikAwalX(e.clientX - posX);
+    setTitikAwalY(e.clientY - posY);
   }
 
-  function ubahPosisiY(nilaiBaru: number) {
-    setPosY(nilaiBaru);
-    prosesPosisiFoto(sumberFoto, posX, nilaiBaru, zoomFoto);
+  function gerakGeserMouse(e: MouseEvent<HTMLDivElement>) {
+    if (!sedangGeser) return;
+    setPosX(e.clientX - titikAwalX);
+    setPosY(e.clientY - titikAwalY);
   }
 
-  function ubahZoomFoto(nilaiBaru: number) {
-    setZoomFoto(nilaiBaru);
-    prosesPosisiFoto(sumberFoto, posX, posY, nilaiBaru);
+  function selesaiGeserMouse() {
+    setSedangGeser(false);
+  }
+
+  function hitungJarakDuaJari(t1: React.Touch, t2: React.Touch) {
+    const dx = t1.clientX - t2.clientX;
+    const dy = t1.clientY - t2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function mulaiSentuhLayar(e: TouchEvent<HTMLDivElement>) {
+    if (e.touches.length === 1) {
+      const sentuhan = e.touches[0];
+      if (!sentuhan) return;
+      setSedangGeser(true);
+      setTitikAwalX(sentuhan.clientX - posX);
+      setTitikAwalY(sentuhan.clientY - posY);
+    } else if (e.touches.length === 2) {
+      const jari1 = e.touches[0];
+      const jari2 = e.touches[1];
+      if (!jari1 || !jari2) return;
+      setSedangGeser(false);
+      setJarakCubitAwal(hitungJarakDuaJari(jari1, jari2));
+      setZoomCubitAwal(skalaZoom);
+    }
+  }
+
+  function gerakSentuhLayar(e: TouchEvent<HTMLDivElement>) {
+    if (e.touches.length === 1 && sedangGeser) {
+      const sentuhan = e.touches[0];
+      if (!sentuhan) return;
+      setPosX(sentuhan.clientX - titikAwalX);
+      setPosY(sentuhan.clientY - titikAwalY);
+    } else if (e.touches.length === 2 && jarakCubitAwal > 0) {
+      const jari1 = e.touches[0];
+      const jari2 = e.touches[1];
+      if (!jari1 || !jari2) return;
+      const jarakSekarang = hitungJarakDuaJari(jari1, jari2);
+      const rasio = jarakSekarang / jarakCubitAwal;
+      const zoomBaru = Math.min(3, Math.max(0.5, zoomCubitAwal * rasio));
+      setSkalaZoom(zoomBaru);
+    }
+  }
+
+  function selesaiSentuhLayar() {
+    setSedangGeser(false);
+    setJarakCubitAwal(0);
+  }
+
+  function perbesarFoto() {
+    setSkalaZoom(Math.min(3, Number((skalaZoom + 0.15).toFixed(2))));
+  }
+
+  function perkecilFoto() {
+    setSkalaZoom(Math.max(0.5, Number((skalaZoom - 0.15).toFixed(2))));
   }
 
   function resetPosisiFoto() {
     setPosX(0);
     setPosY(0);
-    setZoomFoto(100);
-    prosesPosisiFoto(sumberFoto, 0, 0, 100);
+    setSkalaZoom(1);
+  }
+
+  function terapkanPotonganFoto() {
+    if (!sumberFotoMentah) return;
+
+    const img = new window.Image();
+    img.onload = function () {
+      const canvas = document.createElement("canvas");
+      canvas.width = UKURAN_LINGKARAN;
+      canvas.height = UKURAN_LINGKARAN;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      ctx.fillStyle = "#A49F4D";
+      ctx.fillRect(0, 0, UKURAN_LINGKARAN, UKURAN_LINGKARAN);
+
+      const skalaDasar = Math.max(
+        UKURAN_LINGKARAN / img.width,
+        UKURAN_LINGKARAN / img.height
+      );
+      const skalaAkhir = skalaDasar * skalaZoom;
+
+      const lebarGambar = img.width * skalaAkhir;
+      const tinggiGambar = img.height * skalaAkhir;
+
+      const titikX = (UKURAN_LINGKARAN - lebarGambar) / 2 + posX;
+      const titikY = (UKURAN_LINGKARAN - tinggiGambar) / 2 + posY;
+
+      ctx.drawImage(img, titikX, titikY, lebarGambar, tinggiGambar);
+
+      const hasilBase64 = canvas.toDataURL("image/jpeg", 0.85);
+      setEditAvatar(hasilBase64);
+      setModeAturFoto(false);
+    };
+    img.src = sumberFotoMentah;
   }
 
   function hapusFotoProfil() {
-    setSumberFoto("");
+    setSumberFotoMentah("");
     setEditAvatar("");
     setPosX(0);
     setPosY(0);
-    setZoomFoto(100);
+    setSkalaZoom(1);
+    setModeAturFoto(false);
   }
 
   async function tambahKuliner(e: FormEvent<HTMLFormElement>) {
@@ -336,11 +409,9 @@ export default function ProfilePage() {
     setEditRole(role);
     setEditBio(bio);
     setEditTags(tags.join(", "));
-    setSumberFoto(avatar);
     setEditAvatar(avatar);
-    setPosX(0);
-    setPosY(0);
-    setZoomFoto(100);
+    setSumberFotoMentah("");
+    setModeAturFoto(false);
     setEditError("");
     setShowEditModal(true);
   }
@@ -444,7 +515,19 @@ export default function ProfilePage() {
   });
 
   const hurufAvatar = name ? name.charAt(0).toUpperCase() : "W";
-  const hurufPreviewEdit = editName ? editName.charAt(0).toUpperCase() : hurufAvatar;
+  const hurufPreviewEdit = editName
+    ? editName.charAt(0).toUpperCase()
+    : hurufAvatar;
+
+  const skalaDasarPreview = Math.max(
+    UKURAN_LINGKARAN / lebarAsliFoto,
+    UKURAN_LINGKARAN / tinggiAsliFoto
+  );
+  const lebarTampilPreview = lebarAsliFoto * skalaDasarPreview * skalaZoom;
+  const tinggiTampilPreview = tinggiAsliFoto * skalaDasarPreview * skalaZoom;
+  const kiriTampilPreview = (UKURAN_LINGKARAN - lebarTampilPreview) / 2 + posX;
+  const atasTampilPreview =
+    (UKURAN_LINGKARAN - tinggiTampilPreview) / 2 + posY;
 
   if (authLoading || !user) return null;
 
@@ -456,7 +539,10 @@ export default function ProfilePage() {
             <ProfileCard className="pf-id-card h-100">
               <figure className="pf-cover m-0">
                 <Image
-                  src={gambarAman("profile.cover.image", teks("profile.cover.image"))}
+                  src={gambarAman(
+                    "profile.cover.image",
+                    teks("profile.cover.image")
+                  )}
                   alt={teks("profile.cover.alt")}
                   width={400}
                   height={190}
@@ -464,18 +550,15 @@ export default function ProfilePage() {
                   priority
                 />
                 <figcaption className="pf-cover-caption">
-                  <i className="bi bi-heart-fill"></i> {teks("profile.cover.caption")}
+                  <i className="bi bi-heart-fill"></i>{" "}
+                  {teks("profile.cover.caption")}
                 </figcaption>
               </figure>
 
               <div className="pf-avatar" id="pf-avatar" aria-hidden="true">
                 {avatar ? (
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  <img
-                    src={avatar}
-                    alt={name}
-                    className="pf-avatar-img"
-                  />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={avatar} alt={name} className="pf-avatar-img" />
                 ) : (
                   hurufAvatar
                 )}
@@ -489,7 +572,8 @@ export default function ProfilePage() {
                   {email}
                 </p>
                 <p className="pf-loc">
-                  <i className="bi bi-geo-alt-fill"></i> {teks("profile.location")}
+                  <i className="bi bi-geo-alt-fill"></i>{" "}
+                  {teks("profile.location")}
                 </p>
                 <div className="d-flex justify-content-center gap-2 flex-wrap">
                   <button
@@ -743,194 +827,249 @@ export default function ProfilePage() {
         centered
         contentClassName="bg-light pf-modal"
       >
-        <Modal.Header closeButton className="border-0 pb-0">
-          <Modal.Title as="h2" className="h4" id="editTitle">
-            Edit Profil
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="mb-3 text-center">
-            <div className="pf-avatar-preview">
-              {editAvatar ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={editAvatar}
-                  alt="Preview Foto Profil"
-                  className="pf-avatar-img"
-                />
-              ) : (
-                hurufPreviewEdit
-              )}
-            </div>
+        {modeAturFoto ? (
+          /* ====== TAMPILAN PENGATUR POSISI FOTO (TEMA MIE BELITUNG) ====== */
+          <>
+            <Modal.Header className="border-0 pb-1 d-flex justify-content-between align-items-center">
+              <Modal.Title as="h2" className="h5 m-0">
+                Sesuaikan Foto Profil
+              </Modal.Title>
 
-            <div className="d-flex justify-content-center gap-2 flex-wrap mb-2">
-              <label htmlFor="upload-avatar" className="btn btn-profile btn-sm">
-                <i className="bi bi-camera-fill"></i>{" "}
-                {editAvatar ? "Ganti Foto" : "Upload Foto"}
+              <label
+                htmlFor="upload-avatar-ulang"
+                className="btn btn-profile-outline btn-sm m-0"
+              >
+                <i className="bi bi-image"></i> Pilih Foto Lain
               </label>
               <input
                 type="file"
-                id="upload-avatar"
+                id="upload-avatar-ulang"
                 accept="image/*"
                 className="d-none"
                 onChange={pilihFileFoto}
               />
+            </Modal.Header>
 
-              {editAvatar && (
-                <button
-                  type="button"
-                  className="btn btn-trash btn-sm"
-                  onClick={hapusFotoProfil}
-                >
-                  <i className="bi bi-trash3-fill"></i> Hapus Foto
-                </button>
-              )}
-            </div>
+            <Modal.Body className="text-center pt-2">
+              <div
+                className="pf-cropper-stage mb-3"
+                onMouseDown={mulaiGeserMouse}
+                onMouseMove={gerakGeserMouse}
+                onMouseUp={selesaiGeserMouse}
+                onMouseLeave={selesaiGeserMouse}
+                onTouchStart={mulaiSentuhLayar}
+                onTouchMove={gerakSentuhLayar}
+                onTouchEnd={selesaiSentuhLayar}
+              >
+                <div className="pf-cropper-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={sumberFotoMentah}
+                    alt="Atur posisi foto"
+                    className="pf-cropper-img"
+                    style={{
+                      width: lebarTampilPreview + "px",
+                      height: tinggiTampilPreview + "px",
+                      left: kiriTampilPreview + "px",
+                      top: atasTampilPreview + "px",
+                    }}
+                  />
+                </div>
 
-            {sumberFoto && (
-              <div className="p-3 mt-2 rounded border bg-white text-start">
-                <div className="d-flex justify-content-between align-items-center mb-2">
-                  <span className="fw-bold small">Atur Posisi Foto di Lingkaran</span>
+                <div className="pf-cropper-circle-mask"></div>
+              </div>
+
+              <div className="d-flex justify-content-center align-items-center mb-2">
+                <div className="pf-cropper-controls">
                   <button
                     type="button"
-                    className="btn btn-link btn-sm p-0 text-decoration-none"
-                    onClick={resetPosisiFoto}
+                    className="pf-zoom-btn"
+                    onClick={perkecilFoto}
+                    title="Perkecil"
                   >
-                    Reset Posisi
+                    <i className="bi bi-dash-lg"></i>
+                  </button>
+                  <span className="pf-zoom-label">
+                    {Math.round(skalaZoom * 100)}%
+                  </span>
+                  <button
+                    type="button"
+                    className="pf-zoom-btn"
+                    onClick={perbesarFoto}
+                    title="Perbesar"
+                  >
+                    <i className="bi bi-plus-lg"></i>
+                  </button>
+                  <button
+                    type="button"
+                    className="pf-zoom-btn"
+                    onClick={resetPosisiFoto}
+                    title="Reset Posisi"
+                  >
+                    <i className="bi bi-arrow-counterclockwise"></i>
                   </button>
                 </div>
+              </div>
 
-                <div className="mb-2">
-                  <label htmlFor="slider-pos-x" className="form-label small mb-0">
-                    Geser Kiri / Kanan ({posX}px)
-                  </label>
-                  <input
-                    type="range"
-                    className="form-range"
-                    id="slider-pos-x"
-                    min={-100}
-                    max={100}
-                    value={posX}
-                    onChange={(e) => ubahPosisiX(Number(e.target.value))}
-                  />
+              <p className="pf-cropper-hint mb-0">
+                Geser foto di dalam lingkaran. Gunakan tombol <b>+</b> / <b>-</b>{" "}
+                (atau cubit layar di HP) untuk mengatur ukuran.
+              </p>
+            </Modal.Body>
+
+            <Modal.Footer className="border-0 pt-0">
+              <button
+                type="button"
+                className="btn btn-profile-outline"
+                onClick={() => setModeAturFoto(false)}
+              >
+                Kembali
+              </button>
+              <button
+                type="button"
+                className="btn btn-profile"
+                onClick={terapkanPotonganFoto}
+              >
+                <i className="bi bi-check2-circle"></i> Terapkan Foto
+              </button>
+            </Modal.Footer>
+          </>
+        ) : (
+          /* ====== TAMPILAN FORM EDIT PROFIL BIASA ====== */
+          <>
+            <Modal.Header closeButton className="border-0 pb-0">
+              <Modal.Title as="h2" className="h4" id="editTitle">
+                Edit Profil
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="mb-3 text-center">
+                <div className="pf-avatar-preview">
+                  {editAvatar ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={editAvatar}
+                      alt="Preview Foto Profil"
+                      className="pf-avatar-img"
+                    />
+                  ) : (
+                    hurufPreviewEdit
+                  )}
                 </div>
 
-                <div className="mb-2">
-                  <label htmlFor="slider-pos-y" className="form-label small mb-0">
-                    Geser Atas / Bawah ({posY}px)
+                <div className="d-flex justify-content-center gap-2 flex-wrap">
+                  <label
+                    htmlFor="upload-avatar"
+                    className="btn btn-profile btn-sm"
+                  >
+                    <i className="bi bi-camera-fill"></i>{" "}
+                    {editAvatar ? "Ganti Foto" : "Upload Foto"}
                   </label>
                   <input
-                    type="range"
-                    className="form-range"
-                    id="slider-pos-y"
-                    min={-100}
-                    max={100}
-                    value={posY}
-                    onChange={(e) => ubahPosisiY(Number(e.target.value))}
+                    type="file"
+                    id="upload-avatar"
+                    accept="image/*"
+                    className="d-none"
+                    onChange={pilihFileFoto}
                   />
-                </div>
 
-                <div>
-                  <label htmlFor="slider-zoom" className="form-label small mb-0">
-                    Ukuran / Zoom ({zoomFoto}%)
-                  </label>
-                  <input
-                    type="range"
-                    className="form-range"
-                    id="slider-zoom"
-                    min={60}
-                    max={200}
-                    value={zoomFoto}
-                    onChange={(e) => ubahZoomFoto(Number(e.target.value))}
-                  />
+                  {editAvatar && (
+                    <button
+                      type="button"
+                      className="btn btn-trash btn-sm"
+                      onClick={hapusFotoProfil}
+                    >
+                      <i className="bi bi-trash3-fill"></i> Hapus Foto
+                    </button>
+                  )}
                 </div>
               </div>
-            )}
-          </div>
 
-          <div className="mb-3">
-            <label htmlFor="edit-name" className="form-label fw-bold">
-              Nama
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="edit-name"
-              maxLength={30}
-              placeholder="Masukkan nama lengkap"
-              value={editName}
-              onChange={(e) => setEditName(e.target.value)}
-            />
-          </div>
+              <div className="mb-3">
+                <label htmlFor="edit-name" className="form-label fw-bold">
+                  Nama
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="edit-name"
+                  maxLength={30}
+                  placeholder="Masukkan nama lengkap"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                />
+              </div>
 
-          <div className="mb-3">
-            <label htmlFor="edit-role" className="form-label fw-bold">
-              Role
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="edit-role"
-              maxLength={40}
-              placeholder="cth: Student & Programmer"
-              value={editRole}
-              onChange={(e) => setEditRole(e.target.value)}
-            />
-          </div>
+              <div className="mb-3">
+                <label htmlFor="edit-role" className="form-label fw-bold">
+                  Role
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="edit-role"
+                  maxLength={40}
+                  placeholder="cth: Student & Programmer"
+                  value={editRole}
+                  onChange={(e) => setEditRole(e.target.value)}
+                />
+              </div>
 
-          <div className="mb-3">
-            <label htmlFor="edit-bio" className="form-label fw-bold">
-              Bio
-            </label>
-            <textarea
-              className="form-control"
-              id="edit-bio"
-              rows={4}
-              maxLength={220}
-              value={editBio}
-              onChange={(e) => setEditBio(e.target.value)}
-            ></textarea>
-          </div>
+              <div className="mb-3">
+                <label htmlFor="edit-bio" className="form-label fw-bold">
+                  Bio
+                </label>
+                <textarea
+                  className="form-control"
+                  id="edit-bio"
+                  rows={4}
+                  maxLength={220}
+                  value={editBio}
+                  onChange={(e) => setEditBio(e.target.value)}
+                ></textarea>
+              </div>
 
-          <div className="mb-2">
-            <label htmlFor="edit-tags" className="form-label fw-bold">
-              Hashtag
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="edit-tags"
-              maxLength={120}
-              placeholder="cth: AnimLovers, Full Stack Developer, Untarian"
-              value={editTags}
-              onChange={(e) => setEditTags(e.target.value)}
-            />
-            <div className="form-text">
-              Pisahkan dengan koma, maksimal 6 hashtag.
-            </div>
-          </div>
+              <div className="mb-2">
+                <label htmlFor="edit-tags" className="form-label fw-bold">
+                  Hashtag
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="edit-tags"
+                  maxLength={120}
+                  placeholder="cth: AnimLovers, Full Stack Developer, Untarian"
+                  value={editTags}
+                  onChange={(e) => setEditTags(e.target.value)}
+                />
+                <div className="form-text">
+                  Pisahkan dengan koma, maksimal 6 hashtag.
+                </div>
+              </div>
 
-          <p id="edit-error" className="pf-message pf-msg-error mb-0">
-            {editError}
-          </p>
-        </Modal.Body>
-        <Modal.Footer className="border-0 pt-0">
-          <button
-            type="button"
-            className="btn btn-profile-outline"
-            onClick={() => setShowEditModal(false)}
-          >
-            Batal
-          </button>
-          <button
-            type="button"
-            className="btn btn-profile"
-            id="save-profile"
-            onClick={simpanProfil}
-          >
-            Simpan
-          </button>
-        </Modal.Footer>
+              <p id="edit-error" className="pf-message pf-msg-error mb-0">
+                {editError}
+              </p>
+            </Modal.Body>
+            <Modal.Footer className="border-0 pt-0">
+              <button
+                type="button"
+                className="btn btn-profile-outline"
+                onClick={() => setShowEditModal(false)}
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                className="btn btn-profile"
+                id="save-profile"
+                onClick={simpanProfil}
+              >
+                Simpan
+              </button>
+            </Modal.Footer>
+          </>
+        )}
       </Modal>
 
       <Modal
