@@ -470,7 +470,8 @@ export default function ProfilePage() {
 
               <div className="pf-avatar" id="pf-avatar" aria-hidden="true">
                 {avatar ? (
-                  <Image
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
                     src={avatar}
                     alt={name}
                     className="pf-avatar-img"
@@ -748,11 +749,11 @@ export default function ProfilePage() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Bagian Foto Profil & Pengaturan Posisi */}
           <div className="mb-3 text-center">
             <div className="pf-avatar-preview">
               {editAvatar ? (
-                <Image
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
                   src={editAvatar}
                   alt="Preview Foto Profil"
                   className="pf-avatar-img"
