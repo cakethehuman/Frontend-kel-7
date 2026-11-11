@@ -575,6 +575,42 @@
     animation: pfFade 0.5s ease;
 }
 
+.pf-avatar-clickable {
+    cursor: pointer;
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.pf-avatar-clickable:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 4px var(--primary-color);
+}
+
+.pf-photo-viewer-box {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    color: var(--text-light);
+    border: 5px solid var(--bg-light);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25), 0 0 0 3px var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 110px;
+    font-weight: 700;
+    overflow: hidden;
+}
+
+.pf-photo-viewer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
 @keyframes pfFade {
     from {
         opacity: 0;

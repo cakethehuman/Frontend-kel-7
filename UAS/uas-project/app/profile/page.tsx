@@ -28,6 +28,7 @@ interface FavoriteItem {
 }
 
 const UKURAN_LINGKARAN = 220;
+const RESOLUSI_SIMPAN = 400;
 
 export default function ProfilePage() {
   const { user, loading: authLoading, logout } = useAuth();
@@ -49,6 +50,7 @@ export default function ProfilePage() {
     "Soushin",
   ]);
   const [avatar, setAvatar] = useState("");
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editName, setEditName] = useState("");
   const [editRole, setEditRole] = useState("");
@@ -252,30 +254,33 @@ export default function ProfilePage() {
     const img = new window.Image();
     img.onload = function () {
       const canvas = document.createElement("canvas");
-      canvas.width = UKURAN_LINGKARAN;
-      canvas.height = UKURAN_LINGKARAN;
+      canvas.width = RESOLUSI_SIMPAN;
+      canvas.height = RESOLUSI_SIMPAN;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
       ctx.fillStyle = "#A49F4D";
-      ctx.fillRect(0, 0, UKURAN_LINGKARAN, UKURAN_LINGKARAN);
+      ctx.fillRect(0, 0, RESOLUSI_SIMPAN, RESOLUSI_SIMPAN);
 
+      const rasioSimpan = RESOLUSI_SIMPAN / UKURAN_LINGKARAN;
       const skalaDasar = Math.max(
         UKURAN_LINGKARAN / img.width,
         UKURAN_LINGKARAN / img.height
       );
-      const skalaAkhir = skalaDasar * skalaZoom;
+      const skalaAkhir = skalaDasar * skalaZoom * rasioSimpan;
 
       const lebarGambar = img.width * skalaAkhir;
       const tinggiGambar = img.height * skalaAkhir;
 
-      const titikX = (UKURAN_LINGKARAN - lebarGambar) / 2 + posX;
-      const titikY = (UKURAN_LINGKARAN - tinggiGambar) / 2 + posY;
+      const titikX =
+        (RESOLUSI_SIMPAN - lebarGambar) / 2 + posX * rasioSimpan;
+      const titikY =
+        (RESOLUSI_SIMPAN - tinggiGambar) / 2 + posY * rasioSimpan;
 
       ctx.drawImage(img, titikX, titikY, lebarGambar, tinggiGambar);
 
-      const hasilBase64 = canvas.toDataURL("image/jpeg", 0.85);
+      const hasilBase64 = canvas.toDataURL("image/jpeg", 0.88);
       setEditAvatar(hasilBase64);
       setModeAturFoto(false);
     };
@@ -555,7 +560,15 @@ export default function ProfilePage() {
                 </figcaption>
               </figure>
 
-              <div className="pf-avatar" id="pf-avatar" aria-hidden="true">
+              {/* Lingkaran Avatar: Bisa diklik untuk melihat foto profil di tengah layar */}
+              <div
+                className="pf-avatar pf-avatar-clickable"
+                id="pf-avatar"
+                onClick={() => setShowPhotoModal(true)}
+                title="Klik untuk melihat foto profil"
+                role="button"
+                tabIndex={0}
+              >
                 {avatar ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={avatar} alt={name} className="pf-avatar-img" />
@@ -820,6 +833,54 @@ export default function ProfilePage() {
           </div>
         )}
       </section>
+
+      {/* ====== MODAL POPUP LIHAT FOTO PROFIL DI TENGAH LAYAR ====== */}
+      <Modal
+        show={showPhotoModal}
+        onHide={() => setShowPhotoModal(false)}
+        centered
+        contentClassName="bg-light pf-modal text-center"
+      >
+        <Modal.Header closeButton className="border-0 pb-0">
+          <Modal.Title as="h2" className="h5">
+            {name}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="py-4">
+          <div className="pf-photo-viewer-box">
+            {avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={avatar}
+                alt={name}
+                className="pf-photo-viewer-img"
+              />
+            ) : (
+              hurufAvatar
+            )}
+          </div>
+          <p className="pf-sub mt-3 mb-0">{role}</p>
+        </Modal.Body>
+        <Modal.Footer className="border-0 pt-0 justify-content-center">
+          <button
+            type="button"
+            className="btn btn-profile-outline"
+            onClick={() => setShowPhotoModal(false)}
+          >
+            Tutup
+          </button>
+          <button
+            type="button"
+            className="btn btn-profile"
+            onClick={() => {
+              setShowPhotoModal(false);
+              bukaModalEdit();
+            }}
+          >
+            <i className="bi bi-camera-fill"></i> Ubah Foto
+          </button>
+        </Modal.Footer>
+      </Modal>
 
       <Modal
         show={showEditModal}
