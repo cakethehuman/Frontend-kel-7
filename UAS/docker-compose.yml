@@ -26,6 +26,8 @@ services:
     environment:
       DATABASE_URL: postgresql://root:rootpassword@db:5432/uas_project?schema=public
       PORT: "3001"
+      JWT_SECRET: ${JWT_SECRET:-rahasia-lokal-hanya-untuk-docker}
+      FRONTEND_URL: http://localhost:3000
     ports:
       - "3001:3001"
     depends_on:
