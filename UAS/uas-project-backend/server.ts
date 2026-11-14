@@ -51,7 +51,7 @@ app.get("/api/health", health);
 app.get("/health", health);
 
 const PORT = process.env.PORT || 3001;
-if (process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
 }
 
