@@ -8,8 +8,6 @@ import {
   type ReactNode,
 } from "react";
 
-
-
 import { contentEntries, type Entry } from "@/lib/content";
 import { apiFetch } from "./api";
 
@@ -66,14 +64,14 @@ export function useSiteContent(prefix: string): Konten {
   useEffect(() => {
     let dibatalkan = false;
 
-    apiFetch(`/api/content?prefix=${prefix}.`)
+    apiFetch(`/content?prefix=${prefix}.`)
       .then((res) => (res.ok ? res.json() : null))
       .then((data: unknown) => {
         if (dibatalkan || !data || typeof data !== "object") return;
         simpanan[prefix] = data as Mentah;
         setMentah(data as Mentah);
       })
-      .catch(() => { });
+      .catch(() => {});
 
     return () => {
       dibatalkan = true;
