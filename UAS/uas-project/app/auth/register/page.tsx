@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Container, Form, Button, Alert, Spinner } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { apiFetch } from "@/lib/api";
 import "@/app/css/constants.css";
 
 export default function RegisterPage() {
@@ -16,7 +17,7 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
     setSuccess(null);
@@ -41,9 +42,8 @@ export default function RegisterPage() {
 
     try {
       setLoading(true);
-      const res = await fetch(`/auth/register`, {
+      const res = await apiFetch("/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: cleanName,
           email: cleanEmail,
@@ -51,19 +51,26 @@ export default function RegisterPage() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
-      if (!res.ok) {
-        throw new Error(data.message || "Gagal mendaftar.");
+      if (!res.ok || !data) {
+        throw new Error(
+          data?.message ||
+            `Balasan server tidak valid (status ${res.status}). Periksa NEXT_PUBLIC_API_URL dan pastikan backend berjalan.`,
+        );
       }
 
       setSuccess("Pendaftaran berhasil! Mengalihkan ke halaman login...");
       setTimeout(() => {
         router.push("/auth/login");
       }, 1200);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Register error:", err);
-      setError(err.message || "Terjadi kesalahan saat registrasi.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Terjadi kesalahan saat registrasi.",
+      );
     } finally {
       setLoading(false);
     }
