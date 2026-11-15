@@ -31,7 +31,7 @@ const UKURAN_LINGKARAN = 220;
 const RESOLUSI_SIMPAN = 400;
 
 export default function ProfilePage() {
-  const { user, loading: authLoading, logout } = useAuth();
+  const { user, loading: authLoading, logout, refresh } = useAuth();
   const router = useRouter();
   const { teks } = useSiteContent("profile");
   const daftarPilihanWilayah = teks("profile.regions")
@@ -467,6 +467,7 @@ export default function ProfilePage() {
         setBio(bioBaru);
         setTags(tagBersih);
         setAvatar(editAvatar);
+        await refresh();
         setShowEditModal(false);
         tampilkanPesan("Profil berhasil diperbarui!", "ok");
       } else {
