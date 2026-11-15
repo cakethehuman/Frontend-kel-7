@@ -15,19 +15,9 @@ const DATA_KULINER_AWAL = [
   { name: "Soto Banjar", region: "Kalimantan", done: false },
 ];
 
-
-router.get("/", loggedIn, async (req, res) => {
+router.get("/", loggedIn, async (_req, res) => {
   try {
-    let userId = Number(req.query.user_id);
-
-    if (!userId) {
-      const userPertama = await prisma.user.findFirst();
-      if (!userPertama) {
-        res.json([]);
-        return;
-      }
-      userId = userPertama.user_id;
-    }
+    const userId = Number(res.locals.user.user_id);
 
     const jumlah = await prisma.favorite.count({
       where: { user_id: userId },
@@ -61,16 +51,7 @@ router.get("/", loggedIn, async (req, res) => {
 router.post("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
-    let userId = Number(body.user_id);
-
-    if (!userId) {
-      const userPertama = await prisma.user.findFirst();
-      if (!userPertama) {
-        res.status(404).json({ message: "User tidak ditemukan." });
-        return;
-      }
-      userId = userPertama.user_id;
-    }
+    const userId = Number(res.locals.user.user_id);
 
     if (!body.name || !body.region) {
       res.status(400).json({ message: "Nama kuliner dan wilayah wajib diisi." });
@@ -96,9 +77,20 @@ router.post("/", loggedIn, async (req, res) => {
 router.patch("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
+    const userId = Number(res.locals.user.user_id);
+    const favId = Number(body.id);
+
+    const targetFav = await prisma.favorite.findFirst({
+      where: { id: favId, user_id: userId },
+    });
+
+    if (!targetFav) {
+      res.status(404).json({ message: "Kuliner favorit tidak ditemukan." });
+      return;
+    }
 
     const itemUpdate = await prisma.favorite.update({
-      where: { id: Number(body.id) },
+      where: { id: targetFav.id },
       data: { done: Boolean(body.done) },
     });
 
@@ -112,9 +104,20 @@ router.patch("/", loggedIn, async (req, res) => {
 router.delete("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
+    const userId = Number(res.locals.user.user_id);
+    const favId = Number(body.id);
+
+    const targetFav = await prisma.favorite.findFirst({
+      where: { id: favId, user_id: userId },
+    });
+
+    if (!targetFav) {
+      res.status(404).json({ message: "Kuliner favorit tidak ditemukan." });
+      return;
+    }
 
     await prisma.favorite.delete({
-      where: { id: Number(body.id) },
+      where: { id: targetFav.id },
     });
 
     res.json({ message: "Kuliner berhasil dihapus." });
