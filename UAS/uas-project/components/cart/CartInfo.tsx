@@ -15,23 +15,14 @@ import type { MenuItem } from "@/data/menu";
 import type { CartItem } from "@/lib/cartStore";
 import { CartStore } from "@/lib/cartStore";
 import { useCart, useHydrated } from "@/lib/useCart";
+import { apiFetch } from "@/lib/api";
+import { useAuth } from "@/lib/AuthContent";
 
 import { rupiah } from "@/lib/format";
 
 
 const TAX_RATE = 0.1;
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 const MAX_TABLE = 15;
-
-function getLoggedInUserId(): number | null {
-  try {
-    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-    const id = raw ? Number(JSON.parse(raw)?.user_id) : NaN;
-    return Number.isInteger(id) && id > 0 ? id : null;
-  } catch {
-    return null;
-  }
-}
 
 const emptyForm: FormState = {
   name: "",
@@ -43,6 +34,7 @@ const emptyForm: FormState = {
 };
 
 export default function CartInfo() {
+  const { user } = useAuth();
   const hydrated = useHydrated();
   const items = useCart();
 
@@ -58,7 +50,7 @@ export default function CartInfo() {
 
   const loadTables = useCallback(async () => {
     try {
-      const res = await fetch(API_URL + "/orders/tables");
+      const res = await apiFetch("/orders/tables");
       if (!res.ok) return;
       const data = await res.json();
       setTakenTables(Array.isArray(data.taken) ? data.taken : []);
@@ -146,8 +138,7 @@ export default function CartInfo() {
   const finalConfirm = async () => {
     if (!preview || placed || submitting) return;
 
-    const userId = getLoggedInUserId();
-    if (userId === null) {
+    if (!user) {
       setSubmitError("Login dulu untuk mengirim pesanan.");
       return;
     }
@@ -156,11 +147,10 @@ export default function CartInfo() {
     setSubmitError(null);
 
     try {
-      const res = await fetch(API_URL + "/orders", {
+      // apiFetch = API_URL + credentials: "include" (cookie login ikut terkirim)
+      const res = await apiFetch("/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: preview.name,
           phone: preview.phone,
           type: preview.type,
@@ -170,14 +160,24 @@ export default function CartInfo() {
           items: preview.items.map((item) => ({ id: item.id, qty: item.qty })),
         }),
       });
-      const data = await res.json();
+
+      // Baca teks dulu: respons non-JSON (404/500 Vercel) bukan "tidak terhubung"
+      const text = await res.text();
+      let data: { message?: string; order_number?: string; total?: number } = {};
+      try {
+        data = JSON.parse(text);
+      } catch {
+        console.error("Respons bukan JSON:", res.status, text.slice(0, 200));
+      }
 
       if (res.ok) {
-        setPlaced({ ...preview, number: data.order_number, total: data.total });
+        setPlaced({ ...preview, number: data.order_number, total: data.total } as Order);
         CartStore.clear();
         setShowConfirm(false);
       } else {
-        setSubmitError(data.message ?? "Pesanan gagal dikirim. Coba lagi.");
+        setSubmitError(
+          data.message ?? `Pesanan gagal dikirim (status ${res.status}). Coba lagi.`,
+        );
         if (res.status === 409) {
           await loadTables();
           setShowConfirm(false);
@@ -185,7 +185,8 @@ export default function CartInfo() {
         }
       }
     } catch (e) {
-      console.log(e);
+      // Hanya kalau fetch benar-benar gagal (jaringan / CORS)
+      console.error(e);
       setSubmitError("Tidak bisa terhubung ke server. Pastikan backend sudah berjalan.");
     }
 

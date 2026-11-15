@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { prisma } from "../lib/prisma";
 import { requireAdmin } from "../middleware/requireAdmin";
+import { loggedIn } from "../middleware/authentication";
 
 const router = Router();
 
@@ -112,12 +113,12 @@ router.patch("/:id", ...requireAdmin, async (req, res) => {
   }
 });
 
-router.post("/", ...requireAdmin, async (req, res) => {
+router.post("/", loggedIn, async (req, res) => {
   try {
     const body = req.body ?? {};
 
     const user = await prisma.user.findUnique({
-      where: { user_id: Number(body.user_id) },
+      where: { user_id: Number(res.locals.user.user_id) },
     });
 
     if (!user) {
