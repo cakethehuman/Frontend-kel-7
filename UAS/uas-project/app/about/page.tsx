@@ -9,7 +9,6 @@ import FaqItem from "@/components/about/FaqItem";
 import { useSiteContent } from "@/lib/siteContent";
 import { gambarAman } from "@/lib/content";
 
-// Mengubah **teks** menjadi <b>teks</b>
 function tebal(teks: string): ReactNode[] {
   return teks
     .split(/\*\*(.+?)\*\*/g)
