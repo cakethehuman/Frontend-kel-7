@@ -3,6 +3,8 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { apiFetch } from "@/lib/api";
+import { useAuth } from "@/lib/AuthContent";
 
 const starLabels = [
   "Belum dinilai",
@@ -14,18 +16,6 @@ const starLabels = [
 ];
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
-
-function getLoggedInUserId(): number | null {
-  try {
-    const raw = localStorage.getItem("user") || sessionStorage.getItem("currentUser");
-    const id = raw ? Number(JSON.parse(raw)?.user_id) : NaN;
-    return Number.isInteger(id) && id > 0 ? id : null;
-  } catch {
-    return null;
-  }
-}
 
 interface FormState {
   nama: string;
@@ -66,6 +56,7 @@ function Field({ id, label, required, error, children }: FieldProps) {
 }
 
 export default function FeedbackForm() {
+  const { user } = useAuth();
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [alertMsg, setAlertMsg] = useState<string | null>(null);
@@ -92,8 +83,7 @@ export default function FeedbackForm() {
     event.preventDefault();
     if (sending) return;
 
-    const userId = getLoggedInUserId();
-    if (userId === null) {
+    if (!user) {
       setAlertMsg("Login dulu untuk mengirim masukan.");
       return;
     }
@@ -109,11 +99,10 @@ export default function FeedbackForm() {
     setSending(true);
 
     try {
-      const res = await fetch(API_URL + "/api/feedback", {
+      // apiFetch = pakai API_URL + credentials: "include" (cookie login ikut terkirim)
+      const res = await apiFetch("/feedback", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: userId,
           name: form.nama.trim(),
           email: form.email.trim(),
           rating: form.rating,
@@ -122,14 +111,28 @@ export default function FeedbackForm() {
         }),
       });
 
+      // Baca sebagai teks dulu: kalau server balas HTML/teks (404/500 Vercel),
+      // jangan dianggap "tidak bisa terhubung".
+      const text = await res.text();
+      let data: { message?: string } = {};
+      try {
+        data = JSON.parse(text);
+      } catch {
+        console.error("Respons bukan JSON:", res.status, text.slice(0, 200));
+      }
+
       if (res.ok) {
         setSent(true);
+      } else if (res.status === 401) {
+        setAlertMsg(data.message ?? "Sesi habis, silakan login lagi.");
       } else {
-        const data = await res.json();
-        setAlertMsg(data.message ?? "Masukan gagal dikirim. Coba lagi.");
+        setAlertMsg(
+          data.message ?? `Masukan gagal dikirim (status ${res.status}). Coba lagi.`,
+        );
       }
     } catch (e) {
-      console.log(e);
+      // Masuk sini hanya kalau fetch benar-benar gagal (jaringan / CORS)
+      console.error(e);
       setAlertMsg("Tidak bisa terhubung ke server. Pastikan backend sudah berjalan.");
     }
 
